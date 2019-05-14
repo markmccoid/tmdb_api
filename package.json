@@ -1,0 +1,14 @@
+{
+  "name": "tmdb_api",
+  "version": "1.0.0",
+  "description": "Wrapper for the TMDB Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark McCoid",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
