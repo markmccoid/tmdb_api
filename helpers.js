@@ -11,7 +11,7 @@ import { getTMDBConsts } from './index';
  * @param {boolean} [secureURL=true] - return the https or http - *true
  * @returns {string[]} full URL to the image 
  */
-export const formatTVImageURL = (imgFileName, size = 'm', secureURL=true) => {
+export const formatImageURL = (imgFileName, size = 'm', secureURL=true) => {
   let { IMG_URL, SECURE_IMG_URL } = getTMDBConsts();
   // Hardcoding s, m, l for now
   switch (size) {
@@ -42,3 +42,7 @@ export const formatTVImageURL = (imgFileName, size = 'm', secureURL=true) => {
   // Process as an array and return an array, also make sure some value exists in each array slot.
   return imgFileName.map(file => file ? `${baseURL}${size}/${file.match(regEx)[0]}` : '');
 };
+
+export function averageOfArray(arr) {
+  return Math.round(arr.reduce((a,b) => (a+b), 0) / arr.length)
+}
