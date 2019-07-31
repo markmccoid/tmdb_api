@@ -1,3 +1,9 @@
+/**
+ *  @fileOverview TMDB API Wrapper module.
+ *
+ *  @author       Mark McCoid
+ */
+
 import axios from "axios";
 import _ from "lodash";
 

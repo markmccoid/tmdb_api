@@ -17,7 +17,7 @@ import {
 
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
- *
+ * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
@@ -43,7 +43,7 @@ export const getImagesForMovie = (movieId, imageType = "posters") => {
 
 /**
  * Returns an object with an array of movies returned.
- *
+ * @method
  * @param {(string)} searchValue - Value to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {Object} Object data return
@@ -88,7 +88,7 @@ export const movieSearchByTitle = (searchValue, page = 1) => {
 
 /**
  * Returns an object with movie details
- *
+ * @method
  * @param {number} movieId - movieId to get details for
  * @returns {Object} Object data return
  */
@@ -125,7 +125,7 @@ export const movieGetMovieDetails = movieId => {
 
 /**
  * Returns an object with movie credits for passed personId
- *
+ * @method
  * @param {number} personId - personId to get details for
  * @returns {Object} Object data return
  * {

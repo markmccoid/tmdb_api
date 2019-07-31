@@ -1,4 +1,5 @@
 /**
+ * @desc
  * This is the curated API for TV information
  * It uses the TMDBApi_TV.js to pull data and then picks certain
  * data to return and formats it for easy use
@@ -15,7 +16,8 @@ import {
 import { getTMDBConsts } from "../index";
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
- *
+ * @memberOf Curated_API
+ * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - 'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
@@ -41,7 +43,7 @@ export const getImagesForShow = (showId, imageType = "posters") => {
 
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
- *
+ * @method
  * @param {(string)} searchValue - TV Show name to search for.
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {Object} Object data return
@@ -82,7 +84,7 @@ export const tvSearchByTitle = (searchValue, page = 1) => {
 
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
- *
+ * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @returns {Object}
  */

@@ -1,6 +1,21 @@
+/**
+ *  @fileOverview Curated Common Calls.  currently just searchForPersonId
+ *
+ *  @author       Mark McCoid
+ */
+/**
+ * API Curated modules2
+ * @namespace Curated_API
+ *
+ */
+
 import { rawSearchForPerson } from "../APIRaw/TMDB_Common";
 /**
- * Searches for person and returns results
+ * Searches for person and returns results.  Only returns the
+ * {id, name, popularity}, as it is expected to be used for
+ * searching for a person's id.
+ * @memberOf Curated_API
+ * @method
  * @param {string} personName - Name of person to search for
  * @param {number} [page=1] - page number to return
  * @returns {object} response object sorted by popularity desc
