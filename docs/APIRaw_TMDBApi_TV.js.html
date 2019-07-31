@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: APIRaw/TMDBApi_TV.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: APIRaw/TMDBApi_TV.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import axios from "axios";
+import { getTMDBConsts } from "../index";
+// const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
+// const API_URL = 'https://api.themoviedb.org/3';
+
+/**
+ * Returns data from search by searchString
+ *
+ * @param {string} searchString - String of title to search for
+ * @param {number} [page=1] - page number to return if multiple pages from search
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawSearchTVByTitle = (searchString, page = 1) => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/search/tv?api_key=${API_KEY}&amp;page=${page}&amp;include_adult=false&amp;query=${searchString}`;
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      console.log(`Error with searchTVByTitle get: ${err}`);
+      return {
+        error: err,
+        status: err.response.request.status,
+        statusText: err.response.request.statusText,
+        apiCall: err.response.request.responseURL
+      };
+    });
+};
+
+/**
+ * Returns show details for passed TMDb showId
+ *
+ * @param {string} showId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetShowDetails = showId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/tv/${showId}?api_key=${API_KEY}`;
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      console.log(`Error with getShowDetails get: ${err}`);
+      return err;
+    });
+};
+
+/**
+ * Return episodes from showId passed and seasonNum passed
+ *
+ * @param {string} showId - TMDb show id
+ * @param {number} seasonNum - season number to get episodes from
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetEpisodes = (showId, seasonNum) => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/tv/${showId}/season/${seasonNum}?api_key=${API_KEY}`;
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      return {
+        error: err,
+        status: err.response.request.status,
+        statusText: err.response.request.statusText
+      };
+    });
+};
+
+/**
+ * Returns show images for passed showId from TMDb.
+ *
+ * @param {string} showId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetShowImages = showId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/tv/${showId}/images?api_key=${API_KEY}`;
+  return axios.get(apiCall).then(resp => {
+    return {
+      data: resp.data,
+      apiCall: resp.request.responseURL
+    };
+  });
+};
+
+/**
+ * Returns external Ids from TMDb.
+ *
+ * @param {string} showId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetExternalIds = showId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/tv/${showId}/external_ids?api_key=${API_KEY}`;
+  return axios.get(apiCall).then(resp => {
+    return {
+      data: resp.data,
+      apiCall: resp.request.responseURL
+    };
+  });
+};
+
+/**
+ * Returns Credits from TMDb.
+ *
+ * @param {string} showId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetCredits = showId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/tv/${showId}/credits?api_key=${API_KEY}`;
+  return axios.get(apiCall).then(resp => {
+    return {
+      data: resp.data,
+      apiCall: resp.request.responseURL
+    };
+  });
+};
+
+/**
+ * Returns Credit Details from TMDb.
+ *
+ * @param {string} creditId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetCreditDetails = creditId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/credit/${creditId}?api_key=${API_KEY}`;
+  return axios.get(apiCall).then(resp => {
+    return {
+      data: resp.data,
+      apiCall: resp.request.responseURL
+    };
+  });
+};
+
+/**
+ * Returns Person Details for TV from TMDb.
+ * Person Id can be found in getCredits results
+ * cast: [
+ *  {
+ *    id: this is the personId
+ *    ...
+ *  }
+ * ]
+ * @param {string} personId - TMDb show id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+export const rawGetPersonDetails = personId => {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/person/${personId}?api_key=${API_KEY}`;
+  return axios.get(apiCall).then(resp => {
+    return {
+      data: resp.data,
+      apiCall: resp.request.responseURL
+    };
+  });
+};
+
+// export const getShowSeasons = (showId) => {
+//   return axios
+//     .get (`${API_URL}/tv/${showId}/season?api_key=${API_KEY}`)
+//       .then((resp) => {
+//         return {
+//           data: resp.data,
+//           msg: resp.request.responseURL
+//         };
+//       })
+//       .catch((err) => {
+//         console.log(`Error with getShowDetails get: ${err}`)
+//         return err;
+//       });
+// };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#formatImageURL">formatImageURL</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getImagesForMovie">getImagesForMovie</a></li><li><a href="global.html#getImagesForShow">getImagesForShow</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#movieGetMovieDetails">movieGetMovieDetails</a></li><li><a href="global.html#movieGetPersonDetails">movieGetPersonDetails</a></li><li><a href="global.html#movieSearchByTitle">movieSearchByTitle</a></li><li><a href="global.html#rawDiscoverMovies">rawDiscoverMovies</a></li><li><a href="global.html#rawGetCreditDetails">rawGetCreditDetails</a></li><li><a href="global.html#rawGetCredits">rawGetCredits</a></li><li><a href="global.html#rawGetEpisodes">rawGetEpisodes</a></li><li><a href="global.html#rawGetExternalIds">rawGetExternalIds</a></li><li><a href="global.html#rawGetMovieDetails">rawGetMovieDetails</a></li><li><a href="global.html#rawGetMovieImages">rawGetMovieImages</a></li><li><a href="global.html#rawGetPersonDetails">rawGetPersonDetails</a></li><li><a href="global.html#rawGetPersonDetails_Movie">rawGetPersonDetails_Movie</a></li><li><a href="global.html#rawGetShowDetails">rawGetShowDetails</a></li><li><a href="global.html#rawGetShowImages">rawGetShowImages</a></li><li><a href="global.html#rawSearchForPerson">rawSearchForPerson</a></li><li><a href="global.html#rawSearchMovieByTitle">rawSearchMovieByTitle</a></li><li><a href="global.html#rawSearchTVByTitle">rawSearchTVByTitle</a></li><li><a href="global.html#searchForPersonId">searchForPersonId</a></li><li><a href="global.html#tvGetShowDetails">tvGetShowDetails</a></li><li><a href="global.html#tvSearchByTitle">tvSearchByTitle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Jul 31 2019 00:01:30 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

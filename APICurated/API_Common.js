@@ -3,8 +3,10 @@ import { rawSearchForPerson } from "../APIRaw/TMDB_Common";
  * Searches for person and returns results
  * @param {string} personName - Name of person to search for
  * @param {number} [page=1] - page number to return
- * @returns {object} response object
- *  on success { data: data from api call, apiCall: API call}
+ * @returns {object} response object sorted by popularity desc
+ *  on success { data: {
+ *    page, totalpages, totalResults,
+ *    results: [{ id, name, popularity }]}, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
 export const searchForPersonId = (searchValue, page = 1) => {

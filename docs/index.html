@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>TMDB API Wrapper</h1>
+<p>This package wraps select API calls from the <a href="https://developers.themoviedb.org/3/getting-started/introduction">TMDB API</a>.  To use this, you will need to get an API Key from The Movie Database website.</p>
+<h2>Install</h2>
+<pre class="prettyprint source lang-javascript"><code>$ yarn add tmdb_api
+</code></pre>
+<h2>Initialize</h2>
+<p>Before you can call the API functions you will need to initialize the module with your API Key using the <code>initTMDB(APIKey)</code> function</p>
+<pre class="prettyprint source lang-jsx"><code>import React from 'react';
+import Main from './components/Main';
+import { initTMDB } from 'tmdb_api';
+
+function App() {
+  initTMDB('0e4935axxxxxxxxxxxxxxxxxx')
+  return (
+    &lt;div>
+      &lt;header>
+          TMDB API Wrapper
+      &lt;/header>
+      &lt;Main />
+    &lt;/div>
+  );
+}
+
+export default App;
+</code></pre>
+<h2>Raw API Function List</h2>
+<p>The <em>Raw</em> API functions are functions that call and return the data directly from the TMDB API endpoints.  This is in contrast to the <em>Curated</em> API functions, which do some additional formatting like return full image URLs.</p>
+<blockquote>
+<p>Note: for functions that have a page parameter, the return set will also include at the root of the returned object a page (current page you are on), total_results (total count of results), total_pages (total number of pages).  You will need this data for pagination.</p>
+</blockquote>
+<blockquote>
+<p>Note: In raw functions, the full image path is not returned as it is in the curated functions.  Refer to <a href="https://developers.themoviedb.org/3/getting-started/images">TMDB API for Image</a> for details.  You can use the <em>getConfig()</em> function to get the config details.</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>rawSearchTVByTitle(searchString, page = 1)</strong> -  searchString will search the for matching titles.  Page defaults to the first page, but if you want to allow pagination, simply pass the page that you would like.</p>
+<pre class="prettyprint source lang-javascript"><code>// Return Object:
+{
+    page: int,
+    total_results: int,
+    total_pages: int,
+    results: array
+}
+</code></pre>
+</li>
+<li>
+<p><strong>rawGetShowDetails</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetEpisodes</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetShowImages</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetExternalIds</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetCredits</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetCreditDetails</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetPersonDetails</strong> -</p>
+</li>
+<li>
+<p><strong>rawSearchMovieByTitle</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetMovieDetails</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetMovieImages</strong> -</p>
+</li>
+<li>
+<p><strong>rawGetPersonDetails_Movie</strong> -</p>
+</li>
+<li>
+<p><strong>rawDiscoverMovies</strong> -</p>
+</li>
+<li>
+<p><strong>rawSearchForPerson</strong> -</p>
+</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#formatImageURL">formatImageURL</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getImagesForMovie">getImagesForMovie</a></li><li><a href="global.html#getImagesForShow">getImagesForShow</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#movieGetMovieDetails">movieGetMovieDetails</a></li><li><a href="global.html#movieGetPersonDetails">movieGetPersonDetails</a></li><li><a href="global.html#movieSearchByTitle">movieSearchByTitle</a></li><li><a href="global.html#rawDiscoverMovies">rawDiscoverMovies</a></li><li><a href="global.html#rawGetCreditDetails">rawGetCreditDetails</a></li><li><a href="global.html#rawGetCredits">rawGetCredits</a></li><li><a href="global.html#rawGetEpisodes">rawGetEpisodes</a></li><li><a href="global.html#rawGetExternalIds">rawGetExternalIds</a></li><li><a href="global.html#rawGetMovieDetails">rawGetMovieDetails</a></li><li><a href="global.html#rawGetMovieImages">rawGetMovieImages</a></li><li><a href="global.html#rawGetPersonDetails">rawGetPersonDetails</a></li><li><a href="global.html#rawGetPersonDetails_Movie">rawGetPersonDetails_Movie</a></li><li><a href="global.html#rawGetShowDetails">rawGetShowDetails</a></li><li><a href="global.html#rawGetShowImages">rawGetShowImages</a></li><li><a href="global.html#rawSearchForPerson">rawSearchForPerson</a></li><li><a href="global.html#rawSearchMovieByTitle">rawSearchMovieByTitle</a></li><li><a href="global.html#rawSearchTVByTitle">rawSearchTVByTitle</a></li><li><a href="global.html#searchForPersonId">searchForPersonId</a></li><li><a href="global.html#tvGetShowDetails">tvGetShowDetails</a></li><li><a href="global.html#tvSearchByTitle">tvSearchByTitle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Jul 31 2019 00:01:31 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
