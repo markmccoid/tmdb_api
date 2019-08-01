@@ -22,7 +22,7 @@ import { getTMDBConsts } from "../index";
  * @param {string} [imageType=posters] - 'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
  */
-export const getImagesForShow = (showId, imageType = "posters") => {
+function tvGetImages(showId, imageType = "posters") {
   let apiCall;
   return rawGetShowImages(showId).then(resp => {
     // Get array of file_paths
@@ -39,16 +39,17 @@ export const getImagesForShow = (showId, imageType = "posters") => {
       apiCall
     };
   });
-};
+}
 
 /**
- * Returns an array of image URLs. Filters and gives only 'en' English images
+ * Returns obj with tv shows like searchValue (tv title) passed.
+ * @memberOf Curated_API
  * @method
  * @param {(string)} searchValue - TV Show name to search for.
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {Object} Object data return
  */
-export const tvSearchByTitle = (searchValue, page = 1) => {
+function tvSearchByTitle(searchValue, page = 1) {
   let { TV_GENRE_OBJ } = getTMDBConsts();
   // console.log('TV Genre', TV_GENRE_OBJ)
   let apiCall;
@@ -80,15 +81,16 @@ export const tvSearchByTitle = (searchValue, page = 1) => {
       apiCall
     };
   });
-};
+}
 
 /**
- * Returns an array of image URLs. Filters and gives only 'en' English images
+ * returns show details for showId passed
+ * @memberOf Curated_API
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @returns {Object}
  */
-export const tvGetShowDetails = showId => {
+function tvGetShowDetails(showId) {
   let apiCall;
   let searchResults;
   return rawGetShowDetails(showId).then(resp => {
@@ -121,4 +123,6 @@ export const tvGetShowDetails = showId => {
       apiCall
     };
   });
-};
+}
+
+export { tvGetImages, tvSearchByTitle, tvGetShowDetails };

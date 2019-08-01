@@ -4,7 +4,10 @@
  *  @author       Mark McCoid
  */
 /**
- * API Curated modules2
+ * Curated API calls to the tmdb api end points.
+ * These calls all reference their raw counterparts, but only return selected data points.
+ * Also, things like dates are converted to javascript date formats and image data are
+ * converted to URL strings.
  * @namespace Curated_API
  *
  */
@@ -24,7 +27,7 @@ import { rawSearchForPerson } from "../APIRaw/TMDB_Common";
  *    results: [{ id, name, popularity }]}, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const searchForPersonId = (searchValue, page = 1) => {
+function searchForPersonId(searchValue, page = 1) {
   return rawSearchForPerson(searchValue, page).then(resp => {
     console.log("personid return", resp);
     let data = {
@@ -48,4 +51,6 @@ export const searchForPersonId = (searchValue, page = 1) => {
       apiCall: resp.apiCall
     };
   });
-};
+}
+
+export { searchForPersonId };

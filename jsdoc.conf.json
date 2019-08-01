@@ -16,7 +16,27 @@
   "plugins": ["plugins/markdown"],
   "opts": {
     "destination": "docs",
+    "template": "node_modules/docdash",
+    "encoding": "utf8",
     "recurse": true,
+    "verbose": true,
     "readme": "README.md"
+  },
+  "docdash": {
+    "sort": false, // Sort the methods in the navbar
+    "search": true, // Display seach box above navigation which allows to search/filter navigation items
+    "collapse": false, // Collapse navigation by default except current object's navigation of the current page
+    "wrap": true, // Wrap long navigation names instead of trimming them
+    "typedefs": true, // Include typedefs in menu
+    "menu": {
+      // Adding additional menu items after Home
+      "Project Website": {
+        // Menu item name
+        "href": "https://myproject.com", //the rest of HTML properties to add to manu item
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "website_link"
+      }
+    }
   }
 }

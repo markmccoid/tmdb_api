@@ -13,7 +13,7 @@ import { getTMDBConsts } from "../index";
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawSearchMovieByTitle = (searchString, page = 1) => {
+function rawSearchMovieByTitle(searchString, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/search/movie?api_key=${API_KEY}&page=${page}&include_adult=false&query=${encodeURI(
     searchString
@@ -30,7 +30,7 @@ export const rawSearchMovieByTitle = (searchString, page = 1) => {
       console.log(`Error with searchMovieByTitle get: ${err}`);
       return err;
     });
-};
+}
 
 /**
  * Returns movie details for passed TMDb movieId
@@ -40,7 +40,7 @@ export const rawSearchMovieByTitle = (searchString, page = 1) => {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetMovieDetails = movieId => {
+function rawGetMovieDetails(movieId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/movie/${movieId}?api_key=${API_KEY}`;
   return axios
@@ -55,7 +55,7 @@ export const rawGetMovieDetails = movieId => {
       console.log(`Error with getMovieDetails get: ${err}`);
       return err;
     });
-};
+}
 
 /**
  * Returns show images for passed movieId from TMDb.
@@ -65,7 +65,7 @@ export const rawGetMovieDetails = movieId => {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetMovieImages = movieId => {
+function rawGetMovieImages(movieId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/movie/${movieId}/images?api_key=${API_KEY}`;
   return axios.get(apiCall).then(resp => {
@@ -74,7 +74,7 @@ export const rawGetMovieImages = movieId => {
       apiCall: resp.request.responseURL
     };
   });
-};
+}
 
 /**
  * Returns Person Details for Movies from TMDb.
@@ -90,7 +90,7 @@ export const rawGetMovieImages = movieId => {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetPersonDetails_Movie = personId => {
+function rawGetPersonDetails_Movie(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}/movie_credits?api_key=${API_KEY}`;
   return axios.get(apiCall).then(resp => {
@@ -99,7 +99,7 @@ export const rawGetPersonDetails_Movie = personId => {
       apiCall: resp.request.responseURL
     };
   });
-};
+}
 
 /**
  * criteriaObj {
@@ -127,7 +127,7 @@ export const rawGetPersonDetails_Movie = personId => {
  * @param {object} criteriaObj - object with criteria to search with
  * @returns {object} response object {data, apiCall}
  */
-export const rawDiscoverMovies = (criteriaObj, page = 1) => {
+function rawDiscoverMovies(criteriaObj, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   let apiCall = `${API_URL}/discover/movie?api_key=${API_KEY}&page=${page}`;
 
@@ -179,4 +179,12 @@ export const rawDiscoverMovies = (criteriaObj, page = 1) => {
       apiCall: resp.request.responseURL
     };
   });
+}
+
+export {
+  rawSearchMovieByTitle,
+  rawGetMovieDetails,
+  rawGetMovieImages,
+  rawGetPersonDetails_Movie,
+  rawDiscoverMovies
 };

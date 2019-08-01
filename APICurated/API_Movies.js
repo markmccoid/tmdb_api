@@ -22,7 +22,7 @@ import {
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
  */
-export const getImagesForMovie = (movieId, imageType = "posters") => {
+function movieGetImages(movieId, imageType = "posters") {
   let apiCall;
   return rawGetMovieImages(movieId).then(resp => {
     // Get array of file_paths
@@ -39,16 +39,17 @@ export const getImagesForMovie = (movieId, imageType = "posters") => {
       apiCall
     };
   });
-};
+}
 
 /**
- * Returns an object with an array of movies returned.
+ * Returns an object with an array of movies returned based on passed title.
+ * @memberOf Curated_API
  * @method
  * @param {(string)} searchValue - Value to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {Object} Object data return
  */
-export const movieSearchByTitle = (searchValue, page = 1) => {
+function movieSearchByTitle(searchValue, page = 1) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   // console.log('TV Genre', GENRE_OBJ)
   let apiCall;
@@ -84,15 +85,36 @@ export const movieSearchByTitle = (searchValue, page = 1) => {
       apiCall
     };
   });
-};
+}
 
 /**
- * Returns an object with movie details
+ * @typedef movieDetails
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.id the movieId
+ * @property {string} data.title
+ * @property {string} data.tagline
+ * @property {string} data.overview
+ * @property {string} data.status
+ * @property {number} data.runtime runtime in minutes
+ * @property {number} data.budget
+ * @property {number} data.revenue
+ * @property {string} data.releaseDate
+ * @property {string} data.posterURL
+ * @property {string} data.backdropURL
+ * @property {string} data.imdbId
+ * @property {string} data.imdbURL
+ * @property {array.<string>} data.genres
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * Returns an object with movie details from passed movieId
+ * @memberOf Curated_API
  * @method
  * @param {number} movieId - movieId to get details for
- * @returns {Object} Object data return
+ * @returns {movieDetails} Object data return
  */
-export const movieGetMovieDetails = movieId => {
+function movieGetMovieDetails(movieId) {
   return rawGetMovieDetails(movieId).then(resp => {
     console.log("movie resp", resp);
     let movieDetails = {
@@ -114,17 +136,18 @@ export const movieGetMovieDetails = movieId => {
       imdbId: resp.data.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
       genres: resp.data.genres.map(genreObj => genreObj.name),
-      getMovieImages: () => getImagesForMovie(movieId)
+      getMovieImages: () => movieGetImages(movieId)
     };
     return {
       data: movieDetails,
       apiCall: resp.apiCall
     };
   });
-};
+}
 
 /**
- * Returns an object with movie credits for passed personId
+ * Returns an object with movies where person was part of cast or crew for passed personId
+ * @memberOf Curated_API
  * @method
  * @param {number} personId - personId to get details for
  * @returns {Object} Object data return
@@ -134,7 +157,7 @@ export const movieGetMovieDetails = movieId => {
  *    apiCall
  * }
  */
-export const movieGetPersonDetails = personId => {
+function movieGetPersonDetails(personId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
   return rawGetPersonDetails_Movie(personId).then(resp => {
@@ -181,9 +204,22 @@ export const movieGetPersonDetails = personId => {
       apiCall: resp.apiCall
     };
   });
-};
+}
 
-export const discoverMovies = (criteriaObj, page = 1) => {
+/**
+ * Returns an object with data matching passed criteriaObj criteria
+ * @memberOf Curated_API
+ * @method
+ * @param {object} criteriaObj - object with criteria to search for
+ * @param {number} [page=1] - page to return.  Only works if multiple pages
+ * @returns {Object} Object data return
+ * {
+ *    cast: [{}],
+ *    crew: [{}],
+ *    apiCall
+ * }
+ */
+function movieDiscover(criteriaObj, page = 1) {
   let apiCall;
   let searchResults;
   let moviesReturned;
@@ -211,7 +247,7 @@ export const discoverMovies = (criteriaObj, page = 1) => {
         ? formatImageURL(result.backdrop_path, "m", true)[0]
         : "",
       genres: result.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
-      getMovieImages: () => getImagesForMovie(result.id)
+      getMovieImages: () => movieGetImages(result.id)
     }));
 
     return {
@@ -219,4 +255,12 @@ export const discoverMovies = (criteriaObj, page = 1) => {
       apiCall
     };
   });
+}
+
+export {
+  movieGetImages,
+  movieSearchByTitle,
+  movieGetMovieDetails,
+  movieGetPersonDetails,
+  movieDiscover
 };

@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Home - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://myproject.com" target="_blank" class="menu-item" id="website_link" >Project Website</a></h2><h3>Namespaces</h3><ul><li><a href="Curated_API.html">Curated_API</a><ul class='methods'><li data-type='method'><a href="Curated_API.html#.searchForPersonId">searchForPersonId</a></li><li data-type='method'><a href="Curated_API.html#.movieSearchByTitle">movieSearchByTitle</a></li><li data-type='method'><a href="Curated_API.html#.movieGetMovieDetails">movieGetMovieDetails</a></li><li data-type='method'><a href="Curated_API.html#.movieGetPersonDetails">movieGetPersonDetails</a></li><li data-type='method'><a href="Curated_API.html#.discoverMovies">discoverMovies</a></li><li data-type='method'><a href="Curated_API.html#.getImagesForShow">getImagesForShow</a></li><li data-type='method'><a href="Curated_API.html#.tvSearchByTitle">tvSearchByTitle</a></li><li data-type='method'><a href="Curated_API.html#.tvGetShowDetails">tvGetShowDetails</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#getImagesForMovie">getImagesForMovie</a></li><li><a href="global.html#movieDetails">movieDetails</a></li><li><a href="global.html#rawSearchMovieByTitle">rawSearchMovieByTitle</a></li><li><a href="global.html#rawGetMovieDetails">rawGetMovieDetails</a></li><li><a href="global.html#rawGetMovieImages">rawGetMovieImages</a></li><li><a href="global.html#rawGetPersonDetails_Movie">rawGetPersonDetails_Movie</a></li><li><a href="global.html#rawDiscoverMovies">rawDiscoverMovies</a></li><li><a href="global.html#rawSearchTVByTitle">rawSearchTVByTitle</a></li><li><a href="global.html#rawGetShowDetails">rawGetShowDetails</a></li><li><a href="global.html#rawGetEpisodes">rawGetEpisodes</a></li><li><a href="global.html#rawGetShowImages">rawGetShowImages</a></li><li><a href="global.html#rawGetExternalIds">rawGetExternalIds</a></li><li><a href="global.html#rawGetCredits">rawGetCredits</a></li><li><a href="global.html#rawGetCreditDetails">rawGetCreditDetails</a></li><li><a href="global.html#rawGetPersonDetails">rawGetPersonDetails</a></li><li><a href="global.html#rawSearchForPerson">rawSearchForPerson</a></li><li><a href="global.html#formatImageURL">formatImageURL</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li></ul>
+</nav>
+
 <div id="main">
-
-    <h1 class="page-title">Home</h1>
+    
 
     
 
@@ -26,8 +42,9 @@
     
 
 
-    <h3> </h3>
-
+    <section class="package">
+        <h3> </h3>		
+    </section>
 
 
 
@@ -41,8 +58,7 @@
 
 
 
-
-    <section>
+    <section class="readme">
         <article><h1>TMDB API Wrapper</h1>
 <p>This package wraps select API calls from the <a href="https://developers.themoviedb.org/3/getting-started/introduction">TMDB API</a>.  To use this, you will need to get an API Key from The Movie Database website.</p>
 <h2>Install</h2>
@@ -142,22 +158,27 @@ export default App;
 
 <header>
     
-        <h2>APICurated/API_Common.js</h2>
+        <h2>
+        APICurated/API_Common.js
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
-            <div class="description"><p>Curated Common Calls.  currently just searchForPersonId</p></div>
-        
-
-        
-
+            
 
 <dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
 
     
 
@@ -191,13 +212,6 @@ export default App;
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
 
     
 
@@ -205,10 +219,15 @@ export default App;
 </dl>
 
 
+
+
+            
+                <div class="description"><p>Curated Common Calls.  currently just searchForPersonId</p></div>
+            
+
+            
         
-    
-    </div>
-
+        </div>
     
 
     
@@ -216,8 +235,10 @@ export default App;
     
 
     
-
     
+    
+
+     
 
     
 
@@ -242,22 +263,27 @@ export default App;
 
 <header>
     
-        <h2>index.js</h2>
+        <h2>
+        index.js
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
-            <div class="description"><p>TMDB API Wrapper module.</p></div>
-        
-
-        
-
+            
 
 <dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
 
     
 
@@ -291,13 +317,6 @@ export default App;
     
 
     
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
 
     
 
@@ -305,10 +324,15 @@ export default App;
 </dl>
 
 
+
+
+            
+                <div class="description"><p>TMDB API Wrapper module.</p></div>
+            
+
+            
         
-    
-    </div>
-
+        </div>
     
 
     
@@ -316,8 +340,10 @@ export default App;
     
 
     
-
     
+    
+
+     
 
     
 
@@ -335,19 +361,23 @@ export default App;
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="Curated_API.html">Curated_API</a></li></ul><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#formatImageURL">formatImageURL</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getImagesForMovie">getImagesForMovie</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#movieGetMovieDetails">movieGetMovieDetails</a></li><li><a href="global.html#movieGetPersonDetails">movieGetPersonDetails</a></li><li><a href="global.html#movieSearchByTitle">movieSearchByTitle</a></li><li><a href="global.html#rawDiscoverMovies">rawDiscoverMovies</a></li><li><a href="global.html#rawGetCreditDetails">rawGetCreditDetails</a></li><li><a href="global.html#rawGetCredits">rawGetCredits</a></li><li><a href="global.html#rawGetEpisodes">rawGetEpisodes</a></li><li><a href="global.html#rawGetExternalIds">rawGetExternalIds</a></li><li><a href="global.html#rawGetMovieDetails">rawGetMovieDetails</a></li><li><a href="global.html#rawGetMovieImages">rawGetMovieImages</a></li><li><a href="global.html#rawGetPersonDetails">rawGetPersonDetails</a></li><li><a href="global.html#rawGetPersonDetails_Movie">rawGetPersonDetails_Movie</a></li><li><a href="global.html#rawGetShowDetails">rawGetShowDetails</a></li><li><a href="global.html#rawGetShowImages">rawGetShowImages</a></li><li><a href="global.html#rawSearchForPerson">rawSearchForPerson</a></li><li><a href="global.html#rawSearchMovieByTitle">rawSearchMovieByTitle</a></li><li><a href="global.html#rawSearchTVByTitle">rawSearchTVByTitle</a></li><li><a href="global.html#tvGetShowDetails">tvGetShowDetails</a></li><li><a href="global.html#tvSearchByTitle">tvSearchByTitle</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Jul 31 2019 16:06:41 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Jul 31 2019 23:58:39 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
 </body>
 </html>
