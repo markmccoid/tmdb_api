@@ -1,22 +1,23 @@
 /**
- * @desc
- * This is the curated API for TV information
- * It uses the TMDBApi_TV.js to pull data and then picks certain
- * data to return and formats it for easy use
- * If you need data not returned in these curated API functions, simply
- * call the "Raw" TMDB API functions
+ * Curated API calls to the tmdb api end points for **TV Shows**.
+ *
+ * These calls all reference their raw counterparts, but only return selected data points.
+ * Also, things like dates are converted to javascript date formats and image data are
+ * converted to URL strings.
+ * @namespace Curated_API_TV
+ *
  */
 
 import { formatImageURL, averageOfArray } from "../helpers";
 import {
-  rawGetShowImages,
-  rawSearchTVByTitle,
-  rawGetShowDetails
+  rawTVGetShowImages,
+  rawTVSearchByTitle,
+  rawTVGetShowDetails
 } from "../APIRaw/TMDBApi_TV";
 import { getTMDBConsts } from "../index";
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
- * @memberOf Curated_API
+ * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - 'posters', 'backdrops'
@@ -24,7 +25,7 @@ import { getTMDBConsts } from "../index";
  */
 function tvGetImages(showId, imageType = "posters") {
   let apiCall;
-  return rawGetShowImages(showId).then(resp => {
+  return rawTVGetShowImages(showId).then(resp => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
@@ -43,7 +44,7 @@ function tvGetImages(showId, imageType = "posters") {
 
 /**
  * Returns obj with tv shows like searchValue (tv title) passed.
- * @memberOf Curated_API
+ * @memberOf Curated_API_TV
  * @method
  * @param {(string)} searchValue - TV Show name to search for.
  * @param {number} [page=1] - page to return.  Only works if multiple pages
@@ -55,7 +56,7 @@ function tvSearchByTitle(searchValue, page = 1) {
   let apiCall;
   let searchResults;
   let showsReturned;
-  return rawSearchTVByTitle(searchValue, page).then(resp => {
+  return rawTVSearchByTitle(searchValue, page).then(resp => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
@@ -85,7 +86,7 @@ function tvSearchByTitle(searchValue, page = 1) {
 
 /**
  * returns show details for showId passed
- * @memberOf Curated_API
+ * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @returns {Object}
@@ -93,7 +94,7 @@ function tvSearchByTitle(searchValue, page = 1) {
 function tvGetShowDetails(showId) {
   let apiCall;
   let searchResults;
-  return rawGetShowDetails(showId).then(resp => {
+  return rawTVGetShowDetails(showId).then(resp => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {

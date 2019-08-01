@@ -1,30 +1,35 @@
 /**
- * This is the curated API for Movies information
- * It uses the TMDBApi_Movies.js to pull data and then picks certain
- * data to return and formats it for easy use
- * If you need data not returned in these curated API functions, simply
- * call the "Raw" TMDB API functions
+ * Curated API calls to the tmdb api end points for **Movies**.
+ *
+ * These calls all reference their raw counterparts, but only return selected data points.
+ * Also, things like dates are converted to javascript date formats and image data are
+ * converted to URL strings.
+ * @namespace Curated_API_Movies
+ *
  */
+
 import { formatImageURL } from "../helpers";
 import { getTMDBConsts } from "../index";
 import {
-  rawSearchMovieByTitle,
-  rawGetMovieImages,
-  rawGetMovieDetails,
-  rawGetPersonDetails_Movie,
-  rawDiscoverMovies
+  rawMovieSearchByTitle,
+  rawMovieGetImages,
+  rawMovieGetDetails,
+  rawMovieGetPersonDetails,
+  rawMovieDiscover
 } from "../APIRaw/TMDBApi_Movies";
 
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
+ * @memberof Curated_API_Movies
  * @method
+ *
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
  */
 function movieGetImages(movieId, imageType = "posters") {
   let apiCall;
-  return rawGetMovieImages(movieId).then(resp => {
+  return rawMovieGetImages(movieId).then(resp => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
@@ -43,8 +48,9 @@ function movieGetImages(movieId, imageType = "posters") {
 
 /**
  * Returns an object with an array of movies returned based on passed title.
- * @memberOf Curated_API
+ * @memberOf Curated_API_Movies
  * @method
+ *
  * @param {(string)} searchValue - Value to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {Object} Object data return
@@ -55,7 +61,7 @@ function movieSearchByTitle(searchValue, page = 1) {
   let apiCall;
   let searchResults;
   let moviesReturned;
-  return rawSearchMovieByTitle(searchValue, page).then(resp => {
+  return rawMovieSearchByTitle(searchValue, page).then(resp => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
@@ -109,13 +115,13 @@ function movieSearchByTitle(searchValue, page = 1) {
  */
 /**
  * Returns an object with movie details from passed movieId
- * @memberOf Curated_API
  * @method
+ * @memberOf Curated_API_Movies
  * @param {number} movieId - movieId to get details for
  * @returns {movieDetails} Object data return
  */
 function movieGetMovieDetails(movieId) {
-  return rawGetMovieDetails(movieId).then(resp => {
+  return rawMovieGetDetails(movieId).then(resp => {
     console.log("movie resp", resp);
     let movieDetails = {
       id: movieId,
@@ -147,7 +153,7 @@ function movieGetMovieDetails(movieId) {
 
 /**
  * Returns an object with movies where person was part of cast or crew for passed personId
- * @memberOf Curated_API
+ * @memberOf Curated_API_Movies
  * @method
  * @param {number} personId - personId to get details for
  * @returns {Object} Object data return
@@ -160,7 +166,7 @@ function movieGetMovieDetails(movieId) {
 function movieGetPersonDetails(personId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
-  return rawGetPersonDetails_Movie(personId).then(resp => {
+  return rawMovieGetPersonDetails(personId).then(resp => {
     console.log(resp);
     let castMovies = resp.data.cast.map(movie => {
       return {
@@ -208,7 +214,7 @@ function movieGetPersonDetails(personId) {
 
 /**
  * Returns an object with data matching passed criteriaObj criteria
- * @memberOf Curated_API
+ * @memberOf Curated_API_Movies
  * @method
  * @param {object} criteriaObj - object with criteria to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
@@ -224,7 +230,7 @@ function movieDiscover(criteriaObj, page = 1) {
   let searchResults;
   let moviesReturned;
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
-  return rawDiscoverMovies(criteriaObj, page).then(resp => {
+  return rawMovieDiscover(criteriaObj, page).then(resp => {
     console.log("movie resp", resp);
 
     apiCall = resp.apiCall;

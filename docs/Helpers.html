@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>Helpers - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,122 +34,10 @@
 
 <div id="main">
     
-
+    <h1 class="page-title">Helpers</h1>
     
 
-
-
     
-
-
-    <section class="package">
-        <h3> </h3>		
-    </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    <section class="readme">
-        <article><h1>TMDB API Wrapper</h1>
-<p>This package wraps select API calls from the <a href="https://developers.themoviedb.org/3/getting-started/introduction">TMDB API</a>.  To use this, you will need to get an API Key from The Movie Database website.</p>
-<h2>Install</h2>
-<pre class="prettyprint source lang-javascript"><code>$ yarn add tmdb_api
-</code></pre>
-<h2>Initialize</h2>
-<p>Before you can call the API functions you will need to initialize the module with your API Key using the <code>initTMDB(APIKey)</code> function</p>
-<pre class="prettyprint source lang-jsx"><code>import React from 'react';
-import Main from './components/Main';
-import { initTMDB } from 'tmdb_api';
-
-function App() {
-  initTMDB('0e4935axxxxxxxxxxxxxxxxxx')
-  return (
-    &lt;div>
-      &lt;header>
-          TMDB API Wrapper
-      &lt;/header>
-      &lt;Main />
-    &lt;/div>
-  );
-}
-
-export default App;
-</code></pre>
-<h2>Raw API Function List</h2>
-<p>The <em>Raw</em> API functions are functions that call and return the data directly from the TMDB API endpoints.  This is in contrast to the <em>Curated</em> API functions, which do some additional formatting like return full image URLs.</p>
-<blockquote>
-<p>Note: for functions that have a page parameter, the return set will also include at the root of the returned object a page (current page you are on), total_results (total count of results), total_pages (total number of pages).  You will need this data for pagination.</p>
-</blockquote>
-<blockquote>
-<p>Note: In raw functions, the full image path is not returned as it is in the curated functions.  Refer to <a href="https://developers.themoviedb.org/3/getting-started/images">TMDB API for Image</a> for details.  You can use the <em>getConfig()</em> function to get the config details.</p>
-</blockquote>
-<ul>
-<li>
-<p><strong>rawSearchTVByTitle(searchString, page = 1)</strong> -  searchString will search the for matching titles.  Page defaults to the first page, but if you want to allow pagination, simply pass the page that you would like.</p>
-<pre class="prettyprint source lang-javascript"><code>// Return Object:
-{
-    page: int,
-    total_results: int,
-    total_pages: int,
-    results: array
-}
-</code></pre>
-</li>
-<li>
-<p><strong>rawGetShowDetails</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetEpisodes</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetShowImages</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetExternalIds</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetCredits</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetCreditDetails</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetPersonDetails</strong> -</p>
-</li>
-<li>
-<p><strong>rawSearchMovieByTitle</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetMovieDetails</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetMovieImages</strong> -</p>
-</li>
-<li>
-<p><strong>rawGetPersonDetails_Movie</strong> -</p>
-</li>
-<li>
-<p><strong>rawDiscoverMovies</strong> -</p>
-</li>
-<li>
-<p><strong>rawSearchForPerson</strong> -</p>
-</li>
-</ul></article>
-    </section>
-
-
-
-
-
 
 
 
@@ -159,7 +47,7 @@ export default App;
 <header>
     
         <h2>
-        APICurated/API_Common.js
+        Helpers
         </h2>
         
     
@@ -176,7 +64,7 @@ export default App;
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line1">line 1</a>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -197,13 +85,6 @@ export default App;
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Mark McCoid</li>
-        </ul>
-    </dd>
-    
 
     
 
@@ -222,7 +103,7 @@ export default App;
 
 
             
-                <div class="description"><p>Curated Common Calls.  currently just searchForPersonId</p></div>
+                <div class="description"><p>Helper functions</p></div>
             
 
             
@@ -245,43 +126,26 @@ export default App;
     
 
     
+        <h3 class="subsection-title">Methods</h3>
 
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        index.js
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
         
             
+
+    
+
+    <h4 class="name" id=".formatImageURL"><span class="type-signature">(static) </span>formatImageURL<span class="signature">(imgFileName, size<span class="signature-attributes">opt</span>, secureURL<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+
+    
+
+
+
 
 <dl class="details">
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -302,12 +166,260 @@ export default App;
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Mark McCoid</li>
-        </ul>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Returns and array with one or more full URLs to an image.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>imgFileName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>file name of the image or Array of filenames.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>m</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>'s', *'m', 'l', 'original'.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secureURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>return the https or http - *true</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>full URL to the image</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
     </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".buildRawError"><span class="type-signature">(static) </span>buildRawError<span class="signature">(err)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -326,29 +438,90 @@ export default App;
 
 
 
-            
-                <div class="description"><p>TMDB API Wrapper module.</p></div>
-            
 
-            
+<div class="description">
+    <p>When passed an error object, function will return a standardized error
+object that can be thrown.
+This is for the raw TMDB API calls.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
-        </div>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
-    
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>error object from an TMDB API Call</p></td>
+        </tr>
 
     
+    </tbody>
+</table>
 
-    
-    
-    
 
-     
 
-    
 
-    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
     
 
     

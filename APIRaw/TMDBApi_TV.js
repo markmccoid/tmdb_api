@@ -1,18 +1,30 @@
 import axios from "axios";
+
+import { buildRawError } from "../helpers";
 import { getTMDBConsts } from "../index";
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
+/**
+ * Raw API calls to the tmdb api end points for **TV Shows**.
+ *
+ * These calls all reference their raw counterparts, but only return selected data points.
+ * Also, things like dates are converted to javascript date formats and image data are
+ * converted to URL strings.
+ * @namespace Raw_API_TV
+ *
+ */
 
 /**
  * Returns data from search by searchString
  *
+ * @memberOf Raw_API_TV
  * @param {string} searchString - String of title to search for
  * @param {number} [page=1] - page number to return if multiple pages from search
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawSearchTVByTitle = (searchString, page = 1) => {
+function rawTVSearchByTitle(searchString, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/search/tv?api_key=${API_KEY}&page=${page}&include_adult=false&query=${searchString}`;
   return axios
@@ -25,24 +37,21 @@ export const rawSearchTVByTitle = (searchString, page = 1) => {
     })
     .catch(err => {
       console.log(`Error with searchTVByTitle get: ${err}`);
-      return {
-        error: err,
-        status: err.response.request.status,
-        statusText: err.response.request.statusText,
-        apiCall: err.response.request.responseURL
-      };
+      let errorObj = buildRawError(err);
+      throw errorObj;
     });
-};
+}
 
 /**
  * Returns show details for passed TMDb showId
  *
+ * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetShowDetails = showId => {
+function rawTVGetShowDetails(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}?api_key=${API_KEY}`;
   return axios
@@ -55,20 +64,22 @@ export const rawGetShowDetails = showId => {
     })
     .catch(err => {
       console.log(`Error with getShowDetails get: ${err}`);
-      return err;
+      let errorObj = buildRawError(err);
+      throw errorObj;
     });
-};
+}
 
 /**
  * Return episodes from showId passed and seasonNum passed
  *
+ * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
  * @param {number} seasonNum - season number to get episodes from
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetEpisodes = (showId, seasonNum) => {
+function rawTVGetEpisodes(showId, seasonNum) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/season/${seasonNum}?api_key=${API_KEY}`;
   return axios
@@ -80,116 +91,116 @@ export const rawGetEpisodes = (showId, seasonNum) => {
       };
     })
     .catch(err => {
-      return {
-        error: err,
-        status: err.response.request.status,
-        statusText: err.response.request.statusText
-      };
+      let errorObj = buildRawError(err);
+      throw errorObj;
     });
-};
+}
 
 /**
  * Returns show images for passed showId from TMDb.
  *
+ * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetShowImages = showId => {
+function rawTVGetShowImages(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/images?api_key=${API_KEY}`;
-  return axios.get(apiCall).then(resp => {
-    return {
-      data: resp.data,
-      apiCall: resp.request.responseURL
-    };
-  });
-};
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
 
 /**
  * Returns external Ids from TMDb.
  *
+ * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetExternalIds = showId => {
+function rawTVGetExternalIds(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/external_ids?api_key=${API_KEY}`;
-  return axios.get(apiCall).then(resp => {
-    return {
-      data: resp.data,
-      apiCall: resp.request.responseURL
-    };
-  });
-};
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
 
 /**
  * Returns Credits from TMDb.
  *
+ * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetCredits = showId => {
+function rawTVGetCredits(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/credits?api_key=${API_KEY}`;
-  return axios.get(apiCall).then(resp => {
-    return {
-      data: resp.data,
-      apiCall: resp.request.responseURL
-    };
-  });
-};
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
 
 /**
  * Returns Credit Details from TMDb.
  *
+ * @memberOf Raw_API_TV
  * @param {string} creditId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const rawGetCreditDetails = creditId => {
+function rawTVGetCreditDetails(creditId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/credit/${creditId}?api_key=${API_KEY}`;
-  return axios.get(apiCall).then(resp => {
-    return {
-      data: resp.data,
-      apiCall: resp.request.responseURL
-    };
-  });
-};
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
 
-/**
- * Returns Person Details for TV from TMDb.
- * Person Id can be found in getCredits results
- * cast: [
- *  {
- *    id: this is the personId
- *    ...
- *  }
- * ]
- * @param {string} personId - TMDb show id
- * @returns {object} response object {data, msg}
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
- */
-export const rawGetPersonDetails = personId => {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/person/${personId}?api_key=${API_KEY}`;
-  return axios.get(apiCall).then(resp => {
-    return {
-      data: resp.data,
-      apiCall: resp.request.responseURL
-    };
-  });
-};
-
-// export const getShowSeasons = (showId) => {
+// function getShowSeasons = (showId) => {
 //   return axios
 //     .get (`${API_URL}/tv/${showId}/season?api_key=${API_KEY}`)
 //       .then((resp) => {
@@ -203,3 +214,13 @@ export const rawGetPersonDetails = personId => {
 //         return err;
 //       });
 // };
+
+export {
+  rawTVGetCreditDetails,
+  rawTVGetCredits,
+  rawTVGetEpisodes,
+  rawTVGetExternalIds,
+  rawTVGetShowDetails,
+  rawTVGetShowImages,
+  rawTVSearchByTitle
+};

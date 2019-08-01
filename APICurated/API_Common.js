@@ -3,12 +3,14 @@
  *
  *  @author       Mark McCoid
  */
+
 /**
- * Curated API calls to the tmdb api end points.
+ * Curated_API calls to the tmdb api end points that are **COMMON to both TV and Movies**.
+ *
  * These calls all reference their raw counterparts, but only return selected data points.
  * Also, things like dates are converted to javascript date formats and image data are
  * converted to URL strings.
- * @namespace Curated_API
+ * @namespace Curated_API_Common
  *
  */
 
@@ -17,7 +19,7 @@ import { rawSearchForPerson } from "../APIRaw/TMDB_Common";
  * Searches for person and returns results.  Only returns the
  * {id, name, popularity}, as it is expected to be used for
  * searching for a person's id.
- * @memberOf Curated_API
+ * @memberOf Curated_API_Common
  * @method
  * @param {string} personName - Name of person to search for
  * @param {number} [page=1] - page number to return

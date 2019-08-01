@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>Curated_API_Common - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -34,181 +34,331 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">Curated_API_Common</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- *  @fileOverview TMDB API Wrapper module.
- *
- *  @author       Mark McCoid
- */
+        <h2>
+        Curated_API_Common
+        </h2>
+        
+    
+</header>
 
-import axios from "axios";
-import _ from "lodash";
+<article>
+    
+        <div class="container-overview">
+        
+            
 
-// const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
-const API_URL = "https://api.themoviedb.org/3";
+<dl class="details">
 
-// Init function to get base config variables
-// so we don't call config each time
-// Variables stored
-// IMG_URL, SECURE_IMG_URL
-// After config, to retrieve, run function getImgURLs to get the object with above vars
-let IMG_URL = "";
-let SECURE_IMG_URL = "";
-let API_KEY;
-let TV_GENRE_OBJ;
-let MOVIE_GENRE_OBJ;
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
 
-/**
- * Initialization function that MUST be run before any other
- * function can be accessed.
- * Set a number of constants that can be accessed
- * by calling the getTMDBConsts() function
- * @param {string} apiKey - required API Key to access TMDB
- *
- */
-export async function initTMDB(apiKey) {
-  console.log("initing tmdb");
-  API_KEY = apiKey;
-  let resp = await getConfig();
-  // TMDB API Call to get array of Id/Name objects
-  let tvGenreObj = await getTVGenres();
-  let movieGenreObj = await getMovieGenres();
-  tvGenreObj = convertGenreToObj(tvGenreObj);
-  movieGenreObj = convertGenreToObj(movieGenreObj);
-  TV_GENRE_OBJ = tvGenreObj;
-  MOVIE_GENRE_OBJ = movieGenreObj;
-  IMG_URL = resp.data.images.base_url;
-  SECURE_IMG_URL = resp.data.images.secure_base_url;
-}
+    
 
-/**
- * This function returns the needed constants that the TDMB calls
- * need to get their data
- * @param {object}  - TMDB Constants
- *
- */
-export function getTMDBConsts() {
-  return {
-    API_URL,
-    API_KEY,
-    IMG_URL,
-    SECURE_IMG_URL,
-    TV_GENRE_OBJ,
-    MOVIE_GENRE_OBJ
-  };
-}
+    
 
-/**
- * Returns configuration information from TMDb.
- *
- * @returns {object} response object {data, msg}
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
- */
-export const getConfig = () => {
-  const apiCall = `${API_URL}/configuration?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with config get: ${err}`);
-      return {
-        data: "ERROR",
-        apiCall,
-        msg: err
-      };
-    });
-};
+    
 
-/**
- * Returns a TV Genre map from TMDb.
- *
- * @returns {object} response object {data, msg}
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
- */
-export const getTVGenres = () => {
-  const apiCall = `${API_URL}/genre/tv/list?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      console.log(resp);
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with config get: ${err}`);
-      return {
-        data: "ERROR",
-        apiCall,
-        msg: err
-      };
-    });
-};
+    
 
-/**
- * Returns a Movie Genre map from TMDb.
- *
- * @returns {object} response object {data, msg}
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
- */
-export const getMovieGenres = () => {
-  const apiCall = `${API_URL}/genre/movie/list?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      console.log(resp);
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with config get: ${err}`);
-      return {
-        data: "ERROR",
-        apiCall,
-        msg: err
-      };
-    });
-};
+    
 
-/**
- * Take array of genre objects and convert to object:
- * {
- *  [id]: genre name,
- * }
- * @param {array} genres
- */
-function convertGenreToObj(genres) {
-  return genres.data.genres.reduce((final, genre) => {
-    final[genre.id] = genre.name;
-    return final;
-  }, {});
-}
+    
 
-export * from "./APIRaw";
-export * from "./APICurated";
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+                <div class="description"><p>Curated_API calls to the tmdb api end points that are <strong>COMMON to both TV and Movies</strong>.</p>
+<p>These calls all reference their raw counterparts, but only return selected data points.
+Also, things like dates are converted to javascript date formats and image data are
+converted to URL strings.</p></div>
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".searchForPersonId"><span class="type-signature">(static) </span>searchForPersonId<span class="signature">(personName, page<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Searches for person and returns results.  Only returns the
+{id, name, popularity}, as it is expected to be used for
+searching for a person's id.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>personName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>Name of person to search for</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>1</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>page number to return</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>response object sorted by popularity desc
+on success { data: {
+page, totalpages, totalResults,
+results: [{ id, name, popularity }]}, apiCall: API call}
+on error { data: 'ERROR', msg: error message, }</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
