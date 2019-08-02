@@ -113,7 +113,7 @@ function rawMovieGetImages(movieId) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawMovieGetPersonDetails(personId) {
+function rawMovieGetPersonCredits(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}/movie_credits?api_key=${API_KEY}`;
   return axios
@@ -221,6 +221,6 @@ export {
   rawMovieSearchByTitle,
   rawMovieGetDetails,
   rawMovieGetImages,
-  rawMovieGetPersonDetails,
+  rawMovieGetPersonCredits,
   rawMovieDiscover
 };

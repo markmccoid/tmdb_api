@@ -149,7 +149,8 @@ function rawTVGetExternalIds(showId) {
 }
 
 /**
- * Returns Credits from TMDb.
+ * Returns Credits for a show from TMDb.
+ * Looks like it return the main cast and crew for a show.
  *
  * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
@@ -157,7 +158,7 @@ function rawTVGetExternalIds(showId) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetCredits(showId) {
+function rawTVGetShowCredits(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/credits?api_key=${API_KEY}`;
   return axios
@@ -175,7 +176,8 @@ function rawTVGetCredits(showId) {
 }
 
 /**
- * Returns Credit Details from TMDb.
+ * Returns Credit Details from TMDb.  Use rawTVGetShowCredits to get a creditId.
+ * Not sure of the usefullness of this one.
  *
  * @memberOf Raw_API_TV
  * @param {string} creditId - TMDb show id
@@ -185,7 +187,7 @@ function rawTVGetCredits(showId) {
  */
 function rawTVGetCreditDetails(creditId) {
   let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/credit/${creditId}?api_key=${API_KEY}`;
+  const apiCall = `${API_URL}/credit/${encodeURI(creditId)}?api_key=${API_KEY}`;
   return axios
     .get(apiCall)
     .then(resp => {
@@ -217,7 +219,7 @@ function rawTVGetCreditDetails(creditId) {
 
 export {
   rawTVGetCreditDetails,
-  rawTVGetCredits,
+  rawTVGetShowCredits,
   rawTVGetEpisodes,
   rawTVGetExternalIds,
   rawTVGetShowDetails,

@@ -40,14 +40,9 @@ function rawSearchForPerson(personName, page = 1) {
 }
 
 /**
- * Returns Person Details for TV from TMDb.
- * Person Id can be found in getCredits results
- * cast: [
- *  {
- *    id: this is the personId
- *    ...
- *  }
- * ]
+ * Returns Person Details from TMDb.
+ * Details of the person, not the show or movies they are in.
+ *
  * @memberOf Raw_API_Common
  * @param {string} personId - TMDb show id
  * @returns {object} response object {data, msg}

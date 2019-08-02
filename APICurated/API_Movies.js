@@ -8,13 +8,13 @@
  *
  */
 
-import { formatImageURL } from "../helpers";
+import { formatImageURL, parseToDate } from "../helpers";
 import { getTMDBConsts } from "../index";
 import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
   rawMovieGetDetails,
-  rawMovieGetPersonDetails,
+  rawMovieGetPersonCredits,
   rawMovieDiscover
 } from "../APIRaw/TMDBApi_Movies";
 
@@ -73,7 +73,7 @@ function movieSearchByTitle(searchValue, page = 1) {
       return {
         id: movie.id,
         title: movie.title,
-        releaseDate: movie.release_date,
+        releaseDate: movie.release_date && parseToDate(movie.release_date),
         overview: movie.overview,
         posterURL: movie.backdrop_path
           ? formatImageURL(movie.poster_path, "m", true)[0]
@@ -132,7 +132,8 @@ function movieGetMovieDetails(movieId) {
       runtime: resp.data.runtime,
       budget: resp.data.budget,
       revenue: resp.data.revenue,
-      releaseDate: resp.data.release_date,
+      releaseDate:
+        resp.data.release_date && parseToDate(resp.data.release_date),
       posterURL: resp.data.poster_path
         ? formatImageURL(resp.data.poster_path, "m", true)[0]
         : "",
@@ -163,17 +164,17 @@ function movieGetMovieDetails(movieId) {
  *    apiCall
  * }
  */
-function movieGetPersonDetails(personId) {
+function movieGetPersonCredits(personId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
-  return rawMovieGetPersonDetails(personId).then(resp => {
+  return rawMovieGetPersonCredits(personId).then(resp => {
     console.log(resp);
     let castMovies = resp.data.cast.map(movie => {
       return {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: movie.release_date,
+        releaseDate: movie.release_date && parseToDate(movie.release_date),
         creditId: movie.credit_id,
         characterName: movie.character,
         genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
@@ -191,7 +192,7 @@ function movieGetPersonDetails(personId) {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: movie.release_date,
+        releaseDate: movie.release_date && parseToDate(movie.release_date),
         creditId: movie.credit_id,
         job: movie.job,
         department: movie.department,
@@ -245,7 +246,7 @@ function movieDiscover(criteriaObj, page = 1) {
       overview: result.overview,
       popularity: result.popularity,
       originalLanguage: result.original_language,
-      releaseDate: result.release_date,
+      releaseDate: result.release_date && parseToDate(result.release_date),
       posterURL: result.poster_path
         ? formatImageURL(result.poster_path, "m", true)[0]
         : "",
@@ -267,6 +268,6 @@ export {
   movieGetImages,
   movieSearchByTitle,
   movieGetMovieDetails,
-  movieGetPersonDetails,
+  movieGetPersonCredits,
   movieDiscover
 };

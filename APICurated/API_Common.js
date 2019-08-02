@@ -14,7 +14,8 @@
  *
  */
 
-import { rawSearchForPerson } from "../APIRaw/TMDB_Common";
+import { rawSearchForPerson, rawGetPersonDetails } from "../APIRaw/TMDB_Common";
+import { formatImageURL, parseToDate } from "../helpers";
 /**
  * Searches for person and returns results.  Only returns the
  * {id, name, popularity}, as it is expected to be used for
@@ -55,4 +56,36 @@ function searchForPersonId(searchValue, page = 1) {
   });
 }
 
-export { searchForPersonId };
+/**
+ * Returns Person Details from TMDB.
+ * This is basic information about the person, no shows or movies
+ * that they starred in or worked on are included.
+ *
+ * @memberOf Curated_API_Common
+ * @method
+ * @param {number} personId - personId to return info for
+ * @returns {object} response object sorted by popularity desc
+ *  on success {
+ */
+function getPersonDetails(personId) {
+  return rawGetPersonDetails(personId).then(resp => {
+    console.log("person Details", resp);
+    let personDetails = {
+      id: resp.data.id,
+      name: resp.data.name,
+      birthday: resp.data.birthday && parseToDate(resp.data.birthday),
+      knownForDepartment: resp.data.known_for_department,
+      deathDay: resp.data.deathday && parseToDate(resp.data.deathday),
+      biography: resp.data.biography,
+      placeOfBirth: resp.data.place_of_birth,
+      imdbId: resp.data.imdb_id,
+      profileImage: formatImageURL(resp.data.profile_path)[0]
+    };
+    return {
+      data: personDetails,
+      apiCall: resp.apiCall
+    };
+  });
+}
+
+export { searchForPersonId, getPersonDetails };

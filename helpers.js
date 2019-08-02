@@ -6,6 +6,7 @@
  */
 
 import { getTMDBConsts } from "./index";
+import { parse } from "date-fns";
 
 /**
  * Returns and array with one or more full URLs to an image.
@@ -63,6 +64,12 @@ export function averageOfArray(arr) {
  *
  * @memberof Helpers
  * @param {*} err - error object from an TMDB API Call
+ * @returns {Object} - formatted error object
+ * { error,
+ *   status,
+ *   statusText,
+ *   apiCall
+ *  }
  */
 function buildRawError(err) {
   return {
@@ -77,4 +84,16 @@ function buildRawError(err) {
   };
 }
 
-export { formatImageURL, buildRawError };
+/**
+ * When passed an error object, function will return a standardized error
+ * object that can be thrown.
+ * This is for the raw TMDB API calls.
+ *
+ * @memberof Helpers
+ * @param {string} dateString - date string to parse
+ * @returns {date}
+ */
+function parseToDate(dateString) {
+  return parse(dateString);
+}
+export { formatImageURL, buildRawError, parseToDate };

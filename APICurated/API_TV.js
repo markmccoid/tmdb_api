@@ -8,11 +8,12 @@
  *
  */
 
-import { formatImageURL, averageOfArray } from "../helpers";
+import { formatImageURL, averageOfArray, parseToDate } from "../helpers";
 import {
   rawTVGetShowImages,
   rawTVSearchByTitle,
-  rawTVGetShowDetails
+  rawTVGetShowDetails,
+  rawTVGetShowCredits
 } from "../APIRaw/TMDBApi_TV";
 import { getTMDBConsts } from "../index";
 /**
@@ -68,7 +69,7 @@ function tvSearchByTitle(searchValue, page = 1) {
       return {
         id: show.id,
         name: show.name,
-        firstAirDate: show.first_air_date,
+        firstAirDate: show.first_air_date && parseToDate(show.first_air_date),
         overview: show.overview,
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
@@ -110,8 +111,10 @@ function tvGetShowDetails(showId) {
       avgEpisodeRunTime: resp.data.episode_run_time
         ? averageOfArray(resp.data.episode_run_time)
         : 0,
-      firstAirDate: resp.data.first_air_date,
-      lastAirDate: resp.data.last_air_date,
+      firstAirDate:
+        resp.data.first_air_date && parseToDate(resp.data.first_air_date),
+      lastAirDate:
+        resp.data.last_air_date && parseToDate(resp.data.last_air_date),
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
@@ -126,4 +129,47 @@ function tvGetShowDetails(showId) {
   });
 }
 
-export { tvGetImages, tvSearchByTitle, tvGetShowDetails };
+/**
+ * returns show credits for showId passed
+ *
+ * @memberOf Curated_API_TV
+ * @method
+ * @param {(string)} showId - showId from TMDb API Show Search.
+ * @returns {Object}
+ */
+function tvGetShowCredits(showId) {
+  return rawTVGetShowCredits(showId).then(resp => {
+    let cast = resp.data.cast.map(character => {
+      return {
+        characterName: character.character,
+        creditId: character.credit_id,
+        personId: character.id,
+        name: character.name,
+        gender: character.gender,
+        profileURL: character.profile_path
+          ? formatImageURL(character.profile_path, "m", true)[0]
+          : "",
+        order: character.order
+      };
+    });
+    let crew = resp.data.cast.map(crewMember => {
+      return {
+        creditId: crewMember.credit_id,
+        personId: crewMember.id,
+        name: crewMember.name,
+        gender: crewMember.gender,
+        profileURL: crewMember.profile_path
+          ? formatImageURL(crewMember.profile_path, "m", true)[0]
+          : "",
+        job: crewMember.job,
+        department: crewMember.department
+      };
+    });
+    return {
+      data: { cast, crew },
+      apiCall: resp.apiCall
+    };
+  });
+}
+
+export { tvGetImages, tvSearchByTitle, tvGetShowDetails, tvGetShowCredits };
