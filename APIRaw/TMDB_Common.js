@@ -19,8 +19,9 @@ import { getTMDBConsts } from "../index";
  * @param {string} personName - Name of person to search for
  * @param {number} [page=1] - page number to return
  * @returns {object} response object
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
+ * On success { data: data from api call, apiCall: API call}
+ *
+ * On error throws {@link ErrorObj}
  */
 function rawSearchForPerson(personName, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
@@ -43,11 +44,14 @@ function rawSearchForPerson(personName, page = 1) {
  * Returns Person Details from TMDb.
  * Details of the person, not the show or movies they are in.
  *
+ * TMDB Developer API Docs - {@link https://developers.themoviedb.org/3/credits/get-credit-details}
  * @memberOf Raw_API_Common
  * @param {string} personId - TMDb show id
  * @returns {object} response object {data, msg}
- *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
+ *
+ * On success { data: data from api call, apiCall: API call}
+ *
+ * On error throws {@link ErrorObj}
  */
 function rawGetPersonDetails(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
@@ -66,4 +70,66 @@ function rawGetPersonDetails(personId) {
     });
 }
 
-export { rawSearchForPerson, rawGetPersonDetails };
+/**
+ * Returns images for passed PersonId from TMDb.
+ *
+ * TMDB Developer API Docs - {@link https://developers.themoviedb.org/3/people/get-person-images}
+ * @memberOf Raw_API_Common
+ * @param {string} personId - TMDb show id
+ * @returns {object} response object
+ * On success { data: data from api call, apiCall: API call}
+ *
+ * On error throws {@link ErrorObj}
+ */
+function rawGetPersonImages(personId) {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/person/${personId}/images?api_key=${API_KEY}`;
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
+
+/**
+ * Returns a Person's combined credits from TMDb.
+ * These will be credits from TV and Movies.  If you only want TV {@see rawTVGetPersonCredits}
+ *
+ * TMDB Developer API Docs - {@link https://developers.themoviedb.org/3/people/get-person-combined-credits}
+ * @memberOf Raw_API_Common
+ * @param {string} personId - TMDb show id
+ * @returns {object} response object
+ * On success { data: data from api call, apiCall: API call}
+ *
+ * On error {@link ErrorObj}
+ */
+function rawGetPersonCombinedCredits(personId) {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/person/${personId}/combined_credits?api_key=${API_KEY}`;
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
+
+export {
+  rawSearchForPerson,
+  rawGetPersonDetails,
+  rawGetPersonImages,
+  rawGetPersonCombinedCredits
+};

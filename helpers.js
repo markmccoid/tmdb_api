@@ -58,13 +58,20 @@ export function averageOfArray(arr) {
 }
 
 /**
+ * @typeDef {Object} ErrorObj
+ * @property {Object} error the error object thrown from original error. Assuming from axios
+ * @property {string} status err.response.request.status
+ * @property {string} status err.response.request.statusText
+ * @property {string} status err.response.request.responseURL
+ */
+/**
  * When passed an error object, function will return a standardized error
  * object that can be thrown.
  * This is for the raw TMDB API calls.
  *
  * @memberof Helpers
  * @param {*} err - error object from an TMDB API Call
- * @returns {Object} - formatted error object
+ * @returns {ErrorObj} - formatted error object
  * { error,
  *   status,
  *   statusText,
