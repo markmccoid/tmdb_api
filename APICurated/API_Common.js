@@ -14,7 +14,11 @@
  *
  */
 
-import { rawSearchForPerson, rawGetPersonDetails } from "../APIRaw/TMDB_Common";
+import {
+  rawSearchForPerson,
+  rawGetPersonDetails,
+  rawGetPersonImages
+} from "../APIRaw/TMDB_Common";
 import { formatImageURL, parseToDate } from "../helpers";
 /**
  * Searches for person and returns results.  Only returns the
@@ -88,4 +92,32 @@ function getPersonDetails(personId) {
   });
 }
 
-export { searchForPersonId, getPersonDetails };
+/**
+ * Returns Person Images from TMDB.
+ *
+ * @memberOf Curated_API_Common
+ * @method
+ * @param {number} personId - personId to return info for
+ * @returns {object} response object sorted by vote_average desc
+ *  on success {
+ */
+function getPersonImages(personId) {
+  return rawGetPersonImages(personId).then(resp => {
+    let personImages = resp.data.profiles
+      .sort((a, b) => b.vote_average - a.vote_average)
+      .map(image => {
+        return {
+          width: image.width,
+          height: image.height,
+          aspectRatio: image.aspect_ratio,
+          imageURL: formatImageURL(image.file_path)[0]
+        };
+      });
+    return {
+      data: personImages,
+      apiCall: resp.data.apiCall
+    };
+  });
+}
+
+export { searchForPersonId, getPersonDetails, getPersonImages };

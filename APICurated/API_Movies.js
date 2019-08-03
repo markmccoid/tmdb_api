@@ -82,7 +82,7 @@ function movieSearchByTitle(searchValue, page = 1) {
           ? formatImageURL(movie.backdrop_path, "m", true)[0]
           : "",
         genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
-        getMovieDetails: () => movieGetMovieDetails(movie.id)
+        getMovieDetails: () => movieGetDetails(movie.id)
       };
     });
 
@@ -110,7 +110,7 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @property {string} data.backdropURL
  * @property {string} data.imdbId
  * @property {string} data.imdbURL
- * @property {array.<string>} data.genres
+ * @property {array.<string>} data.genres array of genre names
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -120,7 +120,7 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @param {number} movieId - movieId to get details for
  * @returns {movieDetails} Object data return
  */
-function movieGetMovieDetails(movieId) {
+function movieGetDetails(movieId) {
   return rawMovieGetDetails(movieId).then(resp => {
     console.log("movie resp", resp);
     let movieDetails = {
@@ -267,7 +267,7 @@ function movieDiscover(criteriaObj, page = 1) {
 export {
   movieGetImages,
   movieSearchByTitle,
-  movieGetMovieDetails,
+  movieGetDetails,
   movieGetPersonCredits,
   movieDiscover
 };
