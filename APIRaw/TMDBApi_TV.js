@@ -1,6 +1,4 @@
-import axios from "axios";
-
-import { buildRawError } from "../helpers";
+import { callTMDB } from "../helpers";
 import { getTMDBConsts } from "../index";
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
@@ -27,19 +25,7 @@ import { getTMDBConsts } from "../index";
 function rawTVSearchByTitle(searchString, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/search/tv?api_key=${API_KEY}&page=${page}&include_adult=false&query=${searchString}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with searchTVByTitle get: ${err}`);
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -54,19 +40,7 @@ function rawTVSearchByTitle(searchString, page = 1) {
 function rawTVGetShowDetails(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with getShowDetails get: ${err}`);
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -82,18 +56,7 @@ function rawTVGetShowDetails(showId) {
 function rawTVGetEpisodes(showId, seasonNum) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/season/${seasonNum}?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -108,18 +71,7 @@ function rawTVGetEpisodes(showId, seasonNum) {
 function rawTVGetShowImages(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/images?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -134,18 +86,7 @@ function rawTVGetShowImages(showId) {
 function rawTVGetExternalIds(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/external_ids?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -161,18 +102,7 @@ function rawTVGetExternalIds(showId) {
 function rawTVGetShowCredits(showId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/credits?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -188,18 +118,7 @@ function rawTVGetShowCredits(showId) {
 function rawTVGetCreditDetails(creditId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/credit/${encodeURI(creditId)}?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 // function getShowSeasons = (showId) => {

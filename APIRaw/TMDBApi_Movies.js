@@ -1,5 +1,5 @@
-import axios from "axios";
-import { buildRawError } from "../helpers";
+import { format } from "date-fns";
+import { callTMDB } from "../helpers";
 import { getTMDBConsts } from "../index";
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
@@ -30,19 +30,7 @@ function rawMovieSearchByTitle(searchString, page = 1) {
   const apiCall = `${API_URL}/search/movie?api_key=${API_KEY}&page=${page}&include_adult=false&query=${encodeURI(
     searchString
   )}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with searchMovieByTitle get: ${err}`);
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -57,19 +45,7 @@ function rawMovieSearchByTitle(searchString, page = 1) {
 function rawMovieGetDetails(movieId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/movie/${movieId}?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      console.log(`Error with getMovieDetails get: ${err}`);
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -84,18 +60,7 @@ function rawMovieGetDetails(movieId) {
 function rawMovieGetImages(movieId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/movie/${movieId}/images?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -108,26 +73,40 @@ function rawMovieGetImages(movieId) {
  *  }
  * ]
  * @memberOf Raw_API_Movies
- * @param {number} personId - TMDb show id
+ * @param {number} personId - TMDb personId
  * @returns {object} response object
  *  on success { data: data from api call, apiCall: API call}
- *  on error { data: 'ERROR', msg: error message, }
  */
 function rawMovieGetPersonCredits(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}/movie_credits?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
+}
+
+/**
+ * Returns the credits for Movies from TMDb.
+ * Person Id can be found in getCredits results
+ * cast: [
+ *  {
+ *    id: this is the personId
+ *    ...
+ *  }
+ * ],
+ * crew: [
+ *  {
+ *    id: this is the personId
+ *    ...
+ *  }
+ * ]
+ * @memberOf Raw_API_Movies
+ * @param {number} movieId - TMDb movieId
+ * @returns {object} response object
+ *  on success { data: data from api call, apiCall: API call}
+ */
+function rawMovieGetCredits(movieId) {
+  let { API_KEY, API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}`;
+  return callTMDB(apiCall);
 }
 
 /**
@@ -136,7 +115,8 @@ function rawMovieGetPersonCredits(personId) {
  *  releaseYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
- *  cast: [] // person Ids. Only include movies that have one of the Id's added as an actor.
+ *  cast: [] // person Ids. Only include movies that have one of the Id's added as an actor.,
+ *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.,
  *  sortBy: one of the following:
  *    - popularity.asc
  *    - popularity.desc **Default
@@ -185,12 +165,21 @@ function rawMovieDiscover(criteriaObj, page = 1) {
         apiCall += `&primary_release_year=${criteriaArray[1]}`;
         break;
       case "releaseDateGTE":
-        console.log("releaseDate in");
-        apiCall += `&primary_release_date.gte=${criteriaArray[1]}`;
+        let releaseDateGTE = criteriaArray[1];
+        // check if JS date and convert
+        if (typeof releaseDateGTE === "date") {
+          releaseDateGTE = format(releaseDateGTE, "YYYY-MM-DD");
+        }
+        apiCall += `&primary_release_date.gte=${releaseDateGTE}`;
         console.log("releaseDate out", apiCall);
         break;
       case "releaseDateLTE":
-        apiCall += `&primary_release_date.lte=${criteriaArray[1]}`;
+        let releaseDateLTE = criteriaArray[1];
+        // check if JS date and convert
+        if (typeof releaseDateLTE === "date") {
+          releaseDateLTE = format(releaseDateLTE, "YYYY-MM-DD");
+        }
+        apiCall += `&primary_release_date.lte=${releaseDateLTE}`;
         break;
       case "cast":
         //Build the with genres criteria
@@ -199,22 +188,18 @@ function rawMovieDiscover(criteriaObj, page = 1) {
           return (apiCall += idx === 0 ? personId : `,${personId}`);
         });
         break;
+      case "crew":
+        //Build the with genres criteria
+        apiCall += `&with_crew=`;
+        criteriaArray[1].forEach((personId, idx) => {
+          return (apiCall += idx === 0 ? personId : `,${personId}`);
+        });
+        break;
       default:
         break;
     }
   });
-  return axios
-    .get(encodeURI(apiCall))
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 export {
@@ -222,5 +207,6 @@ export {
   rawMovieGetDetails,
   rawMovieGetImages,
   rawMovieGetPersonCredits,
-  rawMovieDiscover
+  rawMovieDiscover,
+  rawMovieGetCredits
 };

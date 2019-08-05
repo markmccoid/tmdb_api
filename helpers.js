@@ -4,7 +4,7 @@
  * @namespace Helpers
  *
  */
-
+import axios from "axios";
 import { getTMDBConsts } from "./index";
 import { parse } from "date-fns";
 
@@ -103,4 +103,29 @@ function buildRawError(err) {
 function parseToDate(dateString) {
   return parse(dateString);
 }
-export { formatImageURL, buildRawError, parseToDate };
+
+/**
+ * Since all Raw TMDB Api calls return the same shape object
+ * this function wraps that functionality, so a raw API calls
+ * just needs the URL to be passed here.
+ *
+ * @memberof Helpers
+ * @param {string} apiCall
+ * @returns {promise}
+ */
+function callTMDB(apiCall) {
+  return axios
+    .get(apiCall)
+    .then(resp => {
+      return {
+        data: resp.data,
+        apiCall: resp.request.responseURL
+      };
+    })
+    .catch(err => {
+      let errorObj = buildRawError(err);
+      throw errorObj;
+    });
+}
+
+export { formatImageURL, buildRawError, parseToDate, callTMDB };

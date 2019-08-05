@@ -15,6 +15,7 @@ import {
   rawMovieGetImages,
   rawMovieGetDetails,
   rawMovieGetPersonCredits,
+  rawMovieGetCredits,
   rawMovieDiscover
 } from "../APIRaw/TMDBApi_Movies";
 
@@ -153,6 +154,55 @@ function movieGetDetails(movieId) {
 }
 
 /**
+ * Returns an object with cast and crew for passed movieId
+ * @memberOf Curated_API_Movies
+ * @method
+ * @param {number} movieId - movieId to get details for
+ * @returns {Object} Object data return
+ * {
+ *    cast: [{}],
+ *    crew: [{}],
+ *    apiCall
+ * }
+ */
+function movieGetCredits(movieId) {
+  let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+
+  return rawMovieGetCredits(movieId).then(resp => {
+    console.log(resp);
+    let castForMovie = resp.data.cast.map(castMember => {
+      return {
+        personId: castMember.id,
+        name: castMember.name,
+        characterName: castMember.character,
+        creditId: castMember.credit_id,
+        gender: castMember.gender,
+        profileURL: castMember.profile_path
+          ? formatImageURL(castMember.profile_path, "m", true)[0]
+          : ""
+      };
+    });
+    let crewForMovie = resp.data.crew.map(crewMember => {
+      return {
+        personId: crewMember.id,
+        name: crewMember.name,
+        creditId: crewMember.credit_id,
+        job: crewMember.job,
+        department: crewMember.department,
+        gender: crewMember.gender,
+        profileURL: crewMember.profile_path
+          ? formatImageURL(crewMember.profile_path, "m", true)[0]
+          : ""
+      };
+    });
+    return {
+      data: { cast: castForMovie, crew: crewForMovie },
+      apiCall: resp.apiCall
+    };
+  });
+}
+
+/**
  * Returns an object with movies where person was part of cast or crew for passed personId
  * @memberOf Curated_API_Movies
  * @method
@@ -269,5 +319,6 @@ export {
   movieSearchByTitle,
   movieGetDetails,
   movieGetPersonCredits,
+  movieGetCredits,
   movieDiscover
 };

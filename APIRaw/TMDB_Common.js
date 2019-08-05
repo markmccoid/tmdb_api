@@ -1,5 +1,4 @@
-import axios from "axios";
-import { buildRawError } from "../helpers";
+import { callTMDB } from "../helpers";
 import { getTMDBConsts } from "../index";
 
 /**
@@ -26,18 +25,7 @@ import { getTMDBConsts } from "../index";
 function rawSearchForPerson(personName, page = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   let apiCall = `${API_URL}/search/person?include_adult=false&api_key=${API_KEY}&page=${page}&query=${personName}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -56,18 +44,7 @@ function rawSearchForPerson(personName, page = 1) {
 function rawGetPersonDetails(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -84,18 +61,7 @@ function rawGetPersonDetails(personId) {
 function rawGetPersonImages(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}/images?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 /**
@@ -113,18 +79,7 @@ function rawGetPersonImages(personId) {
 function rawGetPersonCombinedCredits(personId) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/person/${personId}/combined_credits?api_key=${API_KEY}`;
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
+  return callTMDB(apiCall);
 }
 
 export {

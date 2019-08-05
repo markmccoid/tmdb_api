@@ -34,48 +34,59 @@ export default App;
 
 
 
-## Raw API Function List
+## Raw API Functions
 
-The *Raw* API functions are functions that call and return the data directly from the TMDB API endpoints.  This is in contrast to the *Curated* API functions, which do some additional formatting like return full image URLs.
+The *Raw* API functions are functions that call and return the data directly from the TMDB API endpoints.  This is in contrast to the *Curated* API functions, which do some additional formatting like returning full image URLs.
 
-> Note: for functions that have a page parameter, the return set will also include at the root of the returned object a page (current page you are on), total_results (total count of results), total_pages (total number of pages).  You will need this data for pagination.
+All Raw API functions return data in the following object shape:
+
+```javascript
+{
+    data: // The meat of the return from TMDB API call.
+    apiCall: <string> // apicall used to get results
+}
+```
+
+### Error Object
+
+If an error should occur, all Raw API functions return a standard error object in the following shape:
+
+```javascript
+{
+    error: err, // The full error object
+    status: err.response ? err.response.request.status : null,
+    statusText: err.response ? err.response.request.statusText : null,
+    apiCall: err.response
+      ? err.response.request.responseURL
+      : err.config
+      ? err.config.url
+      : null
+  }
+```
 
 > Note: In raw functions, the full image path is not returned as it is in the curated functions.  Refer to [TMDB API for Image](https://developers.themoviedb.org/3/getting-started/images) for details.  You can use the *getConfig()* function to get the config details.
 
-- **rawSearchTVByTitle(searchString, page = 1)** -  searchString will search the for matching titles.  Page defaults to the first page, but if you want to allow pagination, simply pass the page that you would like.
 
-  ```javascript
-  // Return Object:
-  {
-      page: int,
-      total_results: int,
-      total_pages: int,
-      results: array
-  }
-  ```
 
-- **rawGetShowDetails** -  
+## Curated API Functions
 
-- **rawGetEpisodes** -  
+Curated functions are wrappers around the Raw API calls.  They do some extra work so you don't have too.  
 
-- **rawGetShowImages** -  
+1. Resolve any images to full image paths.
+2. Convert date strings to JavaScript date objects
+3. Convert genre Ids to genre names (unless you are calling the genre function to get a list of id/genre combinations.)
+4. Return a curated set of items from the call.
 
-- **rawGetExternalIds** -  
+The returned object shape is the same as the Raw calls:
 
-- **rawGetCredits** -  
+```javascript
+{
+    data: // The meat of the return from TMDB API call.
+    apiCall: <string> // apicall used to get results
+}
+```
 
-- **rawGetCreditDetails** -  
 
-- **rawGetPersonDetails** -  
 
-- **rawSearchMovieByTitle** -  
+> Note: for functions that have a page parameter, the data object will  also include at the root of the returned object a page (current page you are on), total_results (total count of results), total_pages (total number of pages).  You will need this data for pagination.
 
-- **rawGetMovieDetails** -  
-
-- **rawGetMovieImages** -  
-
-- **rawGetPersonDetails_Movie** -  
-
-- **rawDiscoverMovies** -  
-
-- **rawSearchForPerson** -  
