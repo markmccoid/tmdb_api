@@ -20,13 +20,19 @@ import {
 } from "../APIRaw/TMDBApi_Movies";
 
 /**
+ * @typedef imagesReturn
+ * @type {Object}
+ * @property {Array} data Array of image URLs
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns an array of image URLs. Filters and gives only 'en' English images
  * @memberof Curated_API_Movies
  * @method
  *
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
- * @returns {string[]} Array of URLs to the images
+ * @returns {imagesReturn} Array of URLs to the images
  */
 function movieGetImages(movieId, imageType = "posters") {
   let apiCall;
@@ -48,13 +54,30 @@ function movieGetImages(movieId, imageType = "posters") {
 }
 
 /**
+ * @typedef movieSearch
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page the API call used to hit endpoint
+ * @property {number} data.totalResults the API call used to hit endpoint
+ * @property {number} data.totalPages the API call used to hit endpoint
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the movieId
+ * @property {string} data.results.title
+ * @property {string} data.results.overview
+ * @property {string} data.results.releaseDate
+ * @property {string} data.results.posterURL
+ * @property {string} data.results.backdropURL
+ * @property {array.<string>} data.results.genres array of genre names
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns an object with an array of movies returned based on passed title.
  * @memberOf Curated_API_Movies
  * @method
  *
  * @param {(string)} searchValue - Value to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {Object} Object data return
+ * @returns {movieSearch} Object data return
  */
 function movieSearchByTitle(searchValue, page = 1) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
@@ -167,7 +190,6 @@ function movieGetDetails(movieId) {
  */
 function movieGetCredits(movieId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
-
   return rawMovieGetCredits(movieId).then(resp => {
     console.log(resp);
     let castForMovie = resp.data.cast.map(castMember => {
