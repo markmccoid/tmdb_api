@@ -57,14 +57,14 @@ function movieGetImages(movieId, imageType = "posters") {
  * @typedef movieSearch
  * @type {Object}
  * @property {Object} data the data object
- * @property {number} data.page the API call used to hit endpoint
- * @property {number} data.totalResults the API call used to hit endpoint
- * @property {number} data.totalPages the API call used to hit endpoint
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
  * @property {Array} data.results results of the search
  * @property {number} data.results.id the movieId
  * @property {string} data.results.title
  * @property {string} data.results.overview
- * @property {string} data.results.releaseDate
+ * @property {date} data.results.releaseDate
  * @property {string} data.results.posterURL
  * @property {string} data.results.backdropURL
  * @property {array.<string>} data.results.genres array of genre names
@@ -129,7 +129,7 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @property {number} data.runtime runtime in minutes
  * @property {number} data.budget
  * @property {number} data.revenue
- * @property {string} data.releaseDate
+ * @property {date} data.releaseDate
  * @property {string} data.posterURL
  * @property {string} data.backdropURL
  * @property {string} data.imdbId
@@ -177,11 +177,32 @@ function movieGetDetails(movieId) {
 }
 
 /**
+ * @typedef movieCredits
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {Array} data.cast the cast array
+ * @property {number} data.cast.personId
+ * @property {string} data.cast.name
+ * @property {string} data.cast.characterName
+ * @property {string} data.cast.creditId
+ * @property {number} data.cast.gender 1 is Female, 2 is Male
+ * @property {string} data.cast.profileURL
+ * @property {string} data.crew the crew array
+ * @property {number} data.crew.personId
+ * @property {string} data.crew.name
+ * @property {string} data.crew.creditId
+ * @property {string} data.crew.job
+ * @property {string} data.crew.department
+ * @property {number} data.crew.gender 1 is Female, 2 is Male
+ * @property {string} data.crew.profileURL
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns an object with cast and crew for passed movieId
  * @memberOf Curated_API_Movies
  * @method
  * @param {number} movieId - movieId to get details for
- * @returns {Object} Object data return
+ * @returns {movieCredits} Object data return
  * {
  *    cast: [{}],
  *    crew: [{}],
@@ -225,11 +246,40 @@ function movieGetCredits(movieId) {
 }
 
 /**
+ * @typedef moviePersonCredits
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {Array} data.cast the cast array
+ * @property {number} data.cast.movieId
+ * @property {string} data.cast.title
+ * @property {string} data.cast.overview
+ * @property {date} data.cast.releaseDate
+ * @property {string} data.cast.creditId
+ * @property {string} data.cast.characterName
+ * @property {Array} data.cast.genres
+ * @property {string} data.cast.posterURL
+ * @property {string} data.cast.backdropURL
+ * @property {string} data.cast.orginalLanguage
+ * @property {string} data.crew the crew array
+ * @property {number} data.cast.movieId
+ * @property {string} data.cast.title
+ * @property {string} data.cast.overview
+ * @property {string} data.cast.releaseDate
+ * @property {string} data.cast.creditId
+ * @property {string} data.cast.job
+ * @property {string} data.cast.department
+ * @property {Array} data.cast.genres
+ * @property {string} data.cast.posterURL
+ * @property {string} data.cast.backdropURL
+ * @property {string} data.cast.orginalLanguage
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns an object with movies where person was part of cast or crew for passed personId
  * @memberOf Curated_API_Movies
  * @method
  * @param {number} personId - personId to get details for
- * @returns {Object} Object data return
+ * @returns {moviePersonCredits} Object data return
  * {
  *    cast: [{}],
  *    crew: [{}],
@@ -286,17 +336,57 @@ function movieGetPersonCredits(personId) {
 }
 
 /**
+ * @typedef movieDiscover
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the movieId
+ * @property {string} data.results.title
+ * @property {number} data.results.popularity
+ * @property {string} data.results.originalLanguage
+ * @property {string} data.results.overview
+ * @property {date} data.results.releaseDate
+ * @property {string} data.results.posterURL
+ * @property {string} data.results.backdropURL
+ * @property {array.<string>} data.results.genres array of genre names
+ * @property {function} data.results.getMovieImages returns and array of image URLs for movie
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * @typedef movieDiscoverCriteria
+ * @type {Object}
+ * @property {Array} genres  genre Ids
+ * @property {int} releaseYear: Primary Release Year
+ * @property {date | string} releaseDateGTE: movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+ * @property {date | string} releaseDateLTE: movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+ * @property {Array} cast:  person Ids. Only include movies that have one of the Id's added as an actor
+ * @property {Array} crew:  person Ids. Only include movies that have one of the Id's added as a crew member
+ * @property {string} sortBy Options
+ *    - popularity.asc
+ *    - popularity.desc **Default**
+ *    - release_date.asc
+ *    - release_date.desc
+ *    - revenue.asc
+ *    - revenue.desc
+ *    - primary_release_date.asc
+ *    - primary_release_date.desc
+ *    - original_title.asc
+ *    - original_title.desc
+ *    - vote_average.asc
+ *    - vote_average.desc
+ *    - vote_count.asc
+ *    - vote_count.desc
+ */
+/**
  * Returns an object with data matching passed criteriaObj criteria
  * @memberOf Curated_API_Movies
  * @method
- * @param {object} criteriaObj - object with criteria to search for
+ * @param {movieDiscoverCriteria} criteriaObj - object with criteria to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {Object} Object data return
- * {
- *    cast: [{}],
- *    crew: [{}],
- *    apiCall
- * }
+ * @returns {movieDiscover} Object data return
  */
 function movieDiscover(criteriaObj, page = 1) {
   let apiCall;
