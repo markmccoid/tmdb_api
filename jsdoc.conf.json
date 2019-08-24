@@ -16,7 +16,7 @@
   "plugins": ["plugins/markdown"],
   "opts": {
     "destination": "docs",
-    "template": "node_modules/docdash",
+    "template": "node_modules/better-docs", // "node_modules/docdash",
     "encoding": "utf8",
     "recurse": true,
     "verbose": true,
