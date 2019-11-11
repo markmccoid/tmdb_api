@@ -6,7 +6,7 @@
  */
 import axios from "axios";
 import { getTMDBConsts } from "./index";
-import { parse } from "date-fns";
+import { parseISO, getUnixTime, format } from "date-fns";
 
 /**
  * Returns and array with one or more full URLs to an image.
@@ -92,16 +92,28 @@ function buildRawError(err) {
 }
 
 /**
- * When passed an error object, function will return a standardized error
- * object that can be thrown.
- * This is for the raw TMDB API calls.
+ * Parses passed date
  *
  * @memberof Helpers
  * @param {string} dateString - date string to parse
- * @returns {date}
+ * @returns {object} - return object
+ *  {
+ *    date, // - javascript date format
+ *    epoch, // - Unix epoch timestamp in seconds
+ *    formatted // - Formatted date.  Default "MM-dd-yyyy" or passed in main invokation
+ *  }
  */
 function parseToDate(dateString) {
-  return parse(dateString);
+  if (!dateString || dateString === "") {
+    return undefined;
+  }
+  let { API_OPTIONS } = getTMDBConsts();
+  let theDate = parseISO(dateString); // date-fns to convert to javascript date object
+  return {
+    date: theDate,
+    epoch: getUnixTime(theDate),
+    formatted: format(theDate, API_OPTIONS.dateFormatString)
+  }; // Turns the return milliseconds into seconds (unix date)
 }
 
 /**

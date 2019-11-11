@@ -3,57 +3,41 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Helpers</title>
-
+    <title>Helpers - Documentation</title>
+    
+    
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-    <div id="stickyNavbarOverlay"></div>
-    <div class="top-navbar">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    
-                    
-                        <h1 class="navbar-item">Documentation</h1>
-                    
-                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-                
-            </nav>
-        </div>
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3" id="sidebarNav">
-                <div class="sidebar">
-                    <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a></li><li><a href="Curated_API_TV.html">Curated_API_TV</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Raw_API_Common.html">Raw_API_Common</a></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a></li><li><a href="Raw_API_TV.html">Raw_API_TV</a></li></ul><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li></ul></div>
-                    </nav>
-                </div>
-            </div>
-            <div class="column is-9-desktop">
-                <div class="content" id="main-content-wrapper">
-                    <header class="page-title">
-                        <p>Namespace</p>
-                        <h1>Helpers</h1>
-                    </header>
-                    
-                    
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://myproject.com" target="_blank" class="menu-item" id="website_link" >Project Website</a></h2><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a><ul class='methods'><li data-type='method'><a href="Curated_API_Common.html#.searchForPersonId">searchForPersonId</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonDetails">getPersonDetails</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonImages">getPersonImages</a></li></ul></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a><ul class='methods'><li data-type='method'><a href="Curated_API_Movies.html#.movieGetImages">movieGetImages</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieSearchByTitle">movieSearchByTitle</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetDetails">movieGetDetails</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetCredits">movieGetCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetPersonCredits">movieGetPersonCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieDiscover">movieDiscover</a></li></ul></li><li><a href="Curated_API_TV.html">Curated_API_TV</a><ul class='methods'><li data-type='method'><a href="Curated_API_TV.html#.tvGetImages">tvGetImages</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvSearchByTitle">tvSearchByTitle</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowDetails">tvGetShowDetails</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowCredits">tvGetShowCredits</a></li></ul></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a><ul class='methods'><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieSearchByTitle">rawMovieSearchByTitle</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetDetails">rawMovieGetDetails</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetImages">rawMovieGetImages</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetPersonCredits">rawMovieGetPersonCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetCredits">rawMovieGetCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieDiscover">rawMovieDiscover</a></li></ul></li><li><a href="Raw_API_TV.html">Raw_API_TV</a><ul class='methods'><li data-type='method'><a href="Raw_API_TV.html#.rawTVSearchByTitle">rawTVSearchByTitle</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowDetails">rawTVGetShowDetails</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetEpisodes">rawTVGetEpisodes</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowImages">rawTVGetShowImages</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetExternalIds">rawTVGetExternalIds</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowCredits">rawTVGetShowCredits</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetCreditDetails">rawTVGetCreditDetails</a></li></ul></li><li><a href="Raw_API_Common.html">Raw_API_Common</a><ul class='methods'><li data-type='method'><a href="Raw_API_Common.html#.rawSearchForPerson">rawSearchForPerson</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonDetails">rawGetPersonDetails</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonImages">rawGetPersonImages</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonCombinedCredits">rawGetPersonCombinedCredits</a></li></ul></li><li><a href="Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="Helpers.html#.formatImageURL">formatImageURL</a></li><li data-type='method'><a href="Helpers.html#.buildRawError">buildRawError</a></li><li data-type='method'><a href="Helpers.html#.parseToDate">parseToDate</a></li><li data-type='method'><a href="Helpers.html#.callTMDB">callTMDB</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#searchForPersonId_typedef">searchForPersonId_typedef</a></li><li><a href="global.html#getPersonDetails_typedef">getPersonDetails_typedef</a></li><li><a href="global.html#getPersonImages_typedef">getPersonImages_typedef</a></li><li><a href="global.html#imagesReturn_typedef">imagesReturn_typedef</a></li><li><a href="global.html#movieSearchByTitle_typedef">movieSearchByTitle_typedef</a></li><li><a href="global.html#movieDetails_typedef">movieDetails_typedef</a></li><li><a href="global.html#movieCredits_typedef">movieCredits_typedef</a></li><li><a href="global.html#moviePersonCredits_typedef">moviePersonCredits_typedef</a></li><li><a href="global.html#movieDiscover_typedef">movieDiscover_typedef</a></li><li><a href="global.html#movieDiscoverCriteria_typedef">movieDiscoverCriteria_typedef</a></li><li><a href="global.html#tvSearchByTitle_typedef">tvSearchByTitle_typedef</a></li><li><a href="global.html#tvShowDetails_typedef">tvShowDetails_typedef</a></li><li><a href="global.html#tvCredits_typedef">tvCredits_typedef</a></li><li><a href="global.html#ErrorObj">ErrorObj</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Helpers</h1>
+    
+
+    
 
 
 
@@ -62,173 +46,31 @@
 
 <header>
     
-        <h2>Helpers</h2>
+        <h2>
+        Helpers
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
-            <div class="description"><p>Helper functions</p></div>
-        
-
-        
-
+            
 
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line1">line 1</a>
+    </li></ul></dd>
     
 
     
 
     
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line1">line 1</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class='vertical-section'>
-            <h3 class="title"><span>Methods</span></h3>
-            <div class="members">
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".buildRawError">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            buildRawError<span class="signature">(err)</span><span class="type-signature"> &rarr; {<a href="global.html#ErrorObj">ErrorObj</a>}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>When passed an error object, function will return a standardized error
-object that can be thrown.
-This is for the raw TMDB API calls.</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>err</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">*</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>error object from an TMDB API Call</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
 
     
 
@@ -253,158 +95,47 @@ This is for the raw TMDB API calls.</p>
     
 
     
-    
 
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line81">line 81</a>
-            </span>
-        </p>
     
 </dl>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
             
-                    
+                <div class="description"><p>Helper functions</p></div>
+            
 
-<div class="columns">
-    
-    <div class='param-desc column is-7'><ul>
-<li>formatted error object
-{ error,
-status,
-statusText,
-apiCall
-}</li>
-</ul></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
+            
         
-<span class="param-type"><a href="global.html#ErrorObj">ErrorObj</a></span>
-
-
-    </div>
-    
-</div>
-
-                
         </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
+    
 
     
-    <h4 class="name" id=".callTMDB">
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
         
             
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            callTMDB<span class="signature">(apiCall)</span><span class="type-signature"> &rarr; {promise}</span>
-        </span>
-    </h4>
-    
 
     
-    
-    <div class="description">
-        <p>Since all Raw TMDB Api calls return the same shape object
-this function wraps that functionality, so a raw API calls
-just needs the URL to be passed here.</p>
-    </div>
-    
 
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>apiCall</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">string</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
+    <h4 class="name" id=".formatImageURL"><span class="type-signature">(static) </span>formatImageURL<span class="signature">(imgFileName, size<span class="signature-attributes">opt</span>, secureURL<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
 
     
-    </tbody>
-</table>
-
 
 
 
@@ -412,7 +143,10 @@ just needs the URL to be passed here.</p>
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line20">line 20</a>
+    </li></ul></dd>
     
 
     
@@ -434,19 +168,15 @@ just needs the URL to be passed here.</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line116">line 116</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -454,68 +184,11 @@ just needs the URL to be passed here.</p>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">promise</span>
-
-
-    </div>
-    
+<div class="description">
+    <p>Returns and array with one or more full URLs to an image.</p>
 </div>
 
-                
-        </div>
-    </div>
 
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".formatImageURL">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            formatImageURL<span class="signature">(imgFileName, size<span class="signature-attributes">opt</span>, secureURL<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Returns and array with one or more full URLs to an image.</p>
-    </div>
-    
 
 
 
@@ -552,125 +225,119 @@ just needs the URL to be passed here.</p>
     <tbody>
     
 
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>imgFileName</code></td>
-  
+        <tr>
+            
+                <td class="name"><code>imgFileName</code></td>
+            
 
-  <td class="type">
-  
-      
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 |
 
 <span class="param-type">Array.&lt;string></span>
 
 
-  
-  </td>
+            
+            </td>
 
-  
-      <td class="attributes">
-      
+            
+                <td class="attributes">
+                
 
-      
+                
 
-      
-      </td>
-  
+                
+                </td>
+            
 
-  
-      <td class="default">
-      
-      </td>
-  
+            
+                <td class="default">
+                
+                </td>
+            
 
-  <td class="description last"><p>file name of the image or Array of filenames.</p></td>
-</tr>
-
+            <td class="description last"><p>file name of the image or Array of filenames.</p></td>
+        </tr>
 
     
 
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>size</code></td>
-  
+        <tr>
+            
+                <td class="name"><code>size</code></td>
+            
 
-  <td class="type">
-  
-      
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-  
-  </td>
+            
+            </td>
 
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-      
+                
 
-      
-      </td>
-  
+                
+                </td>
+            
 
-  
-      <td class="default">
-      
-          m
-      
-      </td>
-  
+            
+                <td class="default">
+                
+                    <code>m</code>
+                
+                </td>
+            
 
-  <td class="description last"><p>'s', *'m', 'l', 'original'.</p></td>
-</tr>
-
+            <td class="description last"><p>'s', *'m', 'l', 'original'.</p></td>
+        </tr>
 
     
 
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>secureURL</code></td>
-  
+        <tr>
+            
+                <td class="name"><code>secureURL</code></td>
+            
 
-  <td class="type">
-  
-      
+            <td class="type">
+            
+                
 <span class="param-type">boolean</span>
 
 
-  
-  </td>
+            
+            </td>
 
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-      
+                
 
-      
-      </td>
-  
+                
+                </td>
+            
 
-  
-      <td class="default">
-      
-          true
-      
-      </td>
-  
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
 
-  <td class="description last"><p>return the https or http - *true</p></td>
-</tr>
-
+            <td class="description last"><p>return the https or http - *true</p></td>
+        </tr>
 
     
     </tbody>
@@ -680,10 +347,61 @@ just needs the URL to be passed here.</p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>full URL to the image</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;string></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".buildRawError"><span class="type-signature">(static) </span>buildRawError<span class="signature">(err)</span><span class="type-signature"> &rarr; {<a href="global.html#ErrorObj">ErrorObj</a>}</span></h4>
+
+    
+
+
+
+
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line81">line 81</a>
+    </li></ul></dd>
     
 
     
@@ -705,19 +423,15 @@ just needs the URL to be passed here.</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line20">line 20</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -725,72 +439,13 @@ just needs the URL to be passed here.</p>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>full URL to the image</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Array.&lt;string></span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id=".parseToDate">
-        
-            
-                <span class='tag'>static</span>
-            
-        
-        <span class="code-name">
-            parseToDate<span class="signature">(dateString)</span><span class="type-signature"> &rarr; {date}</span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>When passed an error object, function will return a standardized error
+<div class="description">
+    <p>When passed an error object, function will return a standardized error
 object that can be thrown.
 This is for the raw TMDB API calls.</p>
-    </div>
-    
+</div>
+
+
 
 
 
@@ -823,28 +478,26 @@ This is for the raw TMDB API calls.</p>
     <tbody>
     
 
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>dateString</code></td>
-  
+        <tr>
+            
+                <td class="name"><code>err</code></td>
+            
 
-  <td class="type">
-  
-      
-<span class="param-type">string</span>
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
 
 
-  
-  </td>
+            
+            </td>
 
-  
+            
 
-  
+            
 
-  <td class="description last"><p>date string to parse</p></td>
-</tr>
-
+            <td class="description last"><p>error object from an TMDB API Call</p></td>
+        </tr>
 
     
     </tbody>
@@ -854,10 +507,68 @@ This is for the raw TMDB API calls.</p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>formatted error object
+{ error,
+status,
+statusText,
+apiCall
+}</li>
+</ul>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#ErrorObj">ErrorObj</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".parseToDate"><span class="type-signature">(static) </span>parseToDate<span class="signature">(dateString)</span><span class="type-signature"> &rarr; {date}</span></h4>
+
+    
+
+
+
+
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line103">line 103</a>
+    </li></ul></dd>
     
 
     
@@ -879,19 +590,15 @@ This is for the raw TMDB API calls.</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line103">line 103</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -899,6 +606,11 @@ This is for the raw TMDB API calls.</p>
 
 
 
+<div class="description">
+    <p>When passed an error object, function will return a standardized error
+object that can be thrown.
+This is for the raw TMDB API calls.</p>
+</div>
 
 
 
@@ -910,38 +622,247 @@ This is for the raw TMDB API calls.</p>
 
 
 
+    <h5>Parameters:</h5>
+    
 
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
             
-                    
+                <td class="name"><code>dateString</code></td>
+            
 
-<div class="columns">
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>date string to parse</p></td>
+        </tr>
+
     
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
         
 <span class="param-type">date</span>
 
 
-    </div>
+    </dd>
+</dl>
+
     
-</div>
-
-                
-        </div>
-    </div>
 
 
 
-
-</div>
+        
             
-            </div>
-        </div>
+
+    
+
+    <h4 class="name" id=".callTMDB"><span class="type-signature">(static) </span>callTMDB<span class="signature">(apiCall)</span><span class="type-signature"> &rarr; {promise}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line116">line 116</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Since all Raw TMDB Api calls return the same shape object
+this function wraps that functionality, so a raw API calls
+just needs the URL to be passed here.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">promise</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -954,23 +875,23 @@ This is for the raw TMDB API calls.</p>
 
 
 
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
+</div>
 
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 00:02:08 GMT-0400 (Eastern Daylight Time)</p>
-        <p class="sidebar-created-by">
-            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
-        </p>
-    </div>
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 26 2019 23:47:44 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/app.min.js"></script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
 </body>
 </html>

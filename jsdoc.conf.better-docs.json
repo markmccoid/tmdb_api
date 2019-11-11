@@ -12,15 +12,25 @@
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,
-    "name": "tmdb_api",
-    "logo": {
-      "url": "images/tmdbapi_logo.png"
+    "better-docs": {
+      "name": "tmdb_api Documentation",
+      "logo": "images/tmdbapi_logo.png",
+      "navigation": [
+        {
+          "label": "Github",
+          "href": "https://github.com/markmccoid/tmdb_api"
+        },
+        {
+          "label": "Example Application",
+          "href": "https://github.com/markmccoid/tmdb_api_tester"
+        }
+      ]
     }
   },
   "plugins": ["plugins/markdown", "node_modules/better-docs/category"],
   "opts": {
     "destination": "docs",
-    "template": "node_modules/docdash",
+    "template": "node_modules/better-docs", // "node_modules/docdash",
     "encoding": "utf8",
     "recurse": true,
     "verbose": true,

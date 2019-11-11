@@ -20,7 +20,7 @@ import {
 } from "../APIRaw/TMDBApi_Movies";
 
 /**
- * @typedef imagesReturn
+ * @typedef imagesReturn_typedef
  * @type {Object}
  * @property {Array} data Array of image URLs
  * @property {string} apiCall the API call used to hit endpoint
@@ -32,7 +32,7 @@ import {
  *
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
- * @returns {imagesReturn} Array of URLs to the images
+ * @returns {imagesReturn_typedef} Array of URLs to the images
  */
 function movieGetImages(movieId, imageType = "posters") {
   let apiCall;
@@ -54,7 +54,7 @@ function movieGetImages(movieId, imageType = "posters") {
 }
 
 /**
- * @typedef movieSearch
+ * @typedef movieSearchByTitle_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {number} data.page current page returned
@@ -64,7 +64,7 @@ function movieGetImages(movieId, imageType = "posters") {
  * @property {number} data.results.id the movieId
  * @property {string} data.results.title
  * @property {string} data.results.overview
- * @property {date} data.results.releaseDate
+ * @property {int} data.results.releaseDate - returns the Unix time, can use moment, date-nfs or new Date() to convert
  * @property {string} data.results.posterURL
  * @property {string} data.results.backdropURL
  * @property {array.<string>} data.results.genres array of genre names
@@ -77,7 +77,7 @@ function movieGetImages(movieId, imageType = "posters") {
  *
  * @param {(string)} searchValue - Value to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {movieSearch} Object data return
+ * @returns {movieSearchByTitle_typedef} Object data return
  */
 function movieSearchByTitle(searchValue, page = 1) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
@@ -97,7 +97,7 @@ function movieSearchByTitle(searchValue, page = 1) {
       return {
         id: movie.id,
         title: movie.title,
-        releaseDate: movie.release_date && parseToDate(movie.release_date),
+        releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
         posterURL: movie.backdrop_path
           ? formatImageURL(movie.poster_path, "m", true)[0]
@@ -118,7 +118,7 @@ function movieSearchByTitle(searchValue, page = 1) {
 }
 
 /**
- * @typedef movieDetails
+ * @typedef movieDetails_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {number} data.id the movieId
@@ -142,11 +142,10 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @method
  * @memberOf Curated_API_Movies
  * @param {number} movieId - movieId to get details for
- * @returns {movieDetails} Object data return
+ * @returns {movieDetails_typedef} Object data return
  */
 function movieGetDetails(movieId) {
   return rawMovieGetDetails(movieId).then(resp => {
-    console.log("movie resp", resp);
     let movieDetails = {
       id: movieId,
       title: resp.data.title,
@@ -156,8 +155,7 @@ function movieGetDetails(movieId) {
       runtime: resp.data.runtime,
       budget: resp.data.budget,
       revenue: resp.data.revenue,
-      releaseDate:
-        resp.data.release_date && parseToDate(resp.data.release_date),
+      releaseDate: parseToDate(resp.data.release_date),
       posterURL: resp.data.poster_path
         ? formatImageURL(resp.data.poster_path, "m", true)[0]
         : "",
@@ -177,7 +175,7 @@ function movieGetDetails(movieId) {
 }
 
 /**
- * @typedef movieCredits
+ * @typedef movieCredits_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {Array} data.cast the cast array
@@ -202,7 +200,7 @@ function movieGetDetails(movieId) {
  * @memberOf Curated_API_Movies
  * @method
  * @param {number} movieId - movieId to get details for
- * @returns {movieCredits} Object data return
+ * @returns {movieCredits_typedef} Object data return
  * {
  *    cast: [{}],
  *    crew: [{}],
@@ -212,7 +210,6 @@ function movieGetDetails(movieId) {
 function movieGetCredits(movieId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieGetCredits(movieId).then(resp => {
-    console.log(resp);
     let castForMovie = resp.data.cast.map(castMember => {
       return {
         personId: castMember.id,
@@ -246,7 +243,7 @@ function movieGetCredits(movieId) {
 }
 
 /**
- * @typedef moviePersonCredits
+ * @typedef moviePersonCredits_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {Array} data.cast the cast array
@@ -279,7 +276,7 @@ function movieGetCredits(movieId) {
  * @memberOf Curated_API_Movies
  * @method
  * @param {number} personId - personId to get details for
- * @returns {moviePersonCredits} Object data return
+ * @returns {moviePersonCredits_typedef} Object data return
  * {
  *    cast: [{}],
  *    crew: [{}],
@@ -290,13 +287,12 @@ function movieGetPersonCredits(personId) {
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
   return rawMovieGetPersonCredits(personId).then(resp => {
-    console.log(resp);
     let castMovies = resp.data.cast.map(movie => {
       return {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: movie.release_date && parseToDate(movie.release_date),
+        releaseDate: parseToDate(movie.release_date),
         creditId: movie.credit_id,
         characterName: movie.character,
         genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
@@ -314,7 +310,7 @@ function movieGetPersonCredits(personId) {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: movie.release_date && parseToDate(movie.release_date),
+        releaseDate: parseToDate(movie.release_date),
         creditId: movie.credit_id,
         job: movie.job,
         department: movie.department,
@@ -336,7 +332,7 @@ function movieGetPersonCredits(personId) {
 }
 
 /**
- * @typedef movieDiscover
+ * @typedef movieDiscover_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {number} data.page current page returned
@@ -356,7 +352,7 @@ function movieGetPersonCredits(personId) {
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
- * @typedef movieDiscoverCriteria
+ * @typedef movieDiscoverCriteria_typedef
  * @type {Object}
  * @property {Array} genres  genre Ids
  * @property {int} releaseYear: Primary Release Year
@@ -384,9 +380,9 @@ function movieGetPersonCredits(personId) {
  * Returns an object with data matching passed criteriaObj criteria
  * @memberOf Curated_API_Movies
  * @method
- * @param {movieDiscoverCriteria} criteriaObj - object with criteria to search for
+ * @param {movieDiscoverCriteria_typedef} criteriaObj - object with criteria to search for
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {movieDiscover} Object data return
+ * @returns {movieDiscover_typedef} Object data return
  */
 function movieDiscover(criteriaObj, page = 1) {
   let apiCall;
@@ -394,8 +390,6 @@ function movieDiscover(criteriaObj, page = 1) {
   let moviesReturned;
   let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieDiscover(criteriaObj, page).then(resp => {
-    console.log("movie resp", resp);
-
     apiCall = resp.apiCall;
     searchResults = {
       page: resp.data.page,
@@ -408,7 +402,7 @@ function movieDiscover(criteriaObj, page = 1) {
       overview: result.overview,
       popularity: result.popularity,
       originalLanguage: result.original_language,
-      releaseDate: result.release_date && parseToDate(result.release_date),
+      releaseDate: parseToDate(result.release_date),
       posterURL: result.poster_path
         ? formatImageURL(result.poster_path, "m", true)[0]
         : "",

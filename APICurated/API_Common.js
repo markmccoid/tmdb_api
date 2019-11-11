@@ -20,6 +20,20 @@ import {
   rawGetPersonImages
 } from "../APIRaw/TMDB_Common";
 import { formatImageURL, parseToDate } from "../helpers";
+
+/**
+ * @typedef searchForPersonId_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of persons found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the personId
+ * @property {string} data.results.name
+ * @property {number} data.results.popularity
+ * @property {string} apiCall the API call used to hit endpoint
+ */
 /**
  * Searches for person and returns results.  Only returns the
  * {id, name, popularity}, as it is expected to be used for
@@ -28,7 +42,7 @@ import { formatImageURL, parseToDate } from "../helpers";
  * @method
  * @param {string} personName - Name of person to search for
  * @param {number} [page=1] - page number to return
- * @returns {object} response object sorted by popularity desc
+ * @returns {searchForPersonId_typedef} response object sorted by popularity desc
  *  on success { data: {
  *    page, totalpages, totalResults,
  *    results: [{ id, name, popularity }]}, apiCall: API call}
@@ -61,6 +75,21 @@ function searchForPersonId(searchValue, page = 1) {
 }
 
 /**
+ * @typedef getPersonDetails_typedef
+ * @type {Object}
+ * @property {Object} data results of the search
+ * @property {number} data.id the personId
+ * @property {string} data.name
+ * @property {date} data.birthday
+ * @property {date} data.deathDay
+ * @property {string} data.knownForDepartment
+ * @property {string} data.biography
+ * @property {string} data.placeOfBirth
+ * @property {string} data.profileImage
+ * @property {string} data.imdbId
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns Person Details from TMDB.
  * This is basic information about the person, no shows or movies
  * that they starred in or worked on are included.
@@ -68,7 +97,7 @@ function searchForPersonId(searchValue, page = 1) {
  * @memberOf Curated_API_Common
  * @method
  * @param {number} personId - personId to return info for
- * @returns {object} response object sorted by popularity desc
+ * @returns {getPersonDetails_typedef} response object sorted by popularity desc
  *  on success {
  */
 function getPersonDetails(personId) {
@@ -77,9 +106,9 @@ function getPersonDetails(personId) {
     let personDetails = {
       id: resp.data.id,
       name: resp.data.name,
-      birthday: resp.data.birthday && parseToDate(resp.data.birthday),
+      birthday: parseToDate(resp.data.birthday),
       knownForDepartment: resp.data.known_for_department,
-      deathDay: resp.data.deathday && parseToDate(resp.data.deathday),
+      deathDay: parseToDate(resp.data.deathday),
       biography: resp.data.biography,
       placeOfBirth: resp.data.place_of_birth,
       imdbId: resp.data.imdb_id,
@@ -93,12 +122,22 @@ function getPersonDetails(personId) {
 }
 
 /**
+ * @typedef getPersonImages_typedef
+ * @type {Object}
+ * @property {array} data results of the search
+ * @property {number} data.width
+ * @property {string} data.height
+ * @property {date} data.aspectRatio
+ * @property {string} data.imageURL
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns Person Images from TMDB.
  *
  * @memberOf Curated_API_Common
  * @method
  * @param {number} personId - personId to return info for
- * @returns {object} response object sorted by vote_average desc
+ * @returns {getPersonImages_typedef} Array of person images (https://...)
  *  on success {
  */
 function getPersonImages(personId) {

@@ -20,6 +20,9 @@ let SECURE_IMG_URL = "";
 let API_KEY;
 let TV_GENRE_OBJ;
 let MOVIE_GENRE_OBJ;
+let API_OPTIONS = {
+  dateFormatString: "MM-dd-yyyy"
+};
 
 /**
  * Initialization function that MUST be run before any other
@@ -27,10 +30,13 @@ let MOVIE_GENRE_OBJ;
  * Set a number of constants that can be accessed
  * by calling the getTMDBConsts() function
  * @param {string} apiKey - required API Key to access TMDB
- *
+ * @param {object} options - options object {
+ *  dateFormatString //dateFormatString as used by fns-date https://date-fns.org/v2.7.0/docs/format
+ * }
  */
-export async function initTMDB(apiKey) {
+export async function initTMDB(apiKey, options = {}) {
   console.log("initing tmdb");
+  API_OPTIONS = { ...API_OPTIONS, ...options };
   API_KEY = apiKey;
   let resp = await getConfig();
   // TMDB API Call to get array of Id/Name objects
@@ -42,8 +48,19 @@ export async function initTMDB(apiKey) {
   MOVIE_GENRE_OBJ = movieGenreObj;
   IMG_URL = resp.data.images.base_url;
   SECURE_IMG_URL = resp.data.images.secure_base_url;
+  return;
 }
 
+/**
+ * Updates the API_OPTIONS objects
+ *
+ * @param {object} options - options object {
+ *  dateFormatString //dateFormatString as used by fns-date https://date-fns.org/v2.7.0/docs/format
+ * }
+ */
+export function updateAPIOptions(options = {}) {
+  API_OPTIONS = { ...API_OPTIONS, ...options };
+}
 /**
  * This function returns the needed constants that the TDMB calls
  * need to get their data
@@ -57,7 +74,8 @@ export function getTMDBConsts() {
     IMG_URL,
     SECURE_IMG_URL,
     TV_GENRE_OBJ,
-    MOVIE_GENRE_OBJ
+    MOVIE_GENRE_OBJ,
+    API_OPTIONS
   };
 }
 
@@ -128,7 +146,6 @@ export const getMovieGenres = () => {
   return axios
     .get(apiCall)
     .then(resp => {
-      console.log(resp);
       return {
         data: resp.data,
         apiCall: resp.request.responseURL

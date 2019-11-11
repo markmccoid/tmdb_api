@@ -3,57 +3,41 @@
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
-
+    <title>Global - Documentation</title>
+    
+    
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-    <div id="stickyNavbarOverlay"></div>
-    <div class="top-navbar">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    
-                    
-                        <h1 class="navbar-item">Documentation</h1>
-                    
-                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-                
-            </nav>
-        </div>
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3" id="sidebarNav">
-                <div class="sidebar">
-                    <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a></li><li><a href="Curated_API_TV.html">Curated_API_TV</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Raw_API_Common.html">Raw_API_Common</a></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a></li><li><a href="Raw_API_TV.html">Raw_API_TV</a></li></ul><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li></ul></div>
-                    </nav>
-                </div>
-            </div>
-            <div class="column is-9-desktop">
-                <div class="content" id="main-content-wrapper">
-                    <header class="page-title">
-                        <p>Title</p>
-                        <h1>Global</h1>
-                    </header>
-                    
-                    
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://myproject.com" target="_blank" class="menu-item" id="website_link" >Project Website</a></h2><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a><ul class='methods'><li data-type='method'><a href="Curated_API_Common.html#.searchForPersonId">searchForPersonId</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonDetails">getPersonDetails</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonImages">getPersonImages</a></li></ul></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a><ul class='methods'><li data-type='method'><a href="Curated_API_Movies.html#.movieGetImages">movieGetImages</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieSearchByTitle">movieSearchByTitle</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetDetails">movieGetDetails</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetCredits">movieGetCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetPersonCredits">movieGetPersonCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieDiscover">movieDiscover</a></li></ul></li><li><a href="Curated_API_TV.html">Curated_API_TV</a><ul class='methods'><li data-type='method'><a href="Curated_API_TV.html#.tvGetImages">tvGetImages</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvSearchByTitle">tvSearchByTitle</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowDetails">tvGetShowDetails</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowCredits">tvGetShowCredits</a></li></ul></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a><ul class='methods'><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieSearchByTitle">rawMovieSearchByTitle</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetDetails">rawMovieGetDetails</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetImages">rawMovieGetImages</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetPersonCredits">rawMovieGetPersonCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetCredits">rawMovieGetCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieDiscover">rawMovieDiscover</a></li></ul></li><li><a href="Raw_API_TV.html">Raw_API_TV</a><ul class='methods'><li data-type='method'><a href="Raw_API_TV.html#.rawTVSearchByTitle">rawTVSearchByTitle</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowDetails">rawTVGetShowDetails</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetEpisodes">rawTVGetEpisodes</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowImages">rawTVGetShowImages</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetExternalIds">rawTVGetExternalIds</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowCredits">rawTVGetShowCredits</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetCreditDetails">rawTVGetCreditDetails</a></li></ul></li><li><a href="Raw_API_Common.html">Raw_API_Common</a><ul class='methods'><li data-type='method'><a href="Raw_API_Common.html#.rawSearchForPerson">rawSearchForPerson</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonDetails">rawGetPersonDetails</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonImages">rawGetPersonImages</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonCombinedCredits">rawGetPersonCombinedCredits</a></li></ul></li><li><a href="Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="Helpers.html#.formatImageURL">formatImageURL</a></li><li data-type='method'><a href="Helpers.html#.buildRawError">buildRawError</a></li><li data-type='method'><a href="Helpers.html#.parseToDate">parseToDate</a></li><li data-type='method'><a href="Helpers.html#.callTMDB">callTMDB</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#searchForPersonId_typedef">searchForPersonId_typedef</a></li><li><a href="global.html#getPersonDetails_typedef">getPersonDetails_typedef</a></li><li><a href="global.html#getPersonImages_typedef">getPersonImages_typedef</a></li><li><a href="global.html#imagesReturn_typedef">imagesReturn_typedef</a></li><li><a href="global.html#movieSearchByTitle_typedef">movieSearchByTitle_typedef</a></li><li><a href="global.html#movieDetails_typedef">movieDetails_typedef</a></li><li><a href="global.html#movieCredits_typedef">movieCredits_typedef</a></li><li><a href="global.html#moviePersonCredits_typedef">moviePersonCredits_typedef</a></li><li><a href="global.html#movieDiscover_typedef">movieDiscover_typedef</a></li><li><a href="global.html#movieDiscoverCriteria_typedef">movieDiscoverCriteria_typedef</a></li><li><a href="global.html#tvSearchByTitle_typedef">tvSearchByTitle_typedef</a></li><li><a href="global.html#tvShowDetails_typedef">tvShowDetails_typedef</a></li><li><a href="global.html#tvCredits_typedef">tvCredits_typedef</a></li><li><a href="global.html#ErrorObj">ErrorObj</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Global</h1>
+    
+
+    
 
 
 
@@ -62,18 +46,18 @@
 
 <header>
     
-        <h2></h2>
+        <h2>
+        
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
-
-        
-
+            
 
 <dl class="details">
 
@@ -100,6 +84,7 @@
     
 
     
+
     
 
     
@@ -110,39 +95,78 @@
 </dl>
 
 
-        
-    
-    </div>
 
-    
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <div class='vertical-section'>
-            <h3 class="title"><span>Members</span></h3>
-            <div class="members">
             
-                <div class="member">
 
-<h4 class="name" id="getConfig">
-    
+            
         
-            <span class='tag'>constant</span>
-        
+        </div>
     
-    <span class="code-name">
-        getConfig
-    </span>
-</h4>
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="getConfig"><span class="type-signature">(constant) </span>getConfig<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line71">line 71</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
 
 
 
@@ -155,72 +179,12 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line71">line 71</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
-
-
-</div>
+        
             
-                <div class="member">
-
-<h4 class="name" id="getMovieGenres">
-    
-        
-            <span class='tag'>constant</span>
-        
-    
-    <span class="code-name">
-        getMovieGenres
-    </span>
-</h4>
-
-
-
-
-<div class="description">
-    <p>Returns a Movie Genre map from TMDb.</p>
-</div>
+<h4 class="name" id="getTVGenres"><span class="type-signature">(constant) </span>getTVGenres<span class="type-signature"></span></h4>
 
 
 
@@ -229,7 +193,10 @@
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line98">line 98</a>
+    </li></ul></dd>
     
 
     
@@ -251,40 +218,18 @@
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line126">line 126</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
-
-
-
-
-</div>
-            
-                <div class="member">
-
-<h4 class="name" id="getTVGenres">
-    
-        
-            <span class='tag'>constant</span>
-        
-    
-    <span class="code-name">
-        getTVGenres
-    </span>
-</h4>
 
 
 
@@ -297,140 +242,12 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line98">line 98</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
-
-
-</div>
+        
             
-            </div>
-        </div>
-    
-
-    
-        <div class='vertical-section'>
-            <h3 class="title"><span>Methods</span></h3>
-            <div class="members">
-            
-                <div class="member">
-
-    
-    <h4 class="name" id="convertGenreToObj">
-        
-        <span class="code-name">
-            convertGenreToObj<span class="signature">(genres)</span><span class="type-signature"></span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Take array of genre objects and convert to object:
-{
-[id]: genre name,
-}</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>genres</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">array</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
+<h4 class="name" id="getMovieGenres"><span class="type-signature">(constant) </span>getMovieGenres<span class="type-signature"></span></h4>
 
 
 
@@ -439,7 +256,10 @@
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line126">line 126</a>
+    </li></ul></dd>
     
 
     
@@ -461,19 +281,15 @@
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line154">line 154</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -481,97 +297,31 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="description">
+    <p>Returns a Movie Genre map from TMDb.</p>
 </div>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
             
-                <div class="member">
 
     
-    <h4 class="name" id="getTMDBConsts">
-        
-        <span class="code-name">
-            getTMDBConsts<span class="signature">()</span><span class="type-signature"></span>
-        </span>
-    </h4>
-    
+
+    <h4 class="name" id="initTMDB"><span class="type-signature"></span>initTMDB<span class="signature">(apiKey)</span><span class="type-signature"></span></h4>
 
     
-    
-    <div class="description">
-        <p>This function returns the needed constants that the TDMB calls
-need to get their data</p>
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        
-<tr class="deep-level-0">
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">object</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>TMDB Constants</p></td>
-</tr>
-
-
-    
-    </tbody>
-</table>
-
 
 
 
@@ -579,7 +329,10 @@ need to get their data</p>
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line32">line 32</a>
+    </li></ul></dd>
     
 
     
@@ -601,19 +354,15 @@ need to get their data</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line53">line 53</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -621,44 +370,14 @@ need to get their data</p>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-            
-                <div class="member">
-
-    
-    <h4 class="name" id="initTMDB">
-        
-        <span class="code-name">
-            initTMDB<span class="signature">(apiKey)</span><span class="type-signature"></span>
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        <p>Initialization function that MUST be run before any other
+<div class="description">
+    <p>Initialization function that MUST be run before any other
 function can be accessed.
 Set a number of constants that can be accessed
 by calling the getTMDBConsts() function</p>
-    </div>
-    
+</div>
+
+
 
 
 
@@ -691,28 +410,26 @@ by calling the getTMDBConsts() function</p>
     <tbody>
     
 
-        
-<tr class="deep-level-0">
-  
-      <td class="name"><code>apiKey</code></td>
-  
+        <tr>
+            
+                <td class="name"><code>apiKey</code></td>
+            
 
-  <td class="type">
-  
-      
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-  
-  </td>
+            
+            </td>
 
-  
+            
 
-  
+            
 
-  <td class="description last"><p>required API Key to access TMDB</p></td>
-</tr>
-
+            <td class="description last"><p>required API Key to access TMDB</p></td>
+        </tr>
 
     
     </tbody>
@@ -722,10 +439,39 @@ by calling the getTMDBConsts() function</p>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getTMDBConsts"><span class="type-signature"></span>getTMDBConsts<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line53">line 53</a>
+    </li></ul></dd>
     
 
     
@@ -747,19 +493,15 @@ by calling the getTMDBConsts() function</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="index.js.html" class="button">View Source</a>
-            <span>
-                <a href="index.js.html">index.js</a>, <a href="index.js.html#line32">line 32</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
@@ -767,54 +509,275 @@ by calling the getTMDBConsts() function</p>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="description">
+    <p>This function returns the needed constants that the TDMB calls
+need to get their data</p>
 </div>
-            
-            </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
     
 
-    
-        <div class='vertical-section'>
-            <h3 class="title"><span>Type Definitions</span></h3>
-            <div class="members">
-            
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
+<table class="params">
+    <thead>
+    <tr>
         
-<span class="param-type">Object</span>
 
+        <th>Type</th>
 
-    </span>
+        
 
-<h4 class="name" id="ErrorObj">
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
-    <span class="code-name">
-        ErrorObj
-    </span>
-</h4>
+
+        <tr>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>TMDB Constants</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="convertGenreToObj"><span class="type-signature"></span>convertGenreToObj<span class="signature">(genres)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Take array of genre objects and convert to object:
+{
+[id]: genre name,
+}</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="searchForPersonId_typedef">searchForPersonId_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -841,178 +804,27 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>error</code></td>
-    
 
-    <td class="type">
-    
-        
-<span class="param-type">Object</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the error object thrown from original error. Assuming from axios</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>status</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>err.response.request.status</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>status</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>err.response.request.statusText</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>status</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>err.response.request.responseURL</p></td>
-</tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="helpers.js.html" class="button">View Source</a>
-            <span>
-                <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line60">line 60</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
+        <tr>
             
-                <div class="member">
+                <td class="name"><code>data</code></td>
+            
 
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
-    </span>
+            
+            </td>
 
-<h4 class="name" id="imagesReturn">
-    
-    <span class="code-name">
-        imagesReturn
-    </span>
-</h4>
+            
 
+            
 
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
 
 <table class="props">
     <thead>
@@ -1033,50 +845,220 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>current page returned</p></td>
+        </tr>
+
     
 
-    <td class="type">
+        <tr>
+            
+                <td class="name"><code>totalResults</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total number of persons found</p></td>
+        </tr>
+
     
-        
+
+        <tr>
+            
+                <td class="name"><code>totalPages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total pages use for pagination</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>results</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Array</span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
+            
 
-    
+            
 
-    <td class="description last"><p>Array of image URLs</p></td>
-</tr>
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
 
-    
+<table class="props">
+    <thead>
+    <tr>
         
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
     
 
-    <td class="type">
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the personId</p></td>
+        </tr>
+
     
-        
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>popularity</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
     
 
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
 
     
     </tbody>
@@ -1085,74 +1067,72 @@ by calling the getTMDBConsts() function</p>
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line22">line 22</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
 
-
-</div>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
 <span class="param-type">Object</span>
 
 
-    </span>
+        </li>
+    </ul>
 
-<h4 class="name" id="movieCredits">
+
+
+
+
+
+            
+                
+<h4 class="name" id="getPersonDetails_typedef">getPersonDetails_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
     
-    <span class="code-name">
-        movieCredits
-    </span>
-</h4>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line77">line 77</a>
+    </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -1179,479 +1159,27 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
-    
 
-    <td class="type">
-    
-        
-<span class="param-type">Object</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the data object</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">Array</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the cast array</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.personId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.name</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.characterName</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.creditId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.gender</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>1 is Female, 2 is Male</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.profileURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the crew array</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.personId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.name</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.creditId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.job</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.department</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.gender</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>1 is Female, 2 is Male</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew.profileURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line179">line 179</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
+        <tr>
             
-                <div class="member">
+                <td class="name"><code>data</code></td>
+            
 
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
-    </span>
+            
+            </td>
 
-<h4 class="name" id="movieDetails">
-    
-    <span class="code-name">
-        movieDetails
-    </span>
-</h4>
+            
 
+            
 
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
 
 <table class="props">
     <thead>
@@ -1672,374 +1200,241 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
-    
 
-    <td class="type">
-    
-        
-<span class="param-type">Object</span>
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
 
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the data object</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>id</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the personId</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
 
-    <td class="description last"><p>the movieId</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>title</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>birthday</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>tagline</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>overview</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>status</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>runtime</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>runtime in minutes</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>budget</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>revenue</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>releaseDate</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">date</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
+        <tr>
+            
+                <td class="name"><code>deathDay</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
     
 
-    <td class="description last"></td>
-</tr>
+        <tr>
+            
+                <td class="name"><code>knownForDepartment</code></td>
+            
 
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>posterURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>biography</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>backdropURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>placeOfBirth</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>imdbId</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>profileImage</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>imdbURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>imdbId</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>genres</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">array.&lt;string></span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>array of genre names</p></td>
-</tr>
-
-  
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
 
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
 
     
     </tbody>
@@ -2048,74 +1443,72 @@ by calling the getTMDBConsts() function</p>
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line120">line 120</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
 
-
-</div>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
 <span class="param-type">Object</span>
 
 
-    </span>
+        </li>
+    </ul>
 
-<h4 class="name" id="movieDiscover">
+
+
+
+
+
+            
+                
+<h4 class="name" id="getPersonImages_typedef">getPersonImages_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
     
-    <span class="code-name">
-        movieDiscover
-    </span>
-</h4>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Common.js.html">APICurated/API_Common.js</a>, <a href="APICurated_API_Common.js.html#line124">line 124</a>
+    </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2142,374 +1535,3052 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
         
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
-    
-
-    <td class="type">
-    
+        <th>Name</th>
         
-<span class="param-type">Object</span>
 
+        <th>Type</th>
 
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the data object</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>page</code></td>
-    
-
-    <td class="type">
-    
         
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
 
-    <td class="description last"><p>current page returned</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>totalResults</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>total number of movies search found</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>totalPages</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>total pages use for pagination</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">Array</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>results of the search</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.id</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the movieId</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.title</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>aspectRatio</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.popularity</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.originalLanguage</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.overview</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.releaseDate</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">date</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>imageURL</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.posterURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.backdropURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="imagesReturn_typedef">imagesReturn_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line22">line 22</a>
+    </li></ul></dd>
+    
 
     
 
     
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.genres</code></td>
     
 
-    <td class="type">
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Array of image URLs</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="movieSearchByTitle_typedef">movieSearchByTitle_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line56">line 56</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>current page returned</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>totalResults</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total number of movies search found</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>totalPages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total pages use for pagination</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>results</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the movieId</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>releaseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">array.&lt;string></span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of genre names</p></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="movieDetails_typedef">movieDetails_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line120">line 120</a>
+    </li></ul></dd>
+    
 
     
 
     
 
-    <td class="description last"><p>array of genre names</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.getMovieImages</code></td>
     
 
-    <td class="type">
     
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the movieId</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tagline</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>runtime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>runtime in minutes</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>budget</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>revenue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>releaseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>imdbId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>imdbURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of genre names</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="movieCredits_typedef">movieCredits_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line179">line 179</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cast</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the cast array</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>personId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>characterName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>1 is Female, 2 is Male</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>profileURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>crew</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the crew array</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>personId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>department</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>1 is Female, 2 is Male</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>profileURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="moviePersonCredits_typedef">moviePersonCredits_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line248">line 248</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cast</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the cast array</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>movieId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>releaseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>characterName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>orginalLanguage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>crew</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the crew array</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.movieId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.releaseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.department</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cast.orginalLanguage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="movieDiscover_typedef">movieDiscover_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line338">line 338</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>current page returned</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>totalResults</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total number of movies search found</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>totalPages</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total pages use for pagination</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>results</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the movieId</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>title</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>popularity</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>originalLanguage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>releaseDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of genre names</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getMovieImages</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">function</span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>returns and array of image URLs for movie</p></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
 
-    <td class="description last"><p>returns and array of image URLs for movie</p></td>
-</tr>
-
-  
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
+            
 
-    
+            
 
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
 
     
     </tbody>
@@ -2518,74 +4589,72 @@ by calling the getTMDBConsts() function</p>
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line338">line 338</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
 
-
-</div>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
 <span class="param-type">Object</span>
 
 
-    </span>
+        </li>
+    </ul>
 
-<h4 class="name" id="movieDiscoverCriteria">
+
+
+
+
+
+            
+                
+<h4 class="name" id="movieDiscoverCriteria_typedef">movieDiscoverCriteria_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
     
-    <span class="code-name">
-        movieDiscoverCriteria
-    </span>
-</h4>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line358">line 358</a>
+    </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2612,170 +4681,170 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>genres</code></td>
-    
 
-    <td class="type">
-    
-        
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Array</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>genre Ids</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>releaseYear:</code></td>
+            
 
-    <td class="description last"><p>genre Ids</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>releaseYear:</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">int</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Primary Release Year</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>releaseDateGTE:</code></td>
+            
 
-    <td class="description last"><p>Primary Release Year</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>releaseDateGTE:</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">date</span>
 |
 
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>movies with release date &gt;= date YYYY-MM-DD format either JS Date or string &quot;YYYY-MM-DD&quot;</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>releaseDateLTE:</code></td>
+            
 
-    <td class="description last"><p>movies with release date &gt;= date YYYY-MM-DD format either JS Date or string &quot;YYYY-MM-DD&quot;</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>releaseDateLTE:</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">date</span>
 |
 
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>movies with release date &lt;= date YYYY-MM-DD format either JS Date or string &quot;YYYY-MM-DD&quot;</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>cast:</code></td>
+            
 
-    <td class="description last"><p>movies with release date &lt;= date YYYY-MM-DD format either JS Date or string &quot;YYYY-MM-DD&quot;</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>cast:</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">Array</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>person Ids. Only include movies that have one of the Id's added as an actor</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>crew:</code></td>
+            
 
-    <td class="description last"><p>person Ids. Only include movies that have one of the Id's added as an actor</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>crew:</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">Array</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>person Ids. Only include movies that have one of the Id's added as a crew member</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>sortBy</code></td>
+            
 
-    <td class="description last"><p>person Ids. Only include movies that have one of the Id's added as a crew member</p></td>
-</tr>
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>sortBy</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
+            
 
-    
+            
 
-    <td class="description last"><p>Options</p>
+            <td class="description last"><p>Options</p>
 <ul>
 <li>popularity.asc</li>
 <li>popularity.desc <strong>Default</strong></li>
@@ -2792,7 +4861,7 @@ by calling the getTMDBConsts() function</p>
 <li>vote_count.asc</li>
 <li>vote_count.desc</li>
 </ul></td>
-</tr>
+        </tr>
 
     
     </tbody>
@@ -2801,74 +4870,72 @@ by calling the getTMDBConsts() function</p>
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line358">line 358</a>
-            </span>
-        </p>
-    
-</dl>
 
 
 
 
-
-</div>
+    <h5>Type:</h5>
+    <ul>
+        <li>
             
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
 <span class="param-type">Object</span>
 
 
-    </span>
+        </li>
+    </ul>
 
-<h4 class="name" id="moviePersonCredits">
+
+
+
+
+
+            
+                
+<h4 class="name" id="tvSearchByTitle_typedef">tvSearchByTitle_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
     
-    <span class="code-name">
-        moviePersonCredits
-    </span>
-</h4>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_TV.js.html">APICurated/API_TV.js</a>, <a href="APICurated_API_TV.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
 
@@ -2895,663 +4962,27 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
-    
 
-    <td class="type">
-    
-        
-<span class="param-type">Object</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the data object</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">Array</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the cast array</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.movieId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.title</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.overview</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.releaseDate</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">date</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.creditId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.characterName</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.genres</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">Array</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.posterURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.backdropURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.orginalLanguage</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>crew</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the crew array</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.movieId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">number</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.title</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.overview</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.releaseDate</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.creditId</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.job</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.department</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.genres</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">Array</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.posterURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.backdropURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>cast.orginalLanguage</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line248">line 248</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
+        <tr>
             
-                <div class="member">
+                <td class="name"><code>data</code></td>
+            
 
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
-    </span>
+            
+            </td>
 
-<h4 class="name" id="movieSearch">
-    
-    <span class="code-name">
-        movieSearch
-    </span>
-</h4>
+            
 
+            
 
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
 
 <table class="props">
     <thead>
@@ -3572,305 +5003,289 @@ by calling the getTMDBConsts() function</p>
 
     <tbody>
     
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>data</code></td>
-    
 
-    <td class="type">
-    
-        
-<span class="param-type">Object</span>
+        <tr>
+            
+                <td class="name"><code>page</code></td>
+            
 
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"><p>the data object</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>page</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>current page returned</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>totalResults</code></td>
+            
 
-    <td class="description last"><p>current page returned</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>totalResults</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total number of movies search found</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>totalPages</code></td>
+            
 
-    <td class="description last"><p>total number of movies search found</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>totalPages</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>total pages use for pagination</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>results</code></td>
+            
 
-    <td class="description last"><p>total pages use for pagination</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">Array</span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
+            
 
-    
+            
 
-    <td class="description last"><p>results of the search</p></td>
-</tr>
+            <td class="description last"><p>results of the search</p>
+                <h6>Properties</h6>
 
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.id</code></td>
-    
-
-    <td class="type">
-    
+<table class="props">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the tv showId</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
 
-    <td class="description last"><p>the movieId</p></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.title</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>name of the tv show</p></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.overview</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>firstAirDate</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.releaseDate</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">date</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.posterURL</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
 
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.backdropURL</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">string</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last"></td>
-</tr>
-
-  
-      
-<tr class="deep-level-1">
-    
-        <td class="name"><code>results.genres</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">array.&lt;string></span>
 
 
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of genre names</p></td>
+        </tr>
+
     
-    </td>
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
 
     
 
-    
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
 
-    <td class="description last"><p>array of genre names</p></td>
-</tr>
-
-  
-
-    
-        
-<tr class="deep-level-0">
-    
-        <td class="name"><code>apiCall</code></td>
-    
-
-    <td class="type">
-    
-        
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-    
-    </td>
+            
+            </td>
 
-    
+            
 
-    
+            
 
-    <td class="description last"><p>the API call used to hit endpoint</p></td>
-</tr>
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
 
     
     </tbody>
@@ -3879,10 +5294,40 @@ by calling the getTMDBConsts() function</p>
 
 
 
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="tvShowDetails_typedef">tvShowDetails_typedef</h4>
+
+
+
+
+
 <dl class="details">
 
     
-
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_TV.js.html">APICurated/API_TV.js</a>, <a href="APICurated_API_TV.js.html#line105">line 105</a>
+    </li></ul></dd>
     
 
     
@@ -3904,30 +5349,1239 @@ by calling the getTMDBConsts() function</p>
     
 
     
-    
 
     
 
     
 
     
-        <p class="tag-source">
-            <a href="APICurated_API_Movies.js.html" class="button">View Source</a>
-            <span>
-                <a href="APICurated_API_Movies.js.html">APICurated/API_Movies.js</a>, <a href="APICurated_API_Movies.js.html#line56">line 56</a>
-            </span>
-        </p>
+
+    
+
     
 </dl>
 
 
 
+    <h5 class="subsection-title">Properties:</h5>
 
+    
 
-</div>
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
             
-            </div>
-        </div>
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the tv showId</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>name of the tv show</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>overview</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>avgEpisodeRunTime</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>average runtime in minutes</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>firstAirDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>lastAirDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>posterURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>backdropURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>homePage</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>numberOfEpisodes</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>numberOfSeasons</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>genres</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>array of genre names</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>getImagesForShow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>function that returns array of images for show</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="tvCredits_typedef">tvCredits_typedef</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="APICurated_API_TV.js.html">APICurated/API_TV.js</a>, <a href="APICurated_API_TV.js.html#line170">line 170</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the data object</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cast</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the cast array</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>personId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>characterName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>1 is Female, 2 is Male</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>profileURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>order</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>crew</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the crew array</p>
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>personId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>creditId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>department</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>1 is Female, 2 is Male</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>profileURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>apiCall</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the API call used to hit endpoint</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="ErrorObj">ErrorObj</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>the error object thrown from original error. Assuming from axios</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>err.response.request.status</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>err.response.request.statusText</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>err.response.request.responseURL</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
     
 
     
@@ -3938,23 +6592,23 @@ by calling the getTMDBConsts() function</p>
 
 
 
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
+</div>
 
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 00:02:08 GMT-0400 (Eastern Daylight Time)</p>
-        <p class="sidebar-created-by">
-            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
-        </p>
-    </div>
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 26 2019 23:47:44 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/app.min.js"></script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
 </body>
 </html>

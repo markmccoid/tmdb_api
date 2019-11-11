@@ -8,9 +8,8 @@ import { getTMDBConsts } from "../index";
 /**
  * Raw API calls to the tmdb api end points for **Movies**.
  *
- * These calls all reference their raw counterparts, but only return selected data points.
- * Also, things like dates are converted to javascript date formats and image data are
- * converted to URL strings.
+ * These calls return the raw data from the calls to the tmdb api
+ *
  * @namespace Raw_API_Movies
  *
  */

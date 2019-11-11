@@ -10,17 +10,13 @@
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "templates": {
-    "cleverLinks": false,
-    "monospaceLinks": false,
-    "name": "tmdb_api",
-    "logo": {
-      "url": "images/tmdbapi_logo.png"
-    }
+    "cleverLinks": true,
+    "monospaceLinks": true
   },
-  "plugins": ["plugins/markdown", "node_modules/better-docs/category"],
+  "plugins": ["plugins/markdown"],
   "opts": {
     "destination": "docs",
-    "template": "node_modules/docdash",
+    "template": "node_modules/better-docs", // "node_modules/docdash",
     "encoding": "utf8",
     "recurse": true,
     "verbose": true,
@@ -42,5 +38,20 @@
         "id": "website_link"
       }
     }
+  },
+  "better-docs": {
+    "name": "tmdb_api Documentation",
+    "logo": "images/logo.png",
+    "trackingCode": "tracking-code-which-will-go-to-the-HEAD",
+    "navigation": [
+      {
+        "label": "Github",
+        "href": "https://github.com/SoftwareBrothers/admin-bro"
+      },
+      {
+        "label": "Example Application",
+        "href": "https://admin-bro-example-app.herokuapp.com/admin"
+      }
+    ]
   }
 }

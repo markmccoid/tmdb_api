@@ -1,61 +1,43 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     
     <meta charset="utf-8">
-    <title>JSDoc: APICurated/API_TV.js</title>
-
+    <title>APICurated/API_TV.js - Documentation</title>
+    
+    
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link href="https://fonts.googleapis.com/css?family=Muli:100,400,700|Oswald:300|Inconsolata,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-    <div id="stickyNavbarOverlay"></div>
-    <div class="top-navbar">
-        <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    
-                    
-                        <h1 class="navbar-item">Documentation</h1>
-                    
-                    <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-                
-            </nav>
-        </div>
-    </div>
-    <div class="container">
-        <div class="columns">
-            <div class="column is-3" id="sidebarNav">
-                <div class="sidebar">
-                    <nav>
-                        <h2><a href="index.html">Home</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a></li><li><a href="Curated_API_TV.html">Curated_API_TV</a></li><li><a href="Helpers.html">Helpers</a></li><li><a href="Raw_API_Common.html">Raw_API_Common</a></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a></li><li><a href="Raw_API_TV.html">Raw_API_TV</a></li></ul><h3>Global</h3><ul><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#initTMDB">initTMDB</a></li></ul></div>
-                    </nav>
-                </div>
-            </div>
-            <div class="column is-9-desktop">
-                <div class="content" id="main-content-wrapper">
-                    <header class="page-title">
-                        <p>Source</p>
-                        <h1>APICurated/API_TV.js</h1>
-                    </header>
-                    
-                    
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="wrap">
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://myproject.com" target="_blank" class="menu-item" id="website_link" >Project Website</a></h2><h3>Namespaces</h3><ul><li><a href="Curated_API_Common.html">Curated_API_Common</a><ul class='methods'><li data-type='method'><a href="Curated_API_Common.html#.searchForPersonId">searchForPersonId</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonDetails">getPersonDetails</a></li><li data-type='method'><a href="Curated_API_Common.html#.getPersonImages">getPersonImages</a></li></ul></li><li><a href="Curated_API_Movies.html">Curated_API_Movies</a><ul class='methods'><li data-type='method'><a href="Curated_API_Movies.html#.movieGetImages">movieGetImages</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieSearchByTitle">movieSearchByTitle</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetDetails">movieGetDetails</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetCredits">movieGetCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieGetPersonCredits">movieGetPersonCredits</a></li><li data-type='method'><a href="Curated_API_Movies.html#.movieDiscover">movieDiscover</a></li></ul></li><li><a href="Curated_API_TV.html">Curated_API_TV</a><ul class='methods'><li data-type='method'><a href="Curated_API_TV.html#.tvGetImages">tvGetImages</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvSearchByTitle">tvSearchByTitle</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowDetails">tvGetShowDetails</a></li><li data-type='method'><a href="Curated_API_TV.html#.tvGetShowCredits">tvGetShowCredits</a></li></ul></li><li><a href="Raw_API_Movies.html">Raw_API_Movies</a><ul class='methods'><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieSearchByTitle">rawMovieSearchByTitle</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetDetails">rawMovieGetDetails</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetImages">rawMovieGetImages</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetPersonCredits">rawMovieGetPersonCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieGetCredits">rawMovieGetCredits</a></li><li data-type='method'><a href="Raw_API_Movies.html#.rawMovieDiscover">rawMovieDiscover</a></li></ul></li><li><a href="Raw_API_TV.html">Raw_API_TV</a><ul class='methods'><li data-type='method'><a href="Raw_API_TV.html#.rawTVSearchByTitle">rawTVSearchByTitle</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowDetails">rawTVGetShowDetails</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetEpisodes">rawTVGetEpisodes</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowImages">rawTVGetShowImages</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetExternalIds">rawTVGetExternalIds</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetShowCredits">rawTVGetShowCredits</a></li><li data-type='method'><a href="Raw_API_TV.html#.rawTVGetCreditDetails">rawTVGetCreditDetails</a></li></ul></li><li><a href="Raw_API_Common.html">Raw_API_Common</a><ul class='methods'><li data-type='method'><a href="Raw_API_Common.html#.rawSearchForPerson">rawSearchForPerson</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonDetails">rawGetPersonDetails</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonImages">rawGetPersonImages</a></li><li data-type='method'><a href="Raw_API_Common.html#.rawGetPersonCombinedCredits">rawGetPersonCombinedCredits</a></li></ul></li><li><a href="Helpers.html">Helpers</a><ul class='methods'><li data-type='method'><a href="Helpers.html#.formatImageURL">formatImageURL</a></li><li data-type='method'><a href="Helpers.html#.buildRawError">buildRawError</a></li><li data-type='method'><a href="Helpers.html#.parseToDate">parseToDate</a></li><li data-type='method'><a href="Helpers.html#.callTMDB">callTMDB</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#searchForPersonId_typedef">searchForPersonId_typedef</a></li><li><a href="global.html#getPersonDetails_typedef">getPersonDetails_typedef</a></li><li><a href="global.html#getPersonImages_typedef">getPersonImages_typedef</a></li><li><a href="global.html#imagesReturn_typedef">imagesReturn_typedef</a></li><li><a href="global.html#movieSearchByTitle_typedef">movieSearchByTitle_typedef</a></li><li><a href="global.html#movieDetails_typedef">movieDetails_typedef</a></li><li><a href="global.html#movieCredits_typedef">movieCredits_typedef</a></li><li><a href="global.html#moviePersonCredits_typedef">moviePersonCredits_typedef</a></li><li><a href="global.html#movieDiscover_typedef">movieDiscover_typedef</a></li><li><a href="global.html#movieDiscoverCriteria_typedef">movieDiscoverCriteria_typedef</a></li><li><a href="global.html#tvSearchByTitle_typedef">tvSearchByTitle_typedef</a></li><li><a href="global.html#tvShowDetails_typedef">tvShowDetails_typedef</a></li><li><a href="global.html#tvCredits_typedef">tvCredits_typedef</a></li><li><a href="global.html#ErrorObj">ErrorObj</a></li><li><a href="global.html#initTMDB">initTMDB</a></li><li><a href="global.html#getTMDBConsts">getTMDBConsts</a></li><li><a href="global.html#getConfig">getConfig</a></li><li><a href="global.html#getTVGenres">getTVGenres</a></li><li><a href="global.html#getMovieGenres">getMovieGenres</a></li><li><a href="global.html#convertGenreToObj">convertGenreToObj</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">APICurated/API_TV.js</h1>
+    
+
+    
 
 
 
@@ -80,6 +62,7 @@ import {
   rawTVGetShowCredits
 } from "../APIRaw/TMDBApi_TV";
 import { getTMDBConsts } from "../index";
+
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
  * @memberOf Curated_API_TV
@@ -108,12 +91,28 @@ function tvGetImages(showId, imageType = "posters") {
 }
 
 /**
+ * @typedef tvSearchByTitle_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the tv showId
+ * @property {string} data.results.name name of the tv show
+ * @property {string} data.results.overview
+ * @property {date} data.results.firstAirDate
+ * @property {string} data.results.backdropURL
+ * @property {array.&lt;string>} data.results.genres array of genre names
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns obj with tv shows like searchValue (tv title) passed.
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} searchValue - TV Show name to search for.
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {Object} Object data return
+ * @returns {tvSearchByTitle_typedef} Object data return
  */
 function tvSearchByTitle(searchValue, page = 1) {
   let { TV_GENRE_OBJ } = getTMDBConsts();
@@ -150,11 +149,31 @@ function tvSearchByTitle(searchValue, page = 1) {
 }
 
 /**
+ * @typedef tvShowDetails_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.id the tv showId
+ * @property {string} data.name name of the tv show
+ * @property {string} data.overview
+ * @property {string} data.status
+ * @property {number} data.avgEpisodeRunTime average runtime in minutes
+ * @property {date} data.firstAirDate
+ * @property {date} data.lastAirDate
+ * @property {string} data.posterURL
+ * @property {string} data.backdropURL
+ * @property {string} data.homePage
+ * @property {number} data.numberOfEpisodes
+ * @property {number} data.numberOfSeasons
+ * @property {array.&lt;string>} data.genres array of genre names
+ * @property {function} data.getImagesForShow function that returns array of images for show
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * returns show details for showId passed
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {Object}
+ * @returns {tvShowDetails_typedef}
  */
 function tvGetShowDetails(showId) {
   let apiCall;
@@ -166,6 +185,7 @@ function tvGetShowDetails(showId) {
       id: resp.data.id,
       name: resp.data.name,
       overview: resp.data.overview,
+      status: resp.data.status,
       backdropURL: resp.data.backdrop_path
         ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
         : "",
@@ -194,12 +214,34 @@ function tvGetShowDetails(showId) {
 }
 
 /**
+ * @typedef tvCredits_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {Array} data.cast the cast array
+ * @property {number} data.cast.personId
+ * @property {string} data.cast.name
+ * @property {string} data.cast.characterName
+ * @property {string} data.cast.creditId
+ * @property {number} data.cast.gender 1 is Female, 2 is Male
+ * @property {string} data.cast.profileURL
+ * @property {string} data.cast.order
+ * @property {string} data.crew the crew array
+ * @property {number} data.crew.personId
+ * @property {string} data.crew.name
+ * @property {string} data.crew.creditId
+ * @property {string} data.crew.job
+ * @property {string} data.crew.department
+ * @property {number} data.crew.gender 1 is Female, 2 is Male
+ * @property {string} data.crew.profileURL
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * returns show credits for showId passed
  *
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {Object}
+ * @returns {tvCredits_typedef}
  */
 function tvGetShowCredits(showId) {
   return rawTVGetShowCredits(showId).then(resp => {
@@ -244,23 +286,23 @@ export { tvGetImages, tvSearchByTitle, tvGetShowDetails, tvGetShowCredits };
 
 
 
-                </div>
-            </div>
-        </div>
-    </div>
+    
+    
+</div>
 
-<footer class="footer">
-    <div class="content has-text-centered">
-        <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Aug 24 2019 00:02:08 GMT-0400 (Eastern Daylight Time)</p>
-        <p class="sidebar-created-by">
-            <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-            <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers</a>
-        </p>
-    </div>
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Mon Aug 26 2019 23:47:44 GMT-0400 (Eastern Daylight Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/app.min.js"></script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
 </body>
 </html>

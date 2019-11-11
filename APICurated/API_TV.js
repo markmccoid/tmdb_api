@@ -16,6 +16,13 @@ import {
   rawTVGetShowCredits
 } from "../APIRaw/TMDBApi_TV";
 import { getTMDBConsts } from "../index";
+
+/**
+ * @typedef tvGetImages_typedef
+ * @type {Object}
+ * @property {Array} data array of image URLs (https://...)
+ * @property {string} apiCall the API call used to hit endpoint
+ */
 /**
  * Returns an array of image URLs. Filters and gives only 'en' English images
  * @memberOf Curated_API_TV
@@ -44,12 +51,28 @@ function tvGetImages(showId, imageType = "posters") {
 }
 
 /**
+ * @typedef tvSearchByTitle_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the tv showId
+ * @property {string} data.results.name name of the tv show
+ * @property {string} data.results.overview
+ * @property {date} data.results.firstAirDate
+ * @property {string} data.results.backdropURL
+ * @property {array.<string>} data.results.genres array of genre names
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * Returns obj with tv shows like searchValue (tv title) passed.
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} searchValue - TV Show name to search for.
  * @param {number} [page=1] - page to return.  Only works if multiple pages
- * @returns {Object} Object data return
+ * @returns {tvSearchByTitle_typedef} Object data return
  */
 function tvSearchByTitle(searchValue, page = 1) {
   let { TV_GENRE_OBJ } = getTMDBConsts();
@@ -65,11 +88,12 @@ function tvSearchByTitle(searchValue, page = 1) {
       totalResults: resp.data.total_results,
       totalPages: resp.data.total_pages
     };
+
     showsReturned = resp.data.results.map(show => {
       return {
         id: show.id,
         name: show.name,
-        firstAirDate: show.first_air_date && parseToDate(show.first_air_date),
+        firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
@@ -86,11 +110,31 @@ function tvSearchByTitle(searchValue, page = 1) {
 }
 
 /**
+ * @typedef tvShowDetails_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.id the tv showId
+ * @property {string} data.name name of the tv show
+ * @property {string} data.overview
+ * @property {string} data.status
+ * @property {number} data.avgEpisodeRunTime average runtime in minutes
+ * @property {date} data.firstAirDate
+ * @property {date} data.lastAirDate
+ * @property {string} data.posterURL
+ * @property {string} data.backdropURL
+ * @property {string} data.homePage
+ * @property {number} data.numberOfEpisodes
+ * @property {number} data.numberOfSeasons
+ * @property {array.<string>} data.genres array of genre names
+ * @property {function} data.getImagesForShow function that returns array of images for show
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * returns show details for showId passed
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {Object}
+ * @returns {tvShowDetails_typedef}
  */
 function tvGetShowDetails(showId) {
   let apiCall;
@@ -98,10 +142,12 @@ function tvGetShowDetails(showId) {
   return rawTVGetShowDetails(showId).then(resp => {
     // Curate results
     apiCall = resp.apiCall;
+    console.log(resp.data);
     searchResults = {
       id: resp.data.id,
       name: resp.data.name,
       overview: resp.data.overview,
+      status: resp.data.status,
       backdropURL: resp.data.backdrop_path
         ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
         : "",
@@ -111,10 +157,8 @@ function tvGetShowDetails(showId) {
       avgEpisodeRunTime: resp.data.episode_run_time
         ? averageOfArray(resp.data.episode_run_time)
         : 0,
-      firstAirDate:
-        resp.data.first_air_date && parseToDate(resp.data.first_air_date),
-      lastAirDate:
-        resp.data.last_air_date && parseToDate(resp.data.last_air_date),
+      firstAirDate: parseToDate(resp.data.first_air_date),
+      lastAirDate: parseToDate(resp.data.last_air_date),
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
@@ -130,12 +174,34 @@ function tvGetShowDetails(showId) {
 }
 
 /**
+ * @typedef tvCredits_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {Array} data.cast the cast array
+ * @property {number} data.cast.personId
+ * @property {string} data.cast.name
+ * @property {string} data.cast.characterName
+ * @property {string} data.cast.creditId
+ * @property {number} data.cast.gender 1 is Female, 2 is Male
+ * @property {string} data.cast.profileURL
+ * @property {string} data.cast.order
+ * @property {string} data.crew the crew array
+ * @property {number} data.crew.personId
+ * @property {string} data.crew.name
+ * @property {string} data.crew.creditId
+ * @property {string} data.crew.job
+ * @property {string} data.crew.department
+ * @property {number} data.crew.gender 1 is Female, 2 is Male
+ * @property {string} data.crew.profileURL
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
  * returns show credits for showId passed
  *
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {Object}
+ * @returns {tvCredits_typedef}
  */
 function tvGetShowCredits(showId) {
   return rawTVGetShowCredits(showId).then(resp => {
