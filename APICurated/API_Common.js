@@ -50,7 +50,7 @@ import { formatImageURL, parseToDate } from "../helpers";
  */
 function searchForPersonId(searchValue, page = 1) {
   return rawSearchForPerson(searchValue, page).then(resp => {
-    console.log("personid return", resp);
+    // console.log("personid return", resp);
     let data = {
       page: resp.data.page,
       totalPages: resp.data.total_pages,
@@ -102,7 +102,7 @@ function searchForPersonId(searchValue, page = 1) {
  */
 function getPersonDetails(personId) {
   return rawGetPersonDetails(personId).then(resp => {
-    console.log("person Details", resp);
+    // console.log("person Details", resp);
     let personDetails = {
       id: resp.data.id,
       name: resp.data.name,
