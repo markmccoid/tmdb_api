@@ -4,7 +4,6 @@
  * @namespace Helpers
  *
  */
-import axios from "axios";
 import { getTMDBConsts } from "./index";
 import { parseISO, getUnixTime, format } from "date-fns";
 
@@ -107,7 +106,9 @@ function parseToDate(dateString) {
   if (!dateString || dateString === "") {
     return undefined;
   }
+  console.log("date string", dateString);
   let { API_OPTIONS } = getTMDBConsts();
+
   let theDate = parseISO(dateString); // date-fns to convert to javascript date object
   return {
     date: theDate,
@@ -116,28 +117,4 @@ function parseToDate(dateString) {
   }; // Turns the return milliseconds into seconds (unix date)
 }
 
-/**
- * Since all Raw TMDB Api calls return the same shape object
- * this function wraps that functionality, so a raw API calls
- * just needs the URL to be passed here.
- *
- * @memberof Helpers
- * @param {string} apiCall
- * @returns {promise}
- */
-function callTMDB(apiCall) {
-  return axios
-    .get(apiCall)
-    .then(resp => {
-      return {
-        data: resp.data,
-        apiCall: resp.request.responseURL
-      };
-    })
-    .catch(err => {
-      let errorObj = buildRawError(err);
-      throw errorObj;
-    });
-}
-
-export { formatImageURL, buildRawError, parseToDate, callTMDB };
+export { formatImageURL, buildRawError, parseToDate };

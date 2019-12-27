@@ -1,4 +1,4 @@
-import { callTMDB } from "../helpers";
+import { callTMDB, apiTMDBtv } from "../APIcalls";
 import { getTMDBConsts } from "../index";
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
@@ -20,9 +20,9 @@ import { getTMDBConsts } from "../index";
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVSearchByTitle(searchString, page = 1) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/search/tv?api_key=${API_KEY}&page=${page}&include_adult=false&query=${searchString}`;
-  return callTMDB(apiCall);
+  let { API_URL } = getTMDBConsts();
+  const apiCall = `${API_URL}/search/tv?page=${page}&include_adult=false&query=${searchString}`;
+  return apiTMDBtv(apiCall);
 }
 
 /**

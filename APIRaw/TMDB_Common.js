@@ -1,4 +1,4 @@
-import { callTMDB } from "../helpers";
+import { callTMDB } from "../APICalls";
 import { getTMDBConsts } from "../index";
 
 /**
