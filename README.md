@@ -103,8 +103,19 @@ If an error should occur, all Raw API functions return a standard error object i
 Curated functions are wrappers around the Raw API calls. They do some extra work so you don't have too.
 
 1. Resolve any images to full image paths.
-2. Convert date strings to JavaScript date objects
+
+2. Convert date strings to an JavaScript Object in the form
+
+   ```javascript
+   {
+       date, // JavaScript date
+       epoch, // Unix timestamp -- Seconds from 1/1970
+       formatted //Formatted based on the dateFormatString passed in initTMDB() function. Default "MM-dd-yyyy"
+   }
+   ```
+
 3. Convert genre Ids to genre names (unless you are calling the genre function to get a list of id/genre combinations.)
+
 4. Return a curated set of items from the call.
 
 The returned object shape is the same as the Raw calls:

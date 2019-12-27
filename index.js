@@ -35,7 +35,6 @@ let API_OPTIONS = {
  * }
  */
 export async function initTMDB(apiKey, options = {}) {
-  console.log("initing tmdb");
   API_OPTIONS = { ...API_OPTIONS, ...options };
   API_KEY = apiKey;
   let resp = await getConfig();

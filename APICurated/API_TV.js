@@ -142,7 +142,6 @@ function tvGetShowDetails(showId) {
   return rawTVGetShowDetails(showId).then(resp => {
     // Curate results
     apiCall = resp.apiCall;
-    console.log(resp.data);
     searchResults = {
       id: resp.data.id,
       name: resp.data.name,
@@ -163,7 +162,7 @@ function tvGetShowDetails(showId) {
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
       genres: resp.data.genres.map(tvGenreObj => tvGenreObj.name),
-      getImagesForShow: () => getImagesForShow(showId)
+      getImagesForShow: () => tvGetImages(showId)
     };
 
     return {
@@ -218,7 +217,7 @@ function tvGetShowCredits(showId) {
         order: character.order
       };
     });
-    let crew = resp.data.cast.map(crewMember => {
+    let crew = resp.data.crew.map(crewMember => {
       return {
         creditId: crewMember.credit_id,
         personId: crewMember.id,

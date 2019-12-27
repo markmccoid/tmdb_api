@@ -50,7 +50,7 @@ function rawTVGetShowDetails(showId) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetEpisodes(showId, seasonNum) {
+function rawTVGetEpisodes(showId, seasonNum = 1) {
   let { API_KEY, API_URL } = getTMDBConsts();
   const apiCall = `${API_URL}/tv/${showId}/season/${seasonNum}?api_key=${API_KEY}`;
   return callTMDB(apiCall);
