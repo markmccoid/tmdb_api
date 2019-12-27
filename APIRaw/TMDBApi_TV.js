@@ -1,4 +1,4 @@
-import { callTMDB, apiTMDBtv } from "../APIcalls";
+import { callTMDB, apiTMDB } from "../apiCalls";
 import { getTMDBConsts } from "../index";
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
@@ -20,9 +20,14 @@ import { getTMDBConsts } from "../index";
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVSearchByTitle(searchString, page = 1) {
-  let { API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/search/tv?page=${page}&include_adult=false&query=${searchString}`;
-  return apiTMDBtv(apiCall);
+  const config = {
+    params: {
+      page,
+      query: searchString,
+      include_adult: false
+    }
+  };
+  return apiTMDB("/search/tv", config);
 }
 
 /**
@@ -35,9 +40,7 @@ function rawTVSearchByTitle(searchString, page = 1) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetShowDetails(showId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/tv/${showId}?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/tv/${showId}`);
 }
 
 /**
@@ -51,9 +54,7 @@ function rawTVGetShowDetails(showId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetEpisodes(showId, seasonNum = 1) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/tv/${showId}/season/${seasonNum}?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`tv/${showId}/season/${seasonNum}`);
 }
 
 /**
@@ -66,9 +67,7 @@ function rawTVGetEpisodes(showId, seasonNum = 1) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetShowImages(showId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/tv/${showId}/images?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/tv/${showId}/images`);
 }
 
 /**
@@ -81,9 +80,7 @@ function rawTVGetShowImages(showId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetExternalIds(showId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/tv/${showId}/external_ids?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/tv/${showId}/external_ids`);
 }
 
 /**
@@ -97,9 +94,7 @@ function rawTVGetExternalIds(showId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetShowCredits(showId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/tv/${showId}/credits?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/tv/${showId}/credits`);
 }
 
 /**
@@ -113,9 +108,7 @@ function rawTVGetShowCredits(showId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetCreditDetails(creditId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/credit/${encodeURI(creditId)}?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/credit/${encodeURI(creditId)}`);
 }
 
 // function getShowSeasons = (showId) => {

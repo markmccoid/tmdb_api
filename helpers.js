@@ -57,40 +57,6 @@ export function averageOfArray(arr) {
 }
 
 /**
- * @typeDef {Object} ErrorObj
- * @property {Object} error the error object thrown from original error. Assuming from axios
- * @property {string} status err.response.request.status
- * @property {string} status err.response.request.statusText
- * @property {string} status err.response.request.responseURL
- */
-/**
- * When passed an error object, function will return a standardized error
- * object that can be thrown.
- * This is for the raw TMDB API calls.
- *
- * @memberof Helpers
- * @param {*} err - error object from an TMDB API Call
- * @returns {ErrorObj} - formatted error object
- * { error,
- *   status,
- *   statusText,
- *   apiCall
- *  }
- */
-function buildRawError(err) {
-  return {
-    error: err,
-    status: err.response ? err.response.request.status : null,
-    statusText: err.response ? err.response.request.statusText : null,
-    apiCall: err.response
-      ? err.response.request.responseURL
-      : err.config
-      ? err.config.url
-      : null
-  };
-}
-
-/**
  * Parses passed date
  *
  * @memberof Helpers
@@ -117,4 +83,20 @@ function parseToDate(dateString) {
   }; // Turns the return milliseconds into seconds (unix date)
 }
 
-export { formatImageURL, buildRawError, parseToDate };
+/**
+ * Flattens the passed array (only a single dimensional array)
+ * Used in the discover movie function
+ *
+ * @memberof Helpers
+ * @param {array} arr - array to flatten
+ * @returns {string} - Flat array
+ */
+function flattenArray(arr) {
+  let flatArray = "";
+  arr.forEach((value, idx) => {
+    flatArray += idx === 0 ? value.trim() : `,${value.trim()}`;
+  });
+  return flatArray;
+}
+
+export { formatImageURL, parseToDate, flattenArray };

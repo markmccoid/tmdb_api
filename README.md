@@ -54,7 +54,11 @@ export default App;
 
 initTMDB returns a promise, hence is an async function.  This means that if you are programmatically calling any of the tmdb_api functions, you have to wait until the promise resolves.
 
-The options object currently is only used for date formatting.
+### Options Object
+
+When initializing, you also have the options to pass an *Options* object.  This will set some defaults for how this package will return your data and query the TMDB api.
+
+- **dateFormatString**
 
 ```javascript
 {
@@ -63,6 +67,18 @@ The options object currently is only used for date formatting.
 ```
 
 The *dateFormatString* must use the formatting options from the [**date-fns** package](https://date-fns.org/v2.7.0/docs/format).
+
+- **defaultAPIParams** 
+
+```javascript
+{
+  defaultAPIParams: {
+    include_adult: false
+  }
+}
+```
+
+The *defaultAPIParams* object lets you pass in any parameters that you want to always be set when making calls 
 
 If you need to change the *dateFormatString* after initialization, just use the **updateAPIOptions(options)** functions.
 

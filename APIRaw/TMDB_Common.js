@@ -1,4 +1,4 @@
-import { callTMDB } from "../APICalls";
+import { callTMDB, apiTMDB } from "../apiCalls";
 import { getTMDBConsts } from "../index";
 
 /**
@@ -20,9 +20,13 @@ import { getTMDBConsts } from "../index";
  * On error throws {@link ErrorObj}
  */
 function rawSearchForPerson(personName, page = 1) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  let apiCall = `${API_URL}/search/person?include_adult=false&api_key=${API_KEY}&page=${page}&query=${personName}`;
-  return callTMDB(apiCall);
+  const config = {
+    params: {
+      page,
+      query: personName
+    }
+  };
+  return apiTMDB(`/search/person`, config);
 }
 
 /**
@@ -39,9 +43,7 @@ function rawSearchForPerson(personName, page = 1) {
  * On error throws {@link ErrorObj}
  */
 function rawGetPersonDetails(personId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/person/${personId}?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/person/${personId}`);
 }
 
 /**
@@ -56,9 +58,7 @@ function rawGetPersonDetails(personId) {
  * On error throws {@link ErrorObj}
  */
 function rawGetPersonImages(personId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/person/${personId}/images?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/person/${personId}/images`);
 }
 
 /**
@@ -74,9 +74,7 @@ function rawGetPersonImages(personId) {
  * On error {@link ErrorObj}
  */
 function rawGetPersonCombinedCredits(personId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/person/${personId}/combined_credits?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/person/${personId}/combined_credits`);
 }
 
 export {

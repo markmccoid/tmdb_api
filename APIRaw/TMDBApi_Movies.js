@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { callTMDB } from "../APICalls";
+import { apiTMDB } from "../apiCalls";
 import { getTMDBConsts } from "../index";
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
@@ -25,11 +25,14 @@ import { getTMDBConsts } from "../index";
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawMovieSearchByTitle(searchString, page = 1) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/search/movie?api_key=${API_KEY}&page=${page}&include_adult=false&query=${encodeURI(
-    searchString
-  )}`;
-  return callTMDB(apiCall);
+  const config = {
+    params: {
+      page,
+      include_adult: false,
+      query: searchString
+    }
+  };
+  return apiTMDB("/search/movie", config);
 }
 
 /**
@@ -42,9 +45,7 @@ function rawMovieSearchByTitle(searchString, page = 1) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawMovieGetDetails(movieId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/movie/${movieId}?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/movie/${movieId}`);
 }
 
 /**
@@ -57,9 +58,7 @@ function rawMovieGetDetails(movieId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawMovieGetImages(movieId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/movie/${movieId}/images?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/movie/${movieId}/images`);
 }
 
 /**
@@ -77,9 +76,7 @@ function rawMovieGetImages(movieId) {
  *  on success { data: data from api call, apiCall: API call}
  */
 function rawMovieGetPersonCredits(personId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/person/${personId}/movie_credits?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/person/${personId}/movie_credits`);
 }
 
 /**
@@ -103,9 +100,7 @@ function rawMovieGetPersonCredits(personId) {
  *  on success { data: data from api call, apiCall: API call}
  */
 function rawMovieGetCredits(movieId) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  const apiCall = `${API_URL}/movie/${movieId}/credits?api_key=${API_KEY}`;
-  return callTMDB(apiCall);
+  return apiTMDB(`/movie/${movieId}/credits`);
 }
 
 /**
@@ -137,68 +132,82 @@ function rawMovieGetCredits(movieId) {
  * @returns {object} response object {data, apiCall}
  */
 function rawMovieDiscover(criteriaObj, page = 1) {
-  let { API_KEY, API_URL } = getTMDBConsts();
-  let apiCall = `${API_URL}/discover/movie?api_key=${API_KEY}&page=${page}`;
-
   let criteriaMap = Object.keys(criteriaObj).map(criteriaKey => [
     criteriaKey,
     criteriaObj[criteriaKey]
   ]);
+  console.log("CRITERIA Object", criteriaObj);
+  console.log("CRITERIA Map", criteriaMap);
+  let with_crew,
+    with_cast,
+    with_genres,
+    releaseDateGTE,
+    releaseDateLTE,
+    primary_release_year;
   // Loop through the array created from the keys of the criteriaObj
   // This is an Array of arrays with each inner array holding the criteria name in position 0
   // and the criteria value in position 1
   criteriaMap.forEach(criteriaArray => {
-    console.log("rawMovieDiscover ForEach", criteriaArray);
+    // console.log("rawMovieDiscover ForEach", criteriaArray);
     // Check to see if any data in criteriaObject key we are on
-    // If not, then exist this iteration, i.e. continue with next
+    // If not, then exit this iteration, i.e. continue with next
     if (!criteriaArray[1]) return;
     switch (criteriaArray[0]) {
-      case "genres":
+      case "genres": // with_genres
         //Build the with genres criteria
-        apiCall += `&with_genres=`;
+        with_genres = "";
         criteriaArray[1].forEach((genreId, idx) => {
-          return (apiCall += idx === 0 ? genreId : `,${genreId}`);
+          with_genres += idx === 0 ? genreId.trim() : `,${genreId.trim()}`;
         });
         break;
-      case "releaseYear":
-        apiCall += `&primary_release_year=${criteriaArray[1]}`;
+      case "releaseYear": // primary_release_year
+        primary_release_year = criteriaArray[1];
         break;
-      case "releaseDateGTE":
-        let releaseDateGTE = criteriaArray[1];
+      case "releaseDateGTE": // primary_release_date.gte
+        releaseDateGTE = criteriaArray[1];
         // check if JS date and convert
         if (typeof releaseDateGTE === "date") {
           releaseDateGTE = format(releaseDateGTE, "YYYY-MM-DD");
         }
-        apiCall += `&primary_release_date.gte=${releaseDateGTE}`;
-        console.log("releaseDate out", apiCall);
         break;
-      case "releaseDateLTE":
-        let releaseDateLTE = criteriaArray[1];
+      case "releaseDateLTE": // primary_release_date.lte
+        releaseDateLTE = criteriaArray[1];
         // check if JS date and convert
         if (typeof releaseDateLTE === "date") {
           releaseDateLTE = format(releaseDateLTE, "YYYY-MM-DD");
         }
-        apiCall += `&primary_release_date.lte=${releaseDateLTE}`;
         break;
-      case "cast":
-        //Build the with genres criteria
-        apiCall += `&with_cast=`;
+      case "cast": // with_cast
+        //Build the with cast criteria
+        with_cast = "";
         criteriaArray[1].forEach((personId, idx) => {
-          return (apiCall += idx === 0 ? personId : `,${personId}`);
+          with_cast += idx === 0 ? personId : `,${personId}`;
         });
         break;
-      case "crew":
-        //Build the with genres criteria
-        apiCall += `&with_crew=`;
+      case "crew": // with_crew
+        //Build the with crew criteria
+        with_crew = "";
         criteriaArray[1].forEach((personId, idx) => {
-          return (apiCall += idx === 0 ? personId : `,${personId}`);
+          with_crew += idx === 0 ? personId : `,${personId}`;
         });
         break;
       default:
         break;
     }
   });
-  return callTMDB(apiCall);
+  // This is the config object that will be passed to the api call
+  let config = {
+    params: {
+      with_crew,
+      with_cast,
+      with_genres,
+      primary_release_year,
+      [`primary_release_date.lte`]: releaseDateLTE,
+      [`primary_release_date.gte`]: releaseDateGTE
+    }
+  };
+  console.log("discover config", config);
+  return apiTMDB("/discover/movie", config);
 }
 
 export {
