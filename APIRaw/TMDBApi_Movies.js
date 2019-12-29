@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { apiTMDB } from "../apiCalls";
 import { getTMDBConsts } from "../index";
+import { flattenArray } from "../helpers";
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
@@ -132,80 +133,25 @@ function rawMovieGetCredits(movieId) {
  * @returns {object} response object {data, apiCall}
  */
 function rawMovieDiscover(criteriaObj, page = 1) {
-  let criteriaMap = Object.keys(criteriaObj).map(criteriaKey => [
-    criteriaKey,
-    criteriaObj[criteriaKey]
-  ]);
-  console.log("CRITERIA Object", criteriaObj);
-  console.log("CRITERIA Map", criteriaMap);
-  let with_crew,
-    with_cast,
-    with_genres,
-    releaseDateGTE,
-    releaseDateLTE,
-    primary_release_year;
-  // Loop through the array created from the keys of the criteriaObj
-  // This is an Array of arrays with each inner array holding the criteria name in position 0
-  // and the criteria value in position 1
-  criteriaMap.forEach(criteriaArray => {
-    // console.log("rawMovieDiscover ForEach", criteriaArray);
-    // Check to see if any data in criteriaObject key we are on
-    // If not, then exit this iteration, i.e. continue with next
-    if (!criteriaArray[1]) return;
-    switch (criteriaArray[0]) {
-      case "genres": // with_genres
-        //Build the with genres criteria
-        with_genres = "";
-        criteriaArray[1].forEach((genreId, idx) => {
-          with_genres += idx === 0 ? genreId.trim() : `,${genreId.trim()}`;
-        });
-        break;
-      case "releaseYear": // primary_release_year
-        primary_release_year = criteriaArray[1];
-        break;
-      case "releaseDateGTE": // primary_release_date.gte
-        releaseDateGTE = criteriaArray[1];
-        // check if JS date and convert
-        if (typeof releaseDateGTE === "date") {
-          releaseDateGTE = format(releaseDateGTE, "YYYY-MM-DD");
-        }
-        break;
-      case "releaseDateLTE": // primary_release_date.lte
-        releaseDateLTE = criteriaArray[1];
-        // check if JS date and convert
-        if (typeof releaseDateLTE === "date") {
-          releaseDateLTE = format(releaseDateLTE, "YYYY-MM-DD");
-        }
-        break;
-      case "cast": // with_cast
-        //Build the with cast criteria
-        with_cast = "";
-        criteriaArray[1].forEach((personId, idx) => {
-          with_cast += idx === 0 ? personId : `,${personId}`;
-        });
-        break;
-      case "crew": // with_crew
-        //Build the with crew criteria
-        with_crew = "";
-        criteriaArray[1].forEach((personId, idx) => {
-          with_crew += idx === 0 ? personId : `,${personId}`;
-        });
-        break;
-      default:
-        break;
-    }
-  });
+  const { releaseDateGTE, releaseDateLTE } = criteriaObj;
   // This is the config object that will be passed to the api call
   let config = {
     params: {
-      with_crew,
-      with_cast,
-      with_genres,
-      primary_release_year,
-      [`primary_release_date.lte`]: releaseDateLTE,
-      [`primary_release_date.gte`]: releaseDateGTE
+      with_genres: flattenArray(criteriaObj.genres),
+      primary_release_year: criteriaObj.releaseYear,
+      [`primary_release_date.lte`]:
+        typeof releaseDateLTE === "date"
+          ? format(releaseDateLTE, "YYYY-MM-DD")
+          : releaseDateLTE,
+      [`primary_release_date.gte`]:
+        typeof releaseDateGTE === "date"
+          ? format(releaseDateGTE, "YYYY-MM-DD")
+          : releaseDateGTE,
+      with_crew: flattenArray(criteriaObj.crew),
+      with_cast: flattenArray(criteriaObj.cast)
     }
   };
+
   console.log("discover config", config);
   return apiTMDB("/discover/movie", config);
 }

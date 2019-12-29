@@ -117,7 +117,6 @@ export const getTVGenres = () => {
   return axios
     .get(apiCall)
     .then(resp => {
-      console.log(resp);
       return {
         data: resp.data,
         apiCall: resp.request.responseURL

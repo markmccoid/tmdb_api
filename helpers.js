@@ -72,7 +72,6 @@ function parseToDate(dateString) {
   if (!dateString || dateString === "") {
     return undefined;
   }
-  console.log("date string", dateString);
   let { API_OPTIONS } = getTMDBConsts();
 
   let theDate = parseISO(dateString); // date-fns to convert to javascript date object
@@ -92,6 +91,9 @@ function parseToDate(dateString) {
  * @returns {string} - Flat array
  */
 function flattenArray(arr) {
+  if (!arr) {
+    return undefined;
+  }
   let flatArray = "";
   arr.forEach((value, idx) => {
     flatArray += idx === 0 ? value.trim() : `,${value.trim()}`;
