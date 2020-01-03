@@ -5,7 +5,15 @@
  *
  */
 import axios from "axios";
-import { getTMDBConsts } from "./index";
+// import { getTMDBConsts } from "./index";
+import {
+  IMG_URL,
+  SECURE_IMG_URL,
+  API_KEY,
+  TV_GENRE_OBJ,
+  MOVIE_GENRE_OBJ,
+  API_URL
+} from "./index";
 
 /**
  * @typeDef {Object} ErrorObj
@@ -89,7 +97,7 @@ function callTMDB(apiCall) {
  * @returns {promise}
  */
 function apiTMDB(apiCall, config = {}) {
-  const { API_URL, API_KEY, API_OPTIONS } = getTMDBConsts();
+  // const { API_URL, API_KEY, API_OPTIONS } = getTMDBConsts();
 
   // set the baseURL
   config = { ...config, baseURL: API_URL };

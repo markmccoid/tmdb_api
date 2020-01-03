@@ -8,19 +8,19 @@ import axios from "axios";
 import _ from "lodash";
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
-const API_URL = "https://api.themoviedb.org/3";
+export const API_URL = "https://api.themoviedb.org/3";
 
 // Init function to get base config variables
 // so we don't call config each time
 // Variables stored
 // IMG_URL, SECURE_IMG_URL
 // After config, to retrieve, run function getImgURLs to get the object with above vars
-let IMG_URL = "";
-let SECURE_IMG_URL = "";
-let API_KEY;
-let TV_GENRE_OBJ;
-let MOVIE_GENRE_OBJ;
-let API_OPTIONS = {
+export let IMG_URL = "";
+export let SECURE_IMG_URL = "";
+export let API_KEY;
+export let TV_GENRE_OBJ;
+export let MOVIE_GENRE_OBJ;
+export let API_OPTIONS = {
   dateFormatString: "MM-dd-yyyy"
 };
 
@@ -28,7 +28,8 @@ let API_OPTIONS = {
  * Initialization function that MUST be run before any other
  * function can be accessed.
  * Set a number of constants that can be accessed
- * by calling the getTMDBConsts() function
+ * by calling the getTMDBConsts() function or by importing the
+ * constants themselves
  * @param {string} apiKey - required API Key to access TMDB
  * @param {object} options - options object {
  *  dateFormatString //dateFormatString as used by fns-date https://date-fns.org/v2.7.0/docs/format

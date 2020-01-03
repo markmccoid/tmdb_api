@@ -1,7 +1,5 @@
 import { callTMDB, apiTMDB } from "../apiCalls";
-import { getTMDBConsts } from "../index";
-// const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
-// const API_URL = 'https://api.themoviedb.org/3';
+
 /**
  * Raw API calls to the tmdb api end points for **TV Shows**.
  *

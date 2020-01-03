@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import { apiTMDB } from "../apiCalls";
-import { getTMDBConsts } from "../index";
 import { flattenArray } from "../helpers";
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;

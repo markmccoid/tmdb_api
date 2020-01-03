@@ -15,7 +15,7 @@ import {
   rawTVGetShowDetails,
   rawTVGetShowCredits
 } from "../APIRaw/TMDBApi_TV";
-import { getTMDBConsts } from "../index";
+import { TV_GENRE_OBJ } from "../index";
 
 /**
  * @typedef tvGetImages_typedef
@@ -75,8 +75,7 @@ function tvGetImages(showId, imageType = "posters") {
  * @returns {tvSearchByTitle_typedef} Object data return
  */
 function tvSearchByTitle(searchValue, page = 1) {
-  let { TV_GENRE_OBJ } = getTMDBConsts();
-  // console.log('TV Genre', TV_GENRE_OBJ)
+  // let { TV_GENRE_OBJ } = getTMDBConsts();
   let apiCall;
   let searchResults;
   let showsReturned;

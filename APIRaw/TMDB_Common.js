@@ -1,5 +1,4 @@
-import { callTMDB, apiTMDB } from "../apiCalls";
-import { getTMDBConsts } from "../index";
+import { apiTMDB } from "../apiCalls";
 
 /**
  * Raw API calls to the tmdb api end points that are **COMMON across TV and Movies**.

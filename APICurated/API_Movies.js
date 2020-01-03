@@ -9,7 +9,7 @@
  */
 
 import { formatImageURL, parseToDate } from "../helpers";
-import { getTMDBConsts } from "../index";
+import { MOVIE_GENRE_OBJ } from "../index";
 import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
@@ -80,7 +80,7 @@ function movieGetImages(movieId, imageType = "posters") {
  * @returns {movieSearchByTitle_typedef} Object data return
  */
 function movieSearchByTitle(searchValue, page = 1) {
-  let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   // console.log('TV Genre', GENRE_OBJ)
   let apiCall;
   let searchResults;
@@ -208,7 +208,7 @@ function movieGetDetails(movieId) {
  * }
  */
 function movieGetCredits(movieId) {
-  let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieGetCredits(movieId).then(resp => {
     let castForMovie = resp.data.cast.map(castMember => {
       return {
@@ -284,7 +284,7 @@ function movieGetCredits(movieId) {
  * }
  */
 function movieGetPersonCredits(personId) {
-  let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
   return rawMovieGetPersonCredits(personId).then(resp => {
     let castMovies = resp.data.cast.map(movie => {
@@ -388,7 +388,7 @@ function movieDiscover(criteriaObj, page = 1) {
   let apiCall;
   let searchResults;
   let moviesReturned;
-  let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieDiscover(criteriaObj, page).then(resp => {
     apiCall = resp.apiCall;
     searchResults = {

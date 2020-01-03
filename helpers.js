@@ -4,7 +4,7 @@
  * @namespace Helpers
  *
  */
-import { getTMDBConsts } from "./index";
+import { IMG_URL, SECURE_IMG_URL, API_OPTIONS } from "./index";
 import { parseISO, getUnixTime, format } from "date-fns";
 
 /**
@@ -17,7 +17,6 @@ import { parseISO, getUnixTime, format } from "date-fns";
  * @returns {string[]} full URL to the image
  */
 function formatImageURL(imgFileName, size = "m", secureURL = true) {
-  let { IMG_URL, SECURE_IMG_URL } = getTMDBConsts();
   // Hardcoding s, m, l for now
   switch (size) {
     case "s":
@@ -72,7 +71,6 @@ function parseToDate(dateString) {
   if (!dateString || dateString === "") {
     return undefined;
   }
-  let { API_OPTIONS } = getTMDBConsts();
 
   let theDate = parseISO(dateString); // date-fns to convert to javascript date object
   return {
