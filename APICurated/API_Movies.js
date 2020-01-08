@@ -105,8 +105,7 @@ function movieSearchByTitle(searchValue, page = 1) {
         backdropURL: movie.backdrop_path
           ? formatImageURL(movie.backdrop_path, "m", true)[0]
           : "",
-        genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
-        getMovieDetails: () => movieGetDetails(movie.id)
+        genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId])
       };
     });
 
@@ -164,8 +163,7 @@ function movieGetDetails(movieId) {
         : "",
       imdbId: resp.data.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
-      genres: resp.data.genres.map(genreObj => genreObj.name),
-      getMovieImages: () => movieGetImages(movieId)
+      genres: resp.data.genres.map(genreObj => genreObj.name)
     };
     return {
       data: movieDetails,
@@ -348,7 +346,6 @@ function movieGetPersonCredits(personId) {
  * @property {string} data.results.posterURL
  * @property {string} data.results.backdropURL
  * @property {array.<string>} data.results.genres array of genre names
- * @property {function} data.results.getMovieImages returns and array of image URLs for movie
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -409,8 +406,7 @@ function movieDiscover(criteriaObj, page = 1) {
       backdropURL: result.backdrop_path
         ? formatImageURL(result.backdrop_path, "m", true)[0]
         : "",
-      genres: result.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
-      getMovieImages: () => movieGetImages(result.id)
+      genres: result.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId])
     }));
 
     return {

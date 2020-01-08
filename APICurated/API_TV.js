@@ -125,7 +125,6 @@ function tvSearchByTitle(searchValue, page = 1) {
  * @property {number} data.numberOfEpisodes
  * @property {number} data.numberOfSeasons
  * @property {array.<string>} data.genres array of genre names
- * @property {function} data.getImagesForShow function that returns array of images for show
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -160,8 +159,7 @@ function tvGetShowDetails(showId) {
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
-      genres: resp.data.genres.map(tvGenreObj => tvGenreObj.name),
-      getImagesForShow: () => tvGetImages(showId)
+      genres: resp.data.genres.map(tvGenreObj => tvGenreObj.name)
     };
 
     return {
