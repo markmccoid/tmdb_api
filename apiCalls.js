@@ -6,14 +6,7 @@
  */
 import axios from "axios";
 // import { getTMDBConsts } from "./index";
-import {
-  IMG_URL,
-  SECURE_IMG_URL,
-  API_KEY,
-  TV_GENRE_OBJ,
-  MOVIE_GENRE_OBJ,
-  API_URL
-} from "./index";
+import { API_KEY, API_URL } from "./index";
 
 /**
  * @typeDef {Object} ErrorObj
