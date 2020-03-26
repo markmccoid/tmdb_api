@@ -2,11 +2,15 @@
 
 This package wraps select API calls from the [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction). To use this, you will need to get an API Key from The Movie Database website.
 
+## Note
+
+Please note that even though this package is published to npm, it is still in quite a bit of flux. If you do plan on using it, know that it may change significantly.
+
 ## Motivation
 
-This project was inspired when writing another application that accessed the TMDB API for TV data.  I found that I wrote a bunch of functions to get the data and then had to curate the return data into something useful.  It seemed to make sense to package all this logic into a single package that could be included in any other project.
+This project was inspired when writing another application that accessed the TMDB API for TV data. I found that I wrote a bunch of functions to get the data and then had to curate the return data into something useful. It seemed to make sense to package all this logic into a single package that could be included in any other project.
 
-Realize that the TMDB API is HUGE!  So, my goal was to encapsulate the most common data that a project would need.  If data is missing that you need, do a pull request and add it!
+Realize that the TMDB API is HUGE! So, my goal was to encapsulate the most common data that a project would need. If data is missing that you need, do a pull request and add it!
 
 ## Install
 
@@ -18,21 +22,21 @@ $ yarn add tmdb_api
 
 The API Docs will help you navigate the functions available. [https://markmccoid.github.io/tmdb_api/](https://markmccoid.github.io/tmdb_api/)
 
-You will find that there are two main types of data returned.  Either **Raw** or **Curated**.
+You will find that there are two main types of data returned. Either **Raw** or **Curated**.
 
 **Raw** API functions are simply calls to the main API endpoints, returning all data from them.
 
 **Curated** API functions take the Raw data and format it in a way to make it easier to use and manipulate.
 
-The Raw and Curated functions are split into Common, TV and Movie functions.  TV and Movie are self explanatory. The Common functions are those that span both TV and Movies.  These will include Person data.
+The Raw and Curated functions are split into Common, TV and Movie functions. TV and Movie are self explanatory. The Common functions are those that span both TV and Movies. These will include Person data.
 
-Lastly, there is a section of **Helpers** functions.  You most likely will not need these if you are using the Curated functions.
+Lastly, there is a section of **Helpers** functions. You most likely will not need these if you are using the Curated functions.
 
 I've also tried to include typedefs for the curated functions so will have some documentation on what information is returned with each call.
 
 ## Initialize
 
-Before you can call the API functions you will need to initialize the module with your API Key using the `initTMDB(APIKey, [options])` function.  The options object is optional.
+Before you can call the API functions you will need to initialize the module with your API Key using the `initTMDB(APIKey, [options])` function. The options object is optional.
 
 ```jsx
 import React from "react";
@@ -52,35 +56,35 @@ function App() {
 export default App;
 ```
 
-initTMDB returns a promise, hence is an async function.  This means that if you are programmatically calling any of the tmdb_api functions, you have to wait until the promise resolves.
+initTMDB returns a promise, hence is an async function. This means that if you are programmatically calling any of the tmdb_api functions, you have to wait until the promise resolves.
 
 ### Options Object
 
-When initializing, you also have the options to pass an *Options* object.  This will set some defaults for how this package will return your data and query the TMDB api.
+When initializing, you also have the options to pass an _Options_ object. This will set some defaults for how this package will return your data and query the TMDB api.
 
 - **dateFormatString**
 
 ```javascript
 {
-  dateFormatString: "MM-dd-yyyy"
-};
+  dateFormatString: "MM-dd-yyyy";
+}
 ```
 
-The *dateFormatString* must use the formatting options from the [**date-fns** package](https://date-fns.org/v2.7.0/docs/format).
+The _dateFormatString_ must use the formatting options from the [**date-fns** package](https://date-fns.org/v2.7.0/docs/format).
 
-- **defaultAPIParams** 
+- **defaultAPIParams**
 
 ```javascript
 {
   defaultAPIParams: {
-    include_adult: false
+    include_adult: false;
   }
 }
 ```
 
-The *defaultAPIParams* object lets you pass in any parameters that you want to always be set when making calls 
+The _defaultAPIParams_ object lets you pass in any parameters that you want to always be set when making calls
 
-If you need to change the *dateFormatString* after initialization, just use the **updateAPIOptions(options)** functions.
+If you need to change the _dateFormatString_ after initialization, just use the **updateAPIOptions(options)** functions.
 
 ## Raw API Functions
 
@@ -124,9 +128,9 @@ Curated functions are wrappers around the Raw API calls. They do some extra work
 
    ```javascript
    {
-       date, // JavaScript date
+     date, // JavaScript date
        epoch, // Unix timestamp -- Seconds from 1/1970
-       formatted //Formatted based on the dateFormatString passed in initTMDB() function. Default "MM-dd-yyyy"
+       formatted; //Formatted based on the dateFormatString passed in initTMDB() function. Default "MM-dd-yyyy"
    }
    ```
 

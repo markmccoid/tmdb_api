@@ -151,7 +151,6 @@ function rawMovieDiscover(criteriaObj, page = 1) {
     }
   };
 
-  console.log("discover config", config);
   return apiTMDB("/discover/movie", config);
 }
 
