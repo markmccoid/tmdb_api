@@ -15,7 +15,7 @@ Realize that the TMDB API is HUGE! So, my goal was to encapsulate the most commo
 ## Install
 
 ```javascript
-$ yarn add tmdb_api
+$ yarn add @markmccoid/tmdb_api
 ```
 
 ## API Docs
@@ -41,7 +41,7 @@ Before you can call the API functions you will need to initialize the module wit
 ```jsx
 import React from "react";
 import Main from "./components/Main";
-import { initTMDB } from "tmdb_api";
+import { initTMDB } from "@markmccoid/tmdb_api";
 
 function App() {
   initTMDB("0e4935axxxxxxxxxxxxxxxxxx");
