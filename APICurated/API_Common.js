@@ -17,9 +17,9 @@
 import {
   rawSearchForPerson,
   rawGetPersonDetails,
-  rawGetPersonImages
-} from "../APIRaw/TMDB_Common";
-import { formatImageURL, parseToDate } from "../helpers";
+  rawGetPersonImages,
+} from '../APIRaw/TMDB_Common';
+import { formatImageURL, parseToDate } from '../helpers';
 
 /**
  * @typedef searchForPersonId_typedef
@@ -49,27 +49,27 @@ import { formatImageURL, parseToDate } from "../helpers";
  *  on error { data: 'ERROR', msg: error message, }
  */
 function searchForPersonId(searchValue, page = 1) {
-  return rawSearchForPerson(searchValue, page).then(resp => {
+  return rawSearchForPerson(searchValue, page).then((resp) => {
     // console.log("personid return", resp);
     let data = {
       page: resp.data.page,
       totalPages: resp.data.total_pages,
-      totalResults: resp.data.total_results
+      totalResults: resp.data.total_results,
     };
-    let results = resp.data.results.map(person => {
+    let results = resp.data.results.map((person) => {
       return {
         id: person.id,
         name: person.name,
-        popularity: person.popularity
+        popularity: person.popularity,
       };
     });
     return {
       data: {
         ...data,
         // sort array of results by popularity then reverse to show in desc order (most popular first)
-        results: _.reverse(_.sortBy(results, ["popularity"]))
+        results: _.reverse(_.sortBy(results, ['popularity'])),
       },
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
     };
   });
 }
@@ -101,7 +101,7 @@ function searchForPersonId(searchValue, page = 1) {
  *  on success {
  */
 function getPersonDetails(personId) {
-  return rawGetPersonDetails(personId).then(resp => {
+  return rawGetPersonDetails(personId).then((resp) => {
     // console.log("person Details", resp);
     let personDetails = {
       id: resp.data.id,
@@ -112,11 +112,11 @@ function getPersonDetails(personId) {
       biography: resp.data.biography,
       placeOfBirth: resp.data.place_of_birth,
       imdbId: resp.data.imdb_id,
-      profileImage: formatImageURL(resp.data.profile_path)[0]
+      profileImage: formatImageURL(resp.data.profile_path)[0],
     };
     return {
       data: personDetails,
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
     };
   });
 }
@@ -141,20 +141,20 @@ function getPersonDetails(personId) {
  *  on success {
  */
 function getPersonImages(personId) {
-  return rawGetPersonImages(personId).then(resp => {
+  return rawGetPersonImages(personId).then((resp) => {
     let personImages = resp.data.profiles
       .sort((a, b) => b.vote_average - a.vote_average)
-      .map(image => {
+      .map((image) => {
         return {
           width: image.width,
           height: image.height,
           aspectRatio: image.aspect_ratio,
-          imageURL: formatImageURL(image.file_path)[0]
+          imageURL: formatImageURL(image.file_path)[0],
         };
       });
     return {
       data: personImages,
-      apiCall: resp.data.apiCall
+      apiCall: resp.data.apiCall,
     };
   });
 }

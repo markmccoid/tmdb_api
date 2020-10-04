@@ -8,16 +8,19 @@
  *
  */
 
-import { formatImageURL, parseToDate } from "../helpers";
-import { MOVIE_GENRE_OBJ } from "../index";
+import { formatImageURL, parseToDate } from '../helpers';
+import { MOVIE_GENRE_OBJ } from '../index';
 import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
   rawMovieGetDetails,
+  rawMovieGetRecommendations,
   rawMovieGetPersonCredits,
   rawMovieGetCredits,
-  rawMovieDiscover
-} from "../APIRaw/TMDBApi_Movies";
+  rawMovieGetNowPlaying,
+  rawMovieGetPopular,
+  rawMovieDiscover,
+} from '../APIRaw/TMDBApi_Movies';
 
 /**
  * @typedef imagesReturn_typedef
@@ -34,21 +37,21 @@ import {
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {imagesReturn_typedef} Array of URLs to the images
  */
-function movieGetImages(movieId, imageType = "posters") {
+function movieGetImages(movieId, imageType = 'posters') {
   let apiCall;
-  return rawMovieGetImages(movieId).then(resp => {
+  return rawMovieGetImages(movieId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
-      .filter(imgObj => imgObj.iso_639_1 === "en")
-      .map(imgObj => {
+      .filter((imgObj) => imgObj.iso_639_1 === 'en')
+      .map((imgObj) => {
         return imgObj.file_path;
       });
     // Get the full image URLs
-    let formattedImageURLs = formatImageURL(imgFilePaths, "m", true);
+    let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
     return {
       data: formattedImageURLs,
-      apiCall
+      apiCall,
     };
   });
 }
@@ -64,7 +67,7 @@ function movieGetImages(movieId, imageType = "posters") {
  * @property {number} data.results.id the movieId
  * @property {string} data.results.title
  * @property {string} data.results.overview
- * @property {int} data.results.releaseDate - returns the Unix time, can use moment, date-nfs or new Date() to convert
+ * @property {int} data.results.releaseDate - returns an object with options for date {date, epoch, formatted}
  * @property {string} data.results.posterURL
  * @property {string} data.results.backdropURL
  * @property {array.<string>} data.results.genres array of genre names
@@ -85,33 +88,33 @@ function movieSearchByTitle(searchValue, page = 1) {
   let apiCall;
   let searchResults;
   let moviesReturned;
-  return rawMovieSearchByTitle(searchValue, page).then(resp => {
+  return rawMovieSearchByTitle(searchValue, page).then((resp) => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
       page: resp.data.page,
       totalResults: resp.data.total_results,
-      totalPages: resp.data.total_pages
+      totalPages: resp.data.total_pages,
     };
-    moviesReturned = resp.data.results.map(movie => {
+    moviesReturned = resp.data.results.map((movie) => {
       return {
         id: movie.id,
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
         posterURL: movie.backdrop_path
-          ? formatImageURL(movie.poster_path, "m", true)[0]
-          : "",
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
         backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, "m", true)[0]
-          : "",
-        genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId])
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
 
     return {
       data: { ...searchResults, results: moviesReturned },
-      apiCall
+      apiCall,
     };
   });
 }
@@ -128,12 +131,13 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @property {number} data.runtime runtime in minutes
  * @property {number} data.budget
  * @property {number} data.revenue
- * @property {date} data.releaseDate
+ * @property {object} data.releaseDate returns an object with options for date {date, epoch, formatted}
  * @property {string} data.posterURL
  * @property {string} data.backdropURL
  * @property {string} data.imdbId
  * @property {string} data.imdbURL
  * @property {array.<string>} data.genres array of genre names
+ * @property {array.<object>} data.videos array of video objects- fields are { videoURL, videoThumbnail, id, language, country, key, name, site, size, type }
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -144,7 +148,23 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @returns {movieDetails_typedef} Object data return
  */
 function movieGetDetails(movieId) {
-  return rawMovieGetDetails(movieId).then(resp => {
+  return rawMovieGetDetails(movieId).then((resp) => {
+    //Get video data and format, currently just getting youtube videos
+    const videos = resp.data.videos.results
+      .filter((video) => video.site === 'YouTube')
+      .map((video) => ({
+        id: video.id,
+        language: video.iso_639_1,
+        country: video.iso_3166_1,
+        key: video.key,
+        name: video.name,
+        site: video.site,
+        size: video.size,
+        type: video.type,
+        videoURL: `https://www.youtube.com/watch?v=${video.key}`,
+        videoThumbnail: `https://img.youtube.com/vi/${video.key}/0.jpg`,
+      }));
+
     let movieDetails = {
       id: movieId,
       title: resp.data.title,
@@ -156,18 +176,174 @@ function movieGetDetails(movieId) {
       revenue: resp.data.revenue,
       releaseDate: parseToDate(resp.data.release_date),
       posterURL: resp.data.poster_path
-        ? formatImageURL(resp.data.poster_path, "m", true)[0]
-        : "",
+        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
+        : '',
       backdropURL: resp.data.backdrop_path
-        ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
-        : "",
+        ? formatImageURL(resp.data.backdrop_path, 'm', true)[0]
+        : '',
       imdbId: resp.data.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
-      genres: resp.data.genres.map(genreObj => genreObj.name)
+      genres: resp.data.genres.map((genreObj) => genreObj.name),
+      videos,
     };
     return {
       data: movieDetails,
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
+/**
+ * @typedef moviesSimilar_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the movieId
+ * @property {string} data.results.title
+ * @property {string} data.results.overview
+ * @property {int} data.results.releaseDate - returns an object with options for date {date, epoch, formatted}
+ * @property {string} data.results.posterURL
+ * @property {string} data.results.backdropURL
+ * @property {array.<string>} data.results.genres array of genre names
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * Returns an object with movies that are "similar" to the passed movieId's movie
+ * @method
+ * @memberOf Curated_API_Movies
+ * @param {number} movieId - movieId to get details for
+ * @returns {moviesSimilar_typedef} Object data return
+ */
+
+function movieGetRecommendations(movieId, page = 1) {
+  //Don't forget to change the typedef to match what you are returning
+  // Call rawMovieGetRecommendations()
+  // Make response line up with at least the search result type
+  return rawMovieGetRecommendations(movieId, page).then((resp) => {
+    // Curate results
+
+    const searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+    const moviesReturned = resp.data.results.map((movie) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        releaseDate: parseToDate(movie.release_date),
+        overview: movie.overview,
+        posterURL: movie.backdrop_path
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
+        backdropURL: movie.backdrop_path
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: moviesReturned },
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
+/**
+ * @typedef moviesSimilar_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.page current page returned
+ * @property {number} data.totalResults total number of movies search found
+ * @property {number} data.totalPages total pages use for pagination
+ * @property {Array} data.results results of the search
+ * @property {number} data.results.id the movieId
+ * @property {string} data.results.title
+ * @property {string} data.results.overview
+ * @property {int} data.results.releaseDate - returns an object with options for date {date, epoch, formatted}
+ * @property {string} data.results.posterURL
+ * @property {string} data.results.backdropURL
+ * @property {array.<string>} data.results.genres array of genre names
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * Returns an object with movies that are "similar" to the passed movieId's movie
+ * @method
+ * @memberOf Curated_API_Movies
+ * @param {number} movieId - movieId to get details for
+ * @returns {moviesSimilar_typedef} Object data return
+ */
+
+function movieGetPopular(page = 1, language = 'en-US') {
+  //Don't forget to change the typedef to match what you are returning
+  // Call rawMovieGetPopular()
+  // Make response line up with at least the search result type
+  return rawMovieGetPopular(page, language).then((resp) => {
+    // Curate results
+
+    const searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+    const moviesReturned = resp.data.results.map((movie) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        releaseDate: parseToDate(movie.release_date),
+        overview: movie.overview,
+        posterURL: movie.backdrop_path
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
+        backdropURL: movie.backdrop_path
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: moviesReturned },
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
+function movieGetNowPlaying(page = 1, language = 'en-US') {
+  //Don't forget to change the typedef to match what you are returning
+  // Call rawMovieGetNowPlaying()
+  // Make response line up with at least the search result type
+  return rawMovieGetNowPlaying(page, language).then((resp) => {
+    // Curate results
+
+    const searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+    const moviesReturned = resp.data.results.map((movie) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        releaseDate: parseToDate(movie.release_date),
+        overview: movie.overview,
+        posterURL: movie.backdrop_path
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
+        backdropURL: movie.backdrop_path
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: moviesReturned },
+      apiCall: resp.apiCall,
     };
   });
 }
@@ -207,8 +383,8 @@ function movieGetDetails(movieId) {
  */
 function movieGetCredits(movieId) {
   // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
-  return rawMovieGetCredits(movieId).then(resp => {
-    let castForMovie = resp.data.cast.map(castMember => {
+  return rawMovieGetCredits(movieId).then((resp) => {
+    let castForMovie = resp.data.cast.map((castMember) => {
       return {
         personId: castMember.id,
         name: castMember.name,
@@ -216,11 +392,11 @@ function movieGetCredits(movieId) {
         creditId: castMember.credit_id,
         gender: castMember.gender,
         profileURL: castMember.profile_path
-          ? formatImageURL(castMember.profile_path, "m", true)[0]
-          : ""
+          ? formatImageURL(castMember.profile_path, 'm', true)[0]
+          : '',
       };
     });
-    let crewForMovie = resp.data.crew.map(crewMember => {
+    let crewForMovie = resp.data.crew.map((crewMember) => {
       return {
         personId: crewMember.id,
         name: crewMember.name,
@@ -229,13 +405,13 @@ function movieGetCredits(movieId) {
         department: crewMember.department,
         gender: crewMember.gender,
         profileURL: crewMember.profile_path
-          ? formatImageURL(crewMember.profile_path, "m", true)[0]
-          : ""
+          ? formatImageURL(crewMember.profile_path, 'm', true)[0]
+          : '',
       };
     });
     return {
       data: { cast: castForMovie, crew: crewForMovie },
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
     };
   });
 }
@@ -284,8 +460,8 @@ function movieGetCredits(movieId) {
 function movieGetPersonCredits(personId) {
   // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
 
-  return rawMovieGetPersonCredits(personId).then(resp => {
-    let castMovies = resp.data.cast.map(movie => {
+  return rawMovieGetPersonCredits(personId).then((resp) => {
+    let castMovies = resp.data.cast.map((movie) => {
       return {
         movieId: movie.id,
         title: movie.title,
@@ -293,17 +469,17 @@ function movieGetPersonCredits(personId) {
         releaseDate: parseToDate(movie.release_date),
         creditId: movie.credit_id,
         characterName: movie.character,
-        genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
         posterURL: movie.poster_path
-          ? formatImageURL(movie.poster_path, "m", true)[0]
-          : "",
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
         backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, "m", true)[0]
-          : "",
-        orginalLanguage: movie.original_language
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        orginalLanguage: movie.original_language,
       };
     });
-    let crewMovies = resp.data.crew.map(movie => {
+    let crewMovies = resp.data.crew.map((movie) => {
       return {
         movieId: movie.id,
         title: movie.title,
@@ -312,19 +488,19 @@ function movieGetPersonCredits(personId) {
         creditId: movie.credit_id,
         job: movie.job,
         department: movie.department,
-        genres: movie.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId]),
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
         posterURL: movie.poster_path
-          ? formatImageURL(movie.poster_path, "m", true)[0]
-          : "",
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
         backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, "m", true)[0]
-          : "",
-        orginalLanguage: movie.original_language
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        orginalLanguage: movie.original_language,
       };
     });
     return {
       data: { cast: castMovies, crew: crewMovies },
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
     };
   });
 }
@@ -386,14 +562,14 @@ function movieDiscover(criteriaObj, page = 1) {
   let searchResults;
   let moviesReturned;
   // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
-  return rawMovieDiscover(criteriaObj, page).then(resp => {
+  return rawMovieDiscover(criteriaObj, page).then((resp) => {
     apiCall = resp.apiCall;
     searchResults = {
       page: resp.data.page,
       totalResults: resp.data.total_results,
-      totalPages: resp.data.total_pages
+      totalPages: resp.data.total_pages,
     };
-    moviesReturned = resp.data.results.map(result => ({
+    moviesReturned = resp.data.results.map((result) => ({
       id: result.id,
       title: result.title,
       overview: result.overview,
@@ -401,17 +577,17 @@ function movieDiscover(criteriaObj, page = 1) {
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
       posterURL: result.poster_path
-        ? formatImageURL(result.poster_path, "m", true)[0]
-        : "",
+        ? formatImageURL(result.poster_path, 'm', true)[0]
+        : '',
       backdropURL: result.backdrop_path
-        ? formatImageURL(result.backdrop_path, "m", true)[0]
-        : "",
-      genres: result.genre_ids.map(genreId => MOVIE_GENRE_OBJ[genreId])
+        ? formatImageURL(result.backdrop_path, 'm', true)[0]
+        : '',
+      genres: result.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
     }));
 
     return {
       data: { ...searchResults, results: moviesReturned },
-      apiCall
+      apiCall,
     };
   });
 }
@@ -420,7 +596,10 @@ export {
   movieGetImages,
   movieSearchByTitle,
   movieGetDetails,
+  movieGetRecommendations,
   movieGetPersonCredits,
   movieGetCredits,
-  movieDiscover
+  movieGetPopular,
+  movieGetNowPlaying,
+  movieDiscover,
 };

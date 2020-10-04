@@ -1,6 +1,6 @@
-import { format } from "date-fns";
-import { apiTMDB } from "../apiCalls";
-import { flattenArray } from "../helpers";
+import { format } from 'date-fns';
+import { apiTMDB } from '../apiCalls';
+import { flattenArray } from '../helpers';
 
 // const API_KEY = '0e4935aa81b04539beb687d04ff414e3'//process.env.REACT_APP_TMDB_API_KEY;
 // const API_URL = 'https://api.themoviedb.org/3';
@@ -29,14 +29,16 @@ function rawMovieSearchByTitle(searchString, page = 1) {
     params: {
       page,
       include_adult: false,
-      query: searchString
-    }
+      query: searchString,
+    },
   };
-  return apiTMDB("/search/movie", config);
+  return apiTMDB('/search/movie', config);
 }
 
 /**
  * Returns movie details for passed TMDb movieId
+ * The return data will include a video key with
+ * videos attached to movieId
  *
  * @memberOf Raw_API_Movies
  * @param {string} movieId - TMDb movie id
@@ -45,7 +47,71 @@ function rawMovieSearchByTitle(searchString, page = 1) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawMovieGetDetails(movieId) {
-  return apiTMDB(`/movie/${movieId}`);
+  const config = {
+    params: {
+      append_to_response: 'videos',
+    },
+  };
+  return apiTMDB(`/movie/${movieId}`, config);
+}
+
+/**
+ * Get a list of recommended movies based on passed movieId
+ *
+ * @memberOf Raw_API_Movies
+ * @param {string} movieId - TMDb movie id
+ * @param {number} [page=1] - optional
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieGetRecommendations(movieId, page = 1) {
+  const config = {
+    params: {
+      page,
+    },
+  };
+  return apiTMDB(`/movie/${movieId}/recommendations`, config);
+}
+
+/**
+ * Get a list of Now Playing movies
+ *
+ * @memberOf Raw_API_Movies
+ * @param {number} [page=1] - optional, defaults to 1
+ * @param {string} [language='en-US'] - optional, defaults to 'en-US'
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieGetNowPlaying(page = 1, language = 'en-US') {
+  const config = {
+    params: {
+      page,
+      language,
+    },
+  };
+  return apiTMDB(`/movie/now_playing`, config);
+}
+
+/**
+ * Get a list of Popular movies
+ *
+ * @memberOf Raw_API_Movies
+ * @param {number} [page=1] - optional, defaults to 1
+ * @param {string} [language='en-US'] - optional, defaults to 'en-US'
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieGetPopular(page = 1, language = 'en-US') {
+  const config = {
+    params: {
+      page,
+      language,
+    },
+  };
+  return apiTMDB(`/movie/popular`, config);
 }
 
 /**
@@ -106,11 +172,14 @@ function rawMovieGetCredits(movieId) {
 /**
  * criteriaObj {
  *  genres: [] // genre Ids
+ *  genreCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
  *  releaseYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
- *  cast: [] // person Ids. Only include movies that have one of the Id's added as an actor.,
- *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.,
+ *  cast: [] // person Ids. Only include movies that have one of the Id's added as an actor.
+ *  castCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
+ *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.
+ *  crewCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
  *  sortBy: one of the following:
  *    - popularity.asc
  *    - popularity.desc **Default
@@ -131,34 +200,51 @@ function rawMovieGetCredits(movieId) {
  * @param {object} criteriaObj - object with criteria to search with
  * @returns {object} response object {data, apiCall}
  */
+const boolConversion = {
+  AND: ',',
+  OR: '|',
+  undefined: ',',
+};
 function rawMovieDiscover(criteriaObj, page = 1) {
   const { releaseDateGTE, releaseDateLTE } = criteriaObj;
   // This is the config object that will be passed to the api call
   let config = {
     params: {
-      with_genres: flattenArray(criteriaObj.genres),
+      with_genres: flattenArray(
+        criteriaObj.genres,
+        boolConversion[criteriaObj.genreCompareType]
+      ),
       primary_release_year: criteriaObj.releaseYear,
       [`primary_release_date.lte`]:
-        typeof releaseDateLTE === "date"
-          ? format(releaseDateLTE, "YYYY-MM-DD")
+        typeof releaseDateLTE === 'date'
+          ? format(releaseDateLTE, 'YYYY-MM-DD')
           : releaseDateLTE,
       [`primary_release_date.gte`]:
-        typeof releaseDateGTE === "date"
-          ? format(releaseDateGTE, "YYYY-MM-DD")
+        typeof releaseDateGTE === 'date'
+          ? format(releaseDateGTE, 'YYYY-MM-DD')
           : releaseDateGTE,
-      with_crew: flattenArray(criteriaObj.crew),
-      with_cast: flattenArray(criteriaObj.cast)
-    }
+      with_crew: flattenArray(
+        criteriaObj.crew,
+        boolConversion[criteriaObj.crewCompareType]
+      ),
+      with_cast: flattenArray(
+        criteriaObj.cast,
+        boolConversion[criteriaObj.castCompareType]
+      ),
+    },
   };
 
-  return apiTMDB("/discover/movie", config);
+  return apiTMDB('/discover/movie', config);
 }
 
 export {
   rawMovieSearchByTitle,
   rawMovieGetDetails,
+  rawMovieGetRecommendations,
   rawMovieGetImages,
   rawMovieGetPersonCredits,
+  rawMovieGetNowPlaying,
+  rawMovieGetPopular,
   rawMovieDiscover,
-  rawMovieGetCredits
+  rawMovieGetCredits,
 };
