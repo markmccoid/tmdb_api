@@ -183,7 +183,7 @@ export const getMovieGenres = (convertToObjectFlag = false) => {
  */
 function convertGenreToObj(genreData, genreType) {
   const { genres } = genreData;
-  console.log('GENREs', genres);
+
   if (genres === 'ERROR') {
     // If there was an error getting genres, return canned ones below
     return genreType === 'movie'

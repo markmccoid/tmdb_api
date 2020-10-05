@@ -528,11 +528,11 @@ function movieGetPersonCredits(personId) {
  * @typedef movieDiscoverCriteria_typedef
  * @type {Object}
  * @property {Array} genres  genre Ids
- * @property {int} releaseYear: Primary Release Year
- * @property {date | string} releaseDateGTE: movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
- * @property {date | string} releaseDateLTE: movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
- * @property {Array} cast:  person Ids. Only include movies that have one of the Id's added as an actor
- * @property {Array} crew:  person Ids. Only include movies that have one of the Id's added as a crew member
+ * @property {int} releaseYear Primary Release Year
+ * @property {date | string} releaseDateGTE movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+ * @property {date | string} releaseDateLTE movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+ * @property {Array} cast  person Ids. Only include movies that have one of the Id's added as an actor
+ * @property {Array} crew  person Ids. Only include movies that have one of the Id's added as a crew member
  * @property {string} sortBy Options
  *    - popularity.asc
  *    - popularity.desc **Default**
