@@ -14,6 +14,7 @@ import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
   rawMovieGetDetails,
+  rawMovieGetVideos,
   rawMovieGetRecommendations,
   rawMovieGetPersonCredits,
   rawMovieGetCredits,
@@ -137,7 +138,7 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @property {string} data.imdbId
  * @property {string} data.imdbURL
  * @property {array.<string>} data.genres array of genre names
- * @property {array.<object>} data.videos array of video objects- fields are { videoURL, videoThumbnail, id, language, country, key, name, site, size, type }
+ * @property {array.<object>} data.videos movieVideos_typedef -> array of video objects if withVideos=true- fields are { videoURL, videoThumbnailURL, id, language, country, key, name, site, size, type }
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -145,9 +146,10 @@ function movieSearchByTitle(searchValue, page = 1) {
  * @method
  * @memberOf Curated_API_Movies
  * @param {number} movieId - movieId to get details for
+ * @param {bool} [withVideos=false] - movieId to get details for
  * @returns {movieDetails_typedef} Object data return
  */
-function movieGetDetails(movieId) {
+function movieGetDetails(movieId, withVideos = false) {
   return rawMovieGetDetails(movieId).then((resp) => {
     //Get video data and format, currently just getting youtube videos
     const videos = resp.data.videos.results
@@ -162,7 +164,7 @@ function movieGetDetails(movieId) {
         size: video.size,
         type: video.type,
         videoURL: `https://www.youtube.com/watch?v=${video.key}`,
-        videoThumbnail: `https://img.youtube.com/vi/${video.key}/0.jpg`,
+        videoThumbnailURL: `https://img.youtube.com/vi/${video.key}/0.jpg`,
       }));
 
     let movieDetails = {
@@ -184,10 +186,56 @@ function movieGetDetails(movieId) {
       imdbId: resp.data.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
       genres: resp.data.genres.map((genreObj) => genreObj.name),
-      videos,
     };
     return {
-      data: movieDetails,
+      data: withVideos ? { ...movieDetails, video } : movieDetails,
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
+/**
+ * @typedef movieVideos_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {string} data.id the videoId
+ * @property {string} data.language
+ * @property {string} data.country
+ * @property {string} data.key
+ * @property {string} data.name
+ * @property {number} data.site
+ * @property {number} data.size
+ * @property {number} data.type
+ * @property {object} data.videoURL
+ * @property {string} data.videoThumbnailURL
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * Returns an object with videos for passed movieId
+ * @method
+ * @memberOf Curated_API_Movies
+ * @param {number} movieId - movieId to get details for
+ * @returns {movieDetails_typedef} Object data return
+ */
+function movieGetVideos(movieId) {
+  return rawMovieGetVideos(movieId).then((resp) => {
+    //Get video data and format, currently just getting youtube videos
+    const videos = resp.data.results
+      .filter((video) => video.site === 'YouTube')
+      .map((video) => ({
+        id: video.id,
+        language: video.iso_639_1,
+        country: video.iso_3166_1,
+        key: video.key,
+        name: video.name,
+        site: video.site,
+        size: video.size,
+        type: video.type,
+        videoURL: `https://www.youtube.com/watch?v=${video.key}`,
+        videoThumbnailURL: `https://img.youtube.com/vi/${video.key}/0.jpg`,
+      }));
+    return {
+      data: videos,
       apiCall: resp.apiCall,
     };
   });
@@ -596,6 +644,7 @@ export {
   movieGetImages,
   movieSearchByTitle,
   movieGetDetails,
+  movieGetVideos,
   movieGetRecommendations,
   movieGetPersonCredits,
   movieGetCredits,

@@ -56,6 +56,21 @@ function rawMovieGetDetails(movieId) {
 }
 
 /**
+ * Returns the videos that have been added to the passed movieId.
+ *
+ * https://developers.themoviedb.org/3/movies/get-movie-videos
+ *
+ * @memberOf Raw_API_Movies
+ * @param {string} movieId - TMDb movie id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieGetVideos(movieId) {
+  return apiTMDB(`/movie/${movieId}/videos`);
+}
+
+/**
  * Get a list of recommended movies based on passed movieId
  *
  * @memberOf Raw_API_Movies
@@ -240,6 +255,7 @@ function rawMovieDiscover(criteriaObj, page = 1) {
 export {
   rawMovieSearchByTitle,
   rawMovieGetDetails,
+  rawMovieGetVideos,
   rawMovieGetRecommendations,
   rawMovieGetImages,
   rawMovieGetPersonCredits,
