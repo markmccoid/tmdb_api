@@ -197,7 +197,7 @@ function movieGetDetails(movieId, withVideos = false) {
 /**
  * @typedef movieVideos_typedef
  * @type {Object}
- * @property {Array} data the data object
+ * @property {Array} data the data array is an array of objects
  * @property {string} data.id the videoId
  * @property {string} data.language
  * @property {string} data.country
