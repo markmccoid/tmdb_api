@@ -215,7 +215,7 @@ function movieGetDetails(movieId, withVideos = false) {
  * @method
  * @memberOf Curated_API_Movies
  * @param {number} movieId - movieId to get details for
- * @returns {movieDetails_typedef} Object data return
+ * @returns {movieVideos_typedef} Object data return
  */
 function movieGetVideos(movieId) {
   return rawMovieGetVideos(movieId).then((resp) => {
@@ -242,7 +242,7 @@ function movieGetVideos(movieId) {
 }
 
 /**
- * @typedef moviesSimilar_typedef
+ * @typedef moviesRecommendations_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {number} data.page current page returned
@@ -263,7 +263,7 @@ function movieGetVideos(movieId) {
  * @method
  * @memberOf Curated_API_Movies
  * @param {number} movieId - movieId to get details for
- * @returns {moviesSimilar_typedef} Object data return
+ * @returns {moviesRecommendations_typedef} Object data return
  */
 
 function movieGetRecommendations(movieId, page = 1) {
