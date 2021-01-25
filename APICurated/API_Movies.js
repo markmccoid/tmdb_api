@@ -103,7 +103,7 @@ function movieSearchByTitle(searchValue, page = 1) {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.backdrop_path
+        posterURL: movie.poster_path
           ? formatImageURL(movie.poster_path, 'm', true)[0]
           : '',
         backdropURL: movie.backdrop_path
