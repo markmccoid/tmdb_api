@@ -1,0 +1,1028 @@
+[
+  {
+    "providerId": 8,
+    "providerLogo": "https://www.themoviedb.org/t/p/original/9A1JSVmSxsyaBK4SUFsYVqbAYfW.jpg",
+    "providerName": "Netflix",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 9,
+    "providerLogo": "https://image.tmdb.org/t/p/original/68MNrwlkpF7WnmNPXLah69CR5cb.jpg",
+    "providerName": "Amazon Prime Video",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 2,
+    "providerLogo": "https://image.tmdb.org/t/p/original/q6tl6Ib6X5FT80RMlcDbexIo4St.jpg",
+    "providerName": "Apple iTunes",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 3,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p3Z12gKq2qvJaUOMeKNU2mzKVI9.jpg",
+    "providerName": "Google Play Movies",
+    "providerPriority": 5
+  },
+  {
+    "providerId": 257,
+    "providerLogo": "https://image.tmdb.org/t/p/original/2wPRZit7b8u79GsqTdygmGL6kBW.jpg",
+    "providerName": "fuboTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 11,
+    "providerLogo": "https://image.tmdb.org/t/p/original/kXQQbZ6ZvTwojzMPivQF9sX0V4y.jpg",
+    "providerName": "Mubi",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 15,
+    "providerLogo": "https://image.tmdb.org/t/p/original/giwM8XX4V2AQb9vsoN7yti82tKK.jpg",
+    "providerName": "Hulu",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 100,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nNQnRz0jQ7UOJVtifg64VFc4vDk.jpg",
+    "providerName": "GuideDoc",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 337,
+    "providerLogo": "https://image.tmdb.org/t/p/original/dgPueyEdOwpQ10fjuhL2WYFQwQs.jpg",
+    "providerName": "Disney Plus",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 384,
+    "providerLogo": "https://image.tmdb.org/t/p/original/aS2zvJWn9mwiCOeaaCkIh4wleZS.jpg",
+    "providerName": "HBO Max",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 175,
+    "providerLogo": "https://image.tmdb.org/t/p/original/7IF7BHgNB20PKk37EExLQcWTYaB.jpg",
+    "providerName": "Netflix Kids",
+    "providerPriority": 5
+  },
+  {
+    "providerId": 386,
+    "providerLogo": "https://image.tmdb.org/t/p/original/d9cPwjnMYUEdjsfPuX96akc807z.jpg",
+    "providerName": "Peacock",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 283,
+    "providerLogo": "https://image.tmdb.org/t/p/original/oswPTkUarKavsbi4Ec3b3SgqZ29.jpg",
+    "providerName": "Crunchyroll",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 387,
+    "providerLogo": "https://image.tmdb.org/t/p/original/7cOEzL1ogV1hQV9a65qAeG7dK6c.jpg",
+    "providerName": "Peacock Premium",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 87,
+    "providerLogo": "https://image.tmdb.org/t/p/original/yWVOp7WS6xyDhg6oL1OZwDh0w1r.jpg",
+    "providerName": "Acorn TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 10,
+    "providerLogo": "https://image.tmdb.org/t/p/original/sVBEF7q7LqjHAWSnKwDbzmr2EMY.jpg",
+    "providerName": "Amazon Video",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 350,
+    "providerLogo": "https://image.tmdb.org/t/p/original/A3WLxoSkmuxwaQkpfwL6H8WwWwM.jpg",
+    "providerName": "Apple TV Plus",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 192,
+    "providerLogo": "https://image.tmdb.org/t/p/original/vDCcryHD32b0yMeSCgBhuYavsmx.jpg",
+    "providerName": "YouTube",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 309,
+    "providerLogo": "https://image.tmdb.org/t/p/original/gKv2c2DD2LnHZ5kYqkamz1j4wW.jpg",
+    "providerName": "Sun Nxt",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 464,
+    "providerLogo": "https://image.tmdb.org/t/p/original/1OFTQmaVkbQQJP3Io0RaqgzqNTw.jpg",
+    "providerName": "Kocowa",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 188,
+    "providerLogo": "https://image.tmdb.org/t/p/original/hvVCDCBcmj8ouq5T18P5g2qfaNc.jpg",
+    "providerName": "YouTube Premium",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 190,
+    "providerLogo": "https://image.tmdb.org/t/p/original/aWGqR6ERNT6cAlgmtQUMfGFeaFv.jpg",
+    "providerName": "Curiosity Stream",
+    "providerPriority": 5
+  },
+  {
+    "providerId": 235,
+    "providerLogo": "https://image.tmdb.org/t/p/original/zqPiJW4AeaR7UQV1jupvCyv4RJy.jpg",
+    "providerName": "YouTube Free",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 521,
+    "providerLogo": "https://image.tmdb.org/t/p/original/qc4Aze8HWuVdjUyA1qcOsMZZc6I.jpg",
+    "providerName": "Spamflix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 27,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pCmBqVbaYTpTactRXXDw5O8N1VZ.jpg",
+    "providerName": "HBO Now",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 78,
+    "providerLogo": "https://image.tmdb.org/t/p/original/kwCsPIK3KA1YTXq7XxXaVDhTxLY.jpg",
+    "providerName": "CBS",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 475,
+    "providerLogo": "https://image.tmdb.org/t/p/original/rre9YaMnTG9xKG8GiCp2NVgg5Rw.jpg",
+    "providerName": "DOCSVILLE",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 269,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nHbhC3J5aYQ7bA6vdrF7i0RbNx0.jpg",
+    "providerName": "Funimation Now",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 495,
+    "providerLogo": "https://image.tmdb.org/t/p/original/46veKqyFzqexqq9ZuOxdBiIdkMo.jpg",
+    "providerName": "CGood TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 105,
+    "providerLogo": "https://image.tmdb.org/t/p/original/eqr1RvnDiHcM7UxmaZOIjdTmyx3.jpg",
+    "providerName": "FandangoNOW",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 238,
+    "providerLogo": "https://image.tmdb.org/t/p/original/2irzpx5DK6PhmTOz4qiskLmVnT3.jpg",
+    "providerName": "IMDb TV",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 207,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5IMVCIy2CsyRRKLCAqNbCaYrwSn.jpg",
+    "providerName": "The Roku Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 212,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3U0t5JMFgd2qFZrcqRt5q8Y5Soy.jpg",
+    "providerName": "Hoopla",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 83,
+    "providerLogo": "https://image.tmdb.org/t/p/original/l5TWqY5SLDYpB9lPYzfJtxbgva1.jpg",
+    "providerName": "The CW",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 206,
+    "providerLogo": "https://image.tmdb.org/t/p/original/hPVhTOfXdQgqoqvphRIbOrObuCF.jpg",
+    "providerName": "CW Seed",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 7,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pgaPsqgFh2grkcr7ROkoBajHJnf.jpg",
+    "providerName": "Vudu",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 332,
+    "providerLogo": "https://image.tmdb.org/t/p/original/2XW5fzx0n1K8HVz3qhXkgYblTdh.jpg",
+    "providerName": "VUDU Free",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 43,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pDcaPupcS7YxKce2sQePrq8k1gK.jpg",
+    "providerName": "Starz",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 258,
+    "providerLogo": "https://image.tmdb.org/t/p/original/76AssgaLWMvpNP55ZbQHPlNc4IJ.jpg",
+    "providerName": "Criterion Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 37,
+    "providerLogo": "https://image.tmdb.org/t/p/original/bo7FM7ha4iEnOEAvhhwg0RuVGid.jpg",
+    "providerName": "Showtime",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 209,
+    "providerLogo": "https://image.tmdb.org/t/p/original/kOgsIXY8lJzAtoGBnesOLUwherK.jpg",
+    "providerName": "PBS",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 177,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p9T3rJjhDEK7QE56EhqC6nRgsLY.jpg",
+    "providerName": "Pantaflix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 123,
+    "providerLogo": "https://image.tmdb.org/t/p/original/6Ms2t7smUWvpjlxK2deOVj2jJBK.jpg",
+    "providerName": "FXNow",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 73,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pvfEypkvOYheMjVz1H0rCJQSOC6.jpg",
+    "providerName": "Tubi TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 191,
+    "providerLogo": "https://image.tmdb.org/t/p/original/aYKrIainvyO9J4UPEOJ5jh130k3.jpg",
+    "providerName": "Kanopy",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 243,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3cmJGDcHD3b3yt3EAIzx7vQQ4Gg.jpg",
+    "providerName": "Comedy Central",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 68,
+    "providerLogo": "https://image.tmdb.org/t/p/original/paq2o2dIfQnxcERsVoq7Ys8KYz8.jpg",
+    "providerName": "Microsoft Store",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 279,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nSr2IQSwc5C2QrttIWen8s06ofe.jpg",
+    "providerName": "Redbox",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 139,
+    "providerLogo": "https://image.tmdb.org/t/p/original/rSCrkIuw1aooazOcj2mSoGnjHXk.jpg",
+    "providerName": "Max Go",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 148,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p2EAX57Q0LTU4L2EuADHO3MQKPt.jpg",
+    "providerName": "ABC",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 358,
+    "providerLogo": "https://image.tmdb.org/t/p/original/qZdEeINwQotbr1Rq15dL5G2BaAh.jpg",
+    "providerName": "DIRECTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 12,
+    "providerLogo": "https://image.tmdb.org/t/p/original/eg9ljJBQjpNdurHcAfiFVx5kSBc.jpg",
+    "providerName": "Crackle",
+    "providerPriority": 1
+  },
+  {
+    "providerId": 265,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5yTJmexCFNTIKw0wMem5QzD66Nk.jpg",
+    "providerName": "Tribeca Shortlist",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 80,
+    "providerLogo": "https://image.tmdb.org/t/p/original/25DnbaRwe8V9r5Mhnye3ZNCVS5Q.jpg",
+    "providerName": "AMC",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 25,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nxf0BUGE90D0YdrJPb4x76JTrC.jpg",
+    "providerName": "Fandor",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 122,
+    "providerLogo": "https://image.tmdb.org/t/p/original/eApzJtzOngfBlEC3lCjuAtzsOTf.jpg",
+    "providerName": "Hotstar",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 79,
+    "providerLogo": "https://image.tmdb.org/t/p/original/mlEocKaBtMvrSxJ4sufyrRBWdjz.jpg",
+    "providerName": "NBC",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 34,
+    "providerLogo": "https://image.tmdb.org/t/p/original/isCtOyzi9kLwD8ioScNLDMCnqrG.jpg",
+    "providerName": "Epix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 211,
+    "providerLogo": "https://image.tmdb.org/t/p/original/lV4hKEv6V846kGNPWQdZ7DZvhiI.jpg",
+    "providerName": "Freeform",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 155,
+    "providerLogo": "https://image.tmdb.org/t/p/original/er05UBXvaKlu93aAQTS1iegjGVK.jpg",
+    "providerName": "History",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 215,
+    "providerLogo": "https://image.tmdb.org/t/p/original/djYrg58SndDLXiH6SwiqlKuvUpe.jpg",
+    "providerName": "Syfy",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 156,
+    "providerLogo": "https://image.tmdb.org/t/p/original/eHxX3SyNzA6GbqyMGIozcXXl5ki.jpg",
+    "providerName": "A&amp;E",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 157,
+    "providerLogo": "https://image.tmdb.org/t/p/original/bhaqUP6B4FGxAsvyqLqnPA4gsO5.jpg",
+    "providerName": "Lifetime",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 99,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p2GwlTWJQliHU78yiT960D5qMdW.jpg",
+    "providerName": "Shudder",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 185,
+    "providerLogo": "https://image.tmdb.org/t/p/original/g8LYpcDR5G4OwgCWlRK304o5DT5.jpg",
+    "providerName": "Screambox",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 143,
+    "providerLogo": "https://image.tmdb.org/t/p/original/lhTjM77DOO6Y5YVPMFFQKuF8g66.jpg",
+    "providerName": "Sundance Now",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 241,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5buevv97Eo6Xjnp2qzPjGhJbPGP.jpg",
+    "providerName": "Popcornflix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 151,
+    "providerLogo": "https://image.tmdb.org/t/p/original/orRX4rFJ5FbYe20OEn1W61WfXb3.jpg",
+    "providerName": "BritBox",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 14,
+    "providerLogo": "https://image.tmdb.org/t/p/original/mBxpKYI9OrYizSP3KytSiXVtT4a.jpg",
+    "providerName": "realeyz",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 247,
+    "providerLogo": "https://image.tmdb.org/t/p/original/sKpMRNENAFKnqotfZg1q3oSll85.jpg",
+    "providerName": "Pantaya",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 248,
+    "providerLogo": "https://image.tmdb.org/t/p/original/2KdIQE29PizkdwuV5gT19U603rO.jpg",
+    "providerName": "Boomerang",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 251,
+    "providerLogo": "https://image.tmdb.org/t/p/original/dd4ghukFfLBPf1gWkJQbNhayt4w.jpg",
+    "providerName": "Urban Movie Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 268,
+    "providerLogo": "https://image.tmdb.org/t/p/original/wyWq5p1XUN8mvoEJZGuHKZugcqG.jpg",
+    "providerName": "History Vault",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 254,
+    "providerLogo": "https://image.tmdb.org/t/p/original/4lxjnsbIGiTKHI0OZb4z93Yz1w8.jpg",
+    "providerName": "Dove Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 255,
+    "providerLogo": "https://image.tmdb.org/t/p/original/k7WNHISG9VLnsAhSOVPzMn84kiq.jpg",
+    "providerName": "Yupp TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 218,
+    "providerLogo": "https://image.tmdb.org/t/p/original/qGX10EUnDugNeKTsgly9OFikPll.jpg",
+    "providerName": "Eros Now",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 259,
+    "providerLogo": "https://image.tmdb.org/t/p/original/tt834pzl02s1w18e7g2LfUnaE0A.jpg",
+    "providerName": "Magnolia Selects",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 260,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9cVxuF2kqe5LfZ4oO7X4364i79J.jpg",
+    "providerName": "WWE Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 264,
+    "providerLogo": "https://image.tmdb.org/t/p/original/rjT0slhg69XQcfYnoauhcPDhs06.jpg",
+    "providerName": "MyOutdoorTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 261,
+    "providerLogo": "https://image.tmdb.org/t/p/original/sgFkj7Qfx4PQfbhWZUZZu9eXhkv.jpg",
+    "providerName": "Nickhits Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 262,
+    "providerLogo": "https://image.tmdb.org/t/p/original/eggeLOeeKNuhMGnxwDr0SFf39aF.jpg",
+    "providerName": "Noggin Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 267,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9l93kmw1wnODWOQCMDQAjbQswoI.jpg",
+    "providerName": "Hopster TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 275,
+    "providerLogo": "https://image.tmdb.org/t/p/original/A2OnxoDGZiIWyqk3h0XrNKCware.jpg",
+    "providerName": "Laugh Out Loud",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 276,
+    "providerLogo": "https://image.tmdb.org/t/p/original/mCh788f3TVYlJ1Zxq9zNq2Lb67i.jpg",
+    "providerName": "Smithsonian Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 278,
+    "providerLogo": "https://image.tmdb.org/t/p/original/2O74MTM1ijsBJoCaY2IGjbwgLuj.jpg",
+    "providerName": "Pure Flix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 281,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p54NvBb7wbHdLj3JANunDu819Oz.jpg",
+    "providerName": "Hallmark Movies",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 284,
+    "providerLogo": "https://image.tmdb.org/t/p/original/A4E0QTo4sTEpLFLtzzRxNXHo2jR.jpg",
+    "providerName": "Lifetime Movie Club",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 293,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pHtEI0daI81WhLfoA5s21230ddf.jpg",
+    "providerName": "PBS Kids Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 288,
+    "providerLogo": "https://image.tmdb.org/t/p/original/tYmpgbvvPRpIAt0gHaKzc1cyP8I.jpg",
+    "providerName": "Boomerang Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 289,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3jy6DgihkLU7DzBYBKCjX5r9ytt.jpg",
+    "providerName": "Cinemax Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 292,
+    "providerLogo": "https://image.tmdb.org/t/p/original/gbfwiNWYa5FRn7vkmJ6M11wikZ3.jpg",
+    "providerName": "Pantaya Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 290,
+    "providerLogo": "https://image.tmdb.org/t/p/original/117rfcomW6SouWM1ies5EPGuQLE.jpg",
+    "providerName": "Hallmark Movies Now Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 294,
+    "providerLogo": "https://image.tmdb.org/t/p/original/7rfEHb5aSH6CiwKGKwJrgOvggQz.jpg",
+    "providerName": "PBS Masterpiece Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 295,
+    "providerLogo": "https://image.tmdb.org/t/p/original/jpey8qBvd59Cigf1zRmWlQ1Yk5d.jpg",
+    "providerName": "Viewster Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 291,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p40C91xAxyqNvYQEip2eCgMo5ZC.jpg",
+    "providerName": "MZ Choice Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 299,
+    "providerLogo": "https://image.tmdb.org/t/p/original/maVzhbLzY1EZs9P0ZBB067Vy4VW.jpg",
+    "providerName": "Sling TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 300,
+    "providerLogo": "https://image.tmdb.org/t/p/original/swzSWpmT1zA25vsIrf20d3CTjZD.jpg",
+    "providerName": "Pluto TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 200,
+    "providerLogo": "https://image.tmdb.org/t/p/original/YsqAKmEf6lEgsS49He9GYNy3eC.jpg",
+    "providerName": "HBO Now Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 203,
+    "providerLogo": "https://image.tmdb.org/t/p/original/6TUtiL38fBz1H9P2P1QIN2BiGCX.jpg",
+    "providerName": "Showtime Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 198,
+    "providerLogo": "https://image.tmdb.org/t/p/original/iWrQW1gd7qsLStApnjvcjEKQ0Ev.jpg",
+    "providerName": "CBS All Access Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 430,
+    "providerLogo": "https://image.tmdb.org/t/p/original/8OPnQNFJ5zoPnW8mHqpQOQbsAQi.jpg",
+    "providerName": "HiDive",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 455,
+    "providerLogo": "https://image.tmdb.org/t/p/original/v68auQY9hIxyX53HJ6n5L9zQmPr.jpg",
+    "providerName": "Night Flight Plus",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 454,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5dslPVeMc1VISCDpAxwLT5aKZwH.jpg",
+    "providerName": "Topic",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 453,
+    "providerLogo": "https://image.tmdb.org/t/p/original/wDjC75VqxILvH7DBOXHGV5Ues9z.jpg",
+    "providerName": "MTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 446,
+    "providerLogo": "https://image.tmdb.org/t/p/original/dcbyPeWOwc6yD1T3juzatWgojg4.jpg",
+    "providerName": "Retrocrush",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 194,
+    "providerLogo": "https://image.tmdb.org/t/p/original/1Pp2ScODCRclSPfAwKsrkWYYVt1.jpg",
+    "providerName": "Starz Play Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 445,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pO9ebyVEmpCuIsoMgtTnkkcfSTg.jpg",
+    "providerName": "Classix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 444,
+    "providerLogo": "https://image.tmdb.org/t/p/original/yGUpliz6bsWKCtiY4gbXPXMRamF.jpg",
+    "providerName": "Dekkoo",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 439,
+    "providerLogo": "https://image.tmdb.org/t/p/original/e6b6j8t9wNCzR0Y93qlRuJGayMt.jpg",
+    "providerName": "Shout! Factory TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 438,
+    "providerLogo": "https://image.tmdb.org/t/p/original/AlAwuFppEGzySR1K63a5Rx8WInI.jpg",
+    "providerName": "Chai Flicks",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 433,
+    "providerLogo": "https://image.tmdb.org/t/p/original/g4VZ4TJVgKtdvX3YXeAFlYRKO68.jpg",
+    "providerName": "OVID",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 427,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5DRg8rNwYhuQdubCY0ZFlh53zQ7.jpg",
+    "providerName": "Mhz Choice",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 470,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9q6Vq6aRb4JB6cGBAWwhVQ0JkDJ.jpg",
+    "providerName": "The Film Detective",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 459,
+    "providerLogo": "https://image.tmdb.org/t/p/original/xJOktK3GStNErFD95IvJiS5gkTT.jpg",
+    "providerName": "Netflix Free",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 204,
+    "providerLogo": "https://image.tmdb.org/t/p/original/qH08gFCXh4g5lVy58qQ4wCgvAti.jpg",
+    "providerName": "Shudder Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 201,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nOzdW1MOCSTpGixe8ZlpMNqFNLt.jpg",
+    "providerName": "Mubi Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 196,
+    "providerLogo": "https://image.tmdb.org/t/p/original/mOLMQZ6DsXoNZAvU2MRCs5fabc3.jpg",
+    "providerName": "AcornTV Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 197,
+    "providerLogo": "https://image.tmdb.org/t/p/original/t13W01G6cxaAumq6PWVeVu5x2CV.jpg",
+    "providerName": "BritBox Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 199,
+    "providerLogo": "https://image.tmdb.org/t/p/original/dx25tsfeMZr9IS5I9bpbas3WI4K.jpg",
+    "providerName": "Fandor Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 202,
+    "providerLogo": "https://image.tmdb.org/t/p/original/bssZWOmr2rG3FZMY9OtoNKP0i2Y.jpg",
+    "providerName": "Screambox Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 205,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3A5u5xgXuOb9dUa4McvDy8ZIA4I.jpg",
+    "providerName": "Sundance Now Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 317,
+    "providerLogo": "https://image.tmdb.org/t/p/original/rC62tF1KOgHBBR3JZDVUG35T9i6.jpg",
+    "providerName": "Cartoon Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 318,
+    "providerLogo": "https://image.tmdb.org/t/p/original/oTNFfbDfxD9vlFIjxVrEHKywUXi.jpg",
+    "providerName": "Adult Swim",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 322,
+    "providerLogo": "https://image.tmdb.org/t/p/original/vDCtcFmhqxWa8Engu2VjuRC0oAa.jpg",
+    "providerName": "USA Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 328,
+    "providerLogo": "https://image.tmdb.org/t/p/original/aDyf54uS0HLrEi5kEbA5nK4BNGa.jpg",
+    "providerName": "Fox",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 331,
+    "providerLogo": "https://image.tmdb.org/t/p/original/4lGoNHt7Qd2rRXS03KsKvqDjXFE.jpg",
+    "providerName": "FlixFling",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 343,
+    "providerLogo": "https://image.tmdb.org/t/p/original/zCWMDxCPFzYCoXAbr5W43aatZd.jpg",
+    "providerName": "Bet+ Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 528,
+    "providerLogo": "https://image.tmdb.org/t/p/original/j96rCGRPVyOWkXAJXVffl3Jy3OR.jpg",
+    "providerName": "AMC Plus",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 344,
+    "providerLogo": "https://image.tmdb.org/t/p/original/lIbQ2z8C5iZx2mFqWcRpCz0DhIB.jpg",
+    "providerName": "Rakuten Viki",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 352,
+    "providerLogo": "https://image.tmdb.org/t/p/original/p1e92kLeYHalxC9GClqNJ75lBDG.jpg",
+    "providerName": "AMC on Demand",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 355,
+    "providerLogo": "https://image.tmdb.org/t/p/original/4UoPgi3rVCkRMATXHcPTBkd6Yji.jpg",
+    "providerName": "Darkmatter TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 361,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3IX02Y7dVwZOKaZIb5PPUdr0Per.jpg",
+    "providerName": "TCM",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 365,
+    "providerLogo": "https://image.tmdb.org/t/p/original/fR5ObOw4ZsV0hPFE8WzCJErBoUz.jpg",
+    "providerName": "Bravo TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 363,
+    "providerLogo": "https://image.tmdb.org/t/p/original/hmutNUaKQ0j8m9kfZ5JefhZyS95.jpg",
+    "providerName": "TNT",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 366,
+    "providerLogo": "https://image.tmdb.org/t/p/original/tMCTyUEXWBbD3sWeNylrHsl1G4q.jpg",
+    "providerName": "Food Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 397,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9TtRyhW2zLLA5wk3OEzGpCmYZOW.jpg",
+    "providerName": "BBC America",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 368,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3E4sshyBTahFwCorjBnN9bTibkk.jpg",
+    "providerName": "IndieFlix",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 398,
+    "providerLogo": "https://image.tmdb.org/t/p/original/ml4tzvb1IKJDpHT2H7qCQmC8fHR.jpg",
+    "providerName": "AHCTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 412,
+    "providerLogo": "https://image.tmdb.org/t/p/original/uVr8J48Vg4kWkUmcV8pVDsM8pO.jpg",
+    "providerName": "TLC",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 406,
+    "providerLogo": "https://image.tmdb.org/t/p/original/gMJbNAFSFkwWf5wtyZUO3oMxQ6o.jpg",
+    "providerName": "HGTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 405,
+    "providerLogo": "https://image.tmdb.org/t/p/original/bzTJ7EjRB6sQuxOLy97CQodoHTF.jpg",
+    "providerName": "DIY Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 408,
+    "providerLogo": "https://image.tmdb.org/t/p/original/tznWV6zwAS3L0I9lYnjJfJEhoIb.jpg",
+    "providerName": "Investigation Discovery",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 411,
+    "providerLogo": "https://image.tmdb.org/t/p/original/8ToxDgC9SebG0BEPDtVC9S7JrQI.jpg",
+    "providerName": "Science Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 402,
+    "providerLogo": "https://image.tmdb.org/t/p/original/xWBVRqHJ2j9W1NE9zJNOwOGoPT5.jpg",
+    "providerName": "Destination America",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 399,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nsJdrtFr7OOrbfEkN8CSshQTMom.jpg",
+    "providerName": "Animal Planet",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 404,
+    "providerLogo": "https://image.tmdb.org/t/p/original/3rCYmg8aQkLkZvc60ARCvF34ITa.jpg",
+    "providerName": "Discovery Life",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 403,
+    "providerLogo": "https://image.tmdb.org/t/p/original/d9xuTujlY9xeOAsaumxdWgquoMU.jpg",
+    "providerName": "Discovery",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 410,
+    "providerLogo": "https://image.tmdb.org/t/p/original/6NDrCAcI95bxfQj71OtBAB3viP6.jpg",
+    "providerName": "Motor Trend",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 400,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pQivr6wqHQ1E8GaGZGR1GetSXA.jpg",
+    "providerName": "Cooking Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 413,
+    "providerLogo": "https://image.tmdb.org/t/p/original/cTZIhdyjVRPwgNVrcFvvVBhVJfp.jpg",
+    "providerName": "Travel Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 418,
+    "providerLogo": "https://image.tmdb.org/t/p/original/snMX9dxHF3WL67i8nSPWFMQ7oji.jpg",
+    "providerName": "Paramount Network",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 417,
+    "providerLogo": "https://image.tmdb.org/t/p/original/kvjOKiKq5ffDet9VdX2dXcl42ud.jpg",
+    "providerName": "Here TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 419,
+    "providerLogo": "https://image.tmdb.org/t/p/original/fFm8MkNAKGoC8GysW29S3cL8sVe.jpg",
+    "providerName": "TV Land",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 420,
+    "providerLogo": "https://image.tmdb.org/t/p/original/5AUkwu0dbntP24bOGAoqinLw0gE.jpg",
+    "providerName": "Logo TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 422,
+    "providerLogo": "https://image.tmdb.org/t/p/original/A7eeYo0E0CbhLTCQaZotoJY2JwD.jpg",
+    "providerName": "VH1",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 432,
+    "providerLogo": "https://image.tmdb.org/t/p/original/8secDmuhofEdpibuXh8eZ6xbx1E.jpg",
+    "providerName": "Flix Premiere",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 263,
+    "providerLogo": "https://image.tmdb.org/t/p/original/8VBE2LY4qHMJjbsluD4LQF9GNdP.jpg",
+    "providerName": "DreamWorksTV Amazon Channel",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 506,
+    "providerLogo": "https://image.tmdb.org/t/p/original/pIaWiQfAyoCv3KcpIbStQRKjKC0.jpg",
+    "providerName": "TBS",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 514,
+    "providerLogo": "https://image.tmdb.org/t/p/original/gVCmTv14qUv9VaIwoAPDBTrrGJw.jpg",
+    "providerName": "AsianCrush",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 471,
+    "providerLogo": "https://image.tmdb.org/t/p/original/gNdgCjzTmaCouQMDcC9OinwA8mf.jpg",
+    "providerName": "FILMRISE",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 473,
+    "providerLogo": "https://image.tmdb.org/t/p/original/aCqZ0GVZfZcXqiRdjSyItJRyRL1.jpg",
+    "providerName": "Revry",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 485,
+    "providerLogo": "https://image.tmdb.org/t/p/original/qYK1XTe9r7E78pcvlYLAkOAZwGn.jpg",
+    "providerName": "Rooster Teeth",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 486,
+    "providerLogo": "https://image.tmdb.org/t/p/original/xiUQmGI2bi8Rn6C5u2bArB4YHMp.jpg",
+    "providerName": "Spectrum On Demand",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 487,
+    "providerLogo": "https://image.tmdb.org/t/p/original/nqhGAR6Bh9upVkARPgn03XNAGDS.jpg",
+    "providerName": "OXYGEN",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 503,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9I2FSN1XEOFpYnrHXSsK4H8c0Yp.jpg",
+    "providerName": "Hi-YAH",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 504,
+    "providerLogo": "https://image.tmdb.org/t/p/original/8pznpMj1pDaATt0AgFCd9DZSsyb.jpg",
+    "providerName": "VRV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 507,
+    "providerLogo": "https://image.tmdb.org/t/p/original/iIGyv1y79e0SIIW49iG8K26zbTW.jpg",
+    "providerName": "tru TV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 508,
+    "providerLogo": "https://image.tmdb.org/t/p/original/xxPBDA5oNl7P3Cx0vp7GF8lO19W.jpg",
+    "providerName": "DisneyNOW",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 509,
+    "providerLogo": "https://image.tmdb.org/t/p/original/bWi3PDhojs7JZcs4gb4bWMExqEm.jpg",
+    "providerName": "WeTV",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 520,
+    "providerLogo": "https://image.tmdb.org/t/p/original/9rV4HEcxzYhGCnEqUUz78J6xItl.jpg",
+    "providerName": "Discovery Plus",
+    "providerPriority": 10
+  },
+  {
+    "providerId": 529,
+    "providerLogo": "https://image.tmdb.org/t/p/original/vv5WmovFP46R3ZdAaIl7AnkjM44.jpg",
+    "providerName": "Arrow Player",
+    "providerPriority": 10
+  }
+]

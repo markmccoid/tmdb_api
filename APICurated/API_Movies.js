@@ -13,6 +13,7 @@ import { MOVIE_GENRE_OBJ } from '../index';
 import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
+  rawMovieWatchProviders,
   rawMovieGetDetails,
   rawMovieGetVideos,
   rawMovieGetRecommendations,
@@ -20,6 +21,7 @@ import {
   rawMovieGetCredits,
   rawMovieGetNowPlaying,
   rawMovieGetPopular,
+  rawMovieUpcoming,
   rawMovieDiscover,
 } from '../APIRaw/TMDBApi_Movies';
 
@@ -52,6 +54,88 @@ function movieGetImages(movieId, imageType = 'posters') {
     let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
     return {
       data: formattedImageURLs,
+      apiCall,
+    };
+  });
+}
+
+/**
+ * @typedef movieWatchProviders_typedef
+ * @type {Object}
+ * @property {Object} data the data object
+ * @property {number} data.id the movie id
+ * @property {Array} data.results results of the call
+ * @property {number} data.results.id the movieId
+ * @property {string} data.results.[countryCode] - Based on the array of country codes sent (defaults to just US)
+ * @property {string} data.results.[countryCode].justWatchLink - Link to tmdb API's just watch page
+ * @property {array.<object>} data.results.[countryCode].stream - array of objects, each with streaming information for a provider
+ * @property {number} data.results.[countryCode].stream.displayPriority -
+ * @property {string} data.results.[countryCode].stream.logoURL - URL to the logo image of the provider (Square, usually 100x100)
+ * @property {number} data.results.[countryCode].stream.providerId -
+ * @property {string} data.results.[countryCode].stream.provider - Name of provider (Netflix, Amazon Prime, etc)
+ * @property {array.<object>} data.results.[countryCode].buy - array of objects, each with purchase information for a provider
+ * @property {number} data.results.[countryCode].buy.displayPriority -
+ * @property {string} data.results.[countryCode].buy.logoURL - URL to the logo image of the provider (Square, usually 100x100)
+ * @property {number} data.results.[countryCode].buy.providerId -
+ * @property {string} data.results.[countryCode].buy.provider - Name of provider (Netflix, Amazon Prime, etc)
+ * @property {array.<object>} data.results.[countryCode].rent - array of objects, each with renting information for a provider
+ * @property {number} data.results.[countryCode].rent.displayPriority -
+ * @property {string} data.results.[countryCode].rent.logoURL - URL to the logo image of the provider (Square, usually 100x100)
+ * @property {strnumbering} data.results.[countryCode].rent.providerId -
+ * @property {string} data.results.[countryCode].rent.provider - Name of provider (Netflix, Amazon Prime, etc)
+ * @property {string} apiCall the API call used to hit endpoint
+ */
+/**
+ * Returns an object with an array of movies returned based on passed title.
+ * @memberOf Curated_API_Movies
+ * @method
+ *
+ * @param {string} movieId - Movie Id
+ * @param {array.<string>} countryCodes - Array of country codes to return
+ * @returns {movieWatchProviders_typedef} Object data return
+ */
+function movieGetWatchProviders(movieId, countryCodes = ['US']) {
+  let watchInfo;
+  let searchResults;
+  countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
+
+  return rawMovieWatchProviders(movieId).then((resp) => {
+    const watchProvidersUS = resp.data.results.US;
+    const apiCall = resp.apiCall;
+    searchResults = {
+      movieId: resp.data.id,
+    };
+    // loop through countryCodes and return a single object:
+    // { [countryCode1]: {}, [countryCode2]: {}, ... }
+    watchInfo = countryCodes.reduce((final, code) => {
+      const countryWatchInfo = {
+        [code]: {
+          justWatchLink: watchProvidersUS.link,
+          stream: watchProvidersUS.flatrate.map((el) => ({
+            displayPriority: el.display_priority,
+            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+            providerID: el.provider_id,
+            provider: el.provider_name,
+          })),
+          buy: watchProvidersUS.buy.map((el) => ({
+            displayPriority: el.display_priority,
+            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+            providerID: el.provider_id,
+            provider: el.provider_name,
+          })),
+          rent: watchProvidersUS.rent.map((el) => ({
+            displayPriority: el.display_priority,
+            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+            providerID: el.provider_id,
+            provider: el.provider_name,
+          })),
+        },
+      };
+      return { ...final, ...countryWatchInfo };
+    }, {});
+
+    return {
+      data: { ...searchResults, results: watchInfo },
       apiCall,
     };
   });
@@ -302,7 +386,7 @@ function movieGetRecommendations(movieId, page = 1) {
 }
 
 /**
- * @typedef moviesSimilar_typedef
+ * @typedef moviesPopular_typedef
  * @type {Object}
  * @property {Object} data the data object
  * @property {number} data.page current page returned
@@ -366,6 +450,41 @@ function movieGetNowPlaying(page = 1, language = 'en-US') {
   // Call rawMovieGetNowPlaying()
   // Make response line up with at least the search result type
   return rawMovieGetNowPlaying(page, language).then((resp) => {
+    // Curate results
+
+    const searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+    const moviesReturned = resp.data.results.map((movie) => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        releaseDate: parseToDate(movie.release_date),
+        overview: movie.overview,
+        posterURL: movie.backdrop_path
+          ? formatImageURL(movie.poster_path, 'm', true)[0]
+          : '',
+        backdropURL: movie.backdrop_path
+          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
+          : '',
+        genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: moviesReturned },
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
+function movieGetUpcoming(page = 1, language = 'en-US') {
+  //Don't forget to change the typedef to match what you are returning
+  // Call rawMovieGetNowPlaying()
+  // Make response line up with at least the search result type
+  return rawMovieUpcoming(page, language).then((resp) => {
     // Curate results
 
     const searchResults = {
@@ -581,6 +700,8 @@ function movieGetPersonCredits(personId) {
  * @property {date | string} releaseDateLTE movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
  * @property {Array} cast  person Ids. Only include movies that have one of the Id's added as an actor
  * @property {Array} crew  person Ids. Only include movies that have one of the Id's added as a crew member
+ * @property {Array} watchProviders  Watch providers ids to search limit search by.  Couple with region if desired
+ * @property {Array} watchRegions  NOT IMPLEMENTED. An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.
  * @property {string} sortBy Options
  *    - popularity.asc
  *    - popularity.desc **Default**
@@ -650,5 +771,7 @@ export {
   movieGetCredits,
   movieGetPopular,
   movieGetNowPlaying,
+  movieGetUpcoming,
+  movieGetWatchProviders,
   movieDiscover,
 };

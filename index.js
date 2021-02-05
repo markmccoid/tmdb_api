@@ -6,6 +6,7 @@
 
 import axios from 'axios';
 import _ from 'lodash';
+const watchProviders = require('./watchProviders.json');
 
 export const API_URL = 'https://api.themoviedb.org/3';
 
@@ -94,12 +95,16 @@ export function getTMDBConsts() {
  *  on error { data: 'ERROR', msg: error message, }
  */
 export const getConfig = () => {
+  const sortedWatchProviders = _.sortBy(watchProviders, [
+    'providerPriority',
+    'providerId',
+  ]);
   const apiCall = `${API_URL}/configuration?api_key=${API_KEY}`;
   return axios
     .get(apiCall)
     .then((resp) => {
       return {
-        data: resp.data,
+        data: { ...resp.data, sortedWatchProviders },
         apiCall: resp.request.responseURL,
       };
     })

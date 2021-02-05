@@ -15,6 +15,19 @@ import { flattenArray } from '../helpers';
  */
 
 /**
+ * Returns data for providers of movies
+ *
+ * @memberOf Raw_API_Movies
+ * @param {string} movieId - Movie id of movie to find providers for
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieWatchProviders(movieId) {
+  return apiTMDB(`/movie/${movieId}/watch/providers`);
+}
+
+/**
  * Returns data from search by searchString
  *
  * @memberOf Raw_API_Movies
@@ -110,6 +123,26 @@ function rawMovieGetNowPlaying(page = 1, language = 'en-US') {
 }
 
 /**
+ * Get a list of Upcoming movies
+ *
+ * @memberOf Raw_API_Movies
+ * @param {number} [page=1] - optional, defaults to 1
+ * @param {string} [language='en-US'] - optional, defaults to 'en-US'
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawMovieUpcoming(page = 1, language = 'en-US') {
+  const config = {
+    params: {
+      page,
+      language,
+    },
+  };
+  return apiTMDB(`/movie/upcoming`, config);
+}
+
+/**
  * Get a list of Popular movies
  *
  * @memberOf Raw_API_Movies
@@ -187,7 +220,7 @@ function rawMovieGetCredits(movieId) {
 /**
  * criteriaObj {
  *  genres: [] // genre Ids
- *  genreCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
+ *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any
  *  releaseYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
@@ -195,6 +228,9 @@ function rawMovieGetCredits(movieId) {
  *  castCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
  *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.
  *  crewCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
+ *  watchProviders: [string] // ids of watch providers that movie is located on.
+ *  watchProviderCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
+ *  watchRegions: [string] // NOT IMPLMENTED.  In initial test (2/2021) only US worked and when using US severly limited results.
  *  sortBy: one of the following:
  *    - popularity.asc
  *    - popularity.desc **Default
@@ -225,6 +261,7 @@ function rawMovieDiscover(criteriaObj, page = 1) {
   // This is the config object that will be passed to the api call
   let config = {
     params: {
+      page,
       with_genres: flattenArray(
         criteriaObj.genres,
         boolConversion[criteriaObj.genreCompareType]
@@ -246,6 +283,10 @@ function rawMovieDiscover(criteriaObj, page = 1) {
         criteriaObj.cast,
         boolConversion[criteriaObj.castCompareType]
       ),
+      with_watch_providers: flattenArray(
+        criteriaObj.watchProviders,
+        boolConversion[criteriaObj.watchProviderCompareType]
+      ),
     },
   };
 
@@ -259,8 +300,10 @@ export {
   rawMovieGetRecommendations,
   rawMovieGetImages,
   rawMovieGetPersonCredits,
+  rawMovieUpcoming,
   rawMovieGetNowPlaying,
   rawMovieGetPopular,
   rawMovieDiscover,
   rawMovieGetCredits,
+  rawMovieWatchProviders,
 };
