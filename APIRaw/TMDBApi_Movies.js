@@ -229,8 +229,9 @@ function rawMovieGetCredits(movieId) {
  *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.
  *  crewCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
  *  watchProviders: [string] // ids of watch providers that movie is located on.
- *  watchProviderCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
- *  watchRegions: [string] // NOT IMPLMENTED.  In initial test (2/2021) only US worked and when using US severly limited results.
+ *  watchProviderCompareType: string // "AND" if want movies with all ids or "OR" for movies with any (defaults to OR)
+ *  watchRegions: [string] // In initial test (2/2021) only US worked and if not region sent then the results were not filtered by the passed watchProviders array.  Chose to default to US region if none sent over.
+ *
  *  sortBy: one of the following:
  *    - popularity.asc
  *    - popularity.desc **Default
@@ -285,8 +286,9 @@ function rawMovieDiscover(criteriaObj, page = 1) {
       ),
       with_watch_providers: flattenArray(
         criteriaObj.watchProviders,
-        boolConversion[criteriaObj.watchProviderCompareType]
+        boolConversion[criteriaObj.watchProviderCompareType || 'OR'] //default to OR conditional
       ),
+      watch_region: criteriaObj.watchRegion || 'US',
     },
   };
 

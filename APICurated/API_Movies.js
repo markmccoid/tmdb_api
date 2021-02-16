@@ -100,7 +100,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
   countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
 
   return rawMovieWatchProviders(movieId).then((resp) => {
-    const watchProvidersUS = resp.data.results.US;
+    const watchProviders = resp.data.results;
     const apiCall = resp.apiCall;
     searchResults = {
       movieId: resp.data.id,
@@ -110,20 +110,20 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
     watchInfo = countryCodes.reduce((final, code) => {
       const countryWatchInfo = {
         [code]: {
-          justWatchLink: watchProvidersUS.link,
-          stream: watchProvidersUS.flatrate.map((el) => ({
+          justWatchLink: watchProviders[code].link,
+          stream: watchProviders[code].flatrate.map((el) => ({
             displayPriority: el.display_priority,
             logoURL: formatImageURL(el.logo_path, 'original', true)[0],
             providerID: el.provider_id,
             provider: el.provider_name,
           })),
-          buy: watchProvidersUS.buy.map((el) => ({
+          buy: watchProviders[code].buy.map((el) => ({
             displayPriority: el.display_priority,
             logoURL: formatImageURL(el.logo_path, 'original', true)[0],
             providerID: el.provider_id,
             provider: el.provider_name,
           })),
-          rent: watchProvidersUS.rent.map((el) => ({
+          rent: watchProviders[code].rent.map((el) => ({
             displayPriority: el.display_priority,
             logoURL: formatImageURL(el.logo_path, 'original', true)[0],
             providerID: el.provider_id,
@@ -701,7 +701,7 @@ function movieGetPersonCredits(personId) {
  * @property {Array} cast  person Ids. Only include movies that have one of the Id's added as an actor
  * @property {Array} crew  person Ids. Only include movies that have one of the Id's added as a crew member
  * @property {Array} watchProviders  Watch providers ids to search limit search by.  Couple with region if desired
- * @property {Array} watchRegions  NOT IMPLEMENTED. An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.
+ * @property {Array} watchRegions  An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.  > As of 2/2021 a region must be used or no filtering will occur.  US is sent over as a default.
  * @property {string} sortBy Options
  *    - popularity.asc
  *    - popularity.desc **Default**
