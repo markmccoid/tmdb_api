@@ -108,29 +108,32 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
     // loop through countryCodes and return a single object:
     // { [countryCode1]: {}, [countryCode2]: {}, ... }
     watchInfo = countryCodes.reduce((final, code) => {
-      const countryWatchInfo = {
-        [code]: {
-          justWatchLink: watchProviders[code].link,
-          stream: watchProviders[code].flatrate.map((el) => ({
-            displayPriority: el.display_priority,
-            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-            providerID: el.provider_id,
-            provider: el.provider_name,
-          })),
-          buy: watchProviders[code].buy.map((el) => ({
-            displayPriority: el.display_priority,
-            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-            providerID: el.provider_id,
-            provider: el.provider_name,
-          })),
-          rent: watchProviders[code].rent.map((el) => ({
-            displayPriority: el.display_priority,
-            logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-            providerID: el.provider_id,
-            provider: el.provider_name,
-          })),
-        },
-      };
+      // If the code doesn't have a result value, then return an empty set for it.
+      const countryWatchInfo = !watchProviders[code]
+        ? { [code]: {} }
+        : {
+            [code]: {
+              justWatchLink: watchProviders[code].link,
+              stream: watchProviders[code].flatrate.map((el) => ({
+                displayPriority: el.display_priority,
+                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                providerID: el.provider_id,
+                provider: el.provider_name,
+              })),
+              buy: watchProviders[code].buy.map((el) => ({
+                displayPriority: el.display_priority,
+                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                providerID: el.provider_id,
+                provider: el.provider_name,
+              })),
+              rent: watchProviders[code].rent.map((el) => ({
+                displayPriority: el.display_priority,
+                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                providerID: el.provider_id,
+                provider: el.provider_name,
+              })),
+            },
+          };
       return { ...final, ...countryWatchInfo };
     }, {});
 

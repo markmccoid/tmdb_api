@@ -220,7 +220,7 @@ function rawMovieGetCredits(movieId) {
 /**
  * criteriaObj {
  *  genres: [] // genre Ids
- *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any
+ *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
  *  releaseYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
@@ -255,7 +255,7 @@ function rawMovieGetCredits(movieId) {
 const boolConversion = {
   AND: ',',
   OR: '|',
-  undefined: ',',
+  undefined: '|',
 };
 function rawMovieDiscover(criteriaObj, page = 1) {
   const { releaseDateGTE, releaseDateLTE } = criteriaObj;
@@ -286,9 +286,11 @@ function rawMovieDiscover(criteriaObj, page = 1) {
       ),
       with_watch_providers: flattenArray(
         criteriaObj.watchProviders,
-        boolConversion[criteriaObj.watchProviderCompareType || 'OR'] //default to OR conditional
+        boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
       ),
-      watch_region: criteriaObj.watchRegion || 'US',
+      watch_region: criteriaObj.watchProviders
+        ? criteriaObj.watchRegion || 'US'
+        : undefined,
     },
   };
 
