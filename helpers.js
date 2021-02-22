@@ -95,7 +95,10 @@ function flattenArray(arr, delimiter = ',') {
   }
   let flatArray = '';
   arr.forEach((value, idx) => {
-    flatArray += idx === 0 ? `${value.trim()}` : `${delimiter}${value.trim()}`;
+    flatArray +=
+      idx === 0
+        ? `${value.toString().trim()}`
+        : `${delimiter}${value.toString().trim()}`;
   });
   return flatArray;
 }

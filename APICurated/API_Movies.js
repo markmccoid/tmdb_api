@@ -114,24 +114,30 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
         : {
             [code]: {
               justWatchLink: watchProviders[code].link,
-              stream: watchProviders[code].flatrate.map((el) => ({
-                displayPriority: el.display_priority,
-                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                providerID: el.provider_id,
-                provider: el.provider_name,
-              })),
-              buy: watchProviders[code].buy.map((el) => ({
-                displayPriority: el.display_priority,
-                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                providerID: el.provider_id,
-                provider: el.provider_name,
-              })),
-              rent: watchProviders[code].rent.map((el) => ({
-                displayPriority: el.display_priority,
-                logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                providerID: el.provider_id,
-                provider: el.provider_name,
-              })),
+              stream: !watchProviders[code].flatrate
+                ? []
+                : watchProviders[code].flatrate.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    providerID: el.provider_id,
+                    provider: el.provider_name,
+                  })),
+              buy: !watchProviders[code].buy
+                ? []
+                : watchProviders[code].buy.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    providerID: el.provider_id,
+                    provider: el.provider_name,
+                  })),
+              rent: !watchProviders[code].rent
+                ? []
+                : watchProviders[code].rent.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    providerID: el.provider_id,
+                    provider: el.provider_name,
+                  })),
             },
           };
       return { ...final, ...countryWatchInfo };
