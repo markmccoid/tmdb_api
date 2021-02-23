@@ -119,7 +119,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 : watchProviders[code].flatrate.map((el) => ({
                     displayPriority: el.display_priority,
                     logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                    providerID: el.provider_id,
+                    providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
               buy: !watchProviders[code].buy
@@ -127,7 +127,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 : watchProviders[code].buy.map((el) => ({
                     displayPriority: el.display_priority,
                     logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                    providerID: el.provider_id,
+                    providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
               rent: !watchProviders[code].rent
@@ -135,7 +135,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 : watchProviders[code].rent.map((el) => ({
                     displayPriority: el.display_priority,
                     logoURL: formatImageURL(el.logo_path, 'original', true)[0],
-                    providerID: el.provider_id,
+                    providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
             },
