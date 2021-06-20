@@ -8,6 +8,19 @@ import { callTMDB, apiTMDB } from "../apiCalls";
  */
 
 /**
+ * Returns data for providers of movies
+ *
+ * @memberOf Raw_API_Movies
+ * @param {string} tvId - TV id of TV show to find providers for
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVWatchProviders(tvId) {
+  return apiTMDB(`/tv/${tvId}/watch/providers`);
+}
+
+/**
  * Returns data from search by searchString
  *
  * @memberOf Raw_API_TV
@@ -22,8 +35,8 @@ function rawTVSearchByTitle(searchString, page = 1) {
     params: {
       page,
       query: searchString,
-      include_adult: false
-    }
+      include_adult: false,
+    },
   };
   return apiTMDB("/search/tv", config);
 }
@@ -124,6 +137,25 @@ function rawTVGetCreditDetails(creditId) {
 //       });
 // };
 
+/**
+ * Get a list of Popular TV shows
+ *
+ * @memberOf Raw_API_TV
+ * @param {number} [page=1] - optional, defaults to 1
+ * @param {string} [language='en-US'] - optional, defaults to 'en-US'
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVGetPopular(page = 1, language = "en-US") {
+  const config = {
+    params: {
+      page,
+      language,
+    },
+  };
+  return apiTMDB(`/tv/popular`, config);
+}
 export {
   rawTVGetCreditDetails,
   rawTVGetShowCredits,
@@ -131,5 +163,7 @@ export {
   rawTVGetExternalIds,
   rawTVGetShowDetails,
   rawTVGetShowImages,
-  rawTVSearchByTitle
+  rawTVSearchByTitle,
+  rawTVGetPopular,
+  rawTVWatchProviders,
 };

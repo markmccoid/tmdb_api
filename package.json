@@ -11,17 +11,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "types": "./types/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
     "axios": "^0.21.1",
     "date-fns": "^2.7.0",
-    "lodash": "^4.x"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "better-docs": "^1.1.6",
     "docdash": "^1.1.1",
-    "jsdoc": "^3.6.3",
-    "tui-jsdoc-template": "^1.2.2",
+    "jsdoc": "^3.6.7",
     "ub-jsdoc": "^2.1.11"
   }
 }

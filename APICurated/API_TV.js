@@ -13,7 +13,9 @@ import {
   rawTVGetShowImages,
   rawTVSearchByTitle,
   rawTVGetShowDetails,
-  rawTVGetShowCredits
+  rawTVGetShowCredits,
+  rawTVWatchProviders,
+  rawTVGetPopular,
 } from "../APIRaw/TMDBApi_TV";
 import { TV_GENRE_OBJ } from "../index";
 
@@ -33,19 +35,19 @@ import { TV_GENRE_OBJ } from "../index";
  */
 function tvGetImages(showId, imageType = "posters") {
   let apiCall;
-  return rawTVGetShowImages(showId).then(resp => {
+  return rawTVGetShowImages(showId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
-      .filter(imgObj => imgObj.iso_639_1 === "en")
-      .map(imgObj => {
+      .filter((imgObj) => imgObj.iso_639_1 === "en")
+      .map((imgObj) => {
         return imgObj.file_path;
       });
     // Get the full image URLs
     let formattedImageURLs = formatImageURL(imgFilePaths, "m", true);
     return {
       data: formattedImageURLs,
-      apiCall
+      apiCall,
     };
   });
 }
@@ -79,16 +81,16 @@ function tvSearchByTitle(searchValue, page = 1) {
   let apiCall;
   let searchResults;
   let showsReturned;
-  return rawTVSearchByTitle(searchValue, page).then(resp => {
+  return rawTVSearchByTitle(searchValue, page).then((resp) => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
       page: resp.data.page,
       totalResults: resp.data.total_results,
-      totalPages: resp.data.total_pages
+      totalPages: resp.data.total_pages,
     };
 
-    showsReturned = resp.data.results.map(show => {
+    showsReturned = resp.data.results.map((show) => {
       return {
         id: show.id,
         name: show.name,
@@ -97,13 +99,13 @@ function tvSearchByTitle(searchValue, page = 1) {
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
-        genres: show.genre_ids.map(genreId => TV_GENRE_OBJ[genreId])
+        genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
       };
     });
 
     return {
       data: { ...searchResults, results: showsReturned },
-      apiCall
+      apiCall,
     };
   });
 }
@@ -137,7 +139,7 @@ function tvSearchByTitle(searchValue, page = 1) {
 function tvGetShowDetails(showId) {
   let apiCall;
   let searchResults;
-  return rawTVGetShowDetails(showId).then(resp => {
+  return rawTVGetShowDetails(showId).then((resp) => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
@@ -159,12 +161,120 @@ function tvGetShowDetails(showId) {
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
-      genres: resp.data.genres.map(tvGenreObj => tvGenreObj.name)
+      genres: resp.data.genres.map((tvGenreObj) => tvGenreObj.name),
     };
 
     return {
       data: searchResults,
-      apiCall
+      apiCall,
+    };
+  });
+}
+
+/**
+ * Returns watch providers for passed TV id
+ * @memberOf Curated_API_TV
+ * @method
+ *
+ * @param {string} tvId - Tv Id
+ * @param {array.<string>} countryCodes - Array of country codes to return
+ * @returns {movieWatchProviders_typedef} Object data return
+ */
+function tvGetWatchProviders(tvId, countryCodes = ["US"]) {
+  let watchInfo;
+  let searchResults;
+  countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
+
+  return rawTVWatchProviders(tvId).then((resp) => {
+    const watchProviders = resp.data.results;
+    const apiCall = resp.apiCall;
+    searchResults = {
+      movieId: resp.data.id,
+    };
+    // loop through countryCodes and return a single object:
+    // { [countryCode1]: {}, [countryCode2]: {}, ... }
+    watchInfo = countryCodes.reduce((final, code) => {
+      // If the code doesn't have a result value, then return an empty set for it.
+      const countryWatchInfo = !watchProviders[code]
+        ? { [code]: {} }
+        : {
+            [code]: {
+              justWatchLink: watchProviders[code].link,
+              stream: !watchProviders[code].flatrate
+                ? []
+                : watchProviders[code].flatrate.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    providerId: el.provider_id,
+                    provider: el.provider_name,
+                  })),
+              buy: !watchProviders[code].buy
+                ? []
+                : watchProviders[code].buy.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    providerId: el.provider_id,
+                    provider: el.provider_name,
+                  })),
+              rent: !watchProviders[code].rent
+                ? []
+                : watchProviders[code].rent.map((el) => ({
+                    displayPriority: el.display_priority,
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    providerId: el.provider_id,
+                    provider: el.provider_name,
+                  })),
+            },
+          };
+      return { ...final, ...countryWatchInfo };
+    }, {});
+
+    return {
+      data: { ...searchResults, results: watchInfo },
+      apiCall,
+    };
+  });
+}
+
+/**
+ * @memberOf Curated_API_TV
+ * @method
+ *
+ * @param {string} tvId - tv Id
+ * @param {array.<string>} countryCodes - Array of country codes to return
+ * @returns {movieWatchProviders_typedef} Object data return
+ */
+function tvGetPopular(page, language) {
+  let apiCall;
+  let searchResults;
+  let showsReturned;
+  return rawTVGetPopular(page, language).then((resp) => {
+    // Curate results
+    apiCall = resp.apiCall;
+    searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+
+    showsReturned = resp.data.results.map((show) => {
+      return {
+        id: show.id,
+        name: show.name,
+        originalName: show.original_name,
+        firstAirDate: parseToDate(show.first_air_date),
+        overview: show.overview,
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        backdropURL: show.backdrop_path
+          ? formatImageURL(show.backdrop_path, "m", true)[0]
+          : "",
+        genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: showsReturned },
+      apiCall,
     };
   });
 }
@@ -200,8 +310,8 @@ function tvGetShowDetails(showId) {
  * @returns {tvCredits_typedef}
  */
 function tvGetShowCredits(showId) {
-  return rawTVGetShowCredits(showId).then(resp => {
-    let cast = resp.data.cast.map(character => {
+  return rawTVGetShowCredits(showId).then((resp) => {
+    let cast = resp.data.cast.map((character) => {
       return {
         characterName: character.character,
         creditId: character.credit_id,
@@ -211,10 +321,10 @@ function tvGetShowCredits(showId) {
         profileURL: character.profile_path
           ? formatImageURL(character.profile_path, "m", true)[0]
           : "",
-        order: character.order
+        order: character.order,
       };
     });
-    let crew = resp.data.crew.map(crewMember => {
+    let crew = resp.data.crew.map((crewMember) => {
       return {
         creditId: crewMember.credit_id,
         personId: crewMember.id,
@@ -224,14 +334,21 @@ function tvGetShowCredits(showId) {
           ? formatImageURL(crewMember.profile_path, "m", true)[0]
           : "",
         job: crewMember.job,
-        department: crewMember.department
+        department: crewMember.department,
       };
     });
     return {
       data: { cast, crew },
-      apiCall: resp.apiCall
+      apiCall: resp.apiCall,
     };
   });
 }
 
-export { tvGetImages, tvSearchByTitle, tvGetShowDetails, tvGetShowCredits };
+export {
+  tvGetImages,
+  tvSearchByTitle,
+  tvGetShowDetails,
+  tvGetShowCredits,
+  tvGetPopular,
+  tvGetWatchProviders,
+};

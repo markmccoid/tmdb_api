@@ -1,94 +1,94 @@
 export type tvGetImages_typedef = {
-    /**
-     * array of image URLs (https://...)
-     */
-    data: any[];
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * array of image URLs (https://...)
+   */
+  data: any[];
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type tvSearchByTitle_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: any[];
-    };
-    /**
-     * the tv showId
-     */
-    id: number;
-    /**
-     * name of the tv show
-     */
-    name: string;
-    overview: string;
-    firstAirDate: any;
-    backdropURL: string;
-    /**
-     * array of genre names
-     */
-    genres: any;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: any[];
+  };
+  /**
+   * the tv showId
+   */
+  id: number;
+  /**
+   * name of the tv show
+   */
+  name: string;
+  overview: string;
+  firstAirDate: any;
+  backdropURL: string;
+  /**
+   * array of genre names
+   */
+  genres: any;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type tvShowDetails_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        id: number;
-        name: string;
-        overview: string;
-        status: string;
-        avgEpisodeRunTime: number;
-        firstAirDate: any;
-        lastAirDate: any;
-        posterURL: string;
-        backdropURL: string;
-        homePage: string;
-        numberOfEpisodes: number;
-        numberOfSeasons: number;
-        genres: any;
-    };
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    id: number;
+    name: string;
+    overview: string;
+    status: string;
+    avgEpisodeRunTime: number;
+    firstAirDate: any;
+    lastAirDate: any;
+    posterURL: string;
+    backdropURL: string;
+    homePage: string;
+    numberOfEpisodes: number;
+    numberOfSeasons: number;
+    genres: any;
+  };
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type tvCredits_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        cast: any[];
-    };
-    personId: number;
-    name: string;
-    characterName: string;
-    creditId: string;
-    /**
-     * 1 is Female, 2 is Male
-     */
-    gender: number;
-    profileURL: string;
-    order: string;
-    /**
-     * the crew array
-     */
-    crew: string;
-    job: string;
-    department: string;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    cast: any[];
+  };
+  personId: number;
+  name: string;
+  characterName: string;
+  creditId: string;
+  /**
+   * 1 is Female, 2 is Male
+   */
+  gender: number;
+  profileURL: string;
+  order: string;
+  /**
+   * the crew array
+   */
+  crew: string;
+  job: string;
+  department: string;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 /**
  * @typedef tvGetImages_typedef
@@ -104,7 +104,7 @@ export type tvCredits_typedef = {
  * @param {string} [imageType=posters] - 'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
  */
-export function tvGetImages(showId: (string), imageType?: string): string[];
+export function tvGetImages(showId: string, imageType?: string): string[];
 /**
  * @typedef tvSearchByTitle_typedef
  * @type {Object}
@@ -129,7 +129,7 @@ export function tvGetImages(showId: (string), imageType?: string): string[];
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {tvSearchByTitle_typedef} Object data return
  */
-export function tvSearchByTitle(searchValue: (string), page?: number): tvSearchByTitle_typedef;
+export function tvSearchByTitle(searchValue: string, page?: number): tvSearchByTitle_typedef;
 /**
  * @typedef tvShowDetails_typedef
  * @type {Object}
@@ -146,9 +146,28 @@ export function tvSearchByTitle(searchValue: (string), page?: number): tvSearchB
  * @property {string} data.homePage
  * @property {number} data.numberOfEpisodes
  * @property {number} data.numberOfSeasons
- * @property {array.<string>} data.genres array of genre names
+ * @property {string[]} data.genres array of genre names
  * @property {string} apiCall the API call used to hit endpoint
  */
+
+type tvShowDetailsType = {
+  data: {
+    id: number;
+    name: string;
+    overview: string;
+    status: string;
+    avgEpisodeRunTime: number;
+    firstAirDate: Date;
+    lastAirDate: Date;
+    posterURL: string;
+    backdropURL: string;
+    homePage: string;
+    numberOfEpisodes: number;
+    numberOfSeasons: number;
+    genres: string[];
+  };
+  apiCall: string;
+};
 /**
  * returns show details for showId passed
  * @memberOf Curated_API_TV
@@ -156,7 +175,7 @@ export function tvSearchByTitle(searchValue: (string), page?: number): tvSearchB
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @returns {tvShowDetails_typedef}
  */
-export function tvGetShowDetails(showId: (string)): tvShowDetails_typedef;
+export function tvGetShowDetails(showId: string): tvShowDetailsType;
 /**
  * @typedef tvCredits_typedef
  * @type {Object}
@@ -187,4 +206,27 @@ export function tvGetShowDetails(showId: (string)): tvShowDetails_typedef;
  * @param {(string)} showId - showId from TMDb API Show Search.
  * @returns {tvCredits_typedef}
  */
-export function tvGetShowCredits(showId: (string)): tvCredits_typedef;
+export function tvGetShowCredits(showId: string): tvCredits_typedef;
+
+type TVGetPopularType = {
+  data: {
+    searchResults: {
+      page: number;
+      totalResults: number;
+      totalPages: number;
+    };
+    results: {
+      id: number;
+      name: string;
+      originalName: string;
+      firstAirDate: Date;
+      overview: string;
+      posterURL: string;
+      backdropURL: string;
+      genres: string[];
+    };
+  };
+  apiCall: string;
+};
+
+export function tvGetPopular(page?: number, language?: string): TVGetPopularType;
