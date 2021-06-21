@@ -1,3 +1,9 @@
+export type DateObject = {
+  date?: Date;
+  epoch: number;
+  formatted: string;
+};
+
 export type tvGetImages_typedef = {
   /**
    * array of image URLs (https://...)
@@ -157,8 +163,8 @@ type tvShowDetailsType = {
     overview: string;
     status: string;
     avgEpisodeRunTime: number;
-    firstAirDate: Date;
-    lastAirDate: Date;
+    firstAirDate: DateObject;
+    lastAirDate: DateObject;
     posterURL: string;
     backdropURL: string;
     homePage: string;
@@ -210,21 +216,19 @@ export function tvGetShowCredits(showId: string): tvCredits_typedef;
 
 type TVGetPopularType = {
   data: {
-    searchResults: {
-      page: number;
-      totalResults: number;
-      totalPages: number;
-    };
+    page: number;
+    totalResults: number;
+    totalPages: number;
     results: {
       id: number;
       name: string;
       originalName: string;
-      firstAirDate: Date;
+      firstAirDate: DateObject;
       overview: string;
       posterURL: string;
       backdropURL: string;
       genres: string[];
-    };
+    }[];
   };
   apiCall: string;
 };

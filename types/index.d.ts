@@ -1,6 +1,6 @@
 export type initOptionsType = {
   dateFormateString: string;
-}
+};
 /**
  * Initialization function that MUST be run before any other
  * function can be accessed.
@@ -28,15 +28,15 @@ export function updateAPIOptions(options?: object): void;
  *
  */
 export function getTMDBConsts(): {
-    API_URL: string;
-    API_KEY: any;
-    IMG_URL: string;
-    SECURE_IMG_URL: string;
-    TV_GENRE_OBJ: any;
-    MOVIE_GENRE_OBJ: any;
-    API_OPTIONS: {
-        dateFormatString: string;
-    };
+  API_URL: string;
+  API_KEY: any;
+  IMG_URL: string;
+  SECURE_IMG_URL: string;
+  TV_GENRE_OBJ: any;
+  MOVIE_GENRE_OBJ: any;
+  API_OPTIONS: {
+    dateFormatString: string;
+  };
 };
 export const API_URL: "https://api.themoviedb.org/3";
 export let IMG_URL: string;
@@ -45,10 +45,22 @@ export let API_KEY: any;
 export let TV_GENRE_OBJ: any;
 export let MOVIE_GENRE_OBJ: any;
 export namespace API_OPTIONS {
-    const dateFormatString: string;
+  const dateFormatString: string;
 }
 export function getConfig(): object;
-export function getTVGenres(convertToObjectFlag?: any): object;
+export type Genres = {
+  apiCall: string;
+  data: {
+    genres: {
+      id: number;
+      name: string;
+    }[];
+  };
+};
+
+export type GenresObject = { apiCall: string; [number]: [string] };
+export function getTVGenres(convertToObjectFlag?: boolean): Genres;
+export function getTVGenres(convertToObjectFlag?: boolean): Genres;
 export function getMovieGenres(convertToObjectFlag?: any): object;
 export * from "./APIRaw";
 export * from "./APICurated";
