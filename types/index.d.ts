@@ -59,8 +59,11 @@ export type Genres = {
 };
 
 export type GenresObject = { apiCall: string; [number]: [string] };
-export function getTVGenres(convertToObjectFlag?: boolean): Genres;
-export function getTVGenres(convertToObjectFlag?: boolean): Genres;
-export function getMovieGenres(convertToObjectFlag?: any): object;
+//-- If false or undefined is passed then return will be Genres
+//-- If true is passed then return will be GenresObject
+export function getTVGenres(convertToObjectFlag?: false | undefined): Promise<Genres>;
+export function getTVGenres(convertToObjectFlag?: true): Promise<GenresObject>;
+export function getMovieGenres(convertToObjectFlag?: false | undefined): Promise<Genres>;
+export function getMovieGenres(convertToObjectFlag?: true): Promise<GenresObject>;
 export * from "./APIRaw";
 export * from "./APICurated";

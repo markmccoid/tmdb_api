@@ -16,6 +16,7 @@ import {
   rawTVGetShowCredits,
   rawTVWatchProviders,
   rawTVGetPopular,
+  rawTVDiscover,
 } from "../APIRaw/TMDBApi_TV";
 import { TV_GENRE_OBJ } from "../index";
 
@@ -62,6 +63,9 @@ function tvGetImages(showId, imageType = "posters") {
  * @property {Array} data.results results of the search
  * @property {number} data.results.id the tv showId
  * @property {string} data.results.name name of the tv show
+ * @property {string} data.results.originalName original name of the tv show
+ * @property {string} data.results.popularity
+ * @property {string} data.results.posterURL
  * @property {string} data.results.overview
  * @property {date} data.results.firstAirDate
  * @property {string} data.results.backdropURL
@@ -94,12 +98,16 @@ function tvSearchByTitle(searchValue, page = 1) {
       return {
         id: show.id,
         name: show.name,
+        originalName: show.original_name,
+        originalLanguage: show.original_language,
         firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        popularity: show.popularity,
       };
     });
 
@@ -263,12 +271,14 @@ function tvGetPopular(page, language) {
         name: show.name,
         originalName: show.original_name,
         firstAirDate: parseToDate(show.first_air_date),
+        originalLanguage: show.original_language,
         overview: show.overview,
         posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        popularity: show.popularity,
       };
     });
 
@@ -344,6 +354,39 @@ function tvGetShowCredits(showId) {
   });
 }
 
+// Discover / Advanced Search
+function tvDiscover(criteriaObj, page = 1) {
+  let apiCall;
+  let searchResults;
+  let tvShows;
+  return rawTVDiscover(criteriaObj, page).then((resp) => {
+    apiCall = resp.apiCall;
+    searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+    tvShows = resp.data.results.map((result) => ({
+      id: result.id,
+      name: result.name,
+      originalName: result.original_name,
+      overview: result.overview,
+      popularity: result.popularity,
+      originalLanguage: result.original_language,
+      releaseDate: parseToDate(result.release_date),
+      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
+      backdropURL: result.backdrop_path
+        ? formatImageURL(result.backdrop_path, "m", true)[0]
+        : "",
+      genres: result.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+    }));
+
+    return {
+      data: { ...searchResults, results: tvShows },
+      apiCall,
+    };
+  });
+}
 export {
   tvGetImages,
   tvSearchByTitle,
@@ -351,4 +394,5 @@ export {
   tvGetShowCredits,
   tvGetPopular,
   tvGetWatchProviders,
+  tvDiscover,
 };

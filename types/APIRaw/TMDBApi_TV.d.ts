@@ -78,3 +78,34 @@ export function rawTVGetShowImages(showId: string): object;
  *  on error { data: 'ERROR', msg: error message, }
  */
 export function rawTVSearchByTitle(searchString: string, page?: number): object;
+
+type RawDiscoverCriteria = {
+  genres?: string[]; // genre Ids
+  genreCompareType?: "AND" | "OR" | undefined; // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
+  firstAirDateYear?: number; // Primary Release Year
+  releaseDateGTE?: string; // movies with release date >= date YYYY-MM-DD
+  releaseDateLTE?: string; // movies with release date <= date YYYY-MM-DD
+  cast?: number[]; // person Ids. Only include movies that have one of the Id's added as an actor.
+  castCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any
+  crew?: number[]; // person Ids. Only include movies that have one of the Id's added as a crew member.
+  crewCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any
+  watchProviders?: string[]; // ids of watch providers that movie is located on.
+  watchProviderCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any (defaults to OR)
+  watchRegions?: string[];
+  sortBy?:
+    | "popularity.asc"
+    | "popularity.desc"
+    | "release_date.asc"
+    | "release_date.desc"
+    | "revenue.asc"
+    | "revenue.desc"
+    | "primary_release_date.asc"
+    | "primary_release_date.desc"
+    | "original_title.asc"
+    | "original_title.desc"
+    | "vote_average.asc"
+    | "vote_average.desc"
+    | "vote_count.asc"
+    | "vote_count.desc";
+};
+export function rawTVDiscover(criteriaObj: RawDiscoverCriteria, page: number): object;
