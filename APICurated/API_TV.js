@@ -107,7 +107,9 @@ function tvSearchByTitle(searchValue, page = 1) {
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
-        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        posterURL: show.poster_path
+          ? formatImageURL(show.poster_path, "m", true)[0]
+          : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -126,7 +128,9 @@ function seasonFormatter(rawSeasons) {
     return {
       id: season.id,
       seasonNumber: season.season_number,
-      posterURL: season.poster_path ? formatImageURL(season.poster_path, "m", true)[0] : "",
+      posterURL: season.poster_path
+        ? formatImageURL(season.poster_path, "m", true)[0]
+        : "",
       name: season.name,
       overview: season.overview,
       episodeCount: season.episode_count,
@@ -135,6 +139,11 @@ function seasonFormatter(rawSeasons) {
   });
 }
 
+/**
+ * @memberOf Curated_API_TV
+ * @method
+ * Returns obj with tv shows like searchValue (tv title) passed.
+ */
 async function tvGetShowDetails(showId) {
   let apiCall;
   let searchResults;
@@ -189,20 +198,20 @@ async function tvGetShowDetails(showId) {
  * @memberOf Curated_API_TV
  * @method
  *
- * @param {string} tvId - Tv Id
+ * @param {string} showId - Tv Id
  * @param {array.<string>} countryCodes - Array of country codes to return
- * @returns {movieWatchProviders_typedef} Object data return
+ * Returns -
  */
-function tvGetWatchProviders(tvId, countryCodes = ["US"]) {
+function tvGetWatchProviders(showId, countryCodes = ["US"]) {
   let watchInfo;
   let searchResults;
   countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
 
-  return rawTVWatchProviders(tvId).then((resp) => {
+  return rawTVWatchProviders(showId).then((resp) => {
     const watchProviders = resp.data.results;
     const apiCall = resp.apiCall;
     searchResults = {
-      movieId: resp.data.id,
+      showId: resp.data.id,
     };
     // loop through countryCodes and return a single object:
     // { [countryCode1]: {}, [countryCode2]: {}, ... }
@@ -278,7 +287,9 @@ function tvGetPopular(page, language) {
         firstAirDate: parseToDate(show.first_air_date),
         originalLanguage: show.original_language,
         overview: show.overview,
-        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        posterURL: show.poster_path
+          ? formatImageURL(show.poster_path, "m", true)[0]
+          : "",
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
@@ -379,7 +390,9 @@ function tvDiscover(criteriaObj, page = 1) {
       popularity: result.popularity,
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
-      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
+      posterURL: result.poster_path
+        ? formatImageURL(result.poster_path, "m", true)[0]
+        : "",
       backdropURL: result.backdrop_path
         ? formatImageURL(result.backdrop_path, "m", true)[0]
         : "",
