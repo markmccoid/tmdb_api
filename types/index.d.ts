@@ -1,3 +1,6 @@
+export * from "./APIRaw";
+export * from "./APICurated";
+
 export type initOptionsType = {
   dateFormateString: string;
 };
@@ -65,5 +68,3 @@ export function getTVGenres(convertToObjectFlag?: false | undefined): Promise<Ge
 export function getTVGenres(convertToObjectFlag?: true): Promise<GenresObject>;
 export function getMovieGenres(convertToObjectFlag?: false | undefined): Promise<Genres>;
 export function getMovieGenres(convertToObjectFlag?: true): Promise<GenresObject>;
-export * from "./APIRaw";
-export * from "./APICurated";

@@ -1,3 +1,3 @@
-export * from "./API_TV";
-export * from "./API_Movies";
-export * from "./API_Common";
+export * from "./API_TV.d";
+export * from "./API_Movies.d";
+export * from "./API_Common.d";

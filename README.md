@@ -22,6 +22,8 @@ $ yarn add @markmccoid/tmdb_api
 
 The API Docs will help you navigate the functions available. [https://markmccoid.github.io/tmdb_api/](https://markmccoid.github.io/tmdb_api/)
 
+> NOTE: The generated docs for the functions are going to be superseded by the TypeScript type annotations.
+
 You will find that there are two main types of data returned. Either **Raw** or **Curated**.
 
 **Raw** API functions are simply calls to the main API endpoints, returning all data from them.
@@ -151,3 +153,92 @@ The returned object shape is the same as the Raw calls:
 ```
 
 > Note: for functions that have a page argument, the data object will also include, at the root of the returned object, a page (current page you are on), totalResults (total count of results), totalPages (total number of pages) properties. You will need this data for pagination.
+
+## TypeScript 
+
+My first go at using TypeScript in a project, so any comments would be appreciated.
+
+The type definition files (*\*.d.ts*) are located in the `./types` directory and follows the same directory structure as the source files.
+
+The **Curated** functions have a return type that is made up of a **Base** type so that the main results can have a separate type that you can use in your applications if needed.
+
+For example, most **curated** functions return one of two differenct structures where the result data is in a separate key:
+
+```javascript
+// -- Results that when queried will have multiple pages
+{
+    data: CustomType; // The meat of the return from TMDB API call.
+    apiCall: string; // apicall used to get results
+    page: number; // ONLY returned for functions with a page argument
+    totalResults: number; // ONLY returned for functions with a page argument
+    totalPages: number; // ONLY returned for functions with a page argument
+}
+    
+// -- Results that are returned all in the single query
+    {
+    data: CustomType; // The meat of the return from TMDB API call.
+    apiCall: string; // apicall used to get results
+}
+```
+
+Since multiple functions will be returning this shape, I've create two Generics to handle these.
+
+```typescript
+export type BaseSinglePage<T> = {
+  data: T;
+  apiCall: string;
+};
+
+export type BaseMultiPage<T> = {
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: T;
+  };
+  apiCall: string;
+};
+```
+
+What this means is that you can pull in  the **T** type to type the actual data/results that you will most likely be using in your application.
+
+For example, `tvGetShowDetails(showId)` returns the **TVShowDetailsBase** type, but is built using the BaseSinglePage  generic passing in the **TVShowDetails** type, which ends up typeing the `data` portion of the return object:
+
+```typescript
+function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>
+
+//-- Base built here
+export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
+
+//-- Which results in this
+type TVShowDetailsBase = {
+    data: TVShowDetails;
+    apiCall: string;
+}
+```
+
+Both **tvSearchByTitle** and **tvGetPopular** return the *BaseMultiPage* generic:
+
+```typescript
+export function tvSearchByTitle(
+  searchValue: string,
+  page?: number
+): Promise<TVSearchResultBase>;
+
+export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
+
+//-- Base built here
+export type TVSearchResultBase = BaseMultiPage<TVSearchResultItem[]>;
+
+//-- Which results in this
+type TVSearchResultBase = {
+    data: {
+        page: number;
+        totalResults: number;
+        totalPages: number;
+        results: TVSearchResultItem[];
+    };
+    apiCall: string;
+}
+```
+

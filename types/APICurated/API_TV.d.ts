@@ -4,6 +4,31 @@ export type DateObject = {
   formatted: string;
 };
 
+// -- BASE Generics
+export type BaseSinglePage<T> = {
+  data: T;
+  apiCall: string;
+};
+
+//_-- WAS Thinking that it might be useful to type each piece separately. Not sure.
+// export type MultiPageData<T> = {
+//   page: number;
+//   totalResults: number;
+//   totalPages: number;
+//   results: T;
+// }
+
+export type BaseMultiPage<T> = {
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: T;
+  };
+  apiCall: string;
+};
+//= == BASE Generics END =======
+
 // -- TV IMAGES
 export type TVGetImages = {
   // array of image URLs (https://...)
@@ -13,7 +38,7 @@ export type TVGetImages = {
 
 export function tvGetImages(
   showId: number,
-  imageType?: "posters" | "backgdrops"
+  imageType?: "posters" | "backdrops"
 ): Promise<TVGetImages>;
 
 // -- TV SHOW SEARCH
@@ -29,48 +54,60 @@ export type TVSearchResultItem = {
   popularity: number;
   originalLanguage: string;
 };
-export type TVSearchResult = {
-  data: {
-    page: number;
-    totalResults: number;
-    totalPages: number;
-    results: TVSearchResultItem[];
-  };
-  apiCall: string;
+export type TVSearchResultBase = BaseMultiPage<TVSearchResultItem[]>;
+
+export function tvSearchByTitle(
+  searchValue: string,
+  page?: number
+): Promise<TVSearchResultBase>;
+
+export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
+
+// -- tvGetShowDetails --------------------
+// When getting show details, you get this info on each season
+export type TVDetailSeasons = {
+  id: number;
+  seasonNumber: number;
+  posterURL: string;
+  name: string;
+  overview: string;
+  episodeCount: number;
+  airDate: DateObject;
 };
 
-export function tvSearchByTitle(searchValue: string, page?: number): Promise<TVSearchResult>;
-
-export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResult>;
-
-// -- TV SHOW DETAILS
-type TVShowDetails = {
-  data: {
-    id: number;
-    name: string;
-    overview: string;
-    status: string;
-    avgEpisodeRunTime: number;
-    firstAirDate: DateObject;
-    lastAirDate: DateObject;
-    posterURL: string;
-    backdropURL: string;
-    homePage: string;
-    numberOfEpisodes: number;
-    numberOfSeasons: number;
-    genres: string[];
-  };
-  apiCall: string;
+export type TVShowDetails = {
+  id: number;
+  name: string;
+  overview: string;
+  status: string;
+  tagLine: string;
+  popularity: number;
+  avgEpisodeRunTime: number;
+  firstAirDate: DateObject;
+  lastAirDate: DateObject;
+  posterURL: string;
+  backdropURL: string;
+  homePage: string;
+  numberOfEpisodes: number;
+  numberOfSeasons: number;
+  genres: string[];
+  imdbId: string;
+  imdbURL: string;
+  instagramId: string;
+  tvdbId: number;
+  tvRageId: number;
+  twitterId: string;
+  facebookdId: string;
+  seasons: TVDetailSeasons[];
 };
-/**
- * returns show details for showId passed
- * @memberOf Curated_API_TV
- * @method
- * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {tvShowDetails_typedef}
- */
-export function tvGetShowDetails(showId: string): Promise<TVShowDetails>;
 
+export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
+
+export function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>;
+
+//= == tvGetShowDetails END =====================
+
+// -- tvGetShowCredits -----------
 /**
  * returns show credits for showId passed
  *
@@ -97,14 +134,17 @@ export type CrewType = {
   job: string;
   department: string;
 };
-export type TVCredits = {
-  data: {
-    cast: CastType[];
-    crew: CrewType[];
-  };
-  apiCall: string;
-};
+
+export type TVCredits = BaseSinglePage<{
+  cast: CastType[];
+  crew: CrewType[];
+}>;
+
 export function tvGetShowCredits(showId: string): Promise<TVCredits>;
+//= == tvGetShowCredits END =====================
+
+// -- tvDiscover ---------------------
+
 export type SortByOptions =
   | "popularity.asc"
   | "popularity.desc"
@@ -141,3 +181,5 @@ export function tvDiscover(
   criteriaObj: DiscoverCriteria,
   page: number
 ): Promise<TVSearchResult>;
+
+// -- tvDiscover ---------------------

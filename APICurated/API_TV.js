@@ -1,3 +1,4 @@
+/// <reference path="../types/APICurated/API_TV.d.ts" />
 /**
  * Curated API calls to the tmdb api end points for **TV Shows**.
  *
@@ -13,6 +14,7 @@ import {
   rawTVGetShowImages,
   rawTVSearchByTitle,
   rawTVGetShowDetails,
+  rawTVGetExternalIds,
   rawTVGetShowCredits,
   rawTVWatchProviders,
   rawTVGetPopular,
@@ -118,43 +120,38 @@ function tvSearchByTitle(searchValue, page = 1) {
   });
 }
 
-/**
- * @typedef tvShowDetails_typedef
- * @type {Object}
- * @property {Object} data the data object
- * @property {number} data.id the tv showId
- * @property {string} data.name name of the tv show
- * @property {string} data.overview
- * @property {string} data.status
- * @property {number} data.avgEpisodeRunTime average runtime in minutes
- * @property {date} data.firstAirDate
- * @property {date} data.lastAirDate
- * @property {string} data.posterURL
- * @property {string} data.backdropURL
- * @property {string} data.homePage
- * @property {number} data.numberOfEpisodes
- * @property {number} data.numberOfSeasons
- * @property {array.<string>} data.genres array of genre names
- * @property {string} apiCall the API call used to hit endpoint
- */
-/**
- * returns show details for showId passed
- * @memberOf Curated_API_TV
- * @method
- * @param {(string)} showId - showId from TMDb API Show Search.
- * @returns {tvShowDetails_typedef}
- */
-function tvGetShowDetails(showId) {
+function seasonFormatter(rawSeasons) {
+  // Get rawSeason array, return formatted seasons array
+  return rawSeasons.map((season) => {
+    return {
+      id: season.id,
+      seasonNumber: season.season_number,
+      posterURL: season.poster_path ? formatImageURL(season.poster_path, "m", true)[0] : "",
+      name: season.name,
+      overview: season.overview,
+      episodeCount: season.episode_count,
+      airDate: parseToDate(season.air_date),
+    };
+  });
+}
+
+async function tvGetShowDetails(showId) {
   let apiCall;
   let searchResults;
+  let externalIdData = await rawTVGetExternalIds(showId);
+  let { imdb_id, instagram_id, tvdb_id, tvrage_id, twitter_id, facebook_id } =
+    externalIdData.data;
   return rawTVGetShowDetails(showId).then((resp) => {
     // Curate results
     apiCall = resp.apiCall;
     searchResults = {
       id: resp.data.id,
       name: resp.data.name,
+      originalName: resp.data.original_name,
       overview: resp.data.overview,
       status: resp.data.status,
+      tagLine: resp.data.tagline,
+      popularity: resp.data.popularity,
       backdropURL: resp.data.backdrop_path
         ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
         : "",
@@ -169,7 +166,15 @@ function tvGetShowDetails(showId) {
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
+      imdbId: imdb_id,
+      imdbURL: `https://www.imdb.com/title/${imdb_id}`,
+      instagramId: instagram_id,
+      tvdbId: tvdb_id,
+      tvRageId: tvrage_id,
+      twitterId: twitter_id,
+      facebookdId: facebook_id,
       genres: resp.data.genres.map((tvGenreObj) => tvGenreObj.name),
+      seasons: seasonFormatter(resp.data.seasons),
     };
 
     return {
