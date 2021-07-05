@@ -19,6 +19,8 @@ import {
   rawTVWatchProviders,
   rawTVGetPopular,
   rawTVDiscover,
+  rawTVGetRecommendations,
+  rawTVGetVideos,
 } from "../APIRaw/TMDBApi_TV";
 import { TV_GENRE_OBJ } from "../index";
 
@@ -107,9 +109,7 @@ function tvSearchByTitle(searchValue, page = 1) {
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
-        posterURL: show.poster_path
-          ? formatImageURL(show.poster_path, "m", true)[0]
-          : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -122,15 +122,59 @@ function tvSearchByTitle(searchValue, page = 1) {
   });
 }
 
+/**
+ * @memberOf Curated_API_TV
+ * @method
+ * @param {(string)} showId - TV Show name to search for.
+ * @param {number} [page=1] - page to return.  Only works if multiple pages
+ * @returns {TVSearchResultItem} Object data return
+ */
+function tvGetRecommendations(showId, page = 1) {
+  // let { TV_GENRE_OBJ } = getTMDBConsts();
+  let apiCall;
+  let searchResults;
+  let showsReturned;
+  return rawTVGetRecommendations(showId, page).then((resp) => {
+    // Curate results
+    apiCall = resp.apiCall;
+    searchResults = {
+      page: resp.data.page,
+      totalResults: resp.data.total_results,
+      totalPages: resp.data.total_pages,
+    };
+
+    showsReturned = resp.data.results.map((show) => {
+      return {
+        id: show.id,
+        name: show.name,
+        originalName: show.original_name,
+        originalLanguage: show.original_language,
+        firstAirDate: parseToDate(show.first_air_date),
+        overview: show.overview,
+        backdropURL: show.backdrop_path
+          ? formatImageURL(show.backdrop_path, "m", true)[0]
+          : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        popularity: show.popularity,
+      };
+    });
+
+    return {
+      data: { ...searchResults, results: showsReturned },
+      apiCall,
+    };
+  });
+}
+
+//-----------------------------------
 function seasonFormatter(rawSeasons) {
   // Get rawSeason array, return formatted seasons array
   return rawSeasons.map((season) => {
     return {
       id: season.id,
       seasonNumber: season.season_number,
-      posterURL: season.poster_path
-        ? formatImageURL(season.poster_path, "m", true)[0]
-        : "",
+      posterURL: season.poster_path ? formatImageURL(season.poster_path, "m", true)[0] : "",
       name: season.name,
       overview: season.overview,
       episodeCount: season.episode_count,
@@ -287,9 +331,7 @@ function tvGetPopular(page, language) {
         firstAirDate: parseToDate(show.first_air_date),
         originalLanguage: show.original_language,
         overview: show.overview,
-        posterURL: show.poster_path
-          ? formatImageURL(show.poster_path, "m", true)[0]
-          : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         backdropURL: show.backdrop_path
           ? formatImageURL(show.backdrop_path, "m", true)[0]
           : "",
@@ -370,6 +412,37 @@ function tvGetShowCredits(showId) {
   });
 }
 
+/**
+ * Returns an object with videos for passed showId
+ * @method
+ * @memberOf Curated_API_TV
+ * @param {number} showId - showId to get details for
+ * @returns {movieVideos_typedef} Object data return
+ */
+function tvGetVideos(showId) {
+  return rawTVGetVideos(showId).then((resp) => {
+    //Get video data and format, currently just getting youtube videos
+    const videos = resp.data.results
+      .filter((video) => video.site === "YouTube")
+      .map((video) => ({
+        id: video.id,
+        language: video.iso_639_1,
+        country: video.iso_3166_1,
+        key: video.key,
+        name: video.name,
+        site: video.site,
+        size: video.size,
+        type: video.type,
+        videoURL: `https://www.youtube.com/watch?v=${video.key}`,
+        videoThumbnailURL: `https://img.youtube.com/vi/${video.key}/0.jpg`,
+      }));
+    return {
+      data: videos,
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
 // Discover / Advanced Search
 function tvDiscover(criteriaObj, page = 1) {
   let apiCall;
@@ -390,9 +463,7 @@ function tvDiscover(criteriaObj, page = 1) {
       popularity: result.popularity,
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
-      posterURL: result.poster_path
-        ? formatImageURL(result.poster_path, "m", true)[0]
-        : "",
+      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
       backdropURL: result.backdrop_path
         ? formatImageURL(result.backdrop_path, "m", true)[0]
         : "",
@@ -413,4 +484,6 @@ export {
   tvGetPopular,
   tvGetWatchProviders,
   tvDiscover,
+  tvGetRecommendations,
+  tvGetVideos,
 };

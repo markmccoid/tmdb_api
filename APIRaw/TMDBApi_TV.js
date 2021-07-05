@@ -43,6 +43,25 @@ function rawTVSearchByTitle(searchString, page = 1) {
 }
 
 /**
+ * Get a list of recommended tv shows based on passed showId
+ *
+ * @memberOf Raw_API_TV
+ * @param {string} showId - TMDb sho id
+ * @param {number} [page=1] - optional
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVGetRecommendations(showId, page = 1) {
+  const config = {
+    params: {
+      page,
+    },
+  };
+  return apiTMDB(`/tv/${showId}/recommendations`, config);
+}
+
+/**
  * Returns show details for passed TMDb showId
  *
  * @memberOf Raw_API_TV
@@ -159,6 +178,21 @@ function rawTVGetPopular(page = 1, language = "en-US") {
 }
 
 /**
+ * Returns the videos that have been added to the passed showId.
+ *
+ * https://developers.themoviedb.org/3/movies/get-movie-videos
+ *
+ * @memberOf Raw_API_TV
+ * @param {string} showId - TMDb movie id
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVGetVideos(showId) {
+  return apiTMDB(`/tv/${showId}/videos`);
+}
+
+/**
  * criteriaObj {
  *  genres: [] // genre Ids
  *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
@@ -240,4 +274,6 @@ export {
   rawTVGetPopular,
   rawTVWatchProviders,
   rawTVDiscover,
+  rawTVGetRecommendations,
+  rawTVGetVideos,
 };

@@ -42,6 +42,9 @@ export function tvGetImages(
 ): Promise<TVGetImages>;
 
 // -- TV SHOW SEARCH
+// -- The TVSearchResultItem type is used for
+// -- Search Results
+// -- Recommended Search Results
 export type TVSearchResultItem = {
   id: number;
   name: string;
@@ -61,10 +64,7 @@ export function tvSearchByTitle(
   page?: number
 ): Promise<TVSearchResultBase>;
 
-export function tvGetPopular(
-  page?: number,
-  language?: string
-): Promise<TVSearchResultBase>;
+export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
 
 // -- tvGetShowDetails --------------------
 // When getting show details, you get this info on each season
@@ -398,9 +398,6 @@ export type TVWatchProviders = {
 
 export type TVWatchProvidersBase = BaseSinglePage<TVWatchProviders>;
 
-export function tvGetWatchProviders(
-  showId: number,
-  countryCodes: string[] = ["US"]
-);
+export function tvGetWatchProviders(showId: number, countryCodes: string[] = ["US"]);
 
 // == END tvGetWatchProviders ==============
