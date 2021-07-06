@@ -122,7 +122,7 @@ export function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>;
  */
 export type CastType = {
   characterName: string;
-  creditId: number;
+  creditId: string;
   personId: number;
   name: string;
   gender: number; // 1 = female, 2 = male
@@ -130,7 +130,7 @@ export type CastType = {
   order: number;
 };
 export type CrewType = {
-  creditId: number;
+  creditId: string;
   personId: number;
   name: string;
   gender: number; // 1 = female, 2 = male
@@ -147,6 +147,30 @@ export type TVCredits = BaseSinglePage<{
 export function tvGetShowCredits(showId: string): Promise<TVCredits>;
 //= == tvGetShowCredits END =====================
 
+type CreditsBase = {
+  tvShowId: number;
+  name: string;
+  overview: string;
+  firstAirDate: string;
+  genres: string[];
+  posterURL: string;
+  backdropURL: string;
+  originalLanguage: string;
+  episodeCount: number;
+  creditId: string;
+};
+
+interface CastTVShows extends CreditsBase {
+  characterName: string;
+}
+interface CrewTVShows extends CreditsBase {
+  job: string;
+  department: string;
+}
+
+export function tvGetPersonCredits(
+  personId: number
+): Promise<BaseSinglePage<{ cast: CastTVShows[]; crew: CrewTVShows[] }>>;
 // -- tvDiscover ---------------------
 
 export type SortByOptions =

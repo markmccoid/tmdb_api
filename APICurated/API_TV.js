@@ -21,6 +21,7 @@ import {
   rawTVDiscover,
   rawTVGetRecommendations,
   rawTVGetVideos,
+  rawTVGetPersonCredits,
 } from "../APIRaw/TMDBApi_TV";
 import { TV_GENRE_OBJ } from "../index";
 
@@ -443,6 +444,64 @@ function tvGetVideos(showId) {
   });
 }
 
+/**
+ * Returns an object with movies where person was part of cast or crew for passed personId
+ * @memberOf Curated_API_Movies
+ * @method
+ * @param {number} personId - personId to get details for
+ * @returns {moviePersonCredits_typedef} Object data return
+ * {
+ *    cast: [{}],
+ *    crew: [{}],
+ *    apiCall
+ * }
+ */
+function tvGetPersonCredits(personId) {
+  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+
+  return rawTVGetPersonCredits(personId).then((resp) => {
+    let castTVShows = resp.data.cast.map((tvShow) => {
+      return {
+        tvShowId: tvShow.id,
+        name: tvShow.name,
+        overview: tvShow.overview,
+        firstAirDate: parseToDate(tvShow.first_air_date),
+        creditId: tvShow.credit_id,
+        characterName: tvShow.character,
+        genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        backdropURL: tvShow.backdrop_path
+          ? formatImageURL(tvShow.backdrop_path, "m", true)[0]
+          : "",
+        orginalLanguage: tvShow.original_language,
+        episodeCount: tvShow.episode_count,
+      };
+    });
+    let crewTVShows = resp.data.crew.map((tvShow) => {
+      return {
+        tvShowId: tvShow.id,
+        name: tvShow.name,
+        overview: tvShow.overview,
+        firstAirDate: parseToDate(tvShow.first_air_date),
+        creditId: tvShow.credit_id,
+        job: tvShow.job,
+        department: tvShow.department,
+        genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        backdropURL: tvShow.backdrop_path
+          ? formatImageURL(tvShow.backdrop_path, "m", true)[0]
+          : "",
+        orginalLanguage: tvShow.original_language,
+        episodeCount: tvShow.episode_count,
+      };
+    });
+    return {
+      data: { cast: castTVShows, crew: crewTVShows },
+      apiCall: resp.apiCall,
+    };
+  });
+}
+
 // Discover / Advanced Search
 function tvDiscover(criteriaObj, page = 1) {
   let apiCall;
@@ -476,6 +535,7 @@ function tvDiscover(criteriaObj, page = 1) {
     };
   });
 }
+
 export {
   tvGetImages,
   tvSearchByTitle,
@@ -486,4 +546,5 @@ export {
   tvDiscover,
   tvGetRecommendations,
   tvGetVideos,
+  tvGetPersonCredits,
 };

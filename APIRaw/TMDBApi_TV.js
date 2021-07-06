@@ -176,6 +176,15 @@ function rawTVGetPopular(page = 1, language = "en-US") {
   };
   return apiTMDB(`/tv/popular`, config);
 }
+/**
+ * @memberOf Raw_API_TV
+ * @param {number} personId - TMDb personId
+ * @returns {object} response object
+ *  on success { data: data from api call, apiCall: API call}
+ */
+function rawTVGetPersonCredits(personId) {
+  return apiTMDB(`/person/${personId}/tv_credits`);
+}
 
 /**
  * Returns the videos that have been added to the passed showId.
@@ -263,6 +272,7 @@ function rawTVDiscover(criteriaObj, page = 1) {
 
   return apiTMDB("/discover/tv", config);
 }
+
 export {
   rawTVGetCreditDetails,
   rawTVGetShowCredits,
@@ -276,4 +286,5 @@ export {
   rawTVDiscover,
   rawTVGetRecommendations,
   rawTVGetVideos,
+  rawTVGetPersonCredits,
 };
