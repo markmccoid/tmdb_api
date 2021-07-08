@@ -68,7 +68,7 @@ export function tvGetPopular(page?: number, language?: string): Promise<TVSearch
 
 // -- tvGetShowDetails --------------------
 // When getting show details, you get this info on each season
-export type TVDetailSeasons = {
+export type TVDetail_Seasons = {
   id: number;
   seasonNumber: number;
   posterURL: string;
@@ -77,10 +77,26 @@ export type TVDetailSeasons = {
   episodeCount: number;
   airDate: DateObject;
 };
+export type TVDetail_Episode = {
+  airDate: DateObject;
+  episodeNumber: number;
+  id: number;
+  name: string;
+  overview: string;
+  seasonNumber: number;
+  stillURL: string;
+}
 
+export type TVDetail_Networks = {
+  id: number;
+  name: string;
+  logoURL: string;
+  originCountry: string;
+}
 export type TVShowDetails = {
   id: number;
   name: string;
+  originalName: string;
   overview: string;
   status: string;
   tagLine: string;
@@ -93,6 +109,7 @@ export type TVShowDetails = {
   homePage: string;
   numberOfEpisodes: number;
   numberOfSeasons: number;
+  inProduction: boolean;
   genres: string[];
   imdbId: string;
   imdbURL: string;
@@ -101,7 +118,10 @@ export type TVShowDetails = {
   tvRageId: number;
   twitterId: string;
   facebookdId: string;
-  seasons: TVDetailSeasons[];
+  seasons: TVDetail_Seasons[];
+  lastEpisodeToAir: TVDetail_Episode;
+  nextEpisodeToAir: TVDetail_Episode;
+  networks: TVDetail_Networks[];
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;

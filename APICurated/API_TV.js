@@ -184,6 +184,29 @@ function seasonFormatter(rawSeasons) {
   });
 }
 
+function episodeFormatter(lastEpisode) {
+  return {
+    id: lastEpisode.id,
+    seasonNumber: lastEpisode.season_number,
+    episodeNumber: lastEpisode.episode_number,
+    name: lastEpisode.name,
+    overview: lastEpisode.overview,
+    airDate: parseToDate(lastEpisode.air_date),
+    stillURL: lastEpisode.still_path ? formatImageURL(lastEpisode.still_path, "m", true)[0] : "",
+  }
+}
+
+function networksFormatter(networks) {
+  // Get rawSeason array, return formatted seasons array
+  return networks.map((network) => {
+    return {
+      id: network.id,
+      name: network.name,
+      logoURL: network.logo_url ? formatImageURL(network.logo_url, "m", true)[0] : "",
+      originCountry: network.origin_country
+    };
+  });
+}
 /**
  * @memberOf Curated_API_TV
  * @method
@@ -220,6 +243,7 @@ async function tvGetShowDetails(showId) {
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
+      inProduction: resp.data.in_production,
       imdbId: imdb_id,
       imdbURL: `https://www.imdb.com/title/${imdb_id}`,
       instagramId: instagram_id,
@@ -229,6 +253,9 @@ async function tvGetShowDetails(showId) {
       facebookdId: facebook_id,
       genres: resp.data.genres.map((tvGenreObj) => tvGenreObj.name),
       seasons: seasonFormatter(resp.data.seasons),
+      lastEpisodeToAir: episodeFormatter(resp.data.last_episode_to_air),
+      nextEpisodeToAir: episodeFormatter(resp.data.next_episode_to_air),
+      networks: networksFormatter(resp.data.networks)
     };
 
     return {
