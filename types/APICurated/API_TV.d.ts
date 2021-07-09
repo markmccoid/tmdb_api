@@ -77,13 +77,14 @@ export type TVDetail_Seasons = {
   episodeCount: number;
   airDate: DateObject;
 };
-export type TVDetail_Episode = {
-  airDate: DateObject;
-  episodeNumber: number;
+
+type Episode = {
   id: number;
+  seasonNumber: number;
+  episodeNumber: number;
   name: string;
   overview: string;
-  seasonNumber: number;
+  airDate: DateObject;
   stillURL: string;
 }
 
@@ -119,17 +120,35 @@ export type TVShowDetails = {
   twitterId: string;
   facebookdId: string;
   seasons: TVDetail_Seasons[];
-  lastEpisodeToAir: TVDetail_Episode;
-  nextEpisodeToAir: TVDetail_Episode;
+  lastEpisodeToAir: Episode;
+  nextEpisodeToAir: Episode;
   networks: TVDetail_Networks[];
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
 
-// This is a comment over tvGetShowDetails
+// - FUNCTION Export
 export function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>;
 
 //= == tvGetShowDetails END =====================
+
+//-- tvGetShowSeasonDetails --------------------
+
+type TVShowSeasonDetails = {
+  id: number;
+  seasonNumber: number;
+  name: string;
+  overview: string;
+  posterURL: string;
+  airDate: DateObject;
+  episodes: Episode[]
+}
+
+export type TVShowSeasonBase = BaseSinglePage<TVShowSeasonDetails>;
+
+export function tvGetShowSeasonDetails(tvShowId: number, seasonNumber: number): Promise<TVShowSeasonBase>
+
+//= == tvGetShowSeasonDetails END =====================
 
 // -- tvGetShowCredits -----------
 /**

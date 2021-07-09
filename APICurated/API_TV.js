@@ -9,7 +9,7 @@
  *
  */
 
-import { formatImageURL, averageOfArray, parseToDate } from "../helpers";
+import { formatImageURL, averageOfArray, parseToDate } from '../helpers';
 import {
   rawTVGetShowImages,
   rawTVSearchByTitle,
@@ -22,8 +22,9 @@ import {
   rawTVGetRecommendations,
   rawTVGetVideos,
   rawTVGetPersonCredits,
-} from "../APIRaw/TMDBApi_TV";
-import { TV_GENRE_OBJ } from "../index";
+  rawTVGetShowSeasonDetails,
+} from '../APIRaw/TMDBApi_TV';
+import { TV_GENRE_OBJ } from '../index';
 
 /**
  * @typedef tvGetImages_typedef
@@ -39,18 +40,18 @@ import { TV_GENRE_OBJ } from "../index";
  * @param {string} [imageType=posters] - 'posters', 'backdrops'
  * @returns {string[]} Array of URLs to the images
  */
-function tvGetImages(showId, imageType = "posters") {
+function tvGetImages(showId, imageType = 'posters') {
   let apiCall;
   return rawTVGetShowImages(showId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
-      .filter((imgObj) => imgObj.iso_639_1 === "en")
+      .filter((imgObj) => imgObj.iso_639_1 === 'en')
       .map((imgObj) => {
         return imgObj.file_path;
       });
     // Get the full image URLs
-    let formattedImageURLs = formatImageURL(imgFilePaths, "m", true);
+    let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
     return {
       data: formattedImageURLs,
       apiCall,
@@ -108,9 +109,11 @@ function tvSearchByTitle(searchValue, page = 1) {
         firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
         backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, "m", true)[0]
-          : "",
-        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+          ? formatImageURL(show.backdrop_path, 'm', true)[0]
+          : '',
+        posterURL: show.poster_path
+          ? formatImageURL(show.poster_path, 'm', true)[0]
+          : '',
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -153,9 +156,11 @@ function tvGetRecommendations(showId, page = 1) {
         firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
         backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, "m", true)[0]
-          : "",
-        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+          ? formatImageURL(show.backdrop_path, 'm', true)[0]
+          : '',
+        posterURL: show.poster_path
+          ? formatImageURL(show.poster_path, 'm', true)[0]
+          : '',
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -175,7 +180,9 @@ function seasonFormatter(rawSeasons) {
     return {
       id: season.id,
       seasonNumber: season.season_number,
-      posterURL: season.poster_path ? formatImageURL(season.poster_path, "m", true)[0] : "",
+      posterURL: season.poster_path
+        ? formatImageURL(season.poster_path, 'm', true)[0]
+        : '',
       name: season.name,
       overview: season.overview,
       episodeCount: season.episode_count,
@@ -184,16 +191,18 @@ function seasonFormatter(rawSeasons) {
   });
 }
 
-function episodeFormatter(lastEpisode) {
+function episodeFormatter(episode) {
   return {
-    id: lastEpisode.id,
-    seasonNumber: lastEpisode.season_number,
-    episodeNumber: lastEpisode.episode_number,
-    name: lastEpisode.name,
-    overview: lastEpisode.overview,
-    airDate: parseToDate(lastEpisode.air_date),
-    stillURL: lastEpisode.still_path ? formatImageURL(lastEpisode.still_path, "m", true)[0] : "",
-  }
+    id: episode.id,
+    seasonNumber: episode.season_number,
+    episodeNumber: episode.episode_number,
+    name: episode.name,
+    overview: episode.overview,
+    airDate: parseToDate(episode.air_date),
+    stillURL: episode.still_path
+      ? formatImageURL(episode.still_path, 'm', true)[0]
+      : '',
+  };
 }
 
 function networksFormatter(networks) {
@@ -202,8 +211,10 @@ function networksFormatter(networks) {
     return {
       id: network.id,
       name: network.name,
-      logoURL: network.logo_url ? formatImageURL(network.logo_url, "m", true)[0] : "",
-      originCountry: network.origin_country
+      logoURL: network.logo_url
+        ? formatImageURL(network.logo_url, 'm', true)[0]
+        : '',
+      originCountry: network.origin_country,
     };
   });
 }
@@ -230,11 +241,11 @@ async function tvGetShowDetails(showId) {
       tagLine: resp.data.tagline,
       popularity: resp.data.popularity,
       backdropURL: resp.data.backdrop_path
-        ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
-        : "",
+        ? formatImageURL(resp.data.backdrop_path, 'm', true)[0]
+        : '',
       posterURL: resp.data.poster_path
-        ? formatImageURL(resp.data.poster_path, "m", true)[0]
-        : "",
+        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
+        : '',
       avgEpisodeRunTime: resp.data.episode_run_time
         ? averageOfArray(resp.data.episode_run_time)
         : 0,
@@ -255,7 +266,42 @@ async function tvGetShowDetails(showId) {
       seasons: seasonFormatter(resp.data.seasons),
       lastEpisodeToAir: episodeFormatter(resp.data.last_episode_to_air),
       nextEpisodeToAir: episodeFormatter(resp.data.next_episode_to_air),
-      networks: networksFormatter(resp.data.networks)
+      networks: networksFormatter(resp.data.networks),
+    };
+
+    return {
+      data: searchResults,
+      apiCall,
+    };
+  });
+}
+
+/**
+ * Returns season details for passed tvShowId and seasonNumber
+ * @memberOf Curated_API_TV
+ * @method
+ *
+ * @param {number} tvShowId - tvShowId
+ * @param {number} seasonNumber -
+ * Returns -
+ */
+function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
+  let apiCall;
+  let searchResults;
+
+  return rawTVGetShowSeasonDetails(tvShowId, seasonNumber).then((resp) => {
+    // Curate results
+    apiCall = resp.apiCall;
+    searchResults = {
+      id: resp.data.id,
+      seasonNumber: resp.data.season_number,
+      name: resp.data.name,
+      overview: resp.data.overview,
+      posterURL: resp.data.poster_path
+        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
+        : '',
+      airDate: parseToDate(resp.data.air_date),
+      episodes: resp.data.episodes.map((episode) => episodeFormatter(episode)), //Excludes Crew and Guests
     };
 
     return {
@@ -274,7 +320,7 @@ async function tvGetShowDetails(showId) {
  * @param {array.<string>} countryCodes - Array of country codes to return
  * Returns -
  */
-function tvGetWatchProviders(showId, countryCodes = ["US"]) {
+function tvGetWatchProviders(showId, countryCodes = ['US']) {
   let watchInfo;
   let searchResults;
   countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
@@ -298,7 +344,7 @@ function tvGetWatchProviders(showId, countryCodes = ["US"]) {
                 ? []
                 : watchProviders[code].flatrate.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -306,7 +352,7 @@ function tvGetWatchProviders(showId, countryCodes = ["US"]) {
                 ? []
                 : watchProviders[code].buy.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -314,7 +360,7 @@ function tvGetWatchProviders(showId, countryCodes = ["US"]) {
                 ? []
                 : watchProviders[code].rent.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
+                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -359,10 +405,12 @@ function tvGetPopular(page, language) {
         firstAirDate: parseToDate(show.first_air_date),
         originalLanguage: show.original_language,
         overview: show.overview,
-        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        posterURL: show.poster_path
+          ? formatImageURL(show.poster_path, 'm', true)[0]
+          : '',
         backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, "m", true)[0]
-          : "",
+          ? formatImageURL(show.backdrop_path, 'm', true)[0]
+          : '',
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -415,8 +463,8 @@ function tvGetShowCredits(showId) {
         name: character.name,
         gender: character.gender,
         profileURL: character.profile_path
-          ? formatImageURL(character.profile_path, "m", true)[0]
-          : "",
+          ? formatImageURL(character.profile_path, 'm', true)[0]
+          : '',
         order: character.order,
       };
     });
@@ -427,8 +475,8 @@ function tvGetShowCredits(showId) {
         name: crewMember.name,
         gender: crewMember.gender,
         profileURL: crewMember.profile_path
-          ? formatImageURL(crewMember.profile_path, "m", true)[0]
-          : "",
+          ? formatImageURL(crewMember.profile_path, 'm', true)[0]
+          : '',
         job: crewMember.job,
         department: crewMember.department,
       };
@@ -451,7 +499,7 @@ function tvGetVideos(showId) {
   return rawTVGetVideos(showId).then((resp) => {
     //Get video data and format, currently just getting youtube videos
     const videos = resp.data.results
-      .filter((video) => video.site === "YouTube")
+      .filter((video) => video.site === 'YouTube')
       .map((video) => ({
         id: video.id,
         language: video.iso_639_1,
@@ -496,10 +544,12 @@ function tvGetPersonCredits(personId) {
         creditId: tvShow.credit_id,
         characterName: tvShow.character,
         genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
-        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        posterURL: tvShow.poster_path
+          ? formatImageURL(tvShow.poster_path, 'm', true)[0]
+          : '',
         backdropURL: tvShow.backdrop_path
-          ? formatImageURL(tvShow.backdrop_path, "m", true)[0]
-          : "",
+          ? formatImageURL(tvShow.backdrop_path, 'm', true)[0]
+          : '',
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
       };
@@ -514,10 +564,12 @@ function tvGetPersonCredits(personId) {
         job: tvShow.job,
         department: tvShow.department,
         genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
-        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        posterURL: tvShow.poster_path
+          ? formatImageURL(tvShow.poster_path, 'm', true)[0]
+          : '',
         backdropURL: tvShow.backdrop_path
-          ? formatImageURL(tvShow.backdrop_path, "m", true)[0]
-          : "",
+          ? formatImageURL(tvShow.backdrop_path, 'm', true)[0]
+          : '',
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
       };
@@ -549,10 +601,12 @@ function tvDiscover(criteriaObj, page = 1) {
       popularity: result.popularity,
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
-      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
+      posterURL: result.poster_path
+        ? formatImageURL(result.poster_path, 'm', true)[0]
+        : '',
       backdropURL: result.backdrop_path
-        ? formatImageURL(result.backdrop_path, "m", true)[0]
-        : "",
+        ? formatImageURL(result.backdrop_path, 'm', true)[0]
+        : '',
       genres: result.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
     }));
 
@@ -567,6 +621,7 @@ export {
   tvGetImages,
   tvSearchByTitle,
   tvGetShowDetails,
+  tvGetShowSeasonDetails,
   tvGetShowCredits,
   tvGetPopular,
   tvGetWatchProviders,
