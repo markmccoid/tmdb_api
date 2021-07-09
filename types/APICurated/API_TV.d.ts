@@ -64,7 +64,10 @@ export function tvSearchByTitle(
   page?: number
 ): Promise<TVSearchResultBase>;
 
-export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
+export function tvGetPopular(
+  page?: number,
+  language?: string
+): Promise<TVSearchResultBase>;
 
 // -- tvGetShowDetails --------------------
 // When getting show details, you get this info on each season
@@ -86,14 +89,14 @@ type Episode = {
   overview: string;
   airDate: DateObject;
   stillURL: string;
-}
+};
 
 export type TVDetail_Networks = {
   id: number;
   name: string;
   logoURL: string;
   originCountry: string;
-}
+};
 export type TVShowDetails = {
   id: number;
   name: string;
@@ -127,8 +130,12 @@ export type TVShowDetails = {
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
 
+export type AppendParams = "external_ids" | "videos"[];
 // - FUNCTION Export
-export function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>;
+export function tvGetShowDetails(
+  showId: number,
+  appendToResponse: { params: { append_to_response: AppendParams[] } }
+): Promise<TVShowDetailsBase>;
 
 //= == tvGetShowDetails END =====================
 
@@ -141,12 +148,15 @@ type TVShowSeasonDetails = {
   overview: string;
   posterURL: string;
   airDate: DateObject;
-  episodes: Episode[]
-}
+  episodes: Episode[];
+};
 
 export type TVShowSeasonBase = BaseSinglePage<TVShowSeasonDetails>;
 
-export function tvGetShowSeasonDetails(tvShowId: number, seasonNumber: number): Promise<TVShowSeasonBase>
+export function tvGetShowSeasonDetails(
+  tvShowId: number,
+  seasonNumber: number
+): Promise<TVShowSeasonBase>;
 
 //= == tvGetShowSeasonDetails END =====================
 
@@ -461,6 +471,9 @@ export type TVWatchProviders = {
 
 export type TVWatchProvidersBase = BaseSinglePage<TVWatchProviders>;
 
-export function tvGetWatchProviders(showId: number, countryCodes: string[] = ["US"]);
+export function tvGetWatchProviders(
+  showId: number,
+  countryCodes: string[] = ["US"]
+);
 
 // == END tvGetWatchProviders ==============

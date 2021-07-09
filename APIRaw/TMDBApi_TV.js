@@ -1,5 +1,5 @@
-import { callTMDB, apiTMDB } from '../apiCalls';
-import { flattenArray } from '../helpers';
+import { callTMDB, apiTMDB } from "../apiCalls";
+import { flattenArray } from "../helpers";
 
 /**
  * Raw API calls to the tmdb api end points for **TV Shows**.
@@ -39,7 +39,7 @@ function rawTVSearchByTitle(searchString, page = 1) {
       include_adult: false,
     },
   };
-  return apiTMDB('/search/tv', config);
+  return apiTMDB("/search/tv", config);
 }
 
 /**
@@ -66,12 +66,13 @@ function rawTVGetRecommendations(showId, page = 1) {
  *
  * @memberOf Raw_API_TV
  * @param {string} showId - TMDb show id
+ * @param {object} appendConfig - configuration
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetShowDetails(tvShowId) {
-  return apiTMDB(`/tv/${tvShowId}`);
+function rawTVGetShowDetails(tvShowId, appendConfig = {}) {
+  return apiTMDB(`/tv/${tvShowId}`, appendConfig);
 }
 
 function rawTVGetShowSeasonDetails(tvShowId, seasonNumber) {
@@ -170,7 +171,7 @@ function rawTVGetCreditDetails(creditId) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetPopular(page = 1, language = 'en-US') {
+function rawTVGetPopular(page = 1, language = "en-US") {
   const config = {
     params: {
       page,
@@ -239,9 +240,9 @@ function rawTVGetVideos(showId) {
  * @returns {object} response object {data, apiCall}
  */
 const boolConversion = {
-  AND: ',',
-  OR: '|',
-  undefined: '|',
+  AND: ",",
+  OR: "|",
+  undefined: "|",
 };
 
 function rawTVDiscover(criteriaObj, page = 1) {
@@ -256,12 +257,12 @@ function rawTVDiscover(criteriaObj, page = 1) {
       ),
       first_air_date_year: criteriaObj.firstAirDateYear,
       [`primary_release_date.lte`]:
-        typeof releaseDateLTE === 'date'
-          ? format(releaseDateLTE, 'YYYY-MM-DD')
+        typeof releaseDateLTE === "date"
+          ? format(releaseDateLTE, "YYYY-MM-DD")
           : releaseDateLTE,
       [`primary_release_date.gte`]:
-        typeof releaseDateGTE === 'date'
-          ? format(releaseDateGTE, 'YYYY-MM-DD')
+        typeof releaseDateGTE === "date"
+          ? format(releaseDateGTE, "YYYY-MM-DD")
           : releaseDateGTE,
       with_crew: flattenArray(
         criteriaObj.crew,
@@ -276,12 +277,12 @@ function rawTVDiscover(criteriaObj, page = 1) {
         boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
       ),
       watch_region: criteriaObj.watchProviders
-        ? criteriaObj.watchRegion || 'US'
+        ? criteriaObj.watchRegion || "US"
         : undefined,
     },
   };
 
-  return apiTMDB('/discover/tv', config);
+  return apiTMDB("/discover/tv", config);
 }
 
 export {
