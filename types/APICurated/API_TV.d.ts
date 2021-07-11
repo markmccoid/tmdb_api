@@ -97,6 +97,49 @@ export type TVDetail_Networks = {
   logoURL: string;
   originCountry: string;
 };
+
+export type Videos = {
+  id: string;
+  language: string;
+  country: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+  videoURL: string;
+  videoThumbnailURL: string;
+}
+
+export type AggrCastType = {
+  roles: {
+    characterName: string;
+    creditId: string;
+    episodeCount: number;
+  }[];
+  personId: number;
+  name: string;
+  gender: number; // 1 = female, 2 = male
+  profileURL: string;
+  order: number;
+};
+export type AggrCrewType = {
+  jobs: {
+    creditId: string;
+    job: string;
+    episodeCount: number;
+  }[];
+  personId: number;
+  name: string;
+  gender: number; // 1 = female, 2 = male
+  profileURL: string;
+  department: string;
+};
+
+export type AggregatedCredits ={
+  cast: AggrCastType[];
+  crew: AggrCrewType[];
+};
 export type TVShowDetails = {
   id: number;
   name: string;
@@ -126,15 +169,19 @@ export type TVShowDetails = {
   lastEpisodeToAir: Episode;
   nextEpisodeToAir: Episode;
   networks: TVDetail_Networks[];
+  videos?: Videos[];
+  credits?: TVCredits;
+  aggregated_credits?: AggregatedCredits
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
 
-export type AppendParams = "external_ids" | "videos"[];
+
+export type AppendParams = "videos" | "credits" | "aggregate_credits";
 // - FUNCTION Export
 export function tvGetShowDetails(
   showId: number,
-  appendToResponse: { params: { append_to_response: AppendParams[] } }
+  appendToResponse: AppendParams[]
 ): Promise<TVShowDetailsBase>;
 
 //= == tvGetShowDetails END =====================
@@ -159,6 +206,24 @@ export function tvGetShowSeasonDetails(
 ): Promise<TVShowSeasonBase>;
 
 //= == tvGetShowSeasonDetails END =====================
+
+//-- tvGetShowSeasonDetails --------------------
+
+type TVShowEpisodeDetails = {
+  id: number;
+  seasonNumber: number;
+  name: string;
+  overview: string;
+  stillURL: string;
+  airDate: DateObject;
+  episodeNumber: number;
+  guestStart: Omit<CastType, 'gender' | 'personId'>[],
+  crew: Omit<CrewType, 'gender' | 'personId'>[],
+};
+
+export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVShowEpisodeDetails>
+
+//= == tvGetShowEpisodeDetails END =====================
 
 // -- tvGetShowCredits -----------
 /**
