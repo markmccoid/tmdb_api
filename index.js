@@ -141,7 +141,9 @@ export const getTVGenres = (convertToObjectFlag = false) => {
     .catch((err) => {
       console.log(`Error with config get: ${err}`);
       return {
-        data: convertGenreToObj({ genres: 'ERROR' }, 'tv'), //this will return default genres
+        data: convertToObjectFlag
+          ? convertGenreToObj({ genres: 'ERROR' }, 'tv')
+          : genreTVDefaultObj, //this will return default genres
         apiCall,
         msg: err,
       };
@@ -172,13 +174,55 @@ export const getMovieGenres = (convertToObjectFlag = false) => {
     .catch((err) => {
       console.log(`Error with config get: ${err}`);
       return {
-        data: convertGenreToObj({ genres: 'ERROR' }, 'movie'), //this will return default genres
+        data: convertToObjectFlag
+          ? convertGenreToObj({ genres: 'ERROR' }, 'movie')
+          : genreMovieDefaultObj, //this will return default genres
         apiCall,
         msg: err,
       };
     });
 };
 
+const genreTVDefaultObj = [
+  { id: 10751, name: 'Family' },
+  { id: 10759, name: 'Action & Adventure' },
+  { id: 10762, name: 'Kids' },
+  { id: 10763, name: 'News' },
+  { id: 10764, name: 'Reality' },
+  { id: 10765, name: 'Sci-Fi & Fantasy' },
+  { id: 10766, name: 'Soap' },
+  { id: 10767, name: 'Talk' },
+  { id: 10768, name: 'War & Politics' },
+  { id: 16, name: 'Animation' },
+  { id: 18, name: 'Drama' },
+  { id: 35, name: 'Comedy' },
+  { id: 37, name: 'Western' },
+  { id: 80, name: 'Crime' },
+  { id: 9648, name: 'Mystery' },
+  { id: 99, name: 'Documentary' },
+];
+
+const genreMovieDefaultObj = [
+  { id: 10402, name: 'Music' },
+  { id: 10749, name: 'Romance' },
+  { id: 10751, name: 'Family' },
+  { id: 10752, name: 'War' },
+  { id: 10770, name: 'TV Movie' },
+  { id: 12, name: 'Adventure' },
+  { id: 14, name: 'Fantasy' },
+  { id: 16, name: 'Animation' },
+  { id: 18, name: 'Drama' },
+  { id: 27, name: 'Horror' },
+  { id: 28, name: 'Action' },
+  { id: 35, name: 'Comedy' },
+  { id: 36, name: 'History' },
+  { id: 37, name: 'Western' },
+  { id: 53, name: 'Thriller' },
+  { id: 80, name: 'Crime' },
+  { id: 878, name: 'Science Fiction' },
+  { id: 9648, name: 'Mystery' },
+  { id: 99, name: 'Documentary' },
+];
 /**
  * Take array of genre objects and convert to object:
  * {
