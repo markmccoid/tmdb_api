@@ -396,26 +396,26 @@ function tvGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber) {
           : '',
         airDate: parseToDate(resp.data.air_date),
         episodeNumber: resp.data.episode_number,
-        guestStars: {
-          id: resp.data.guest_stars.id,
-          name: resp.data.guest_stars.name,
-          creditId: resp.data.guest_stars.credit_id,
-          characterName: resp.data.guest_stars.character,
-          order: resp.data.guest_stars.order,
-          profileURL: resp.data.guest_stars.profile_path
-            ? formatImageURL(resp.data.guest_stars.profile_path, 'm', true)[0]
+        guestStars: resp.data.guest_stars.map((guest) => ({
+          id: guest.id,
+          name: guest.name,
+          creditId: guest.credit_id,
+          characterName: guest.character,
+          order: guest.order,
+          profileURL: guest.profile_path
+            ? formatImageURL(guest.profile_path, 'm', true)[0]
             : '',
-        },
-        crew: {
-          id: resp.data.crew.id,
-          name: resp.data.crew.name,
-          creditId: resp.data.crew.credit_id,
-          job: resp.data.crew.job,
-          department: resp.data.crew.department,
-          profileURL: resp.data.crew.profile_path
-            ? formatImageURL(resp.data.crew.profile_path, 'm', true)[0]
+        })),
+        crew: resp.data.crew.map((member) => ({
+          id: member.id,
+          name: member.name,
+          creditId: member.credit_id,
+          job: member.job,
+          department: member.department,
+          profileURL: member.profile_path
+            ? formatImageURL(member.profile_path, 'm', true)[0]
             : '',
-        },
+        })),
       };
 
       return {
@@ -751,6 +751,7 @@ export {
   tvSearchByTitle,
   tvGetShowDetails,
   tvGetShowSeasonDetails,
+  tvGetShowEpisodeDetails,
   tvGetShowCredits,
   tvGetPopular,
   tvGetWatchProviders,

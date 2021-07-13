@@ -141,7 +141,7 @@ export const getTVGenres = (convertToObjectFlag = false) => {
     .catch((err) => {
       console.log(`Error with config get: ${err}`);
       return {
-        data: convertGenreToObj('ERROR', 'tv'), //this will return default genres
+        data: convertGenreToObj({ genres: 'ERROR' }, 'tv'), //this will return default genres
         apiCall,
         msg: err,
       };
@@ -172,7 +172,7 @@ export const getMovieGenres = (convertToObjectFlag = false) => {
     .catch((err) => {
       console.log(`Error with config get: ${err}`);
       return {
-        data: convertGenreToObj('ERROR', 'movie'), //this will return default genres
+        data: convertGenreToObj({ genres: 'ERROR' }, 'movie'), //this will return default genres
         apiCall,
         msg: err,
       };
@@ -234,7 +234,6 @@ function convertGenreToObj(genreData, genreType) {
   }
   // genre data from API is an array of object {id, name}
   // convert that into a single object for easy lookups.
-
   return genres.reduce((final, genre) => {
     final[genre.id] = genre.name;
     return final;
