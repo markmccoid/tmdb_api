@@ -35,11 +35,23 @@ export type TVGetImages = {
   data: string[];
   apiCall: string;
 };
+// returned when aspect ratio needed
+export type TVGetImagesAspect = {
+  data: | { aspectRatio: number, URL: string }[];
+  apiCall: string;
+};
 
 export function tvGetImages(
   showId: number,
-  imageType?: "posters" | "backdrops"
+  imageType?: "posters" | "backdrops" | "logos",
+  includeAspectRatio?: false,
 ): Promise<TVGetImages>;
+
+export function tvGetImages(
+  showId: number,
+  imageType?: "posters" | "backdrops" | "logos",
+  includeAspectRatio?: true,
+): Promise<TVGetImagesAspect>;
 
 // -- TV SHOW SEARCH
 // -- The TVSearchResultItem type is used for
@@ -181,7 +193,7 @@ export type AppendParams = "videos" | "credits" | "aggregate_credits";
 // - FUNCTION Export
 export function tvGetShowDetails(
   showId: number,
-  appendToResponse: AppendParams[]
+  appendToResponse?: AppendParams[]
 ): Promise<TVShowDetailsBase>;
 
 //= == tvGetShowDetails END =====================

@@ -38,21 +38,49 @@ import { TV_GENRE_OBJ } from '../index';
  * @memberOf Curated_API_TV
  * @method
  * @param {(string)} showId - showId from TMDb API Show Search.
- * @param {string} [imageType=posters] - 'posters', 'backdrops'
+ * @param {string} [imageType=posters] - 'posters', 'backdrops', 'logos'
+ * @param {string} [includeAspectRatio=false] - include the aspect ratio in the result
+ *   [{ aspectRation: '1.78', URL: 'https://image.tmdb.org/t/p/w1280/...' }]
  * @returns {string[]} Array of URLs to the images
  */
-function tvGetImages(showId, imageType = 'posters') {
+function tvGetImages(
+  showId,
+  imageType = 'posters',
+  includeAspectRatio = false
+) {
   let apiCall;
   return rawTVGetShowImages(showId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
+
     let imgFilePaths = resp.data[imageType]
       .filter((imgObj) => imgObj.iso_639_1 === 'en')
       .map((imgObj) => {
-        return imgObj.file_path;
+        return {
+          aspectRatio: imgObj.aspect_ratio,
+          URL: formatImageURL(imgObj.file_path, 'm', true)[0],
+        };
       });
-    // Get the full image URLs
-    let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
+    // If aspect ratio is requested, return object with aspect ratio and URL
+    if (includeAspectRatio) {
+      return {
+        data: imgFilePaths,
+        apiCall,
+      };
+    }
+    // Otherwise, return array of URLs
+    return {
+      data: imgFilePaths.map((imgObj) => imgObj.URL),
+      apiCall,
+    };
+
+    // let imgFilePaths = resp.data[imageType]
+    //   .filter((imgObj) => imgObj.iso_639_1 === 'en')
+    //   .map((imgObj) => {
+    //     return imgObj.file_path;
+    //   });
+    // // Get the full image URLs
+    // let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
     return {
       data: formattedImageURLs,
       apiCall,
