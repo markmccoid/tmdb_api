@@ -115,13 +115,30 @@ function rawTVGetShowImages(showId) {
  * Returns external Ids from TMDb.
  *
  * @memberOf Raw_API_TV
- * @param {string} showId - TMDb show id
+ * @param {number} showId - TMDb show id
  * @returns {object} response object {data, msg}
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetExternalIds(showId) {
   return apiTMDB(`/tv/${showId}/external_ids`);
+}
+
+/**
+ * Returns external Ids from TMDb for Episode.
+ *
+ * @memberOf Raw_API_TV
+ * @param {number} showId - TMDb show id
+ * @param {number} seasonNumber -
+ * @param {number} epoisdeNumber -
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVGetEpisodeExternalIds(showId, seasonNumber, episodeNumber) {
+  return apiTMDB(
+    `/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/external_ids`
+  );
 }
 
 /**
@@ -296,6 +313,7 @@ export {
   rawTVGetShowCredits,
   rawTVGetEpisodes,
   rawTVGetExternalIds,
+  rawTVGetEpisodeExternalIds,
   rawTVGetShowDetails,
   rawTVGetShowSeasonDetails,
   rawTVGetShowEpisodeDetails,

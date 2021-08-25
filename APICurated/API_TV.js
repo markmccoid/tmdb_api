@@ -15,6 +15,7 @@ import {
   rawTVSearchByTitle,
   rawTVGetShowDetails,
   rawTVGetExternalIds,
+  rawTVGetEpisodeExternalIds,
   rawTVGetShowCredits,
   rawTVWatchProviders,
   rawTVGetPopular,
@@ -341,6 +342,7 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
       inProduction: resp.data.in_production,
       imdbId: resp.data.external_ids.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.external_ids.imdb_id}`,
+      imdbEpisodesURL: `https://www.imdb.com/title/${resp.data.external_ids.imdb_id}/episodes`,
       instagramId: resp.data.external_ids.instagram_id,
       tvdbId: resp.data.external_ids.tvdb_id,
       tvRageId: resp.data.external_ids.tvrage_id,
@@ -444,6 +446,42 @@ function tvGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber) {
             ? formatImageURL(member.profile_path, 'm', true)[0]
             : '',
         })),
+      };
+
+      return {
+        data: searchResults,
+        apiCall,
+      };
+    }
+  );
+}
+
+/**
+ * Returns episode External Ids for passed tvShowId, seasonNumber and EpisodeNumber
+ * @memberOf Curated_API_TV
+ * @method
+ *
+ * @param {number} tvShowId - tvShowId
+ * @param {number} seasonNumber -
+ * @param {number} episodeNumber -
+ * Returns -
+ */
+
+function tvGetShowEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber) {
+  let apiCall;
+  let searchResults;
+
+  return rawTVGetEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber).then(
+    (resp) => {
+      // Curate results
+      apiCall = resp.apiCall;
+      searchResults = {
+        id: resp.data.id,
+        imdbId: resp.data.imdb_id,
+        imdbEpisodeURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
+        freebaseId: resp.data.freebase_id,
+        tvdbId: resp.data.tvdb_id,
+        tvrageId: resp.data.tvrage_id,
       };
 
       return {
@@ -780,6 +818,7 @@ export {
   tvGetShowDetails,
   tvGetShowSeasonDetails,
   tvGetShowEpisodeDetails,
+  tvGetShowEpisodeExternalIds,
   tvGetShowCredits,
   tvGetPopular,
   tvGetWatchProviders,
