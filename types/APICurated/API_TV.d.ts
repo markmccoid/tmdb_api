@@ -172,6 +172,7 @@ export type TVShowDetails = {
   genres: string[];
   imdbId: string;
   imdbURL: string;
+  imdbEpisodesURL: string;
   instagramId: string;
   tvdbId: number;
   tvRageId: number;
@@ -219,7 +220,7 @@ export function tvGetShowSeasonDetails(
 
 //= == tvGetShowSeasonDetails END =====================
 
-//-- tvGetShowSeasonDetails --------------------
+//-- tvGetShowEpisodeDetails --------------------
 
 type TVShowEpisodeDetails = {
   id: number;
@@ -232,10 +233,27 @@ type TVShowEpisodeDetails = {
   guestStars: Omit<CastType, 'gender' | 'personId'>[],
   crew: Omit<CrewType, 'gender' | 'personId'>[],
 };
+export type TVShowEpisodeDetailsBase = BaseSinglePage<TVShowEpisodeDetails>;
 
-export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVShowEpisodeDetails>
+export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVShowEpisodeDetailsBase>
 
 //= == tvGetShowEpisodeDetails END =====================
+
+//-- tvGetShowEpisodeExternalIds --------------------
+
+type TVEpisodeExternalIds = {
+  id: number;
+  imdbId: string;
+  imdbEpisodeURL: string;
+  freebaseId: string;
+  tvdbId: number;
+  tvrageId: number;
+};
+export type TVEpisodeExternalIdsBase = BaseSinglePage<TVEpisodeExternalIds>;
+
+export function tvGetShowEpisodeExternalIds(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVEpisodeExternalIdsBase>
+
+//= == tvGetShowEpisodeExternalIds END =====================
 
 // -- tvGetShowCredits -----------
 /**
