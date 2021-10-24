@@ -408,52 +408,78 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
  * @param {number} episodeNumber -
  * Returns -
  */
-function tvGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber) {
+function tvGetShowEpisodeDetails(
+  tvShowId,
+  seasonNumber,
+  episodeNumber,
+  appendToResponse = []
+) {
   let apiCall;
   let searchResults;
+  let castResults;
 
-  return rawTVGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber).then(
-    (resp) => {
-      // Curate results
-      apiCall = resp.apiCall;
-      searchResults = {
-        id: resp.data.id,
-        seasonNumber: resp.data.season_number,
-        name: resp.data.name,
-        overview: resp.data.overview,
-        stillURL: resp.data.still_path
-          ? formatImageURL(resp.data.still_path, 'm', true)[0]
+  // Always get external ids using append_to_response tmdb api functionality
+  appendToResponse = Array.isArray(appendToResponse)
+    ? appendToResponse
+    : [appendToResponse];
+  appendToResponse = [
+    ...appendToResponse.map((el) => el.trim()), //remove spaces
+  ];
+
+  // Take array of valid append options and join with comma to build param object
+  const appendParam = {
+    params: { append_to_response: appendToResponse.join(',') },
+  };
+
+  return rawTVGetShowEpisodeDetails(
+    tvShowId,
+    seasonNumber,
+    episodeNumber,
+    appendParam
+  ).then((resp) => {
+    // Curate results
+    apiCall = resp.apiCall;
+    searchResults = {
+      id: resp.data.id,
+      seasonNumber: resp.data.season_number,
+      name: resp.data.name,
+      overview: resp.data.overview,
+      stillURL: resp.data.still_path
+        ? formatImageURL(resp.data.still_path, 'm', true)[0]
+        : '',
+      airDate: parseToDate(resp.data.air_date),
+      episodeNumber: resp.data.episode_number,
+      guestStars: resp.data.guest_stars.map((guest) => ({
+        id: guest.id,
+        name: guest.name,
+        creditId: guest.credit_id,
+        characterName: guest.character,
+        order: guest.order,
+        profileURL: guest.profile_path
+          ? formatImageURL(guest.profile_path, 'm', true)[0]
           : '',
-        airDate: parseToDate(resp.data.air_date),
-        episodeNumber: resp.data.episode_number,
-        guestStars: resp.data.guest_stars.map((guest) => ({
-          id: guest.id,
-          name: guest.name,
-          creditId: guest.credit_id,
-          characterName: guest.character,
-          order: guest.order,
-          profileURL: guest.profile_path
-            ? formatImageURL(guest.profile_path, 'm', true)[0]
-            : '',
-        })),
-        crew: resp.data.crew.map((member) => ({
-          id: member.id,
-          name: member.name,
-          creditId: member.credit_id,
-          job: member.job,
-          department: member.department,
-          profileURL: member.profile_path
-            ? formatImageURL(member.profile_path, 'm', true)[0]
-            : '',
-        })),
-      };
-
-      return {
-        data: searchResults,
-        apiCall,
+      })),
+      crew: resp.data.crew.map((member) => ({
+        id: member.id,
+        name: member.name,
+        creditId: member.credit_id,
+        job: member.job,
+        department: member.department,
+        profileURL: member.profile_path
+          ? formatImageURL(member.profile_path, 'm', true)[0]
+          : '',
+      })),
+    };
+    if (appendToResponse.includes('credits')) {
+      castResults = {
+        cast: processCastData(resp.data.credits.cast),
       };
     }
-  );
+    return {
+      data: { ...searchResults, ...castResults },
+      apiCall,
+    };
+  });
 }
 
 /**

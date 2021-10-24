@@ -79,9 +79,34 @@ function rawTVGetShowSeasonDetails(tvShowId, seasonNumber) {
   return apiTMDB(`/tv/${tvShowId}/season/${seasonNumber}`);
 }
 
-function rawTVGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber) {
+/**
+ * Returns show single episode details for passed TMDb showId, seasonNum, episodeNum
+ *
+ * @memberOf Raw_API_TV
+ * @param {string} showId - TMDb show id
+ * @param {number} seasonNumber
+ * @param {number} episodeNumber
+ * @param {object} appendConfig - axios config object, allowing you to pass "append_to_response" for additional data.
+ * some options are: "credits,images,external_ids"
+ * @returns {object} response object {data, msg}
+ *  on success { data: data from api call, apiCall: API call}
+ *  on error { data: 'ERROR', msg: error message, }
+ */
+function rawTVGetShowEpisodeDetails(
+  tvShowId,
+  seasonNumber,
+  episodeNumber,
+  appendConfig = {}
+) {
   return apiTMDB(
-    `/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}`
+    `/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}`,
+    appendConfig
+  );
+}
+
+function rawTVGetShowEpisodeCredits(tvShowId, seasonNumber, episodeNumber) {
+  return apiTMDB(
+    `/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}/credits`
   );
 }
 /**
@@ -325,4 +350,5 @@ export {
   rawTVGetRecommendations,
   rawTVGetVideos,
   rawTVGetPersonCredits,
+  rawTVGetShowEpisodeCredits,
 };

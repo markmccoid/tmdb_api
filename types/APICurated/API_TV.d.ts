@@ -232,10 +232,11 @@ type TVShowEpisodeDetails = {
   episodeNumber: number;
   guestStars: Omit<CastType, 'gender' | 'personId'>[],
   crew: Omit<CrewType, 'gender' | 'personId'>[],
+  cast?: CastType[]
 };
 export type TVShowEpisodeDetailsBase = BaseSinglePage<TVShowEpisodeDetails>;
 
-export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVShowEpisodeDetailsBase>
+export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number, appendToResponse: string[] | string): Promise<TVShowEpisodeDetailsBase>
 
 //= == tvGetShowEpisodeDetails END =====================
 
