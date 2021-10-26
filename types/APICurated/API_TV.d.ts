@@ -230,7 +230,7 @@ type TVShowEpisodeDetails = {
   stillURL: string;
   airDate: DateObject;
   episodeNumber: number;
-  guestStars: Omit<CastType, 'gender' | 'personId'>[],
+  guestStars: CastType[],
   crew: Omit<CrewType, 'gender' | 'personId'>[],
   cast?: CastType[]
 };
