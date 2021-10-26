@@ -449,16 +449,17 @@ function tvGetShowEpisodeDetails(
         : '',
       airDate: parseToDate(resp.data.air_date),
       episodeNumber: resp.data.episode_number,
-      guestStars: resp.data.guest_stars.map((guest) => ({
-        id: guest.id,
-        name: guest.name,
-        creditId: guest.credit_id,
-        characterName: guest.character,
-        order: guest.order,
-        profileURL: guest.profile_path
-          ? formatImageURL(guest.profile_path, 'm', true)[0]
-          : '',
-      })),
+      // guestStars: resp.data.guest_stars.map((guest) => ({
+      //   id: guest.id,
+      //   name: guest.name,
+      //   creditId: guest.credit_id,
+      //   characterName: guest.character,
+      //   order: guest.order,
+      //   profileURL: guest.profile_path
+      //     ? formatImageURL(guest.profile_path, 'm', true)[0]
+      //     : '',
+      // })),
+      guestStars: processCastData(resp.data.guest_stars),
       crew: resp.data.crew.map((member) => ({
         id: member.id,
         name: member.name,
