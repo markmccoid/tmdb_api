@@ -60,7 +60,7 @@ function searchForPersonId(searchValue, page = 1) {
       totalPages: resp.data.total_pages,
       totalResults: resp.data.total_results,
     };
-    console.log(resp.data.results);
+    // console.log(resp.data.results);
 
     let results = resp.data.results.map((person) => {
       let knownFor = [];
