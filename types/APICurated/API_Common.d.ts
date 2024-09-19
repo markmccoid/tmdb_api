@@ -2,61 +2,69 @@ export type dateResultsType = {
   date: Date;
   epoch: number;
   formatted: string;
-}
+};
 export type searchForPersonId_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: any[];
-    };
-    /**
-     * the personId
-     */
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: any[];
+  };
+  /**
+   * the personId
+   */
+  id: number;
+  name: string;
+  profileImageURL: string;
+  knownFor: {
     id: number;
-    name: string;
-    popularity: number;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+    mediaType: string;
+    title: string;
+    posterURL: string;
+    backdropURL: string;
+  };
+  popularity: number;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type getPersonDetails_typedef = {
-    /**
-     * results of the search
-     */
-    data: {
-        id: number;
-        name: string;
-        birthday: any;
-        deathDay: any;
-        knownForDepartment: string;
-        biography: string;
-        placeOfBirth: string;
-        profileImage: string;
-        imdbId: string;
-    };
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * results of the search
+   */
+  data: {
+    id: number;
+    name: string;
+    birthday: any;
+    deathDay: any;
+    knownForDepartment: string;
+    biography: string;
+    placeOfBirth: string;
+    profileImage: string;
+    imdbId: string;
+  };
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type getPersonImages_typedef = {
-    /**
-     * results of the search
-     */
-    data: any[];
-    width: number;
-    height: string;
-    aspectRatio: any;
-    imageURL: string;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * results of the search
+   */
+  data: any[];
+  width: number;
+  height: string;
+  aspectRatio: any;
+  imageURL: string;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 /**
  * @typedef searchForPersonId_typedef
