@@ -14,12 +14,9 @@
  *
  */
 
-import {
-  rawSearchForPerson,
-  rawGetPersonDetails,
-  rawGetPersonImages,
-} from '../APIRaw/TMDB_Common';
-import { formatImageURL, parseToDate } from '../helpers';
+import { rawSearchForPerson, rawGetPersonDetails, rawGetPersonImages } from "../APIRaw/TMDB_Common";
+import { formatImageURL, parseToDate } from "../helpers";
+import _ from "lodash";
 
 /**
  * @typedef searchForPersonId_typedef
@@ -31,7 +28,14 @@ import { formatImageURL, parseToDate } from '../helpers';
  * @property {Array} data.results results of the search
  * @property {number} data.results.id the personId
  * @property {string} data.results.name
+ * @property {string} data.results.profileImageURL
  * @property {number} data.results.popularity
+ * @property {Array} data.results.knownFor list of movies known for
+ * @property {number} data.results.knownFor.id movie id
+ * @property {string} data.results.knownFor.mediaType
+ * @property {string} data.results.knownFor.title
+ * @property {string} data.results.knownFor.posterURL
+ * @property {string} data.results.knownFor.backdropURL
  * @property {string} apiCall the API call used to hit endpoint
  */
 /**
@@ -56,18 +60,35 @@ function searchForPersonId(searchValue, page = 1) {
       totalPages: resp.data.total_pages,
       totalResults: resp.data.total_results,
     };
+    console.log(resp.data.results);
+
     let results = resp.data.results.map((person) => {
+      let knownFor = [];
+
+      person.known_for.map((movie) => {
+        const newInfo = {
+          id: movie.id,
+          mediaType: movie.mediaType,
+          title: movie.title,
+          posterURL: formatImageURL(movie.poster_path, "m", true)[0],
+          backdropURL: formatImageURL(movie.backdrop_path, "m", true)[0],
+        };
+        knownFor.push(newInfo);
+      });
+
       return {
         id: person.id,
         name: person.name,
+        profileImageURL: formatImageURL(person.profile_path, "m", true)[0],
         popularity: person.popularity,
+        knownFor,
       };
     });
     return {
       data: {
         ...data,
         // sort array of results by popularity then reverse to show in desc order (most popular first)
-        results: _.reverse(_.sortBy(results, ['popularity'])),
+        results: _.reverse(_.sortBy(results, ["popularity"])),
       },
       apiCall: resp.apiCall,
     };
