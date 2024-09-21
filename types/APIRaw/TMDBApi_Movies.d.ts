@@ -1,3 +1,4 @@
+import { movieDiscoverCriteria_typedef } from "./../APICurated/API_Movies.d";
 /**
  * Returns data from search by searchString
  *
@@ -102,7 +103,11 @@ export function rawMovieGetNowPlaying(page?: number, language?: string): object;
  *  on error { data: 'ERROR', msg: error message, }
  */
 export function rawMovieGetPopular(page?: number, language?: string): object;
-export function rawMovieDiscover(criteriaObj: any, page?: number): Promise<any>;
+
+export function rawMovieDiscover(
+  criteriaObj: movieDiscoverCriteria_typedef,
+  page?: number
+): Promise<any>;
 /**
  * Returns the credits for Movies from TMDb.
  * Person Id can be found in getCredits results

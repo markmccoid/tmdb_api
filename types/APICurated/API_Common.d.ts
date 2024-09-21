@@ -3,16 +3,7 @@ export type dateResultsType = {
   epoch: number;
   formatted: string;
 };
-export type searchForPersonId_typedef = {
-  /**
-   * the data object
-   */
-  data: {
-    page: number;
-    totalResults: number;
-    totalPages: number;
-    results: any[];
-  };
+export type SearchForPerson_Results = {
   /**
    * the personId
    */
@@ -25,13 +16,26 @@ export type searchForPersonId_typedef = {
     title: string;
     posterURL: string;
     backdropURL: string;
-  };
+  }[];
   popularity: number;
+};
+export type searchForPersonId_typedef = {
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: SearchForPerson_Results[];
+  };
+
   /**
    * the API call used to hit endpoint
    */
   apiCall: string;
 };
+
 export type getPersonDetails_typedef = {
   /**
    * results of the search

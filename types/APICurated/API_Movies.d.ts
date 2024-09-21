@@ -1,27 +1,27 @@
-import { dateResultsType } from './API_Common';
+import { dateResultsType } from "./API_Common";
 
 export type imagesReturn_typedef = {
-    /**
-     * Array of image URLs
-     */
-    data: any[];
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * Array of image URLs
+   */
+  data: any[];
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type movieWatchProviders_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        movieId: number;
-        results: any[];
-    };
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    movieId: number;
+    results: any[];
+  };
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 
 type videoResultsType = {
@@ -35,279 +35,276 @@ type videoResultsType = {
   site: string;
   size: number;
   type: string;
-}
+};
 type movieSearchByTitle_Results = {
-      /** the movieId */
-       id: number;
-       title: string;
-       overview: string;
-       /** - returns an object with options for date {date, epoch, formatted} */
-       releaseDate: dateResultsType;
-       posterURL: string;
-       backdropURL: string;
-       /**array of genre names */
-       genres: string[];
-       videos?: videoResultsType[]
-}
+  /** the movieId */
+  id: number;
+  title: string;
+  overview: string;
+  /** - returns an object with options for date {date, epoch, formatted} */
+  releaseDate: dateResultsType;
+  posterURL: string;
+  backdropURL: string;
+  /**array of genre names */
+  genres: string[];
+  videos?: videoResultsType[];
+};
 export type movieSearchByTitle_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: movieSearchByTitle_Results[];
-    };
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: movieSearchByTitle_Results[];
+  };
+  apiCall: string;
 };
 export type movieDetails_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        id: number;
-        title: string;
-        tagline: string;
-        overview: string;
-        status: string;
-        runtime: number;
-        budget: number;
-        revenue: number;
-        releaseDate: object;
-        posterURL: string;
-        backdropURL: string;
-        imdbId: string;
-        imdbURL: string;
-        genres: string[];
-        videos?: videoResultsType[];
-    };
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    id: number;
+    title: string;
+    tagline: string;
+    overview: string;
+    status: string;
+    runtime: number;
+    budget: number;
+    revenue: number;
+    releaseDate: object;
+    posterURL: string;
+    backdropURL: string;
+    imdbId: string;
+    imdbURL: string;
+    genres: string[];
+    videos?: videoResultsType[];
+  };
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type movieVideos_typedef = {
-    /**
-     * the data array is an array of objects
-     */
-    data: any[];
-    /**
-     * the videoId
-     */
-    id: string;
-    language: string;
-    country: string;
-    key: string;
-    name: string;
-    site: number;
-    size: number;
-    type: number;
-    videoURL: object;
-    videoThumbnailURL: string;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data array is an array of objects
+   */
+  data: any[];
+  /**
+   * the videoId
+   */
+  id: string;
+  language: string;
+  country: string;
+  key: string;
+  name: string;
+  site: number;
+  size: number;
+  type: number;
+  videoURL: object;
+  videoThumbnailURL: string;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type moviesRecommendations_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: any[];
-    };
-    /**
-     * the movieId
-     */
-    id: number;
-    title: string;
-    overview: string;
-    /**
-     * - returns an object with options for date {date, epoch, formatted}
-     */
-    releaseDate: any;
-    posterURL: string;
-    backdropURL: string;
-    /**
-     * array of genre names
-     */
-    genres: any;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: any[];
+  };
+  /**
+   * the movieId
+   */
+  id: number;
+  title: string;
+  overview: string;
+  /**
+   * - returns an object with options for date {date, epoch, formatted}
+   */
+  releaseDate: any;
+  posterURL: string;
+  backdropURL: string;
+  /**
+   * array of genre names
+   */
+  genres: any;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type moviesPopular_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: any[];
-    };
-    /**
-     * the movieId
-     */
-    id: number;
-    title: string;
-    overview: string;
-    /**
-     * - returns an object with options for date {date, epoch, formatted}
-     */
-    releaseDate: any;
-    posterURL: string;
-    backdropURL: string;
-    /**
-     * array of genre names
-     */
-    genres: any;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: any[];
+  };
+  /**
+   * the movieId
+   */
+  id: number;
+  title: string;
+  overview: string;
+  /**
+   * - returns an object with options for date {date, epoch, formatted}
+   */
+  releaseDate: any;
+  posterURL: string;
+  backdropURL: string;
+  /**
+   * array of genre names
+   */
+  genres: any;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type movieCredits_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        cast: any[];
-    };
-    personId: number;
-    name: string;
-    characterName: string;
-    creditId: string;
-    /**
-     * 1 is Female, 2 is Male
-     */
-    gender: number;
-    profileURL: string;
-    /**
-     * the crew array
-     */
-    crew: string;
-    job: string;
-    department: string;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    cast: any[];
+  };
+  personId: number;
+  name: string;
+  characterName: string;
+  creditId: string;
+  /**
+   * 1 is Female, 2 is Male
+   */
+  gender: number;
+  profileURL: string;
+  /**
+   * the crew array
+   */
+  crew: string;
+  job: string;
+  department: string;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type moviePersonCredits_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        cast: any[];
-    };
-    movieId: number;
-    title: string;
-    overview: string;
-    releaseDate: any;
-    creditId: string;
-    characterName: string;
-    genres: any[];
-    posterURL: string;
-    backdropURL: string;
-    orginalLanguage: string;
-    /**
-     * the crew array
-     */
-    crew: string;
-    job: string;
-    department: string;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    cast: any[];
+  };
+  movieId: number;
+  title: string;
+  overview: string;
+  releaseDate: any;
+  creditId: string;
+  characterName: string;
+  genres: any[];
+  posterURL: string;
+  backdropURL: string;
+  orginalLanguage: string;
+  /**
+   * the crew array
+   */
+  crew: string;
+  job: string;
+  department: string;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type movieDiscover_typedef = {
-    /**
-     * the data object
-     */
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: any[];
-    };
-    /**
-     * the movieId
-     */
-    id: number;
-    title: string;
-    popularity: number;
-    originalLanguage: string;
-    overview: string;
-    releaseDate: any;
-    posterURL: string;
-    backdropURL: string;
-    /**
-     * array of genre names
-     */
-    genres: any;
-    /**
-     * the API call used to hit endpoint
-     */
-    apiCall: string;
+  /**
+   * the data object
+   */
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: any[];
+  };
+  /**
+   * the movieId
+   */
+  id: number;
+  title: string;
+  popularity: number;
+  originalLanguage: string;
+  overview: string;
+  releaseDate: any;
+  posterURL: string;
+  backdropURL: string;
+  /**
+   * array of genre names
+   */
+  genres: any;
+  /**
+   * the API call used to hit endpoint
+   */
+  apiCall: string;
 };
 export type movieDiscoverCriteria_typedef = {
-    /**
-     * genre Ids
-     */
-    genres: any[];
-    /**
-     * Primary Release Year
-     */
-    releaseYear: any;
-    /**
-     * movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
-     */
-    releaseDateGTE: any | string;
-    /**
-     * movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
-     */
-    releaseDateLTE: any | string;
-    /**
-     * person Ids. Only include movies that have one of the Id's added as an actor
-     */
-    cast: any[];
-    /**
-     * person Ids. Only include movies that have one of the Id's added as a crew member
-     */
-    crew: any[];
-    /**
-     * Watch providers ids to search limit search by.  Couple with region if desired
-     */
-    watchProviders: any[];
-    /**
-     * An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.  > As of 2/2021 a region must be used or no filtering will occur.  US is sent over as a default.
-     */
-    watchRegions: any[];
-    /**
-     * Options
-     * - popularity.asc
-     * - popularity.desc **Default**
-     * - release_date.asc
-     * - release_date.desc
-     * - revenue.asc
-     * - revenue.desc
-     * - primary_release_date.asc
-     * - primary_release_date.desc
-     * - original_title.asc
-     * - original_title.desc
-     * - vote_average.asc
-     * - vote_average.desc
-     * - vote_count.asc
-     * - vote_count.desc
-     */
-    sortBy: string;
+  /**
+   * genre Ids
+   */
+  genres: any[];
+  /**
+   * Primary Release Year
+   */
+  releaseYear: any;
+  /**
+   * movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+   */
+  releaseDateGTE: any | string;
+  /**
+   * movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
+   */
+  releaseDateLTE: any | string;
+  /**
+   * person Ids. Only include movies that have one of the Id's added as an actor
+   */
+  cast: any[];
+  /**
+   * person Ids. Only include movies that have one of the Id's added as a crew member
+   */
+  crew: any[];
+  /**
+   * Watch providers ids to search limit search by.  Couple with region if desired
+   */
+  watchProviders: any[];
+  /**
+   * An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.  > As of 2/2021 a region must be used or no filtering will occur.  US is sent over as a default.
+   */
+  watchRegions: any[];
+  sortBy:
+    | "popularity.asc"
+    | "popularity.desc"
+    | "release_date.asc"
+    | "release_date.desc"
+    | "revenue.asc"
+    | "revenue.desc"
+    | "primary_release_date.asc"
+    | "primary_release_date.desc"
+    | "original_title.asc"
+    | "original_title.desc"
+    | "vote_average.asc"
+    | "vote_average.desc"
+    | "vote_count.asc"
+    | "vote_count.desc";
 };
 /**
  * @typedef imagesReturn_typedef
@@ -351,7 +348,7 @@ export function movieGetImages(movieId: any, imageType?: string): imagesReturn_t
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {movieSearchByTitle_typedef} Object data return
  */
-export function movieSearchByTitle(searchValue: (string), page?: number): movieSearchByTitle_typedef;
+export function movieSearchByTitle(searchValue: string, page?: number): movieSearchByTitle_typedef;
 /**
  * @typedef movieDetails_typedef
  * @type {Object}
@@ -430,7 +427,10 @@ export function movieGetVideos(movieId: number): movieVideos_typedef;
  * @param {number} movieId - movieId to get details for
  * @returns {moviesRecommendations_typedef} Object data return
  */
-export function movieGetRecommendations(movieId: number, page?: number): moviesRecommendations_typedef;
+export function movieGetRecommendations(
+  movieId: number,
+  page?: number
+): moviesRecommendations_typedef;
 /**
  * @typedef moviePersonCredits_typedef
  * @type {Object}
@@ -569,7 +569,10 @@ export function movieGetUpcoming(page?: number, language?: string): any;
  * @param {array.<string>} countryCodes - Array of country codes to return
  * @returns {movieWatchProviders_typedef} Object data return
  */
-export function movieGetWatchProviders(movieId: string, countryCodes?: string[]): movieWatchProviders_typedef;
+export function movieGetWatchProviders(
+  movieId: string,
+  countryCodes?: string[]
+): movieWatchProviders_typedef;
 /**
  * @typedef movieDiscover_typedef
  * @type {Object}
@@ -624,4 +627,7 @@ export function movieGetWatchProviders(movieId: string, countryCodes?: string[])
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {movieDiscover_typedef} Object data return
  */
-export function movieDiscover(criteriaObj: movieDiscoverCriteria_typedef, page?: number): movieDiscover_typedef;
+export function movieDiscover(
+  criteriaObj: movieDiscoverCriteria_typedef,
+  page?: number
+): Promise<movieDiscover_typedef>;

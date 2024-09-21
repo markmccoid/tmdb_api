@@ -1,6 +1,6 @@
-import { format } from 'date-fns';
-import { apiTMDB } from '../apiCalls';
-import { flattenArray } from '../helpers';
+import { format } from "date-fns";
+import { apiTMDB } from "../apiCalls";
+import { flattenArray } from "../helpers";
 
 // const API_URL = 'https://api.themoviedb.org/3';
 
@@ -44,7 +44,7 @@ function rawMovieSearchByTitle(searchString, page = 1) {
       query: searchString,
     },
   };
-  return apiTMDB('/search/movie', config);
+  return apiTMDB("/search/movie", config);
 }
 
 /**
@@ -61,7 +61,7 @@ function rawMovieSearchByTitle(searchString, page = 1) {
 function rawMovieGetDetails(movieId) {
   const config = {
     params: {
-      append_to_response: 'videos',
+      append_to_response: "videos",
     },
   };
   return apiTMDB(`/movie/${movieId}`, config);
@@ -111,7 +111,7 @@ function rawMovieGetRecommendations(movieId, page = 1) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawMovieGetNowPlaying(page = 1, language = 'en-US') {
+function rawMovieGetNowPlaying(page = 1, language = "en-US") {
   const config = {
     params: {
       page,
@@ -131,7 +131,7 @@ function rawMovieGetNowPlaying(page = 1, language = 'en-US') {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawMovieUpcoming(page = 1, language = 'en-US') {
+function rawMovieUpcoming(page = 1, language = "en-US") {
   const config = {
     params: {
       page,
@@ -151,7 +151,7 @@ function rawMovieUpcoming(page = 1, language = 'en-US') {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawMovieGetPopular(page = 1, language = 'en-US') {
+function rawMovieGetPopular(page = 1, language = "en-US") {
   const config = {
     params: {
       page,
@@ -252,9 +252,9 @@ function rawMovieGetCredits(movieId) {
  * @returns {object} response object {data, apiCall}
  */
 const boolConversion = {
-  AND: ',',
-  OR: '|',
-  undefined: '|',
+  AND: ",",
+  OR: "|",
+  undefined: "|",
 };
 function rawMovieDiscover(criteriaObj, page = 1) {
   const { releaseDateGTE, releaseDateLTE } = criteriaObj;
@@ -262,38 +262,24 @@ function rawMovieDiscover(criteriaObj, page = 1) {
   let config = {
     params: {
       page,
-      with_genres: flattenArray(
-        criteriaObj.genres,
-        boolConversion[criteriaObj.genreCompareType]
-      ),
+      with_genres: flattenArray(criteriaObj.genres, boolConversion[criteriaObj.genreCompareType]),
       primary_release_year: criteriaObj.releaseYear,
       [`primary_release_date.lte`]:
-        typeof releaseDateLTE === 'date'
-          ? format(releaseDateLTE, 'YYYY-MM-DD')
-          : releaseDateLTE,
+        typeof releaseDateLTE === "date" ? format(releaseDateLTE, "YYYY-MM-DD") : releaseDateLTE,
       [`primary_release_date.gte`]:
-        typeof releaseDateGTE === 'date'
-          ? format(releaseDateGTE, 'YYYY-MM-DD')
-          : releaseDateGTE,
-      with_crew: flattenArray(
-        criteriaObj.crew,
-        boolConversion[criteriaObj.crewCompareType]
-      ),
-      with_cast: flattenArray(
-        criteriaObj.cast,
-        boolConversion[criteriaObj.castCompareType]
-      ),
+        typeof releaseDateGTE === "date" ? format(releaseDateGTE, "YYYY-MM-DD") : releaseDateGTE,
+      with_crew: flattenArray(criteriaObj.crew, boolConversion[criteriaObj.crewCompareType]),
+      with_cast: flattenArray(criteriaObj.cast, boolConversion[criteriaObj.castCompareType]),
       with_watch_providers: flattenArray(
         criteriaObj.watchProviders,
         boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
       ),
-      watch_region: criteriaObj.watchProviders
-        ? criteriaObj.watchRegion || 'US'
-        : undefined,
+      watch_region: criteriaObj.watchProviders ? criteriaObj.watchRegion || "US" : undefined,
+      sort_by: criteriaObj.sortBy,
     },
   };
 
-  return apiTMDB('/discover/movie', config);
+  return apiTMDB("/discover/movie", config);
 }
 
 export {
