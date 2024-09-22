@@ -2,20 +2,18 @@
 
 This package wraps select API calls from the [TMDB API](https://developers.themoviedb.org/3/getting-started/introduction). To use this, you will need to get an API Key from The Movie Database website.
 
-## Note
-
-Please note that even though this package is published to npm, it is still in quite a bit of flux. If you do plan on using it, know that it may change significantly.
-
 ## Motivation
 
 This project was inspired when writing another application that accessed the TMDB API for TV data. I found that I wrote a bunch of functions to get the data and then had to curate the return data into something useful. It seemed to make sense to package all this logic into a single package that could be included in any other project.
 
-Realize that the TMDB API is HUGE! So, my goal was to encapsulate the most common data that a project would need. If data is missing that you need, do a pull request and add it!
+Realize that the TMDB API is HUGE! So, my goal was to encapsulate the most common data that a (my) project would need. If data is missing that you need, do a pull request and add it!
 
 ## Install
 
 ```javascript
 $ yarn add @markmccoid/tmdb_api
+## OR
+$ npm install @markmccoid/tmdb_api
 ```
 
 ## API Docs
@@ -46,7 +44,19 @@ import Main from "./components/Main";
 import { initTMDB } from "@markmccoid/tmdb_api";
 
 function App() {
-  initTMDB("0e4935axxxxxxxxxxxxxxxxxx");
+  const [isLoaded, setIsLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    const initializeApp = async () => {
+      const tmdbConfig = await initTMDB("0e4935axxxxxxxxxxxxxxxxxx");
+      setIsLoaded(true);
+    };
+    initializeApp();
+  }, []);
+
+  if (!isLoaded) {
+    return <div>Initializing App...</div>;
+  }
   return (
     <div>
       <header>TMDB API Wrapper</header>
@@ -58,7 +68,20 @@ function App() {
 export default App;
 ```
 
-initTMDB returns a promise, hence is an async function. This means that if you are programmatically calling any of the tmdb_api functions, you have to wait until the promise resolves.
+initTMDB returns a config object that contains the config information used in the application. You probably won't need it.
+
+```ts
+interface TMDBConfig {
+  IMG_URL: string;
+  SECURE_IMG_URL: string;
+  API_KEY: string;
+  TV_GENRE_OBJ: { [key: number]: string };
+  MOVIE_GENRE_OBJ: { [key: number]: string };
+  API_OPTIONS: {
+    dateFormatString: string;
+  };
+}
+```
 
 ### Options Object
 
@@ -84,9 +107,7 @@ The _dateFormatString_ must use the formatting options from the [**date-fns** pa
 }
 ```
 
-The _defaultAPIParams_ object lets you pass in any parameters that you want to always be set when making calls
-
-If you need to change the _dateFormatString_ after initialization, just use the **updateAPIOptions(options)** functions.
+The _defaultAPIParams_ object currently allows you to change the "include_adult" flag. If not passed, the default is "false".
 
 ## Raw API Functions
 
@@ -154,11 +175,11 @@ The returned object shape is the same as the Raw calls:
 
 > Note: for functions that have a page argument, the data object will also include, at the root of the returned object, a page (current page you are on), totalResults (total count of results), totalPages (total number of pages) properties. You will need this data for pagination.
 
-## TypeScript 
+## TypeScript
 
 My first go at using TypeScript in a project, so any comments would be appreciated.
 
-The type definition files (*\*.d.ts*) are located in the `./types` directory and follows the same directory structure as the source files.
+The type definition files (_\*.d.ts_) are located in the `./types` directory and follows the same directory structure as the source files.
 
 The **Curated** functions have a return type that is made up of a **Base** type so that the main results can have a separate type that you can use in your applications if needed.
 
@@ -167,17 +188,17 @@ For example, most **curated** functions return one of two differenct structures 
 ```javascript
 // -- Results that when queried will have multiple pages
 {
-    data: CustomType; // The meat of the return from TMDB API call.
-    apiCall: string; // apicall used to get results
-    page: number; // ONLY returned for functions with a page argument
-    totalResults: number; // ONLY returned for functions with a page argument
-    totalPages: number; // ONLY returned for functions with a page argument
+  data: CustomType; // The meat of the return from TMDB API call.
+  apiCall: string; // apicall used to get results
+  page: number; // ONLY returned for functions with a page argument
+  totalResults: number; // ONLY returned for functions with a page argument
+  totalPages: number; // ONLY returned for functions with a page argument
 }
-    
+
 // -- Results that are returned all in the single query
-    {
-    data: CustomType; // The meat of the return from TMDB API call.
-    apiCall: string; // apicall used to get results
+{
+  data: CustomType; // The meat of the return from TMDB API call.
+  apiCall: string; // apicall used to get results
 }
 ```
 
@@ -200,30 +221,27 @@ export type BaseMultiPage<T> = {
 };
 ```
 
-What this means is that you can pull in  the **T** type to type the actual data/results that you will most likely be using in your application.
+What this means is that you can pull in the **T** type to type the actual data/results that you will most likely be using in your application.
 
-For example, `tvGetShowDetails(showId)` returns the **TVShowDetailsBase** type, but is built using the BaseSinglePage  generic passing in the **TVShowDetails** type, which ends up typeing the `data` portion of the return object:
+For example, `tvGetShowDetails(showId)` returns the **TVShowDetailsBase** type, but is built using the BaseSinglePage generic passing in the **TVShowDetails** type, which ends up typeing the `data` portion of the return object:
 
 ```typescript
-function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>
+function tvGetShowDetails(showId: number): Promise<TVShowDetailsBase>;
 
 //-- Base built here
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
 
 //-- Which results in this
 type TVShowDetailsBase = {
-    data: TVShowDetails;
-    apiCall: string;
-}
+  data: TVShowDetails;
+  apiCall: string;
+};
 ```
 
-Both **tvSearchByTitle** and **tvGetPopular** return the *BaseMultiPage* generic:
+Both **tvSearchByTitle** and **tvGetPopular** return the _BaseMultiPage_ generic:
 
 ```typescript
-export function tvSearchByTitle(
-  searchValue: string,
-  page?: number
-): Promise<TVSearchResultBase>;
+export function tvSearchByTitle(searchValue: string, page?: number): Promise<TVSearchResultBase>;
 
 export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
 
@@ -232,13 +250,12 @@ export type TVSearchResultBase = BaseMultiPage<TVSearchResultItem[]>;
 
 //-- Which results in this
 type TVSearchResultBase = {
-    data: {
-        page: number;
-        totalResults: number;
-        totalPages: number;
-        results: TVSearchResultItem[];
-    };
-    apiCall: string;
-}
+  data: {
+    page: number;
+    totalResults: number;
+    totalPages: number;
+    results: TVSearchResultItem[];
+  };
+  apiCall: string;
+};
 ```
-

@@ -8,8 +8,9 @@
  *
  */
 
-import { formatImageURL, parseToDate } from '../helpers';
-import { MOVIE_GENRE_OBJ } from '../index';
+import { formatImageURL, parseToDate } from "../helpers";
+import { tmdbConfig } from "../config";
+
 import {
   rawMovieSearchByTitle,
   rawMovieGetImages,
@@ -23,7 +24,7 @@ import {
   rawMovieGetPopular,
   rawMovieUpcoming,
   rawMovieDiscover,
-} from '../APIRaw/TMDBApi_Movies';
+} from "../APIRaw/TMDBApi_Movies";
 
 /**
  * @typedef imagesReturn_typedef
@@ -40,18 +41,18 @@ import {
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {imagesReturn_typedef} Array of URLs to the images
  */
-function movieGetImages(movieId, imageType = 'posters') {
+function movieGetImages(movieId, imageType = "posters") {
   let apiCall;
   return rawMovieGetImages(movieId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
     let imgFilePaths = resp.data[imageType]
-      .filter((imgObj) => imgObj.iso_639_1 === 'en')
+      .filter((imgObj) => imgObj.iso_639_1 === "en")
       .map((imgObj) => {
         return imgObj.file_path;
       });
     // Get the full image URLs
-    let formattedImageURLs = formatImageURL(imgFilePaths, 'm', true);
+    let formattedImageURLs = formatImageURL(imgFilePaths, "m", true);
     return {
       data: formattedImageURLs,
       apiCall,
@@ -94,7 +95,7 @@ function movieGetImages(movieId, imageType = 'posters') {
  * @param {array.<string>} countryCodes - Array of country codes to return
  * @returns {movieWatchProviders_typedef} Object data return
  */
-function movieGetWatchProviders(movieId, countryCodes = ['US']) {
+function movieGetWatchProviders(movieId, countryCodes = ["US"]) {
   let watchInfo;
   let searchResults;
   countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
@@ -118,7 +119,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].flatrate.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -126,7 +127,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].buy.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -134,7 +135,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].rent.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -177,7 +178,7 @@ function movieGetWatchProviders(movieId, countryCodes = ['US']) {
  * @returns {movieSearchByTitle_typedef} Object data return
  */
 function movieSearchByTitle(searchValue, page = 1) {
-  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   // console.log('TV Genre', GENRE_OBJ)
   let apiCall;
   let searchResults;
@@ -196,12 +197,8 @@ function movieSearchByTitle(searchValue, page = 1) {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.poster_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.poster_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
@@ -246,7 +243,7 @@ function movieGetDetails(movieId, withVideos = false) {
   return rawMovieGetDetails(movieId).then((resp) => {
     //Get video data and format, currently just getting youtube videos
     const videos = resp.data.videos.results
-      .filter((video) => video.site === 'YouTube')
+      .filter((video) => video.site === "YouTube")
       .map((video) => ({
         id: video.id,
         language: video.iso_639_1,
@@ -270,12 +267,10 @@ function movieGetDetails(movieId, withVideos = false) {
       budget: resp.data.budget,
       revenue: resp.data.revenue,
       releaseDate: parseToDate(resp.data.release_date),
-      posterURL: resp.data.poster_path
-        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
-        : '',
+      posterURL: resp.data.poster_path ? formatImageURL(resp.data.poster_path, "m", true)[0] : "",
       backdropURL: resp.data.backdrop_path
-        ? formatImageURL(resp.data.backdrop_path, 'm', true)[0]
-        : '',
+        ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
+        : "",
       imdbId: resp.data.imdb_id,
       imdbURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
       genres: resp.data.genres.map((genreObj) => genreObj.name),
@@ -314,7 +309,7 @@ function movieGetVideos(movieId) {
   return rawMovieGetVideos(movieId).then((resp) => {
     //Get video data and format, currently just getting youtube videos
     const videos = resp.data.results
-      .filter((video) => video.site === 'YouTube')
+      .filter((video) => video.site === "YouTube")
       .map((video) => ({
         id: video.id,
         language: video.iso_639_1,
@@ -360,6 +355,7 @@ function movieGetVideos(movieId) {
  */
 
 function movieGetRecommendations(movieId, page = 1) {
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   //Don't forget to change the typedef to match what you are returning
   // Call rawMovieGetRecommendations()
   // Make response line up with at least the search result type
@@ -377,12 +373,8 @@ function movieGetRecommendations(movieId, page = 1) {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.backdrop_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.backdrop_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
@@ -419,7 +411,8 @@ function movieGetRecommendations(movieId, page = 1) {
  * @returns {moviesSimilar_typedef} Object data return
  */
 
-function movieGetPopular(page = 1, language = 'en-US') {
+function movieGetPopular(page = 1, language = "en-US") {
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   //Don't forget to change the typedef to match what you are returning
   // Call rawMovieGetPopular()
   // Make response line up with at least the search result type
@@ -437,12 +430,8 @@ function movieGetPopular(page = 1, language = 'en-US') {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.backdrop_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.backdrop_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
@@ -454,7 +443,8 @@ function movieGetPopular(page = 1, language = 'en-US') {
   });
 }
 
-function movieGetNowPlaying(page = 1, language = 'en-US') {
+function movieGetNowPlaying(page = 1, language = "en-US") {
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   //Don't forget to change the typedef to match what you are returning
   // Call rawMovieGetNowPlaying()
   // Make response line up with at least the search result type
@@ -472,12 +462,8 @@ function movieGetNowPlaying(page = 1, language = 'en-US') {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.backdrop_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.backdrop_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
@@ -489,7 +475,8 @@ function movieGetNowPlaying(page = 1, language = 'en-US') {
   });
 }
 
-function movieGetUpcoming(page = 1, language = 'en-US') {
+function movieGetUpcoming(page = 1, language = "en-US") {
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   //Don't forget to change the typedef to match what you are returning
   // Call rawMovieGetNowPlaying()
   // Make response line up with at least the search result type
@@ -507,12 +494,8 @@ function movieGetUpcoming(page = 1, language = 'en-US') {
         title: movie.title,
         releaseDate: parseToDate(movie.release_date),
         overview: movie.overview,
-        posterURL: movie.backdrop_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.backdrop_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
       };
     });
@@ -558,7 +541,6 @@ function movieGetUpcoming(page = 1, language = 'en-US') {
  * }
  */
 function movieGetCredits(movieId) {
-  // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieGetCredits(movieId).then((resp) => {
     let castForMovie = resp.data.cast.map((castMember) => {
       return {
@@ -568,8 +550,8 @@ function movieGetCredits(movieId) {
         creditId: castMember.credit_id,
         gender: castMember.gender,
         profileURL: castMember.profile_path
-          ? formatImageURL(castMember.profile_path, 'm', true)[0]
-          : '',
+          ? formatImageURL(castMember.profile_path, "m", true)[0]
+          : "",
       };
     });
     let crewForMovie = resp.data.crew.map((crewMember) => {
@@ -581,8 +563,8 @@ function movieGetCredits(movieId) {
         department: crewMember.department,
         gender: crewMember.gender,
         profileURL: crewMember.profile_path
-          ? formatImageURL(crewMember.profile_path, 'm', true)[0]
-          : '',
+          ? formatImageURL(crewMember.profile_path, "m", true)[0]
+          : "",
       };
     });
     return {
@@ -634,7 +616,7 @@ function movieGetCredits(movieId) {
  * }
  */
 function movieGetPersonCredits(personId) {
-  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
 
   return rawMovieGetPersonCredits(personId).then((resp) => {
     let castMovies = resp.data.cast.map((movie) => {
@@ -646,12 +628,8 @@ function movieGetPersonCredits(personId) {
         creditId: movie.credit_id,
         characterName: movie.character,
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
-        posterURL: movie.poster_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.poster_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         orginalLanguage: movie.original_language,
       };
     });
@@ -665,12 +643,8 @@ function movieGetPersonCredits(personId) {
         job: movie.job,
         department: movie.department,
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
-        posterURL: movie.poster_path
-          ? formatImageURL(movie.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: movie.backdrop_path
-          ? formatImageURL(movie.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: movie.poster_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
+        backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         orginalLanguage: movie.original_language,
       };
     });
@@ -736,10 +710,10 @@ function movieGetPersonCredits(personId) {
  * @returns {movieDiscover_typedef} Object data return
  */
 function movieDiscover(criteriaObj, page = 1) {
+  const { MOVIE_GENRE_OBJ } = tmdbConfig.getConfig();
   let apiCall;
   let searchResults;
   let moviesReturned;
-  // // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
   return rawMovieDiscover(criteriaObj, page).then((resp) => {
     apiCall = resp.apiCall;
     searchResults = {
@@ -754,12 +728,8 @@ function movieDiscover(criteriaObj, page = 1) {
       popularity: result.popularity,
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
-      posterURL: result.poster_path
-        ? formatImageURL(result.poster_path, 'm', true)[0]
-        : '',
-      backdropURL: result.backdrop_path
-        ? formatImageURL(result.backdrop_path, 'm', true)[0]
-        : '',
+      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
+      backdropURL: result.backdrop_path ? formatImageURL(result.backdrop_path, "m", true)[0] : "",
       genres: result.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
     }));
 

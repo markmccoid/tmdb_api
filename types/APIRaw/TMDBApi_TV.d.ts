@@ -8,7 +8,7 @@
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetCreditDetails(creditId: string): object;
+export function rawTVGetCreditDetails(creditId: string): Promise<object>;
 /**
  * Returns Credits for a show from TMDb.
  * Looks like it return the main cast and crew for a show.
@@ -19,7 +19,7 @@ export function rawTVGetCreditDetails(creditId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetShowCredits(showId: string): object;
+export function rawTVGetShowCredits(showId: string): Promise<object>;
 /**
  * Return episodes from showId passed and seasonNum passed
  *
@@ -30,7 +30,7 @@ export function rawTVGetShowCredits(showId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetEpisodes(showId: string, seasonNum?: number): object;
+export function rawTVGetEpisodes(showId: string, seasonNum?: number): Promise<object>;
 /**
  * Returns external Ids from TMDb.
  *
@@ -40,7 +40,7 @@ export function rawTVGetEpisodes(showId: string, seasonNum?: number): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetExternalIds(showId: string): object;
+export function rawTVGetExternalIds(showId: string): Promise<object>;
 /**
  * Returns show details for passed TMDb showId
  *
@@ -50,7 +50,7 @@ export function rawTVGetExternalIds(showId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetShowDetails(showId: string): object;
+export function rawTVGetShowDetails(showId: string): Promise<object>;
 /**
  * Returns show images for passed showId from TMDb.
  *
@@ -60,7 +60,7 @@ export function rawTVGetShowDetails(showId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVGetShowImages(showId: string): object;
+export function rawTVGetShowImages(showId: string): Promise<object>;
 /**
  * Raw API calls to the tmdb api end points for **TV Shows**.
  *
@@ -77,7 +77,7 @@ export function rawTVGetShowImages(showId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawTVSearchByTitle(searchString: string, page?: number): object;
+export function rawTVSearchByTitle(searchString: string, page?: number): Promise<object>;
 
 type RawDiscoverCriteria = {
   genres?: string[]; // genre Ids
@@ -108,4 +108,4 @@ type RawDiscoverCriteria = {
     | "vote_count.asc"
     | "vote_count.desc";
 };
-export function rawTVDiscover(criteriaObj: RawDiscoverCriteria, page: number): object;
+export function rawTVDiscover(criteriaObj: RawDiscoverCriteria, page: number): Promise<object>;

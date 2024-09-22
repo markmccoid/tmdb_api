@@ -4,8 +4,11 @@
  * @namespace Helpers
  *
  */
-import { IMG_URL, SECURE_IMG_URL, API_OPTIONS } from './index';
-import { parseISO, getUnixTime, format } from 'date-fns';
+
+import { tmdbConfig } from "./config";
+
+// import { IMG_URL, SECURE_IMG_URL, API_OPTIONS } from './index';
+import { parseISO, getUnixTime, format } from "date-fns";
 
 /**
  * Returns and array with one or more full URLs to an image.
@@ -16,23 +19,24 @@ import { parseISO, getUnixTime, format } from 'date-fns';
  * @param {boolean} [secureURL=true] - return the https or http - *true
  * @returns {string[]} full URL to the image
  */
-function formatImageURL(imgFileName, size = 'm', secureURL = true) {
+function formatImageURL(imgFileName, size = "m", secureURL = true) {
+  const { IMG_URL, SECURE_IMG_URL, API_OPTIONS } = tmdbConfig.getConfig();
   // Hardcoding s, m, l for now
   switch (size) {
-    case 's':
-      size = 'w185';
+    case "s":
+      size = "w185";
       break;
-    case 'm':
-      size = 'w300';
+    case "m":
+      size = "w300";
       break;
-    case 'l':
-      size = 'w500';
+    case "l":
+      size = "w500";
       break;
-    case 'original':
-      size = 'original';
+    case "original":
+      size = "original";
       break;
     default:
-      size = 'w300';
+      size = "w300";
   }
   let baseURL = secureURL ? SECURE_IMG_URL : IMG_URL;
 
@@ -40,15 +44,11 @@ function formatImageURL(imgFileName, size = 'm', secureURL = true) {
   let regEx = /[^\/].*/;
   // If imgFileName IS NOT an array, then process as single file, but still return array
   if (!Array.isArray(imgFileName)) {
-    return imgFileName
-      ? [`${baseURL}${size}/${imgFileName.match(regEx)[0]}`]
-      : [''];
+    return imgFileName ? [`${baseURL}${size}/${imgFileName.match(regEx)[0]}`] : [""];
   }
 
   // Process as an array and return an array, also make sure some value exists in each array slot.
-  return imgFileName.map((file) =>
-    file ? `${baseURL}${size}/${file.match(regEx)[0]}` : ''
-  );
+  return imgFileName.map((file) => (file ? `${baseURL}${size}/${file.match(regEx)[0]}` : ""));
 }
 
 export function averageOfArray(arr) {
@@ -68,7 +68,8 @@ export function averageOfArray(arr) {
  *  }
  */
 function parseToDate(dateString) {
-  if (!dateString || dateString === '') {
+  const { API_OPTIONS } = tmdbConfig.getConfig();
+  if (!dateString || dateString === "") {
     return undefined;
   }
 
@@ -89,16 +90,14 @@ function parseToDate(dateString) {
  * @param {string} delimiter - string to delimit flattened array with
  * @returns {string} - Flat array
  */
-function flattenArray(arr, delimiter = ',') {
+function flattenArray(arr, delimiter = ",") {
   if (!arr) {
     return undefined;
   }
-  let flatArray = '';
+  let flatArray = "";
   arr.forEach((value, idx) => {
     flatArray +=
-      idx === 0
-        ? `${value.toString().trim()}`
-        : `${delimiter}${value.toString().trim()}`;
+      idx === 0 ? `${value.toString().trim()}` : `${delimiter}${value.toString().trim()}`;
   });
   return flatArray;
 }

@@ -261,36 +261,36 @@ export type movieDiscoverCriteria_typedef = {
   /**
    * genre Ids
    */
-  genres: any[];
+  genres?: any[];
   /**
    * Primary Release Year
    */
-  releaseYear: any;
+  releaseYear?: any;
   /**
    * movies with release date >= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
    */
-  releaseDateGTE: any | string;
+  releaseDateGTE?: any | string;
   /**
    * movies with release date <= date YYYY-MM-DD format either JS Date or string "YYYY-MM-DD"
    */
-  releaseDateLTE: any | string;
+  releaseDateLTE?: any | string;
   /**
    * person Ids. Only include movies that have one of the Id's added as an actor
    */
-  cast: any[];
+  cast?: any[];
   /**
    * person Ids. Only include movies that have one of the Id's added as a crew member
    */
-  crew: any[];
+  crew?: any[];
   /**
    * Watch providers ids to search limit search by.  Couple with region if desired
    */
-  watchProviders: any[];
+  watchProviders?: any[];
   /**
    * An ISO 3166-1 code. Combine this filter with with_watch_providers in order to filter your results by a specific watch provider in a specific region.  > As of 2/2021 a region must be used or no filtering will occur.  US is sent over as a default.
    */
-  watchRegions: any[];
-  sortBy:
+  watchRegions?: any[];
+  sortBy?:
     | "popularity.asc"
     | "popularity.desc"
     | "release_date.asc"
@@ -348,7 +348,10 @@ export function movieGetImages(movieId: any, imageType?: string): imagesReturn_t
  * @param {number} [page=1] - page to return.  Only works if multiple pages
  * @returns {movieSearchByTitle_typedef} Object data return
  */
-export function movieSearchByTitle(searchValue: string, page?: number): movieSearchByTitle_typedef;
+export function movieSearchByTitle(
+  searchValue: string,
+  page?: number
+): Promise<movieSearchByTitle_typedef>;
 /**
  * @typedef movieDetails_typedef
  * @type {Object}
@@ -378,7 +381,10 @@ export function movieSearchByTitle(searchValue: string, page?: number): movieSea
  * @param {bool} [withVideos=false] - movieId to get details for
  * @returns {movieDetails_typedef} Object data return
  */
-export function movieGetDetails(movieId: number, withVideos?: boolean): movieDetails_typedef;
+export function movieGetDetails(
+  movieId: number,
+  withVideos?: boolean
+): Promise<movieDetails_typedef>;
 /**
  * @typedef movieVideos_typedef
  * @type {Object}
@@ -402,7 +408,7 @@ export function movieGetDetails(movieId: number, withVideos?: boolean): movieDet
  * @param {number} movieId - movieId to get details for
  * @returns {movieVideos_typedef} Object data return
  */
-export function movieGetVideos(movieId: number): movieVideos_typedef;
+export function movieGetVideos(movieId: number): Promise<movieVideos_typedef>;
 /**
  * @typedef moviesRecommendations_typedef
  * @type {Object}
@@ -472,7 +478,7 @@ export function movieGetRecommendations(
  *    apiCall
  * }
  */
-export function movieGetPersonCredits(personId: number): moviePersonCredits_typedef;
+export function movieGetPersonCredits(personId: number): Promise<moviePersonCredits_typedef>;
 /**
  * @typedef movieCredits_typedef
  * @type {Object}
@@ -506,7 +512,7 @@ export function movieGetPersonCredits(personId: number): moviePersonCredits_type
  *    apiCall
  * }
  */
-export function movieGetCredits(movieId: number): movieCredits_typedef;
+export function movieGetCredits(movieId: number): Promise<movieCredits_typedef>;
 /**
  * @typedef moviesPopular_typedef
  * @type {Object}
@@ -531,9 +537,9 @@ export function movieGetCredits(movieId: number): movieCredits_typedef;
  * @param {number} movieId - movieId to get details for
  * @returns {moviesSimilar_typedef} Object data return
  */
-export function movieGetPopular(page?: number, language?: string): any;
-export function movieGetNowPlaying(page?: number, language?: string): any;
-export function movieGetUpcoming(page?: number, language?: string): any;
+export function movieGetPopular(page?: number, language?: string): Promise<any>;
+export function movieGetNowPlaying(page?: number, language?: string): Promise<any>;
+export function movieGetUpcoming(page?: number, language?: string): Promise<any>;
 /**
  * @typedef movieWatchProviders_typedef
  * @type {Object}
@@ -572,7 +578,7 @@ export function movieGetUpcoming(page?: number, language?: string): any;
 export function movieGetWatchProviders(
   movieId: string,
   countryCodes?: string[]
-): movieWatchProviders_typedef;
+): Promise<movieWatchProviders_typedef>;
 /**
  * @typedef movieDiscover_typedef
  * @type {Object}

@@ -97,7 +97,10 @@ export type getPersonImages_typedef = {
  *    results: [{ id, name, popularity }]}, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function searchForPersonId(searchValue: any, page?: number): searchForPersonId_typedef;
+export function searchForPersonId(
+  searchValue: any,
+  page?: number
+): Promise<searchForPersonId_typedef>;
 /**
  * @typedef getPersonDetails_typedef
  * @type {Object}
@@ -124,7 +127,7 @@ export function searchForPersonId(searchValue: any, page?: number): searchForPer
  * @returns {getPersonDetails_typedef} response object sorted by popularity desc
  *  on success {
  */
-export function getPersonDetails(personId: number): getPersonDetails_typedef;
+export function getPersonDetails(personId: number): Promise<getPersonDetails_typedef>;
 /**
  * @typedef getPersonImages_typedef
  * @type {Object}
@@ -144,4 +147,4 @@ export function getPersonDetails(personId: number): getPersonDetails_typedef;
  * @returns {getPersonImages_typedef} Array of person images (https://...)
  *  on success {
  */
-export function getPersonImages(personId: number): getPersonImages_typedef;
+export function getPersonImages(personId: number): Promise<getPersonImages_typedef>;

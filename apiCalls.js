@@ -5,8 +5,8 @@
  *
  */
 import axios from "axios";
+import { tmdbConfig } from "./config";
 // import { getTMDBConsts } from "./index";
-import { API_KEY, API_URL } from "./index";
 
 /**
  * @typeDef {Object} ErrorObj
@@ -34,11 +34,7 @@ function buildRawError(err) {
     error: err,
     status: err.response ? err.response.request.status : null,
     statusText: err.response ? err.response.request.statusText : null,
-    apiCall: err.response
-      ? err.response.request.responseURL
-      : err.config
-      ? err.config.url
-      : null
+    apiCall: err.response ? err.response.request.responseURL : err.config ? err.config.url : null,
   };
 }
 
@@ -54,13 +50,13 @@ function buildRawError(err) {
 function callTMDB(apiCall) {
   return axios
     .get(apiCall)
-    .then(resp => {
+    .then((resp) => {
       return {
         data: resp.data,
-        apiCall: resp.request.responseURL
+        apiCall: resp.request.responseURL,
       };
     })
-    .catch(err => {
+    .catch((err) => {
       let errorObj = buildRawError(err);
       throw errorObj;
     });
@@ -90,24 +86,27 @@ function callTMDB(apiCall) {
  * @returns {promise}
  */
 function apiTMDB(apiCall, config = {}) {
-  // const { API_URL, API_KEY, API_OPTIONS } = getTMDBConsts();
+  const { API_KEY, API_URL, API_OPTIONS } = tmdbConfig.getConfig();
+  const {
+    defaultAPIParams: { include_adult },
+  } = API_OPTIONS;
 
   // set the baseURL
   config = { ...config, baseURL: API_URL };
   // Pull out the params if passed in config object, if any
   const params = config.params || {};
   // merge api_key into params object passed if it exists
-  config.params = { ...params, api_key: API_KEY };
+  config.params = { ...params, include_adult: !!include_adult, api_key: API_KEY };
   // actual API call
   return axios
     .get(apiCall, config)
-    .then(resp => {
+    .then((resp) => {
       return {
         data: resp.data,
-        apiCall: resp.request.responseURL
+        apiCall: resp.request.responseURL,
       };
     })
-    .catch(err => {
+    .catch((err) => {
       let errorObj = buildRawError(err);
       throw errorObj;
     });

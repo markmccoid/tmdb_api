@@ -9,7 +9,7 @@ import { movieDiscoverCriteria_typedef } from "./../APICurated/API_Movies.d";
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieSearchByTitle(searchString: string, page?: number): object;
+export function rawMovieSearchByTitle(searchString: string, page?: number): Promise<object>;
 /**
  * Returns movie details for passed TMDb movieId
  * The return data will include a video key with
@@ -21,7 +21,7 @@ export function rawMovieSearchByTitle(searchString: string, page?: number): obje
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetDetails(movieId: string): object;
+export function rawMovieGetDetails(movieId: string): Promise<object>;
 /**
  * Returns the videos that have been added to the passed movieId.
  *
@@ -33,7 +33,7 @@ export function rawMovieGetDetails(movieId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetVideos(movieId: string): object;
+export function rawMovieGetVideos(movieId: string): Promise<object>;
 /**
  * Get a list of recommended movies based on passed movieId
  *
@@ -44,7 +44,7 @@ export function rawMovieGetVideos(movieId: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetRecommendations(movieId: string, page?: number): object;
+export function rawMovieGetRecommendations(movieId: string, page?: number): Promise<object>;
 /**
  * Returns show images for passed movieId from TMDb.
  *
@@ -54,7 +54,7 @@ export function rawMovieGetRecommendations(movieId: string, page?: number): obje
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetImages(movieId: string): object;
+export function rawMovieGetImages(movieId: string): Promise<object>;
 /**
  * Returns Person Details for Movies from TMDb.
  * Person Id can be found in getCredits results
@@ -69,7 +69,7 @@ export function rawMovieGetImages(movieId: string): object;
  * @returns {object} response object
  *  on success { data: data from api call, apiCall: API call}
  */
-export function rawMovieGetPersonCredits(personId: number): object;
+export function rawMovieGetPersonCredits(personId: number): Promise<object>;
 /**
  * Get a list of Upcoming movies
  *
@@ -80,7 +80,7 @@ export function rawMovieGetPersonCredits(personId: number): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieUpcoming(page?: number, language?: string): object;
+export function rawMovieUpcoming(page?: number, language?: string): Promise<object>;
 /**
  * Get a list of Now Playing movies
  *
@@ -91,7 +91,7 @@ export function rawMovieUpcoming(page?: number, language?: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetNowPlaying(page?: number, language?: string): object;
+export function rawMovieGetNowPlaying(page?: number, language?: string): Promise<object>;
 /**
  * Get a list of Popular movies
  *
@@ -102,7 +102,7 @@ export function rawMovieGetNowPlaying(page?: number, language?: string): object;
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export function rawMovieGetPopular(page?: number, language?: string): object;
+export function rawMovieGetPopular(page?: number, language?: string): Promise<object>;
 
 export function rawMovieDiscover(
   criteriaObj: movieDiscoverCriteria_typedef,

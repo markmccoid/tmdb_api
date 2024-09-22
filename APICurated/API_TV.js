@@ -9,7 +9,7 @@
  *
  */
 
-import { formatImageURL, averageOfArray, parseToDate } from '../helpers';
+import { formatImageURL, averageOfArray, parseToDate } from "../helpers";
 import {
   rawTVGetShowImages,
   rawTVSearchByTitle,
@@ -25,8 +25,9 @@ import {
   rawTVGetPersonCredits,
   rawTVGetShowSeasonDetails,
   rawTVGetShowEpisodeDetails,
-} from '../APIRaw/TMDBApi_TV';
-import { TV_GENRE_OBJ } from '../index';
+} from "../APIRaw/TMDBApi_TV";
+
+import { tmdbConfig } from "../config";
 
 /**
  * @typedef tvGetImages_typedef
@@ -44,22 +45,18 @@ import { TV_GENRE_OBJ } from '../index';
  *   [{ aspectRation: '1.78', URL: 'https://image.tmdb.org/t/p/w1280/...' }]
  * @returns {string[]} Array of URLs to the images
  */
-function tvGetImages(
-  showId,
-  imageType = 'posters',
-  includeAspectRatio = false
-) {
+function tvGetImages(showId, imageType = "posters", includeAspectRatio = false) {
   let apiCall;
   return rawTVGetShowImages(showId).then((resp) => {
     // Get array of file_paths
     apiCall = resp.apiCall;
 
     let imgFilePaths = resp.data[imageType]
-      .filter((imgObj) => imgObj.iso_639_1 === 'en')
+      .filter((imgObj) => imgObj.iso_639_1 === "en")
       .map((imgObj) => {
         return {
           aspectRatio: imgObj.aspect_ratio,
-          URL: formatImageURL(imgObj.file_path, 'm', true)[0],
+          URL: formatImageURL(imgObj.file_path, "m", true)[0],
         };
       });
     // If aspect ratio is requested, return object with aspect ratio and URL
@@ -117,7 +114,7 @@ function tvGetImages(
  * @returns {tvSearchByTitle_typedef} Object data return
  */
 function tvSearchByTitle(searchValue, page = 1) {
-  // let { TV_GENRE_OBJ } = getTMDBConsts();
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
   let apiCall;
   let searchResults;
   let showsReturned;
@@ -138,12 +135,8 @@ function tvSearchByTitle(searchValue, page = 1) {
         originalLanguage: show.original_language,
         firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
-        backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, 'm', true)[0]
-          : '',
-        posterURL: show.poster_path
-          ? formatImageURL(show.poster_path, 'm', true)[0]
-          : '',
+        backdropURL: show.backdrop_path ? formatImageURL(show.backdrop_path, "m", true)[0] : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -164,7 +157,7 @@ function tvSearchByTitle(searchValue, page = 1) {
  * @returns {TVSearchResultItem} Object data return
  */
 function tvGetRecommendations(showId, page = 1) {
-  // let { TV_GENRE_OBJ } = getTMDBConsts();
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
   let apiCall;
   let searchResults;
   let showsReturned;
@@ -185,12 +178,8 @@ function tvGetRecommendations(showId, page = 1) {
         originalLanguage: show.original_language,
         firstAirDate: parseToDate(show.first_air_date),
         overview: show.overview,
-        backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, 'm', true)[0]
-          : '',
-        posterURL: show.poster_path
-          ? formatImageURL(show.poster_path, 'm', true)[0]
-          : '',
+        backdropURL: show.backdrop_path ? formatImageURL(show.backdrop_path, "m", true)[0] : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -211,9 +200,7 @@ function seasonFormatter(rawSeasons) {
     return {
       id: season.id,
       seasonNumber: season.season_number,
-      posterURL: season.poster_path
-        ? formatImageURL(season.poster_path, 'm', true)[0]
-        : '',
+      posterURL: season.poster_path ? formatImageURL(season.poster_path, "m", true)[0] : "",
       name: season.name,
       overview: season.overview,
       episodeCount: season.episode_count,
@@ -231,9 +218,7 @@ function episodeFormatter(episode) {
     name: episode.name,
     overview: episode.overview,
     airDate: parseToDate(episode.air_date),
-    stillURL: episode.still_path
-      ? formatImageURL(episode.still_path, 'm', true)[0]
-      : '',
+    stillURL: episode.still_path ? formatImageURL(episode.still_path, "m", true)[0] : "",
   };
 }
 
@@ -244,9 +229,7 @@ function networksFormatter(networks) {
     return {
       id: network.id,
       name: network.name,
-      logoURL: network.logo_url
-        ? formatImageURL(network.logo_url, 'm', true)[0]
-        : '',
+      logoURL: network.logo_url ? formatImageURL(network.logo_url, "m", true)[0] : "",
       originCountry: network.origin_country,
     };
   });
@@ -262,13 +245,13 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
 
   // Always get external ids using append_to_response tmdb api functionality
   appendToResponse = [
-    'external_ids',
+    "external_ids",
     ...appendToResponse.map((el) => el.trim()), //remove spaces
   ];
 
   // Take array of valid append options and join with comma to build param object
   const appendParam = {
-    params: { append_to_response: appendToResponse.join(',') },
+    params: { append_to_response: appendToResponse.join(",") },
   };
 
   return rawTVGetShowDetails(showId, appendParam).then((resp) => {
@@ -280,9 +263,9 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
 
     //if videos appended,
     let videos = [];
-    if (appendToResponse.includes('videos')) {
+    if (appendToResponse.includes("videos")) {
       videos = resp.data.videos.results
-        .filter((video) => video.site === 'YouTube')
+        .filter((video) => video.site === "YouTube")
         .map((video) => ({
           id: video.id,
           language: video.iso_639_1,
@@ -300,7 +283,7 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
 
     //if credits appended,
     let credits = [];
-    if (appendToResponse.includes('credits')) {
+    if (appendToResponse.includes("credits")) {
       credits = {
         cast: processCastData(resp.data.credits.cast),
         crew: processCrewData(resp.data.credits.crew),
@@ -310,7 +293,7 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
 
     //if aggregate_credits appended,
     let aggregateCredits = [];
-    if (appendToResponse.includes('aggregate_credits')) {
+    if (appendToResponse.includes("aggregate_credits")) {
       aggregateCredits = {
         cast: processCastData(resp.data.aggregate_credits.cast),
         crew: processCrewData(resp.data.aggregate_credits.crew),
@@ -326,11 +309,9 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
       tagLine: resp.data.tagline,
       popularity: resp.data.popularity,
       backdropURL: resp.data.backdrop_path
-        ? formatImageURL(resp.data.backdrop_path, 'm', true)[0]
-        : '',
-      posterURL: resp.data.poster_path
-        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
-        : '',
+        ? formatImageURL(resp.data.backdrop_path, "m", true)[0]
+        : "",
+      posterURL: resp.data.poster_path ? formatImageURL(resp.data.poster_path, "m", true)[0] : "",
       avgEpisodeRunTime: resp.data.episode_run_time
         ? averageOfArray(resp.data.episode_run_time)
         : 0,
@@ -375,7 +356,6 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
 function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
   let apiCall;
   let searchResults;
-
   return rawTVGetShowSeasonDetails(tvShowId, seasonNumber).then((resp) => {
     // Curate results
     apiCall = resp.apiCall;
@@ -384,9 +364,7 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
       seasonNumber: resp.data.season_number,
       name: resp.data.name,
       overview: resp.data.overview,
-      posterURL: resp.data.poster_path
-        ? formatImageURL(resp.data.poster_path, 'm', true)[0]
-        : '',
+      posterURL: resp.data.poster_path ? formatImageURL(resp.data.poster_path, "m", true)[0] : "",
       airDate: parseToDate(resp.data.air_date),
       episodes: resp.data.episodes.map((episode) => episodeFormatter(episode)), //Excludes Crew and Guests
     };
@@ -408,79 +386,65 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
  * @param {number} episodeNumber -
  * Returns -
  */
-function tvGetShowEpisodeDetails(
-  tvShowId,
-  seasonNumber,
-  episodeNumber,
-  appendToResponse = []
-) {
+function tvGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber, appendToResponse = []) {
   let apiCall;
   let searchResults;
   let castResults;
 
   // Always get external ids using append_to_response tmdb api functionality
-  appendToResponse = Array.isArray(appendToResponse)
-    ? appendToResponse
-    : [appendToResponse];
+  appendToResponse = Array.isArray(appendToResponse) ? appendToResponse : [appendToResponse];
   appendToResponse = [
     ...appendToResponse.map((el) => el.trim()), //remove spaces
   ];
 
   // Take array of valid append options and join with comma to build param object
   const appendParam = {
-    params: { append_to_response: appendToResponse.join(',') },
+    params: { append_to_response: appendToResponse.join(",") },
   };
 
-  return rawTVGetShowEpisodeDetails(
-    tvShowId,
-    seasonNumber,
-    episodeNumber,
-    appendParam
-  ).then((resp) => {
-    // Curate results
-    apiCall = resp.apiCall;
-    searchResults = {
-      id: resp.data.id,
-      seasonNumber: resp.data.season_number,
-      name: resp.data.name,
-      overview: resp.data.overview,
-      stillURL: resp.data.still_path
-        ? formatImageURL(resp.data.still_path, 'm', true)[0]
-        : '',
-      airDate: parseToDate(resp.data.air_date),
-      episodeNumber: resp.data.episode_number,
-      // guestStars: resp.data.guest_stars.map((guest) => ({
-      //   id: guest.id,
-      //   name: guest.name,
-      //   creditId: guest.credit_id,
-      //   characterName: guest.character,
-      //   order: guest.order,
-      //   profileURL: guest.profile_path
-      //     ? formatImageURL(guest.profile_path, 'm', true)[0]
-      //     : '',
-      // })),
-      guestStars: processCastData(resp.data.guest_stars),
-      crew: resp.data.crew.map((member) => ({
-        id: member.id,
-        name: member.name,
-        creditId: member.credit_id,
-        job: member.job,
-        department: member.department,
-        profileURL: member.profile_path
-          ? formatImageURL(member.profile_path, 'm', true)[0]
-          : '',
-      })),
-    };
-    if (appendToResponse.includes('credits')) {
-      castResults = {
-        cast: processCastData(resp.data.credits.cast),
+  return rawTVGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber, appendParam).then(
+    (resp) => {
+      // Curate results
+      apiCall = resp.apiCall;
+      searchResults = {
+        id: resp.data.id,
+        seasonNumber: resp.data.season_number,
+        name: resp.data.name,
+        overview: resp.data.overview,
+        stillURL: resp.data.still_path ? formatImageURL(resp.data.still_path, "m", true)[0] : "",
+        airDate: parseToDate(resp.data.air_date),
+        episodeNumber: resp.data.episode_number,
+        // guestStars: resp.data.guest_stars.map((guest) => ({
+        //   id: guest.id,
+        //   name: guest.name,
+        //   creditId: guest.credit_id,
+        //   characterName: guest.character,
+        //   order: guest.order,
+        //   profileURL: guest.profile_path
+        //     ? formatImageURL(guest.profile_path, 'm', true)[0]
+        //     : '',
+        // })),
+        guestStars: processCastData(resp.data.guest_stars),
+        crew: resp.data.crew.map((member) => ({
+          id: member.id,
+          name: member.name,
+          creditId: member.credit_id,
+          job: member.job,
+          department: member.department,
+          profileURL: member.profile_path ? formatImageURL(member.profile_path, "m", true)[0] : "",
+        })),
+      };
+      if (appendToResponse.includes("credits")) {
+        castResults = {
+          cast: processCastData(resp.data.credits.cast),
+        };
+      }
+      return {
+        data: { ...searchResults, ...castResults },
+        apiCall,
       };
     }
-    return {
-      data: { ...searchResults, ...castResults },
-      apiCall,
-    };
-  });
+  );
 }
 
 /**
@@ -498,25 +462,23 @@ function tvGetShowEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber) {
   let apiCall;
   let searchResults;
 
-  return rawTVGetEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber).then(
-    (resp) => {
-      // Curate results
-      apiCall = resp.apiCall;
-      searchResults = {
-        id: resp.data.id,
-        imdbId: resp.data.imdb_id,
-        imdbEpisodeURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
-        freebaseId: resp.data.freebase_id,
-        tvdbId: resp.data.tvdb_id,
-        tvrageId: resp.data.tvrage_id,
-      };
+  return rawTVGetEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber).then((resp) => {
+    // Curate results
+    apiCall = resp.apiCall;
+    searchResults = {
+      id: resp.data.id,
+      imdbId: resp.data.imdb_id,
+      imdbEpisodeURL: `https://www.imdb.com/title/${resp.data.imdb_id}`,
+      freebaseId: resp.data.freebase_id,
+      tvdbId: resp.data.tvdb_id,
+      tvrageId: resp.data.tvrage_id,
+    };
 
-      return {
-        data: searchResults,
-        apiCall,
-      };
-    }
-  );
+    return {
+      data: searchResults,
+      apiCall,
+    };
+  });
 }
 
 /**
@@ -528,7 +490,7 @@ function tvGetShowEpisodeExternalIds(tvShowId, seasonNumber, episodeNumber) {
  * @param {array.<string>} countryCodes - Array of country codes to return
  * Returns -
  */
-function tvGetWatchProviders(showId, countryCodes = ['US']) {
+function tvGetWatchProviders(showId, countryCodes = ["US"]) {
   let watchInfo;
   let searchResults;
   countryCodes = countryCodes.map((el) => el.trim().toUpperCase());
@@ -552,7 +514,7 @@ function tvGetWatchProviders(showId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].flatrate.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -560,7 +522,7 @@ function tvGetWatchProviders(showId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].buy.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -568,7 +530,7 @@ function tvGetWatchProviders(showId, countryCodes = ['US']) {
                 ? []
                 : watchProviders[code].rent.map((el) => ({
                     displayPriority: el.display_priority,
-                    logoURL: formatImageURL(el.logo_path, 'original', true)[0],
+                    logoURL: formatImageURL(el.logo_path, "original", true)[0],
                     providerId: el.provider_id,
                     provider: el.provider_name,
                   })),
@@ -593,6 +555,7 @@ function tvGetWatchProviders(showId, countryCodes = ['US']) {
  * @returns {movieWatchProviders_typedef} Object data return
  */
 function tvGetPopular(page, language) {
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
   let apiCall;
   let searchResults;
   let showsReturned;
@@ -613,12 +576,8 @@ function tvGetPopular(page, language) {
         firstAirDate: parseToDate(show.first_air_date),
         originalLanguage: show.original_language,
         overview: show.overview,
-        posterURL: show.poster_path
-          ? formatImageURL(show.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: show.backdrop_path
-          ? formatImageURL(show.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
+        backdropURL: show.backdrop_path ? formatImageURL(show.backdrop_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
         popularity: show.popularity,
       };
@@ -653,9 +612,7 @@ function processCastData(castData) {
       personId: castItem.id,
       name: castItem.name,
       gender: castItem.gender,
-      profileURL: castItem.profile_path
-        ? formatImageURL(castItem.profile_path, 'm', true)[0]
-        : '',
+      profileURL: castItem.profile_path ? formatImageURL(castItem.profile_path, "m", true)[0] : "",
       order: castItem.order,
     };
   });
@@ -684,8 +641,8 @@ function processCrewData(crewData) {
       name: crewMember.name,
       gender: crewMember.gender,
       profileURL: crewMember.profile_path
-        ? formatImageURL(crewMember.profile_path, 'm', true)[0]
-        : '',
+        ? formatImageURL(crewMember.profile_path, "m", true)[0]
+        : "",
       department: crewMember.department,
     };
   });
@@ -721,7 +678,7 @@ function tvGetVideos(showId) {
   return rawTVGetVideos(showId).then((resp) => {
     //Get video data and format, currently just getting youtube videos
     const videos = resp.data.results
-      .filter((video) => video.site === 'YouTube')
+      .filter((video) => video.site === "YouTube")
       .map((video) => ({
         id: video.id,
         language: video.iso_639_1,
@@ -754,7 +711,7 @@ function tvGetVideos(showId) {
  * }
  */
 function tvGetPersonCredits(personId) {
-  // let { MOVIE_GENRE_OBJ } = getTMDBConsts();
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
 
   return rawTVGetPersonCredits(personId).then((resp) => {
     let castTVShows = resp.data.cast.map((tvShow) => {
@@ -766,12 +723,8 @@ function tvGetPersonCredits(personId) {
         creditId: tvShow.credit_id,
         characterName: tvShow.character,
         genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
-        posterURL: tvShow.poster_path
-          ? formatImageURL(tvShow.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: tvShow.backdrop_path
-          ? formatImageURL(tvShow.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        backdropURL: tvShow.backdrop_path ? formatImageURL(tvShow.backdrop_path, "m", true)[0] : "",
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
       };
@@ -786,12 +739,8 @@ function tvGetPersonCredits(personId) {
         job: tvShow.job,
         department: tvShow.department,
         genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
-        posterURL: tvShow.poster_path
-          ? formatImageURL(tvShow.poster_path, 'm', true)[0]
-          : '',
-        backdropURL: tvShow.backdrop_path
-          ? formatImageURL(tvShow.backdrop_path, 'm', true)[0]
-          : '',
+        posterURL: tvShow.poster_path ? formatImageURL(tvShow.poster_path, "m", true)[0] : "",
+        backdropURL: tvShow.backdrop_path ? formatImageURL(tvShow.backdrop_path, "m", true)[0] : "",
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
       };
@@ -805,6 +754,7 @@ function tvGetPersonCredits(personId) {
 
 // Discover / Advanced Search
 function tvDiscover(criteriaObj, page = 1) {
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
   let apiCall;
   let searchResults;
   let tvShows;
@@ -823,12 +773,8 @@ function tvDiscover(criteriaObj, page = 1) {
       popularity: result.popularity,
       originalLanguage: result.original_language,
       releaseDate: parseToDate(result.release_date),
-      posterURL: result.poster_path
-        ? formatImageURL(result.poster_path, 'm', true)[0]
-        : '',
-      backdropURL: result.backdrop_path
-        ? formatImageURL(result.backdrop_path, 'm', true)[0]
-        : '',
+      posterURL: result.poster_path ? formatImageURL(result.poster_path, "m", true)[0] : "",
+      backdropURL: result.backdrop_path ? formatImageURL(result.backdrop_path, "m", true)[0] : "",
       genres: result.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
     }));
 
