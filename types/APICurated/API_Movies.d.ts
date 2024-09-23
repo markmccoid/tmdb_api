@@ -1,3 +1,4 @@
+import { GenresObject } from "./../index.d";
 import { dateResultsType } from "./API_Common";
 
 export type imagesReturn_typedef = {
@@ -204,27 +205,32 @@ export type moviePersonCredits_typedef = {
    * the data object
    */
   data: {
-    cast: any[];
+    cast: {
+      movieId: number;
+      title: string;
+      overview: string;
+      releaseDate: dateResultsType;
+      creditId: string;
+      characterName: string;
+      genres: string[];
+      posterURL: string;
+      backdropURL: string;
+      orginalLanguage: string;
+    }[];
+    crew: {
+      movieId: number;
+      title: string;
+      overview: string;
+      releaseDate: dateResultsType;
+      creditId: string;
+      job: string;
+      department: string;
+      genres: string[];
+      posterURL: string;
+      backdropURL: string;
+      orginalLanguage: string;
+    }[];
   };
-  movieId: number;
-  title: string;
-  overview: string;
-  releaseDate: any;
-  creditId: string;
-  characterName: string;
-  genres: any[];
-  posterURL: string;
-  backdropURL: string;
-  orginalLanguage: string;
-  /**
-   * the crew array
-   */
-  crew: string;
-  job: string;
-  department: string;
-  /**
-   * the API call used to hit endpoint
-   */
   apiCall: string;
 };
 export type movieDiscover_typedef = {
@@ -235,23 +241,23 @@ export type movieDiscover_typedef = {
     page: number;
     totalResults: number;
     totalPages: number;
-    results: any[];
+    results: {
+      /**
+       * the movieId
+       */
+      id: number;
+      title: string;
+      popularity: number;
+      originalLanguage: string;
+      overview: string;
+      releaseDate: dateResultsType;
+      posterURL: string;
+      backdropURL: string;
+      /** array of genre names */
+      genres: string[];
+    }[];
   };
-  /**
-   * the movieId
-   */
-  id: number;
-  title: string;
-  popularity: number;
-  originalLanguage: string;
-  overview: string;
-  releaseDate: any;
-  posterURL: string;
-  backdropURL: string;
-  /**
-   * array of genre names
-   */
-  genres: any;
+
   /**
    * the API call used to hit endpoint
    */

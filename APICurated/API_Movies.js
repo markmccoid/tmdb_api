@@ -10,6 +10,7 @@
 
 import { formatImageURL, parseToDate } from "../helpers";
 import { tmdbConfig } from "../config";
+import _ from "lodash";
 
 import {
   rawMovieSearchByTitle,
@@ -605,6 +606,7 @@ function movieGetCredits(movieId) {
  */
 /**
  * Returns an object with movies where person was part of cast or crew for passed personId
+ * All movies are sorted by release date in descending order
  * @memberOf Curated_API_Movies
  * @method
  * @param {number} personId - personId to get details for
@@ -620,25 +622,28 @@ function movieGetPersonCredits(personId) {
 
   return rawMovieGetPersonCredits(personId).then((resp) => {
     let castMovies = resp.data.cast.map((movie) => {
+      const releaseDate = parseToDate(movie.release_date);
       return {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: parseToDate(movie.release_date),
+        releaseDate,
         creditId: movie.credit_id,
         characterName: movie.character,
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
         posterURL: movie.poster_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
         backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         orginalLanguage: movie.original_language,
+        sortDate: releaseDate?.epoch || 0,
       };
     });
     let crewMovies = resp.data.crew.map((movie) => {
+      const releaseDate = parseToDate(movie.release_date);
       return {
         movieId: movie.id,
         title: movie.title,
         overview: movie.overview,
-        releaseDate: parseToDate(movie.release_date),
+        releaseDate,
         creditId: movie.credit_id,
         job: movie.job,
         department: movie.department,
@@ -646,10 +651,15 @@ function movieGetPersonCredits(personId) {
         posterURL: movie.poster_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
         backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         orginalLanguage: movie.original_language,
+        sortDate: releaseDate?.epoch || 0,
       };
     });
+
     return {
-      data: { cast: castMovies, crew: crewMovies },
+      data: {
+        cast: _.reverse(_.sortBy(castMovies, "sortDate")),
+        crew: _.reverse(_.sortBy(crewMovies, "sortDate")),
+      },
       apiCall: resp.apiCall,
     };
   });
