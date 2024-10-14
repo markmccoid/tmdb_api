@@ -75,7 +75,7 @@ export type movieDetails_typedef = {
     runtime: number;
     budget: number;
     revenue: number;
-    releaseDate: object;
+    releaseDate: dateResultsType;
     posterURL: string;
     backdropURL: string;
     imdbId: string;
@@ -130,7 +130,7 @@ export type moviesRecommendations_typedef = {
   /**
    * - returns an object with options for date {date, epoch, formatted}
    */
-  releaseDate: any;
+  releaseDate: dateResultsType;
   posterURL: string;
   backdropURL: string;
   /**
@@ -161,7 +161,7 @@ export type moviesPopular_typedef = {
   /**
    * - returns an object with options for date {date, epoch, formatted}
    */
-  releaseDate: any;
+  releaseDate: dateResultsType;
   posterURL: string;
   backdropURL: string;
   /**

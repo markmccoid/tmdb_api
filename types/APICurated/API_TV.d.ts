@@ -37,20 +37,20 @@ export type TVGetImages = {
 };
 // returned when aspect ratio needed
 export type TVGetImagesAspect = {
-  data: | { aspectRatio: number, URL: string }[];
+  data: { aspectRatio: number; URL: string }[];
   apiCall: string;
 };
 
 export function tvGetImages(
   showId: number,
   imageType?: "posters" | "backdrops" | "logos",
-  includeAspectRatio?: false,
+  includeAspectRatio?: false
 ): Promise<TVGetImages>;
 
 export function tvGetImages(
   showId: number,
   imageType?: "posters" | "backdrops" | "logos",
-  includeAspectRatio?: true,
+  includeAspectRatio?: true
 ): Promise<TVGetImagesAspect>;
 
 // -- TV SHOW SEARCH
@@ -62,7 +62,7 @@ export type TVSearchResultItem = {
   name: string;
   originalName: string;
   overview: string;
-  firstAirDate: any;
+  firstAirDate: DateObject;
   backdropURL: string;
   posterURL: string;
   genres: string[];
@@ -71,15 +71,9 @@ export type TVSearchResultItem = {
 };
 export type TVSearchResultBase = BaseMultiPage<TVSearchResultItem[]>;
 
-export function tvSearchByTitle(
-  searchValue: string,
-  page?: number
-): Promise<TVSearchResultBase>;
+export function tvSearchByTitle(searchValue: string, page?: number): Promise<TVSearchResultBase>;
 
-export function tvGetPopular(
-  page?: number,
-  language?: string
-): Promise<TVSearchResultBase>;
+export function tvGetPopular(page?: number, language?: string): Promise<TVSearchResultBase>;
 
 // -- tvGetShowDetails --------------------
 // When getting show details, you get this info on each season
@@ -121,7 +115,7 @@ export type Videos = {
   type: string;
   videoURL: string;
   videoThumbnailURL: string;
-}
+};
 
 export type AggrCastType = {
   roles: {
@@ -148,7 +142,7 @@ export type AggrCrewType = {
   department: string;
 };
 
-export type AggregatedCredits ={
+export type AggregatedCredits = {
   cast: AggrCastType[];
   crew: AggrCrewType[];
 };
@@ -184,11 +178,10 @@ export type TVShowDetails = {
   networks: TVDetail_Networks[];
   videos?: Videos[];
   credits?: TVCredits;
-  aggregated_credits?: AggregatedCredits
+  aggregated_credits?: AggregatedCredits;
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
-
 
 export type AppendParams = "videos" | "credits" | "aggregate_credits";
 // - FUNCTION Export
@@ -230,13 +223,18 @@ type TVShowEpisodeDetails = {
   stillURL: string;
   airDate: DateObject;
   episodeNumber: number;
-  guestStars: CastType[],
-  crew: Omit<CrewType, 'gender' | 'personId'>[],
-  cast?: CastType[]
+  guestStars: CastType[];
+  crew: Omit<CrewType, "gender" | "personId">[];
+  cast?: CastType[];
 };
 export type TVShowEpisodeDetailsBase = BaseSinglePage<TVShowEpisodeDetails>;
 
-export function tvGetShowEpisodeDetails(tvShowId: number, seasonNumber: number, episodeNumber: number, appendToResponse: string[] | string): Promise<TVShowEpisodeDetailsBase>
+export function tvGetShowEpisodeDetails(
+  tvShowId: number,
+  seasonNumber: number,
+  episodeNumber: number,
+  appendToResponse: string[] | string
+): Promise<TVShowEpisodeDetailsBase>;
 
 //= == tvGetShowEpisodeDetails END =====================
 
@@ -252,7 +250,11 @@ type TVEpisodeExternalIds = {
 };
 export type TVEpisodeExternalIdsBase = BaseSinglePage<TVEpisodeExternalIds>;
 
-export function tvGetShowEpisodeExternalIds(tvShowId: number, seasonNumber: number, episodeNumber: number): Promise<TVEpisodeExternalIdsBase>
+export function tvGetShowEpisodeExternalIds(
+  tvShowId: number,
+  seasonNumber: number,
+  episodeNumber: number
+): Promise<TVEpisodeExternalIdsBase>;
 
 //= == tvGetShowEpisodeExternalIds END =====================
 
@@ -350,10 +352,7 @@ export type DiscoverCriteria = {
   sortBy?: SortByOptions;
 };
 
-export function tvDiscover(
-  criteriaObj: DiscoverCriteria,
-  page: number
-): Promise<TVSearchResult>;
+export function tvDiscover(criteriaObj: DiscoverCriteria, page: number): Promise<TVSearchResult>;
 
 // == END tvDiscover ==============
 
@@ -567,9 +566,6 @@ export type TVWatchProviders = {
 
 export type TVWatchProvidersBase = BaseSinglePage<TVWatchProviders>;
 
-export function tvGetWatchProviders(
-  showId: number,
-  countryCodes: string[] = ["US"]
-);
+export function tvGetWatchProviders(showId: number, countryCodes: string[] = ["US"]);
 
 // == END tvGetWatchProviders ==============
