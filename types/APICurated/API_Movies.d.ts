@@ -11,13 +11,27 @@ export type imagesReturn_typedef = {
    */
   apiCall: string;
 };
+
+export type ProviderInfo = {
+  provider: string;
+  logoURL: string;
+  providerId: number;
+  displayPriority: number;
+};
+export type WatchProvidersType = {
+  justWatchLink: string;
+  stream: ProviderInfo[];
+  rent: ProviderInfo[];
+  buy: ProviderInfo[];
+};
+type CountryCode = string;
 export type movieWatchProviders_typedef = {
   /**
    * the data object
    */
   data: {
     movieId: number;
-    results: any[];
+    results: Record<CountryCode, WatchProvidersType>;
   };
   /**
    * the API call used to hit endpoint
