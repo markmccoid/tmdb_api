@@ -377,6 +377,9 @@ function movieGetRecommendations(movieId, page = 1) {
         posterURL: movie.backdrop_path ? formatImageURL(movie.poster_path, "m", true)[0] : "",
         backdropURL: movie.backdrop_path ? formatImageURL(movie.backdrop_path, "m", true)[0] : "",
         genres: movie.genre_ids.map((genreId) => MOVIE_GENRE_OBJ[genreId]),
+        popularity: movie.popularity,
+        voteAverage: movie.vote_average,
+        voteCount: movie.vote_count,
       };
     });
 

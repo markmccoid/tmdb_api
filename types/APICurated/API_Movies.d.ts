@@ -1,3 +1,4 @@
+import { AggregatedCredits } from "./API_TV.d";
 import { GenresObject } from "./../index.d";
 import { dateResultsType } from "./API_Common";
 
@@ -5,7 +6,7 @@ export type imagesReturn_typedef = {
   /**
    * Array of image URLs
    */
-  data: any[];
+  data: string[];
   /**
    * the API call used to hit endpoint
    */
@@ -106,24 +107,42 @@ export type movieVideos_typedef = {
   /**
    * the data array is an array of objects
    */
-  data: any[];
+  data: {
+    id: string;
+    language: string;
+    country: string;
+    key: string;
+    name: string;
+    site: number;
+    size: number;
+    type: number;
+    videoURL: object;
+    videoThumbnailURL: string;
+  }[];
   /**
    * the videoId
    */
-  id: string;
-  language: string;
-  country: string;
-  key: string;
-  name: string;
-  site: number;
-  size: number;
-  type: number;
-  videoURL: object;
-  videoThumbnailURL: string;
+
   /**
    * the API call used to hit endpoint
    */
   apiCall: string;
+};
+
+export type movieRecommendationsResults = {
+  //the movieId
+  id: number;
+  title: string;
+  //returns an object with options for date {date, epoch, formatted}
+  releaseDate: dateResultsType;
+  overview: string;
+  posterURL: string;
+  backdropURL: string;
+  //array of genre names
+  genres: string[];
+  popularity: number;
+  voteAverage: number;
+  voteCount: number;
 };
 export type moviesRecommendations_typedef = {
   /**
@@ -133,24 +152,9 @@ export type moviesRecommendations_typedef = {
     page: number;
     totalResults: number;
     totalPages: number;
-    results: any[];
+    results: movieRecommendationsResults[];
   };
-  /**
-   * the movieId
-   */
-  id: number;
-  title: string;
-  overview: string;
-  /**
-   * - returns an object with options for date {date, epoch, formatted}
-   */
-  releaseDate: dateResultsType;
-  posterURL: string;
-  backdropURL: string;
-  /**
-   * array of genre names
-   */
-  genres: any;
+
   /**
    * the API call used to hit endpoint
    */
@@ -164,51 +168,67 @@ export type moviesPopular_typedef = {
     page: number;
     totalResults: number;
     totalPages: number;
-    results: any[];
+    results: {
+      page: number;
+      totalResults: number;
+      totalPages: number;
+      results: {
+        /**
+         * the movieId
+         */
+        id: number;
+        title: string;
+        overview: string;
+        /**
+         * - returns an object with options for date {date, epoch, formatted}
+         */
+        releaseDate: dateResultsType;
+        posterURL: string;
+        backdropURL: string;
+        /**
+         * array of genre names
+         */
+        genres: any;
+      }[];
+    };
   };
-  /**
-   * the movieId
-   */
-  id: number;
-  title: string;
-  overview: string;
-  /**
-   * - returns an object with options for date {date, epoch, formatted}
-   */
-  releaseDate: dateResultsType;
-  posterURL: string;
-  backdropURL: string;
-  /**
-   * array of genre names
-   */
-  genres: any;
+
   /**
    * the API call used to hit endpoint
    */
   apiCall: string;
 };
+
 export type movieCredits_typedef = {
   /**
    * the data object
    */
   data: {
-    cast: any[];
+    cast: {
+      personId: number;
+      name: string;
+      characterName: string;
+      creditId: string;
+      /**
+       * 1 is Female, 2 is Male
+       */
+      gender: number;
+      profileURL: string;
+    }[];
+    crew: {
+      personId: number;
+      name: string;
+      creditId: string;
+      /**
+       * 1 is Female, 2 is Male
+       */
+      gender: number;
+      profileURL: string;
+      job: string;
+      department: string;
+    }[];
   };
-  personId: number;
-  name: string;
-  characterName: string;
-  creditId: string;
-  /**
-   * 1 is Female, 2 is Male
-   */
-  gender: number;
-  profileURL: string;
-  /**
-   * the crew array
-   */
-  crew: string;
-  job: string;
-  department: string;
+
   /**
    * the API call used to hit endpoint
    */
@@ -456,7 +476,7 @@ export function movieGetVideos(movieId: number): Promise<movieVideos_typedef>;
 export function movieGetRecommendations(
   movieId: number,
   page?: number
-): moviesRecommendations_typedef;
+): Promise<moviesRecommendations_typedef>;
 /**
  * @typedef moviePersonCredits_typedef
  * @type {Object}
