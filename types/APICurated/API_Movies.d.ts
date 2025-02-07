@@ -361,7 +361,7 @@ export type movieDiscoverCriteria_typedef = {
  * @param {string} [imageType=posters] - *'posters', 'backdrops'
  * @returns {imagesReturn_typedef} Array of URLs to the images
  */
-export function movieGetImages(movieId: any, imageType?: string): imagesReturn_typedef;
+export function movieGetImages(movieId: any, imageType?: string): Promise<imagesReturn_typedef>;
 /**
  * @typedef movieSearchByTitle_typedef
  * @type {Object}

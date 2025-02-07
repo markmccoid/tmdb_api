@@ -1,5 +1,5 @@
-import { callTMDB, apiTMDB } from '../apiCalls';
-import { flattenArray } from '../helpers';
+import { callTMDB, apiTMDB } from "../apiCalls";
+import { flattenArray } from "../helpers";
 
 /**
  * Raw API calls to the tmdb api end points for **TV Shows**.
@@ -39,7 +39,7 @@ function rawTVSearchByTitle(searchString, page = 1) {
       include_adult: false,
     },
   };
-  return apiTMDB('/search/tv', config);
+  return apiTMDB("/search/tv", config);
 }
 
 /**
@@ -92,22 +92,12 @@ function rawTVGetShowSeasonDetails(tvShowId, seasonNumber) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetShowEpisodeDetails(
-  tvShowId,
-  seasonNumber,
-  episodeNumber,
-  appendConfig = {}
-) {
-  return apiTMDB(
-    `/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}`,
-    appendConfig
-  );
+function rawTVGetShowEpisodeDetails(tvShowId, seasonNumber, episodeNumber, appendConfig = {}) {
+  return apiTMDB(`/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}`, appendConfig);
 }
 
 function rawTVGetShowEpisodeCredits(tvShowId, seasonNumber, episodeNumber) {
-  return apiTMDB(
-    `/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}/credits`
-  );
+  return apiTMDB(`/tv/${tvShowId}/season/${seasonNumber}/episode/${episodeNumber}/credits`);
 }
 /**
  * Return episodes from showId passed and seasonNum passed
@@ -161,9 +151,7 @@ function rawTVGetExternalIds(showId) {
  *  on error { data: 'ERROR', msg: error message, }
  */
 function rawTVGetEpisodeExternalIds(showId, seasonNumber, episodeNumber) {
-  return apiTMDB(
-    `/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/external_ids`
-  );
+  return apiTMDB(`/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}/external_ids`);
 }
 
 /**
@@ -219,7 +207,7 @@ function rawTVGetCreditDetails(creditId) {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-function rawTVGetPopular(page = 1, language = 'en-US') {
+function rawTVGetPopular(page = 1, language = "en-US") {
   const config = {
     params: {
       page,
@@ -269,68 +257,55 @@ function rawTVGetVideos(showId) {
  *  watchRegions: [string] // In initial test (2/2021) only US worked and if not region sent then the results were not filtered by the passed watchProviders array.  Chose to default to US region if none sent over.
  *
  *  sortBy: one of the following:
- *    - popularity.asc
- *    - popularity.desc **Default
- *    - release_date.asc
- *    - release_date.desc
- *    - revenue.asc
- *    - revenue.desc
- *    - primary_release_date.asc
- *    - primary_release_date.desc
- *    - original_title.asc
- *    - original_title.desc
- *    - vote_average.asc
- *    - vote_average.desc
- *    - vote_count.asc
- *    - vote_count.desc
+    | "first_air_date.asc"
+    | "first_air_date.desc"
+    | "name.asc"
+    | "name.desc"
+    | "original_name.asc"
+    | "original_name.desc"
+    | "popularity.asc"
+    | "popularity.desc"
+    | "vote_average.asc"
+    | "vote_average.desc"
+    | "vote_count.asc"
+    | "vote_count.desc";
  * }
  * @param {object} criteriaObj - object with criteria to search with
  * @returns {object} response object {data, apiCall}
  */
 const boolConversion = {
-  AND: ',',
-  OR: '|',
-  undefined: '|',
+  AND: ",",
+  OR: "|",
+  undefined: "|",
 };
 
 function rawTVDiscover(criteriaObj, page = 1) {
-  const { releaseDateGTE, releaseDateLTE } = criteriaObj;
+  const { firstAirDateGTE, firstAirDateLTE } = criteriaObj;
   // This is the config object that will be passed to the api call
   let config = {
     params: {
       page,
-      with_genres: flattenArray(
-        criteriaObj.genres,
-        boolConversion[criteriaObj.genreCompareType]
-      ),
+      with_genres: flattenArray(criteriaObj.genres, boolConversion[criteriaObj.genreCompareType]),
       first_air_date_year: criteriaObj.firstAirDateYear,
-      [`primary_release_date.lte`]:
-        typeof releaseDateLTE === 'date'
-          ? format(releaseDateLTE, 'YYYY-MM-DD')
-          : releaseDateLTE,
-      [`primary_release_date.gte`]:
-        typeof releaseDateGTE === 'date'
-          ? format(releaseDateGTE, 'YYYY-MM-DD')
-          : releaseDateGTE,
-      with_crew: flattenArray(
-        criteriaObj.crew,
-        boolConversion[criteriaObj.crewCompareType]
-      ),
-      with_cast: flattenArray(
-        criteriaObj.cast,
-        boolConversion[criteriaObj.castCompareType]
-      ),
+      [`first_air_date.lte`]:
+        typeof firstAirDateLTE === "date" ? format(firstAirDateLTE, "YYYY-MM-DD") : firstAirDateLTE,
+      [`first_air_date.gte`]:
+        typeof firstAirDateGTE === "date" ? format(firstAirDateGTE, "YYYY-MM-DD") : firstAirDateGTE,
+      with_crew: flattenArray(criteriaObj.crew, boolConversion[criteriaObj.crewCompareType]),
+      with_cast: flattenArray(criteriaObj.cast, boolConversion[criteriaObj.castCompareType]),
       with_watch_providers: flattenArray(
         criteriaObj.watchProviders,
         boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
       ),
-      watch_region: criteriaObj.watchProviders
-        ? criteriaObj.watchRegion || 'US'
-        : undefined,
+      watch_region: criteriaObj.watchProviders ? criteriaObj.watchRegion || "US" : undefined,
+      with_origin_country: flattenArray(
+        criteriaObj.withOriginCountry,
+        boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
+      ),
     },
   };
 
-  return apiTMDB('/discover/tv', config);
+  return apiTMDB("/discover/tv", config);
 }
 
 export {

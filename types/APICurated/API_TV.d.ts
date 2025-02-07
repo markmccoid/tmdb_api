@@ -183,7 +183,15 @@ export type TVShowDetails = {
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
 
-export type AppendParams = "videos" | "credits" | "aggregate_credits";
+export type AppendParams =
+  | "videos"
+  | "credits"
+  | "aggregate_credits"
+  | "images"
+  | "recommendations"
+  | "keywords"
+  | "external_ids"
+  | "translations";
 // - FUNCTION Export
 export function tvGetShowDetails(
   showId: number,
@@ -321,16 +329,14 @@ export function tvGetPersonCredits(
 // -- tvDiscover ---------------------
 
 export type SortByOptions =
+  | "first_air_date.asc"
+  | "first_air_date.desc"
+  | "name.asc"
+  | "name.desc"
+  | "original_name.asc"
+  | "original_name.desc"
   | "popularity.asc"
   | "popularity.desc"
-  | "release_date.asc"
-  | "release_date.desc"
-  | "revenue.asc"
-  | "revenue.desc"
-  | "primary_release_date.asc"
-  | "primary_release_date.desc"
-  | "original_title.asc"
-  | "original_title.desc"
   | "vote_average.asc"
   | "vote_average.desc"
   | "vote_count.asc"
@@ -338,21 +344,26 @@ export type SortByOptions =
 
 export type DiscoverCriteria = {
   genres?: string[]; // genre Ids
-  genreCompareType?: "AND" | "OR" | undefined; // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
+  genreCompareType?: "AND" | "OR" | undefined; // "AND" (,) if want TV Shows with all ids or "OR" (|) for TV Shows with any (default to OR)
   firstAirDateYear?: number; // Primary Release Year
-  releaseDateGTE?: string; // movies with release date >= date YYYY-MM-DD
-  releaseDateLTE?: string; // movies with release date <= date YYYY-MM-DD
-  cast?: number[]; // person Ids. Only include movies that have one of the Id's added as an actor.
-  castCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any
-  crew?: number[]; // person Ids. Only include movies that have one of the Id's added as a crew member.
-  crewCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any
+  releaseDateGTE?: string; // TV Shows with release date >= date YYYY-MM-DD
+  releaseDateLTE?: string; // TV Shows with release date <= date YYYY-MM-DD
+  cast?: number[]; // person Ids. Only include TV Shows that have one of the Id's added as an actor.
+  castCompareType?: "AND" | "OR" | undefined; // "AND" if want TV Shows with all ids or "OR" for TV Shows with any
+  crew?: number[]; // person Ids. Only include TV Shows that have one of the Id's added as a crew member.
+  crewCompareType?: "AND" | "OR" | undefined; // "AND" if want TV Shows with all ids or "OR" for TV Shows with any
   watchProviders?: string[]; // ids of watch providers that movie is located on.
-  watchProviderCompareType?: "AND" | "OR" | undefined; // "AND" if want movies with all ids or "OR" for movies with any (defaults to OR)
+  watchProviderCompareType?: "AND" | "OR" | undefined; // "AND" if want TV Shows with all ids or "OR" for TV Shows with any (defaults to OR)
   watchRegions?: string[];
+  withOriginCountry?: string[]; // US, KR (South Korea) ISO Country standard
+  withOriginCountryCompareType?: "AND" | "OR" | undefined; // "AND" if want TV Shows with all ids or "OR" for TV Shows with any (defaults to OR)
   sortBy?: SortByOptions;
 };
 
-export function tvDiscover(criteriaObj: DiscoverCriteria, page: number): Promise<TVSearchResult>;
+export function tvDiscover(
+  criteriaObj: DiscoverCriteria,
+  page: number
+): Promise<TVSearchResultBase>;
 
 // == END tvDiscover ==============
 

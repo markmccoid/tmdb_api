@@ -238,6 +238,15 @@ function networksFormatter(networks) {
  * @memberOf Curated_API_TV
  * @method
  * Returns obj with tv shows like searchValue (tv title) passed.
+ * appendToReponse is an array of strings that can be appended to the response
+ *  - credits: Includes cast and crew information.
+ *  - aggregate_credits: Similar to credits but aggregates roles across episodes.
+ *  - images: Provides posters and backdrops.
+ *  - videos: Includes trailers and promotional videos.
+ *  - recommendations: Suggests similar TV shows.
+ *  - keywords: Lists associated keywords for the show.
+ *  - external_ids: Fetches external identifiers (e.g., IMDb ID). - Always included
+ *  - translations: Provides translations for metadata.
  */
 async function tvGetShowDetails(showId, appendToResponse = []) {
   let apiCall;
