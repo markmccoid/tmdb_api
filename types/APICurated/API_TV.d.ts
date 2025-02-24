@@ -174,16 +174,6 @@ export type AggregatedCredits = {
   crew: AggrCrewType[];
 };
 
-type AppendParamTypes = {
-  videos: TVShowDetailsVideos;
-  credits: TVShowDetailsCredits;
-  aggregate_credits: TVShowDetailsAggregateCredits;
-  images: TVShowDetailsImages;
-  recommendations: TVShowRecommendations;
-  // keywords: TVShowDetailsKeywords;
-  // translations: TVShowDetailsTranslations;
-};
-
 export type TVShowDetails = {
   id: number;
   name: string;
@@ -214,11 +204,11 @@ export type TVShowDetails = {
   lastEpisodeToAir: Episode;
   nextEpisodeToAir: Episode;
   networks: TVDetail_Networks[];
-  // videos?: Videos[];
-  // credits?: TVCredits;
-  // aggregated_credits?: AggregatedCredits;
-  // recommendations?: TVShowRecommendations[];
-  // images?: AppendedImages;
+  videos?: Videos[];
+  credits?: TVCredits;
+  aggregated_credits?: AggregatedCredits;
+  recommendations?: TVShowRecommendations[];
+  images?: AppendedImages;
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
@@ -236,10 +226,7 @@ export function tvGetShowDetails(
   showId: number,
   appendToResponse?: AppendParams[]
 ): Promise<TVShowDetailsBase>;
-export function tvGetShowDetails<T extends AppendParams[]>(
-  showId: number,
-  appendToResponse: T
-): Promise<TVShowDetailsBase & IntersectionOf<T>>;
+
 //= == tvGetShowDetails END =====================
 
 //-- tvGetShowSeasonDetails --------------------
