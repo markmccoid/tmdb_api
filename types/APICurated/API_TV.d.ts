@@ -1,3 +1,4 @@
+import { Recommendations } from "./API_TV.d";
 export type DateObject = {
   date?: Date;
   epoch: number;
@@ -117,6 +118,32 @@ export type Videos = {
   videoThumbnailURL: string;
 };
 
+type ImageObj = {
+  aspectRatio: number;
+  imageURL: string;
+};
+export type AppendedImages = {
+  backdrops: ImageObj;
+  posters: ImageObj;
+  logos: ImageObj;
+};
+export type TVShowRecommendations = {
+  id: number; // Unique identifier for the media item
+  name: string; // Name of the media item
+  backdrop_path: string | null; // Path to the backdrop image (nullable if not available)
+  poster_path: string | null; // Path to the poster image (nullable if not available)
+  genres: string[]; // Array of genre names associated with the media item
+  original_name: string; // Original name of the media item
+  overview: string; // Description or summary of the media item
+  media_type: "tv" | "movie"; // Type of media (e.g., "tv" or "movie")
+  adult: boolean; // Indicates if the content is for adults
+  original_language: string; // Language code (e.g., "en" for English)
+  popularity: number; // Popularity score of the media item
+  vote_average: number; // Average vote score
+  vote_count: number; // Total number of votes
+  first_air_date: DateObject; // First air date
+  origin_country?: string[]; // Array of origin countries (optional, as it may not exist for some media types)
+};
 export type AggrCastType = {
   roles: {
     characterName: string;
@@ -146,6 +173,17 @@ export type AggregatedCredits = {
   cast: AggrCastType[];
   crew: AggrCrewType[];
 };
+
+type AppendParamTypes = {
+  videos: TVShowDetailsVideos;
+  credits: TVShowDetailsCredits;
+  aggregate_credits: TVShowDetailsAggregateCredits;
+  images: TVShowDetailsImages;
+  recommendations: TVShowRecommendations;
+  // keywords: TVShowDetailsKeywords;
+  // translations: TVShowDetailsTranslations;
+};
+
 export type TVShowDetails = {
   id: number;
   name: string;
@@ -176,9 +214,11 @@ export type TVShowDetails = {
   lastEpisodeToAir: Episode;
   nextEpisodeToAir: Episode;
   networks: TVDetail_Networks[];
-  videos?: Videos[];
-  credits?: TVCredits;
-  aggregated_credits?: AggregatedCredits;
+  // videos?: Videos[];
+  // credits?: TVCredits;
+  // aggregated_credits?: AggregatedCredits;
+  // recommendations?: TVShowRecommendations[];
+  // images?: AppendedImages;
 };
 
 export type TVShowDetailsBase = BaseSinglePage<TVShowDetails>;
@@ -190,14 +230,16 @@ export type AppendParams =
   | "images"
   | "recommendations"
   | "keywords"
-  | "external_ids"
   | "translations";
 // - FUNCTION Export
 export function tvGetShowDetails(
   showId: number,
   appendToResponse?: AppendParams[]
 ): Promise<TVShowDetailsBase>;
-
+export function tvGetShowDetails<T extends AppendParams[]>(
+  showId: number,
+  appendToResponse: T
+): Promise<TVShowDetailsBase & IntersectionOf<T>>;
 //= == tvGetShowDetails END =====================
 
 //-- tvGetShowSeasonDetails --------------------

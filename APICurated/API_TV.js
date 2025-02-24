@@ -234,6 +234,7 @@ function networksFormatter(networks) {
     };
   });
 }
+
 /**
  * @memberOf Curated_API_TV
  * @method
@@ -309,6 +310,34 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
       };
       optionalKeys = { ...optionalKeys, aggregateCredits };
     }
+    if (appendToResponse.includes("recommendations")) {
+      resp.data.recommendations.results = resp.data.recommendations.results.map((show) => ({
+        ...show,
+        backdrop_path: formatImageURL(show.backdrop_path, "m", true)[0],
+        poster_path: formatImageURL(show.poster_path, "m", true)[0],
+        genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
+        first_air_date: parseToDate(show.first_air_date),
+      }));
+      optionalKeys = { ...optionalKeys, recommendations: resp.data.recommendations.results };
+    }
+
+    // Appended Images
+    if (appendToResponse.includes("images")) {
+      resp.data.images.backdrops = resp.data.images.backdrops.map((imgObj) => ({
+        aspectRatio: imgObj.aspect_ratio,
+        imageURL: formatImageURL(imgObj.file_path, "m", true)[0],
+      }));
+      resp.data.images.logos = resp.data.images.logos.map((imgObj) => ({
+        aspectRatio: imgObj.aspect_ratio,
+        imageURL: formatImageURL(imgObj.file_path, "m", true)[0],
+      }));
+      resp.data.images.posters = resp.data.images.posters.map((imgObj) => ({
+        aspectRatio: imgObj.aspect_ratio,
+        imageURL: formatImageURL(imgObj.file_path, "m", true)[0],
+      }));
+      optionalKeys = { ...optionalKeys, images: resp.data.images };
+    }
+
     searchResults = {
       id: resp.data.id,
       name: resp.data.name,
