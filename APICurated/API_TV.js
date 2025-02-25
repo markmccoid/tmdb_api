@@ -252,7 +252,7 @@ function networksFormatter(networks) {
 async function tvGetShowDetails(showId, appendToResponse = []) {
   let apiCall;
   let searchResults;
-
+  const { TV_GENRE_OBJ } = tmdbConfig.getConfig();
   // Always get external ids using append_to_response tmdb api functionality
   appendToResponse = [
     "external_ids",
@@ -312,11 +312,16 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
     }
     if (appendToResponse.includes("recommendations")) {
       resp.data.recommendations.results = resp.data.recommendations.results.map((show) => ({
-        ...show,
-        backdrop_path: formatImageURL(show.backdrop_path, "m", true)[0],
-        poster_path: formatImageURL(show.poster_path, "m", true)[0],
+        id: show.id,
+        name: show.name,
+        originalName: show.original_name,
+        originalLanguage: show.original_language,
+        firstAirDate: parseToDate(show.first_air_date),
+        overview: show.overview,
+        backdropURL: show.backdrop_path ? formatImageURL(show.backdrop_path, "m", true)[0] : "",
+        posterURL: show.poster_path ? formatImageURL(show.poster_path, "m", true)[0] : "",
         genres: show.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
-        first_air_date: parseToDate(show.first_air_date),
+        popularity: show.popularity,
       }));
       optionalKeys = { ...optionalKeys, recommendations: resp.data.recommendations.results };
     }
