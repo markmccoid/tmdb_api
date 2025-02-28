@@ -1,4 +1,3 @@
-import { Recommendations } from "./API_TV.d";
 export type DateObject = {
   date?: Date;
   epoch: number;
@@ -96,6 +95,7 @@ type Episode = {
   overview: string;
   airDate: DateObject;
   stillURL: string;
+  runTime: number;
 };
 
 export type TVDetail_Networks = {
