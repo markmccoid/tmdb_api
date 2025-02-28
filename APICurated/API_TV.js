@@ -219,7 +219,7 @@ function episodeFormatter(episode) {
     overview: episode.overview,
     airDate: parseToDate(episode.air_date),
     stillURL: episode.still_path ? formatImageURL(episode.still_path, "m", true)[0] : "",
-    runTime: episode.run_time,
+    runTime: episode.runtime,
   };
 }
 
