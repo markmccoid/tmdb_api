@@ -239,6 +239,7 @@ type TVShowSeasonDetails = {
   posterURL: string;
   airDate: DateObject;
   episodes: Episode[];
+  episodeAvgRunTime: number;
 };
 
 export type TVShowSeasonBase = BaseSinglePage<TVShowSeasonDetails>;

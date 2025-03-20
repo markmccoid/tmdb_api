@@ -411,6 +411,7 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
       posterURL: resp.data.poster_path ? formatImageURL(resp.data.poster_path, "m", true)[0] : "",
       airDate: parseToDate(resp.data.air_date),
       episodes: resp.data.episodes.map((episode) => episodeFormatter(episode)), //Excludes Crew and Guests
+      episodeAvgRunTime: getAverageRunTime(resp.data.episodes),
     };
 
     return {
@@ -420,6 +421,10 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
   });
 }
 
+function getAverageRunTime(episodes) {
+  const total = episodes.reduce((sum, episode) => sum + episode.runTime, 0);
+  return total / episodes.length;
+}
 /**
  * Returns episode details for passed tvShowId, seasonNumber and EpisodeNumber
  * @memberOf Curated_API_TV
