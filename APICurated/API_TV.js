@@ -422,7 +422,7 @@ function tvGetShowSeasonDetails(tvShowId, seasonNumber) {
 }
 
 function getAverageRunTime(episodes) {
-  const total = episodes.reduce((sum, episode) => sum + episode.runTime, 0);
+  const total = episodes.reduce((sum, episode) => sum + episode.runtime, 0);
   return total / episodes.length;
 }
 /**
