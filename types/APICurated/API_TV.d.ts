@@ -185,6 +185,7 @@ export type TVShowDetails = {
   avgEpisodeRunTime: number;
   firstAirDate: DateObject;
   lastAirDate: DateObject;
+  nextAirDate: DateObject;
   posterURL: string;
   backdropURL: string;
   homePage: string;

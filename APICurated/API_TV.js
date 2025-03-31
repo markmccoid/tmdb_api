@@ -361,6 +361,7 @@ async function tvGetShowDetails(showId, appendToResponse = []) {
         : 0,
       firstAirDate: parseToDate(resp.data.first_air_date),
       lastAirDate: parseToDate(resp.data.last_air_date),
+      nextAirDate: parseToDate(resp.data.next_episode_to_air?.air_date),
       homePage: resp.data.homepage,
       numberOfEpisodes: resp.data.number_of_episodes,
       numberOfSeasons: resp.data.number_of_seasons,
