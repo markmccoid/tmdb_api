@@ -337,13 +337,14 @@ type CreditsBase = {
   tvShowId: number;
   name: string;
   overview: string;
-  firstAirDate: string;
+  firstAirDate: DateObject;
   genres: string[];
   posterURL: string;
   backdropURL: string;
   originalLanguage: string;
   episodeCount: number;
   creditId: string;
+  sortDate: number;
 };
 
 interface CastTVShows extends CreditsBase {

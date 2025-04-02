@@ -765,11 +765,12 @@ function tvGetPersonCredits(personId) {
 
   return rawTVGetPersonCredits(personId).then((resp) => {
     let castTVShows = resp.data.cast.map((tvShow) => {
+      const firstAirDate = parseToDate(tvShow.first_air_date);
       return {
         tvShowId: tvShow.id,
         name: tvShow.name,
         overview: tvShow.overview,
-        firstAirDate: parseToDate(tvShow.first_air_date),
+        firstAirDate,
         creditId: tvShow.credit_id,
         characterName: tvShow.character,
         genres: tvShow.genre_ids.map((genreId) => TV_GENRE_OBJ[genreId]),
@@ -777,14 +778,16 @@ function tvGetPersonCredits(personId) {
         backdropURL: tvShow.backdrop_path ? formatImageURL(tvShow.backdrop_path, "m", true)[0] : "",
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
+        sortDate: firstAirDate?.epoch || 0,
       };
     });
     let crewTVShows = resp.data.crew.map((tvShow) => {
+      const firstAirDate = parseToDate(tvShow.first_air_date);
       return {
         tvShowId: tvShow.id,
         name: tvShow.name,
         overview: tvShow.overview,
-        firstAirDate: parseToDate(tvShow.first_air_date),
+        firstAirDate,
         creditId: tvShow.credit_id,
         job: tvShow.job,
         department: tvShow.department,
@@ -793,6 +796,7 @@ function tvGetPersonCredits(personId) {
         backdropURL: tvShow.backdrop_path ? formatImageURL(tvShow.backdrop_path, "m", true)[0] : "",
         orginalLanguage: tvShow.original_language,
         episodeCount: tvShow.episode_count,
+        sortDate: firstAirDate?.epoch || 0,
       };
     });
     return {
