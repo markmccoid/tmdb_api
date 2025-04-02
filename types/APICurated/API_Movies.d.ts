@@ -250,6 +250,7 @@ export type moviePersonCredits_typedef = {
       posterURL: string;
       backdropURL: string;
       orginalLanguage: string;
+      sortDate: number;
     }[];
     crew: {
       movieId: number;
@@ -263,6 +264,7 @@ export type moviePersonCredits_typedef = {
       posterURL: string;
       backdropURL: string;
       orginalLanguage: string;
+      sortDate: number;
     }[];
   };
   apiCall: string;
