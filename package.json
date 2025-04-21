@@ -1,6 +1,6 @@
 {
   "name": "@markmccoid/tmdb_api",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "Wrapper for the TMDB Api",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "types": "./types/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.7.7",
-    "axios": "^0.21.1",
+    "axios": "^1.6.8",
     "date-fns": "^2.7.0",
     "lodash": "^4.17.21",
     "np": "^7.5.0"
