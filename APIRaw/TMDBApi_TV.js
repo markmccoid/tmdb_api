@@ -247,8 +247,8 @@ function rawTVGetVideos(showId) {
  *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
  *  withoutGenres: [] //exclude any shows with these genres
  *  firstAirDateYear: int // Primary Release Year
- *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
- *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
+ *  firstAirDateGTE: date // TV with release date >= date YYYY-MM-DD
+ *  firstAirDateLTE: date // TV with release date <= date YYYY-MM-DD
  *  cast: [] // person Ids. Only include movies that have one of the Id's added as an actor.
  *  castCompareType: string // "AND" if want movies with all ids or "OR" for movies with any
  *  crew: [] // person Ids. Only include movies that have one of the Id's added as a crew member.
@@ -304,6 +304,7 @@ function rawTVDiscover(criteriaObj, page = 1) {
         criteriaObj.withOriginCountry,
         boolConversion[criteriaObj.watchProviderCompareType] //default to OR conditional
       ),
+      sort_by: criteriaObj.sortBy,
     },
   };
 
