@@ -220,6 +220,7 @@ function rawMovieGetCredits(movieId) {
  * criteriaObj {
  *  genres: [] // genre Ids
  *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
+ *  withoutGenres: [] //exclude any shows with these genres
  *  releaseYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
@@ -263,6 +264,7 @@ function rawMovieDiscover(criteriaObj, page = 1) {
     params: {
       page,
       with_genres: flattenArray(criteriaObj.genres, boolConversion[criteriaObj.genreCompareType]),
+      without_genres: flattenArray(criteriaObj.withoutGenres, ","),
       primary_release_year: criteriaObj.releaseYear,
       [`primary_release_date.lte`]:
         typeof releaseDateLTE === "date" ? format(releaseDateLTE, "YYYY-MM-DD") : releaseDateLTE,

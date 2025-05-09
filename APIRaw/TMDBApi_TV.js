@@ -245,6 +245,7 @@ function rawTVGetVideos(showId) {
  * criteriaObj {
  *  genres: [] // genre Ids
  *  genreCompareType: string // "AND" (,) if want movies with all ids or "OR" (|) for movies with any (default to OR)
+ *  withoutGenres: [] //exclude any shows with these genres
  *  firstAirDateYear: int // Primary Release Year
  *  releaseDateGTE: date // movies with release date >= date YYYY-MM-DD
  *  releaseDateLTE: date // movies with release date <= date YYYY-MM-DD
@@ -286,6 +287,7 @@ function rawTVDiscover(criteriaObj, page = 1) {
     params: {
       page,
       with_genres: flattenArray(criteriaObj.genres, boolConversion[criteriaObj.genreCompareType]),
+      without_genres: flattenArray(criteriaObj.withoutGenres, ","),
       first_air_date_year: criteriaObj.firstAirDateYear,
       [`first_air_date.lte`]:
         typeof firstAirDateLTE === "date" ? format(firstAirDateLTE, "YYYY-MM-DD") : firstAirDateLTE,

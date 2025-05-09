@@ -377,6 +377,7 @@ export type SortByOptions =
 export type DiscoverCriteria = {
   genres?: string[]; // genre Ids
   genreCompareType?: "AND" | "OR" | undefined; // "AND" (,) if want TV Shows with all ids or "OR" (|) for TV Shows with any (default to OR)
+  withoutGenres?: string[]; // exclude these genre Ids
   firstAirDateYear?: number; // Primary Release Year
   releaseDateGTE?: string; // TV Shows with release date >= date YYYY-MM-DD
   releaseDateLTE?: string; // TV Shows with release date <= date YYYY-MM-DD

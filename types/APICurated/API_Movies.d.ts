@@ -303,7 +303,11 @@ export type movieDiscoverCriteria_typedef = {
   /**
    * genre Ids
    */
-  genres?: any[];
+  genres?: string[];
+  /**
+   * exclude any shows with these genres
+   */
+  withoutGenres?: string[];
   /**
    * Primary Release Year
    */
