@@ -1,6 +1,6 @@
 import { callTMDB, apiTMDB } from "../apiCalls";
 import { flattenArray } from "../helpers";
-
+import { convertGenreToObj } from "../config";
 /**
  * Raw API calls to the tmdb api end points for **TV Shows**.
  *
@@ -311,6 +311,32 @@ function rawTVDiscover(criteriaObj, page = 1) {
   return apiTMDB("/discover/tv", config);
 }
 
+function rawTVGetAllGenres(convertToObjectFlag = false) {
+  // const apiCall = `${API_URL}/genre/tv/list?api_key=${apiKey}`;
+  const resp = apiTMDB("/genre/tv/list");
+  return {
+    data: convertToObjectFlag ? convertGenreToObj(resp.data, "tv") : resp.data,
+    apiCall: resp.apiCall,
+  };
+  return axios
+    .get(apiCall)
+    .then((resp) => {
+      return {
+        data: convertToObjectFlag ? convertGenreToObj(resp.data, "tv") : resp.data,
+        apiCall: resp.request.responseURL,
+      };
+    })
+    .catch((err) => {
+      console.log(`Error with config get: ${err}`);
+      return {
+        data: convertToObjectFlag
+          ? convertGenreToObj({ genres: "ERROR" }, "tv")
+          : genreTVDefaultObj, //this will return default genres
+        apiCall,
+        msg: err,
+      };
+    });
+}
 export {
   rawTVGetCreditDetails,
   rawTVGetShowCredits,
@@ -329,4 +355,5 @@ export {
   rawTVGetVideos,
   rawTVGetPersonCredits,
   rawTVGetShowEpisodeCredits,
+  rawTVGetAllGenres,
 };

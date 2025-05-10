@@ -97,7 +97,7 @@ export const getTMDBConfig = (apiKey) => {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const getTVGenres = (apiKey, convertToObjectFlag = false) => {
+const getTVGenres = (apiKey, convertToObjectFlag = false) => {
   const apiCall = `${API_URL}/genre/tv/list?api_key=${apiKey}`;
   return axios
     .get(apiCall)
@@ -197,7 +197,7 @@ const genreMovieDefaultObj = [
  * }
  * @param {object} genres
  */
-function convertGenreToObj(genreData, genreType) {
+export function convertGenreToObj(genreData, genreType) {
   const { genres } = genreData;
 
   if (genres === "ERROR") {

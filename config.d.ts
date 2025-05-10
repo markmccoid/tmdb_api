@@ -31,7 +31,7 @@ export function getTMDBConfig(apiKey: string): Promise<{
   apiCall: string;
 }>;
 
-export function getTVGenres(
+function getTVGenres(
   apiKey: string,
   convertToObjectFlag?: boolean
 ): Promise<{
