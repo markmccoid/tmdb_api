@@ -5,8 +5,14 @@ export interface TMDBConfig {
   IMG_URL: string;
   SECURE_IMG_URL: string;
   API_KEY: string;
-  TV_GENRE_OBJ: { [key: number]: string };
-  MOVIE_GENRE_OBJ: { [key: number]: string };
+  TV_GENRE_OBJ: Record<number, string>;
+  MOVIE_GENRE_OBJ: Record<number, string>;
+  WATCH_PROVIDERS: {
+    provider_id: number;
+    provider_name: string;
+    logo_path: string;
+    display_priority: number;
+  };
   API_OPTIONS: {
     dateFormatString: string;
     defaultAPIParams: { include_adult: boolean };
@@ -26,7 +32,7 @@ export function getTMDBConfig(apiKey: string): Promise<{
       base_url: string;
       secure_base_url: string;
     };
-    sortedWatchProviders: any[];
+    WATCH_PROVIDERS: any[];
   };
   apiCall: string;
 }>;

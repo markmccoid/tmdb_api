@@ -1,5 +1,5 @@
 import axios from "axios";
-import _ from "lodash";
+import _, { sortBy } from "lodash";
 import watchProviders from "./watchProviders.json";
 
 const API_URL = "https://api.themoviedb.org/3";
@@ -25,6 +25,7 @@ class TMDBConfigManager {
   async initialize(apiKey, options) {
     // Perform your async initialization here
     let resp = await getTMDBConfig(apiKey);
+
     // TMDB API Call to get array of Id/Name objects
     const tvGenreObj = await getTVGenres(apiKey, true);
     const movieGenreObj = await getMovieGenres(apiKey, true);
@@ -45,6 +46,7 @@ class TMDBConfigManager {
       API_URL: "https://api.themoviedb.org/3",
       TV_GENRE_OBJ: tvGenreObj.data,
       MOVIE_GENRE_OBJ: movieGenreObj.data,
+      WATCH_PROVIDERS: resp.data.WATCH_PROVIDERS,
       API_OPTIONS: {
         dateFormatString: "MM-dd-yyyy",
         defaultAPIParams: { include_adult: false },
@@ -68,18 +70,26 @@ class TMDBConfigManager {
  *  on success { data: data from api call, apiCall: API call}
  *  on error { data: 'ERROR', msg: error message, }
  */
-export const getTMDBConfig = (apiKey) => {
-  const sortedWatchProviders = _.sortBy(watchProviders, ["providerPriority", "providerId"]);
-  const watchAPICall = `${API_URL}/watch/providers/tv?watch_region=US&${apiKey}`;
-  const watchResults = axios.get(watchAPICall).then((resp) => resp.data);
-
+export const getTMDBConfig = async (apiKey) => {
+  // const sortedWatchProviders = _.sortBy(watchProviders, ["providerPriority", "providerId"]);
+  const watchAPICall = `${API_URL}/watch/providers/tv?watch_region=US&api_key=${apiKey}`;
+  const watchResults = await axios.get(watchAPICall);
+  const sortedWatchProviders = sortProviders(watchResults.data.results);
+  // console.log(
+  //   "WATCH",
+  //   watchAPICall,
+  //   sortedWatchProviders,
+  //   watchResults.data.results
+  //     .filter((el) => el.display_priorities.US < 100)
+  //     .sort((a, b) => a.display_priorities.US - b.display_priorities.US)
+  // );
   const apiCall = `${API_URL}/configuration?api_key=${apiKey}`;
 
   return axios
     .get(apiCall)
     .then((resp) => {
       return {
-        data: { ...resp.data, sortedWatchProviders },
+        data: { ...resp.data, WATCH_PROVIDERS: sortedWatchProviders },
         apiCall: resp.request.responseURL,
       };
     })
@@ -93,6 +103,16 @@ export const getTMDBConfig = (apiKey) => {
     });
 };
 
+function sortProviders(providers) {
+  providers = providers.map((el) => ({
+    provider_id: el.provider_id,
+    provider_name: el.provider_name,
+    logo_path: el.logo_path,
+    display_priority: el.display_priorities.US,
+  }));
+
+  return sortBy(providers, ["display_priority"]);
+}
 /**
  * Returns a TV Genre map from TMDb.
  *
