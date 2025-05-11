@@ -70,7 +70,11 @@ class TMDBConfigManager {
  */
 export const getTMDBConfig = (apiKey) => {
   const sortedWatchProviders = _.sortBy(watchProviders, ["providerPriority", "providerId"]);
+  const watchAPICall = `${API_URL}/watch/providers/tv?watch_region=US&${apiKey}`;
+  const watchResults = axios.get(watchAPICall).then((resp) => resp.data);
+
   const apiCall = `${API_URL}/configuration?api_key=${apiKey}`;
+
   return axios
     .get(apiCall)
     .then((resp) => {
