@@ -8,11 +8,11 @@ export interface TMDBConfig {
   TV_GENRE_OBJ: Record<number, string>;
   MOVIE_GENRE_OBJ: Record<number, string>;
   WATCH_PROVIDERS: {
-    provider_id: number;
-    provider_name: string;
-    logo_path: string;
-    display_priority: number;
-  };
+    providerId: number;
+    provider: string;
+    displayPriority: number;
+    logoPath: string;
+  }[];
   API_OPTIONS: {
     dateFormatString: string;
     defaultAPIParams: { include_adult: boolean };
