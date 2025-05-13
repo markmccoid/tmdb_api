@@ -46,12 +46,12 @@ class TMDBConfigManager {
       API_URL: "https://api.themoviedb.org/3",
       TV_GENRE_OBJ: tvGenreObj.data,
       MOVIE_GENRE_OBJ: movieGenreObj.data,
-      WATCH_PROVIDERS: {
-        providerId: resp.data.WATCH_PROVIDERS.provider_id,
-        provider: resp.data.WATCH_PROVIDERS.providerName,
-        displayPriority: resp.data.WATCH_PROVIDERS.display_priority,
-        logoPath: resp.data.WATCH_PROVIDERS.logoPath,
-      },
+      WATCH_PROVIDERS: resp.data.WATCH_PROVIDERS.map((wp) => ({
+        providerId: wp.provider_id,
+        provider: wp.providerName,
+        displayPriority: wp.display_priority,
+        logoPath: wp.logoPath,
+      })),
       API_OPTIONS: {
         dateFormatString: "MM-dd-yyyy",
         defaultAPIParams: { include_adult: false },
