@@ -1,6 +1,6 @@
 {
   "name": "@markmccoid/tmdb_api",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Wrapper for the TMDB Api",
   "main": "index.js",
   "scripts": {

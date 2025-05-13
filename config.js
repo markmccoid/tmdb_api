@@ -49,7 +49,7 @@ class TMDBConfigManager {
       WATCH_PROVIDERS: resp.data.WATCH_PROVIDERS.map((wp) => ({
         providerId: wp.provider_id,
         provider: wp.provider_name,
-        displayPriority: wp.display_priority,
+        displayPriority: formatImageURL(wp.display_priority, "original", true)[0],
         logoPath: wp.logo_path,
       })),
       API_OPTIONS: {
