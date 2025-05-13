@@ -52,7 +52,7 @@ class TMDBConfigManager {
         providerId: wp.provider_id,
         provider: wp.provider_name,
         displayPriority: wp.display_priority,
-        logoPath: formatImageURLBeforeInit(wp.logo_path, "original", true, IMG_URL)[0],
+        logoPath: formatImageURLBeforeInit(wp.logo_path, "original", true, SECURE_IMG_URL)[0],
       })),
       API_OPTIONS: {
         dateFormatString: "MM-dd-yyyy",
