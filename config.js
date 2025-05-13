@@ -48,9 +48,9 @@ class TMDBConfigManager {
       MOVIE_GENRE_OBJ: movieGenreObj.data,
       WATCH_PROVIDERS: resp.data.WATCH_PROVIDERS.map((wp) => ({
         providerId: wp.provider_id,
-        provider: wp.providerName,
+        provider: wp.provider_name,
         displayPriority: wp.display_priority,
-        logoPath: wp.logoPath,
+        logoPath: wp.logo_path,
       })),
       API_OPTIONS: {
         dateFormatString: "MM-dd-yyyy",
