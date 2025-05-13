@@ -51,6 +51,38 @@ function formatImageURL(imgFileName, size = "m", secureURL = true) {
   return imgFileName.map((file) => (file ? `${baseURL}${size}/${file.match(regEx)[0]}` : ""));
 }
 
+function formatImageURLBeforeInit(imgFileName, size = "m", secureURL = true, IMG_URL) {
+  // const { IMG_URL, SECURE_IMG_URL, API_OPTIONS } = tmdbConfig.getConfig();
+  // Hardcoding s, m, l for now
+  switch (size) {
+    case "s":
+      size = "w185";
+      break;
+    case "m":
+      size = "w300";
+      break;
+    case "l":
+      size = "w500";
+      break;
+    case "original":
+      size = "original";
+      break;
+    default:
+      size = "w300";
+  }
+  let baseURL = IMG_URL;
+
+  // Get rid of any preceding '/'  in the passed imgFileName
+  let regEx = /[^\/].*/;
+  // If imgFileName IS NOT an array, then process as single file, but still return array
+  if (!Array.isArray(imgFileName)) {
+    return imgFileName ? [`${baseURL}${size}/${imgFileName.match(regEx)[0]}`] : [""];
+  }
+
+  // Process as an array and return an array, also make sure some value exists in each array slot.
+  return imgFileName.map((file) => (file ? `${baseURL}${size}/${file.match(regEx)[0]}` : ""));
+}
+
 export function averageOfArray(arr) {
   return Math.round(arr.reduce((a, b) => a + b, 0) / arr.length);
 }
@@ -102,4 +134,4 @@ function flattenArray(arr, delimiter = ",") {
   return flatArray;
 }
 
-export { formatImageURL, parseToDate, flattenArray };
+export { formatImageURL, formatImageURLBeforeInit, parseToDate, flattenArray };

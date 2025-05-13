@@ -1,6 +1,7 @@
 import axios from "axios";
 import _, { sortBy } from "lodash";
 import watchProviders from "./watchProviders.json";
+import { formatImageURLBeforeInit } from "./helpers";
 
 const API_URL = "https://api.themoviedb.org/3";
 
@@ -39,6 +40,7 @@ class TMDBConfigManager {
       IMG_URL = resp.data.images.base_url;
       SECURE_IMG_URL = resp.data.images.secure_base_url;
     }
+
     this.config = {
       IMG_URL,
       SECURE_IMG_URL,
@@ -49,8 +51,8 @@ class TMDBConfigManager {
       WATCH_PROVIDERS: resp.data.WATCH_PROVIDERS.map((wp) => ({
         providerId: wp.provider_id,
         provider: wp.provider_name,
-        displayPriority: formatImageURL(wp.display_priority, "original", true)[0],
-        logoPath: wp.logo_path,
+        displayPriority: wp.display_priority,
+        logoPath: formatImageURLBeforeInit(wp.logo_path, "original", true, IMG_URL)[0],
       })),
       API_OPTIONS: {
         dateFormatString: "MM-dd-yyyy",
